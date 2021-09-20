@@ -13,8 +13,10 @@
     <title>Manage teacher</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
+    <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
     <!-- page css -->
     <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
+    <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
     <!-- Footable CSS -->
     <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
     <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
@@ -39,157 +41,14 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        <header class="topbar">
-            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
-                <!-- ============================================================== -->
-                <!-- Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="Aindex.php">
-                        <!-- Logo icon -->
-                        <b class="m-l-5 m-r-5">
-                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <i class="fa fa-music"></i>
-                            <!-- Dark Logo icon -->
-                            <!-- <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" /> -->
-                            <!-- Light Logo icon -->
-                            <!-- <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" /> -->
-                        </b>
-                        <!--End Logo icon -->
-                        <span class="hidden-xs"><span class="font-bold">MUSIC</span> ACADEMY</span>
-                    </a>
-                </div>
-                <!-- ============================================================== -->
-                <!-- End Logo -->
-                <!-- ============================================================== -->
-                <div class="navbar-collapse">
-                    <!-- ============================================================== -->
-                    <!-- toggle and nav items -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
-                        <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
-                    </ul>
-                    <!-- ============================================================== -->
-                    <!-- User profile -->
-                    <!-- ============================================================== -->
-                    <ul class="navbar-nav my-lg-0">
-                        <!-- ============================================================== -->
-                        <!-- Notifications -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="ti-bell"></i>
-                                <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
-                                <ul>
-                                    <li>
-                                        <div class="drop-title">Notifications</div>
-                                    </li>
-                                    <li>
-                                        <div class="message-center">
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)">
-                                                <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Luanch Admin</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)">
-                                                <div class="btn btn-success btn-circle"><i class="ti-calendar"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Event today</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)">
-                                                <div class="btn btn-info btn-circle"><i class="ti-settings"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Settings</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span>
-                                                </div>
-                                            </a>
-                                            <!-- Message -->
-                                            <a href="javascript:void(0)">
-                                                <div class="btn btn-primary btn-circle"><i class="ti-user"></i></div>
-                                                <div class="mail-contnet">
-                                                    <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <a class="nav-link text-center link" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- End Notifications -->
-                        <!-- ============================================================== -->
-                        <!-- ============================================================== -->
-                        <!-- User Profile -->
-                        <!-- ============================================================== -->
-                        <li class="nav-item dropdown u-pro">
-                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="hidden-md-down">Admin &nbsp;
-                                    <i class="fa fa-angle-down"></i>
-                                </span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right animated flipInY">
-                                <!-- text-->
-                                <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-                                <!-- text-->
-                                <div class="dropdown-divider"></div>
-                                <!-- text-->
-                                <a href="../index.php" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
-                                <!-- text-->
-                            </div>
-                        </li>
-                        <!-- ============================================================== -->
-                        <!-- End User Profile -->
-                        <!-- ============================================================== -->
-                    </ul>
-                </div>
-            </nav>
-        </header>
+        <?php require_once("ATopbar.php") ?>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <aside class="left-sidebar">
-            <!-- Sidebar scroll-->
-            <div class="scroll-sidebar">
-                <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
-                    <ul id="sidebarnav">
-                        <li class="nav-small-cap">--- MANAGEMENT</li>
-                        <li> <a class="waves-effect waves-dark" href="Aindex.php"><i class="icon-calender"></i><span class="hide-menu">Calendar</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="Ateacher.php"><i class="icon-people"></i><span class="hide-menu">Teacher</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="icon-user"></i><span class="hide-menu">Parent</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="ti-credit-card"></i><span class="hide-menu">Invoice</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="ti-receipt"></i><span class="hide-menu">Payment Receipt</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="icon-folder"></i><span class="hide-menu">Learning Resource</span></a>
-                        </li>
-                        <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="icon-graduation"></i><span class="hide-menu">Student Progression</span></a>
-                        </li>
-
-                        <li class="nav-small-cap">--- SETTINGS</li>
-                        <li> <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-settings text-info"></i><span class="hide-menu">Account Settings</span></a></li>
-                        <li> <a class="waves-effect waves-dark" href="../index.php" aria-expanded="false"><i class="icon-logout text-danger"></i><span class="hide-menu">Log Out</span></a></li>
-                    </ul>
-                </nav>
-                <!-- End Sidebar navigation -->
-            </div>
-            <!-- End Sidebar scroll-->
-        </aside>
+        <?php require_once("ASideBar.php") ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -206,7 +65,7 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Teacher List</h4>
+                        <h4 class="text-themecolor">Teacher Management</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
@@ -227,200 +86,266 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Teacher list</h4>
-                                <div class="mt-5">
-
-                                    <div class="d-flex">
-                                        <div class="mr-auto">
-                                            <label class="form-inline">Show &nbsp;
-                                                <select id="table-entries">
-                                                    <option value="5">5</option>
-                                                    <option value="10">10</option>
-                                                    <option value="15">15</option>
-                                                    <option value="20">20</option>
-                                                </select> &nbsp; entries
-                                            </label>
-                                        </div>
-                                        <div class="ml-auto">
-                                            <div class="form-group">
-                                                <input id="table-search" type="text" placeholder="Search" autocomplete="off">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist" id="teacherTab">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" data-toggle="tab" href="#teacherlist" role="tab">
+                                            <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Teacher List</span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#addteacher" role="tab">
+                                            <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Add Teacher</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- Tab panes -->
+                                <div class="tab-content tabcontent-border">
+                                    <!-- teacher list panel -->
+                                    <div class="tab-pane active" id="teacherlist" role="tabpanel">
+                                        <div class="p-20">
+                                            <div class="d-flex">
+                                                <div class="mr-auto">
+                                                    <label class="form-inline">Show &nbsp;
+                                                        <select id="table-entries">
+                                                            <option value="5">5</option>
+                                                            <option value="10">10</option>
+                                                            <option value="15">15</option>
+                                                            <option value="20">20</option>
+                                                        </select> &nbsp; entries
+                                                    </label>
+                                                </div>
+                                                <div class="ml-auto">
+                                                    <div class="form-group">
+                                                        <input id="table-search" type="text" placeholder="Search" autocomplete="off">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="table-responsive ">
+                                                <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Profile Pic</th>
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <th>Phone</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
+                                                            </td>
+                                                            <td>teacher A</td>
+                                                            <td>teachera@gmail.com</td>
+                                                            <td>+123 456 789</td>
+                                                            <td>
+                                                                <a href="AeditTeacher.php" type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</a>
+                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
+                                                            </td>
+                                                            <td>tasd</td>
+                                                            <td>aaa@gmail.com</td>
+                                                            <td>+1 789</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
+                                                            </td>
+                                                            <td>dsa</td>
+                                                            <td>bba@gmail.com</td>
+                                                            <td>+789</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
+                                                            </td>
+                                                            <td>tdsa</td>
+                                                            <td>cca@gmail.com</td>
+                                                            <td>+89</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
+                                                            </td>
+                                                            <td>tdsa</td>
+                                                            <td>cca@gmail.com</td>
+                                                            <td>+89</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
+                                                            </td>
+                                                            <td>tdsa</td>
+                                                            <td>cca@gmail.com</td>
+                                                            <td>+89</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="7">
+                                                                <div class="text-right">
+                                                                    <ul class="pagination"> </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <tbody>
-                                    <div class="table-responsive ">
-                                        <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
-                                            <thead>
-                                                <tr>
-                                                    <th>Profile Pic</th>
-                                                    <th>Name</th>
-                                                    <th>Email</th>
-                                                    <th>Phone</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tr>
-                                                <td>
-                                                    <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                </td>
-                                                <td>teacher A</td>
-                                                <td>teachera@gmail.com</td>
-                                                <td>+123 456 789</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                    <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                </td>
-                                                <td>tasd</td>
-                                                <td>aaa@gmail.com</td>
-                                                <td>+1 789</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                    <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                </td>
-                                                <td>dsa</td>
-                                                <td>bba@gmail.com</td>
-                                                <td>+789</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                    <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                </td>
-                                                <td>tdsa</td>
-                                                <td>cca@gmail.com</td>
-                                                <td>+89</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                    <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                </td>
-                                                <td>tdsa</td>
-                                                <td>cca@gmail.com</td>
-                                                <td>+89</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                    <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                </td>
-                                                <td>tdsa</td>
-                                                <td>cca@gmail.com</td>
-                                                <td>+89</td>
-                                                <td>
-                                                    <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                    <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
-                                                </td>
-                                            </tr>
-                                </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <td colspan="2">
-                                            <button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#add-contact">Add New Teacher</button>
-
-                                        </td>
-                                        <!-- Add New Teacher modal -->
-                                        <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title" id="myModalLabel">Add New Teacher</h4>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <from class="form-horizontal form-material">
-                                                            <div class="form-group">
-                                                                <div class="col-md-12 m-b-20">
-                                                                    <input type="text" class="form-control" placeholder="Type name">
-                                                                </div>
-                                                                <div class="col-md-12 m-b-20">
-                                                                    <input type="text" class="form-control" placeholder="Email">
-                                                                </div>
-                                                                <div class="col-md-12 m-b-20">
-                                                                    <input type="text" class="form-control" placeholder="Phone">
-                                                                </div>
-                                                                <div class="col-md-12 m-b-20">
-                                                                    <input type="text" class="form-control" placeholder="Designation">
-                                                                </div>
-                                                                <div class="col-md-12 m-b-20">
-                                                                    <input type="text" class="form-control" placeholder="Age">
-                                                                </div>
-                                                                <div class="col-md-12 m-b-20">
-                                                                    <input type="text" class="form-control" placeholder="Date of joining">
-                                                                </div>
-                                                                <div class="col-md-12 m-b-20">
-                                                                    <input type="text" class="form-control" placeholder="Salary">
-                                                                </div>
-                                                                <div class="col-md-12 m-b-20">
-                                                                    <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="icon-cloud-upload m-r-5"></i>Upload Profile Pic</span>
-                                                                        <input type="file" class="upload">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </from>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Save</button>
-                                                        <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                                    <!-- add teacher panel -->
+                                    <div class="tab-pane" id="addteacher" role="tabpanel">
+                                        <div class="p-20">
+                                            <form class="form-material">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-text">Name</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter your name">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <!-- /.modal-content -->
-                                            </div>
-                                            <!-- /.modal-dialog -->
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-email">Email</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="email" id="example-email" name="example-email" class="form-control" placeholder="enter your email">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-phone">Phone</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="example-phone" name="example-phone" class="form-control" placeholder="enter your phone">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-sm-12">Gender</label>
+                                                        <div class="col-sm-12">
+                                                            <select class="form-control">
+                                                                <option>Select Gender</option>
+                                                                <option>Male</option>
+                                                                <option>Female</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-sm-12">Profile Image</label>
+                                                        <div class="col-sm-12">
+                                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+                                                                <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+                                                                    <input type="file" name="..."> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-sm-12">Department</label>
+                                                        <div class="col-sm-12">
+                                                            <select class="form-control">
+                                                                <option>Select Department</option>
+                                                                <option>Computer</option>
+                                                                <option>Mechanical</option>
+                                                                <option>Electrical</option>
+                                                                <option>Medical</option>
+                                                                <option>BCA/MCA</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="position">Position</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="position" name="position" class="form-control" placeholder="e.g. Asst. Professor">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12">Description</label>
+                                                        <div class="col-md-12">
+                                                            <textarea class="form-control" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="url">Website URL</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="url" name="url" class="form-control" placeholder="your website">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Submit</button>
+                                                <button type="submit" class="btn btn-dark waves-effect waves-light">Cancel</button>
+                                            </form>
                                         </div>
-                                        <td colspan="7">
-                                            <div class="text-right">
-                                                <ul class="pagination"> </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tfoot>
-                                </table>
+                                    </div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- End PAge Content -->
-            <!-- ============================================================== -->
+                <!-- End PAge Content -->
+                <!-- ============================================================== -->
 
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
         </div>
         <!-- ============================================================== -->
-        <!-- End Container fluid  -->
+        <!-- End Page wrapper  -->
         <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Page wrapper  -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- footer -->
-    <!-- ============================================================== -->
-    <footer class="footer">
-        © 2021 Music Academy Management System
-    </footer>
-    <!-- ============================================================== -->
-    <!-- End footer -->
-    <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer">
+            © 2021 Music Academy Management System
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -440,12 +365,32 @@
     <script src="../dist/js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="../dist/js/pages/jasny-bootstrap.js"></script>
+    <script src="../dist/js/pages/mask.js"></script>
     <!-- Footable -->
     <script src="../assets/node_modules/footable/js/footable.all.min.js"></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        // tab panel javascript
+        $('a[data-toggle="tab"]').click(function(e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        $('a[data-toggle="tab"]').on("shown.bs.tab", function(e) {
+            var id = $(e.target).attr("href");
+            sessionStorage.setItem('selectedTab', id)
+        });
+        var selectedTab = sessionStorage.getItem('selectedTab');
+        if (selectedTab != null) {
+            $('a[data-toggle="tab"][href="' + selectedTab + '"]').tab('show');
+        }
+
+        ///////////////////////////////////////////////////////////////
+        // footable
         $('#mytable').footable();
         $('#table-entries').on('change', function(e) {
             e.preventDefault();
