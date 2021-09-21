@@ -70,7 +70,7 @@
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="Aindex.php">Home</a></li>
+                                <li class="breadcrumb-item"><a href="ACalendar.php">Home</a></li>
                                 <li class="breadcrumb-item active">Teacher</li>
                             </ol>
                         </div>
@@ -125,7 +125,7 @@
                                                 <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
                                                     <thead>
                                                         <tr>
-                                                            <th>Profile Pic</th>
+                                                            <th>#</th>
                                                             <th>Name</th>
                                                             <th>Email</th>
                                                             <th>Phone</th>
@@ -134,21 +134,17 @@
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td>
-                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                            </td>
+                                                            <td>1</td>
                                                             <td>teacher A</td>
                                                             <td>teachera@gmail.com</td>
                                                             <td>+123 456 789</td>
                                                             <td>
-                                                                <a href="AeditTeacher.php" type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</a>
+                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</a>
                                                                 <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                            </td>
+                                                            <td>2</td>
                                                             <td>tasd</td>
                                                             <td>aaa@gmail.com</td>
                                                             <td>+1 789</td>
@@ -158,48 +154,40 @@
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                            </td>
+                                                            <td>3</td>
                                                             <td>dsa</td>
                                                             <td>bba@gmail.com</td>
-                                                            <td>+789</td>
+                                                            <td>+666</td>
                                                             <td>
                                                                 <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
                                                                 <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                            </td>
+                                                            <td>4</td>
                                                             <td>tdsa</td>
                                                             <td>cca@gmail.com</td>
-                                                            <td>+89</td>
+                                                            <td>+777</td>
                                                             <td>
                                                                 <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
                                                                 <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                            </td>
-                                                            <td>tdsa</td>
-                                                            <td>cca@gmail.com</td>
-                                                            <td>+89</td>
+                                                            <td>5</td>
+                                                            <td>gdsg</td>
+                                                            <td>hhh@gmail.com</td>
+                                                            <td>+999</td>
                                                             <td>
                                                                 <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
                                                                 <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td>
-                                                                <img src="../assets/images/users/4.jpg" alt="user" width="40" class="img-circle" />
-                                                            </td>
-                                                            <td>tdsa</td>
-                                                            <td>cca@gmail.com</td>
-                                                            <td>+89</td>
+                                                            <td>6</td>
+                                                            <td>tre</td>
+                                                            <td>ttt@gmail.com</td>
+                                                            <td>+444</td>
                                                             <td>
                                                                 <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
                                                                 <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
@@ -264,17 +252,6 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-sm-12">Profile Image</label>
-                                                        <div class="col-sm-12">
-                                                            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
-                                                                <div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
-                                                                    <input type="file" name="..."> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
                                                         <label class="col-sm-12">Department</label>
                                                         <div class="col-sm-12">
                                                             <select class="form-control">
@@ -315,7 +292,7 @@
                                                     </div>
                                                 </div>
                                                 <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Submit</button>
-                                                <button type="submit" class="btn btn-dark waves-effect waves-light">Cancel</button>
+                                                <button type="button" class="btn btn-dark waves-effect waves-light">Reset</button>
                                             </form>
                                         </div>
                                     </div>
@@ -415,6 +392,7 @@
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
+                allowOutsideClick: false,
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',

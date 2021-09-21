@@ -4,7 +4,7 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="Aindex.php">
+            <a class="navbar-brand" href="ACalendar.php">
                 <!-- Logo icon -->
                 <b class="m-l-5 m-r-5">
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -99,10 +99,7 @@
                         <!-- text-->
                         <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                         <!-- text-->
-                        <div class="dropdown-divider"></div>
-                        <!-- text-->
-                        <a href="../index.php" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
-                        <!-- text-->
+                        <a href="../index.php" class="dropdown-item"><i class="ti-power-off"></i> Logout</a>
                     </div>
                 </li>
                 <!-- ============================================================== -->
