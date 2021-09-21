@@ -7,7 +7,7 @@ if(isset($_POST["login"])){
     // $password=$_POST["password"];
 
     if($username=="admin"){
-        header("Location:admin/Aindex.php");
+        header("Location:admin/ACalendar.php");
         die();
     }
     else if($username=="teacher"){
