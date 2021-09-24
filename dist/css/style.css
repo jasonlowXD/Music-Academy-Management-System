@@ -12059,6 +12059,13 @@ html body .navbar-dark .mailbox .message-center {
   text-align: center;
   background: #01c0c8; }
 
+  /* this part overwrite the fullcalendar main.min.css */
+  .fc .fc-list-event:hover td {
+    background-color: #f5f5f5;
+    background-color: var(--fc-list-event-hover-bg-color,#f5f5f5);
+    color: black !important;
+}
+
 .calendar-event {
   cursor: move;
   margin: 10px 5px 0 0;
