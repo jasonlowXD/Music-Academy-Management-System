@@ -342,13 +342,13 @@
                                             <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
                                                 <thead>
                                                     <tr>
-                                                        <th style="width:1%">#</th>
+                                                        <th>#</th>
                                                         <th style="width:15%">Parent</th>
-                                                        <th style="width:20%">new date</th>
-                                                        <th style="width:14%">new time</th>
-                                                        <th style="width:30%">desc</th>
-                                                        <th style="width:10%">status</th>
-                                                        <th style="width:10%">action</th>
+                                                        <th style="width:20%">New Date</th>
+                                                        <th style="width:15%">New Time</th>
+                                                        <th style="width:30%">Description</th>
+                                                        <th>Status</th>
+                                                        <th>Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -538,7 +538,9 @@
                 selectable: true,
                 editable: false,
                 droppable: false,
-                dayMaxEvents: true, // allow "more" link when too many events
+                dayMaxEvents: 3, // allow "more" link when too many events
+                eventMaxStack:3,
+                slotEventOverlap:false,
 
                 dateClick: function(info) {
                     fulldate = info.date;

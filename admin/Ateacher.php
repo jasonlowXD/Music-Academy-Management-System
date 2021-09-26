@@ -213,32 +213,32 @@
                                             <form class="form-material">
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-text">Name</span>
+                                                        <label class="col-md-12" for="example-text">Teacher Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter your name">
+                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter name here" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-email">Email</span>
+                                                        <label class="col-md-12" for="example-email">Teacher Email</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="email" id="example-email" name="example-email" class="form-control" placeholder="enter your email">
+                                                            <input type="email" id="example-email" name="example-email" class="form-control" placeholder="enter email here" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-phone">Phone</span>
+                                                        <label class="col-md-12" for="example-phone">Teacher Phone Number</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-phone" name="example-phone" class="form-control" placeholder="enter your phone">
+                                                            <input type="text" id="example-phone" name="example-phone" class="form-control" placeholder="enter phone here" required>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <!-- <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-sm-12">Gender</label>
                                                         <div class="col-sm-12">
@@ -249,48 +249,7 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-sm-12">Department</label>
-                                                        <div class="col-sm-12">
-                                                            <select class="form-control">
-                                                                <option>Select Department</option>
-                                                                <option>Computer</option>
-                                                                <option>Mechanical</option>
-                                                                <option>Electrical</option>
-                                                                <option>Medical</option>
-                                                                <option>BCA/MCA</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="position">Position</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" id="position" name="position" class="form-control" placeholder="e.g. Asst. Professor">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12">Description</label>
-                                                        <div class="col-md-12">
-                                                            <textarea class="form-control" rows="3"></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="url">Website URL</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" id="url" name="url" class="form-control" placeholder="your website">
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                </div> -->
                                                 <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Submit</button>
                                                 <button type="button" class="btn btn-dark waves-effect waves-light">Reset</button>
                                             </form>
@@ -352,19 +311,19 @@
 
     <script>
         // tab panel javascript
-        $('a[data-toggle="tab"]').click(function(e) {
-            e.preventDefault();
-            $(this).tab('show');
-        });
+        // $('a[data-toggle="tab"]').click(function(e) {
+        //     e.preventDefault();
+        //     $(this).tab('show');
+        // });
 
-        $('a[data-toggle="tab"]').on("shown.bs.tab", function(e) {
-            var id = $(e.target).attr("href");
-            sessionStorage.setItem('selectedTab', id)
-        });
-        var selectedTab = sessionStorage.getItem('selectedTab');
-        if (selectedTab != null) {
-            $('a[data-toggle="tab"][href="' + selectedTab + '"]').tab('show');
-        }
+        // $('a[data-toggle="tab"]').on("shown.bs.tab", function(e) {
+        //     var id = $(e.target).attr("href");
+        //     sessionStorage.setItem('selectedTab', id)
+        // });
+        // var selectedTab = sessionStorage.getItem('selectedTab');
+        // if (selectedTab != null) {
+        //     $('a[data-toggle="tab"][href="' + selectedTab + '"]').tab('show');
+        // }
 
         ///////////////////////////////////////////////////////////////
         // footable
@@ -376,6 +335,8 @@
             $('#mytable').trigger('footable_initialized');
         });
 
+        var addrow = $('#mytable');
+
         // Search input
         $('#table-search').on('input', function(e) {
             e.preventDefault();
@@ -383,8 +344,6 @@
                 filter: $(this).val()
             });
         });
-
-        var addrow = $('#mytable');
 
         addrow.footable().on('click', '#delete-row-btn', function(e) {
             e.preventDefault();
@@ -403,7 +362,7 @@
                     var footable = addrow.data('footable');
                     //get the row we are wanting to delete
                     var row = $(this).parents('tr:first');
-                    //delete the row
+                    //delete the TEACHER AND FIRE SWAL
                     footable.removeRow(row);
                     Swal.fire(
                         'Deleted!',

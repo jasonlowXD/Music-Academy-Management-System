@@ -5,7 +5,7 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
                 <li class="nav-small-cap">--- MANAGEMENT</li>
-                <li> <a class="waves-effect waves-dark" href="ACalendar.php"><i class="icon-calender"></i><span class="hide-menu">Calendar</span></a>
+                <li> <a class="waves-effect waves-dark" href="ACalendar.php"><i class="icon-calender"></i><span class="hide-menu">Class Calendar</span></a>
                 </li>
                 <li> <a class="waves-effect waves-dark" href="ATeacher.php"><i class="icon-user"></i><span class="hide-menu">Teacher</span></a>
                 </li>
@@ -13,9 +13,7 @@
                 </li>
                 <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="icon-people"></i><span class="hide-menu">Parent & Children</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="ti-credit-card"></i><span class="hide-menu">Invoice</span></a>
-                </li>
-                <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="ti-receipt"></i><span class="hide-menu">Payment Receipt</span></a>
+                <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="ti-credit-card"></i><span class="hide-menu">Invoice & Receipt</span></a>
                 </li>
                 <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="icon-folder"></i><span class="hide-menu">Learning Resource</span></a>
                 </li>

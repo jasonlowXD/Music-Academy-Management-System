@@ -64,7 +64,8 @@
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="ACalendar.php">Home</a></li>
-                                <li class="breadcrumb-item active">Teacher</li>
+                                <li class="breadcrumb-item"><a href="ATeacher.php">Teacher</a></li>
+                                <li class="breadcrumb-item active">Edit Teacher</li>
                             </ol>
                         </div>
                     </div>
@@ -86,60 +87,25 @@
                                             <label class="col-md-12" for="example-text">Name</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter your name" value="Teacher ABC">
+                                                <input type="text" id="example-text" name="example-text" class="form-control" value="Teacher ABC" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <label class="col-sm-12">Gender</label>
-                                            <div class="col-sm-12">
-                                                <select class="form-control text-muted">
-                                                    <option>Select Gender</option>
-                                                    <option selected="selected">Male</option>
-                                                    <option>Female</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <label class="col-sm-12" for="dept">Department</label>
-                                            <div class="col-sm-12">
-                                                <select class="form-control text-muted" id="dept">
-                                                    <option>Select Department</option>
-                                                    <option selected="selected">Computer</option>
-                                                    <option>Mechanical</option>
-                                                    <option>Electrical</option>
-                                                    <option>Medical</option>
-                                                    <option>BCA/MCA</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <label class="col-md-12" for="position">Position</span>
+                                            <label class="col-md-12" for="example-email">Teacher Email</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="position" name="position" class="form-control text-muted" placeholder="e.g. Dentist" value="Assistant Professor">
+                                                <input type="email" id="example-email" name="example-email" class="form-control" value="TeacherABC@abc.com" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <label class="col-md-12">Description</label>
-                                            <div class="col-md-12">
-                                                <textarea class="form-control text-muted" rows="3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="row">
-                                            <label class="col-md-12" for="url">Website URL</span>
+                                            <label class="col-md-12" for="example-phone">Teacher Phone Number</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="url" name="url" class="form-control text-muted" placeholder="your website" value="http://www.example-website.com">
+                                                <input type="text" id="example-phone" name="example-phone" class="form-control" value="+6012-3456789" required>
                                             </div>
                                         </div>
                                     </div>
@@ -207,6 +173,7 @@
                 confirmButtonText: 'Yes, confirm!'
             }).then((result) => {
                 if (result.isConfirmed) {
+                    // DO EDIT TEACHER HERE THEN FIRE SWAL
                     Swal.fire(
                         'Done!',
                         'Teacher Edited.',
