@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Manage teacher</title>
+    <title>Edit teacher</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
@@ -87,7 +87,7 @@
                                             <label class="col-md-12" for="example-text">Name</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-text" name="example-text" class="form-control" value="Teacher ABC" required>
+                                                <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter teacher name" value="Teacher ABC" required>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +96,7 @@
                                             <label class="col-md-12" for="example-email">Teacher Email</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="email" id="example-email" name="example-email" class="form-control" value="TeacherABC@abc.com" required>
+                                                <input type="email" id="example-email" name="example-email" class="form-control text-muted" placeholder="enter teacher email" value="TeacherABC@abc.com" required>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@
                                             <label class="col-md-12" for="example-phone">Teacher Phone Number</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-phone" name="example-phone" class="form-control" value="+6012-3456789" required>
+                                                <input type="text" id="example-phone" name="example-phone" class="form-control text-muted" placeholder="enter teacher phone" value="+6012-3456789"  required>
                                             </div>
                                         </div>
                                     </div>

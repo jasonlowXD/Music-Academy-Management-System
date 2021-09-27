@@ -95,7 +95,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#addteacher" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Add Teacher</span>
+                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Teacher</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -140,7 +140,7 @@
                                                             <td>+123 456 789</td>
                                                             <td>
                                                                 <a href="ATeacherEdit.php" type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</a>
-                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -149,8 +149,8 @@
                                                             <td>aaa@gmail.com</td>
                                                             <td>+1 789</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -159,8 +159,8 @@
                                                             <td>bba@gmail.com</td>
                                                             <td>+666</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -169,8 +169,8 @@
                                                             <td>cca@gmail.com</td>
                                                             <td>+777</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -179,8 +179,8 @@
                                                             <td>hhh@gmail.com</td>
                                                             <td>+999</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -189,8 +189,8 @@
                                                             <td>ttt@gmail.com</td>
                                                             <td>+444</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
-                                                                <button type="button" class="btn btn-xl btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -216,7 +216,7 @@
                                                         <label class="col-md-12" for="example-text">Teacher Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter name here" required>
+                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter teacher name" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -225,7 +225,7 @@
                                                         <label class="col-md-12" for="example-email">Teacher Email</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="email" id="example-email" name="example-email" class="form-control" placeholder="enter email here" required>
+                                                            <input type="email" id="example-email" name="example-email" class="form-control" placeholder="enter teacher email" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -234,24 +234,12 @@
                                                         <label class="col-md-12" for="example-phone">Teacher Phone Number</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-phone" name="example-phone" class="form-control" placeholder="enter phone here" required>
+                                                            <input type="text" id="example-phone" name="example-phone" class="form-control" placeholder="enter teacher phone" required>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <!-- <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-sm-12">Gender</label>
-                                                        <div class="col-sm-12">
-                                                            <select class="form-control">
-                                                                <option>Select Gender</option>
-                                                                <option>Male</option>
-                                                                <option>Female</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div> -->
                                                 <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Submit</button>
-                                                <button type="button" class="btn btn-dark waves-effect waves-light">Reset</button>
+                                                <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                             </form>
                                         </div>
                                     </div>
