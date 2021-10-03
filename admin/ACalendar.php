@@ -482,7 +482,8 @@
                 className: 'bg-primary',
                 extendedProps: {
                     location: 'www.google.com',
-                    description: 'learn beginner things'
+                    description: 'learn beginner things',
+                    attendance:0
                 }
             }, {
                 groupId: 2,
@@ -539,8 +540,8 @@
                 editable: false,
                 droppable: false,
                 dayMaxEvents: 3, // allow "more" link when too many events
-                eventMaxStack:3,
-                slotEventOverlap:false,
+                eventMaxStack: 3,
+                slotEventOverlap: false,
 
                 dateClick: function(info) {
                     fulldate = info.date;
@@ -688,7 +689,7 @@
                     var datestring = datestringMoment.format('YYYY-MM-DD')
 
                     var startTimeInfo = eventObj.start;
-                    var startTimeMoment = moment(startTimeInfo, 'HH:mm'); //convert to moment
+                    var startTimeMoment = moment(startTimeInfo, 'HH:mm'); //convert to moment object
                     startTime = startTimeMoment.format('HH:mm')
 
                     editform.find("select[name='teacher']").val(teacher);
@@ -699,22 +700,48 @@
                     editform.find("input[name='day']").val(dayName);
                     editform.find("input[name='startTime']").val(startTime);
 
+                    var attendance=eventObj.extendedProps.attendance;
+                    console.log(attendance);
+                    editAttendanceForm.find("input[name='options']").val([attendance]);
+
 
                     // EDIT ATTENDANCE EVENT
                     editAttendanceForm.off("submit").on('submit', function() {
                         var attendance = editAttendanceForm.find("input[name='options']:checked").val();
                         // console.log(attendance);
-                        var className;
+                        var className,attend;
                         if (attendance == 1) {
                             className = 'bg-success';
+                            attend=1;
                         } else if (attendance == 0) {
                             className = 'bg-danger';
+                            attend=0;
                         }
 
                         eventGroupId.forEach(myFunction);
 
+                        // console.log(datestring);
+
                         function myFunction(value, index, arr) {
-                            value.setProp('classNames', className);
+                            // console.log(arr);
+                            // console.log(index);
+
+                            // console.log(arr[index].start);
+                            // console.log(eventObj.start);
+                            // var valueStart = value.start;
+                            // var valueStartMoment = moment(valueStart, "YYYY-MM-DD");
+                            // var valueStartDate = valueStartMoment.format('YYYY-MM-DD');
+                            // console.log(valueStartDate);
+
+                            if(value.startStr==eventObj.startStr){
+                                console.log("same date here");
+                                value.setExtendedProp('attendance',attend );
+                                value.setProp('classNames',className );
+                                // console.log(value.extendedProps.attendance);
+                            }
+                            console.log(value.extendedProps.attendance);
+
+                            
                         }
 
                         $modal.modal('hide');
