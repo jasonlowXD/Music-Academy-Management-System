@@ -11,11 +11,11 @@ if(isset($_POST["login"])){
         die();
     }
     else if($username=="teacher"){
-        header("Location:admin/Tindex.php");
+        header("Location:admin/TCalendar.php");
         die();
     }
-    else if($username=="student"){
-        header("Location:admin/Sindex.php");
+    else if($username=="parent"){
+        header("Location:admin/PCalendar.php");
         die();
     }
     else{

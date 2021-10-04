@@ -382,7 +382,7 @@
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                                <tfoot>
+                                                <!-- <tfoot>
                                                     <tr>
                                                         <td colspan="7">
                                                             <div class="text-right">
@@ -390,12 +390,9 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                </tfoot>
+                                                </tfoot> -->
                                             </table>
                                         </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type='button' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -675,11 +672,11 @@
                             break;
                     }
                     var id = eventObj.groupId;
-                    // console.log(id);
+                    
                     var eventGroupId = calendar.getEvents().filter(function(event) {
                         return event.groupId === id;
                     });
-
+                    console.log(eventGroupId);
                     var teacherChildren = eventObj.title.split(",");
                     teacher = teacherChildren[0];
                     children = teacherChildren[1];
@@ -726,8 +723,8 @@
                             // console.log(arr);
                             // console.log(index);
 
-                            // console.log(arr[index].start);
-                            // console.log(eventObj.start);
+                            // console.log(value);
+                            // console.log(eventObj);
                             // var valueStart = value.start;
                             // var valueStartMoment = moment(valueStart, "YYYY-MM-DD");
                             // var valueStartDate = valueStartMoment.format('YYYY-MM-DD');

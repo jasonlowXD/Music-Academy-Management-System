@@ -97,7 +97,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <!-- text-->
-                        <a href="javascript:void(0)" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                        <a href="Account.php" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                         <!-- text-->
                         <a href="../index.php" class="dropdown-item"><i class="ti-power-off"></i> Logout</a>
                     </div>
