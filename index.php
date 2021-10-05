@@ -1,25 +1,35 @@
 <?php
 
-$username='';
-$usernameErr='';
-if(isset($_POST["login"])){
-    $username=$_POST["username"];
-    // $password=$_POST["password"];
+$email = '';
+$emailErr = '';
+$passErr = '';
+if (isset($_POST["login"])) {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
 
-    if($username=="admin"){
-        header("Location:admin/ACalendar.php");
-        die();
-    }
-    else if($username=="teacher"){
-        header("Location:admin/TCalendar.php");
-        die();
-    }
-    else if($username=="parent"){
-        header("Location:admin/PCalendar.php");
-        die();
-    }
-    else{
-        $usernameErr = "username not exists";
+    if ($email == "admin@123") {
+        if ($password == "123") {
+            header("Location:admin/ACalendar.php");
+            die();
+        } else {
+            $passErr = "Wrong password";
+        }
+    } else if ($email == "teacher@123") {
+        if ($password == "123") {
+            header("Location:admin/TCalendar.php");
+            die();
+        } else {
+            $passErr = "Wrong password";
+        }
+    } else if ($email == "parent@123") {
+        if ($password == "123") {
+            header("Location:admin/PCalendar.php");
+            die();
+        } else {
+            $passErr = "Wrong password";
+        }
+    } else {
+        $emailErr = "username not exists";
     }
 }
 
@@ -66,20 +76,22 @@ if(isset($_POST["login"])){
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" >
+        <div class="login-register">
             <div class="login-box card border border-dark rounded">
                 <div class="card-body">
-                    <form class="form-horizontal form-material" id="loginform" method="post" action="">
+                    <form class="form-control-line" id="loginform" method="post" action="">
                         <h3 class="box-title m-b-20">Sign In</h3>
-                        <div class="form-group m-b-30">
+
+                        <div class="form-group m-b-30 <?php echo (!empty($emailErr)) ? 'has-danger' : ''; ?>">
                             <div class="col-xs-12">
-                                <input class="form-control <?php echo (!empty($usernameErr)) ? 'is-invalid' : ''; ?>" value="<?php echo htmlspecialchars($username ?? '') ?>" type="text" name="username" required="" placeholder="Username" autofocus>
-                                <span class="invalid-feedback"><?php echo $usernameErr; ?></span>
+                                <input class="form-control <?php echo (!empty($emailErr)) ? 'form-control-danger' : ''; ?>" value="<?php echo htmlspecialchars($email ?? '') ?>" type="email" name="email" required="" placeholder="Email">
+                                <span class="form-control-feedback"><?php echo $emailErr; ?></span>
                             </div>
                         </div>
-                        <div class="form-group m-b-30">
+                        <div class="form-group m-b-30 <?php echo (!empty($passErr)) ? 'has-danger' : ''; ?>">
                             <div class="col-xs-12">
-                                <input class="form-control" type="password" name="password" required="" placeholder="Password">
+                                <input class="form-control <?php echo (!empty($passErr)) ? 'form-control-danger' : ''; ?>" type="password" name="password" required="" placeholder="Password">
+                                <span class="form-control-feedback"><?php echo $passErr; ?></span>
                             </div>
                         </div>
                         <div class="form-group m-b-30 row">
@@ -111,7 +123,7 @@ if(isset($_POST["login"])){
                         </div>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="text" required="" placeholder="Email">
+                                <input class="form-control" type="email" id="email" required="" placeholder="Email">
                             </div>
                         </div>
                         <div class="form-group text-center m-t-20">
@@ -136,6 +148,8 @@ if(isset($_POST["login"])){
     <!-- Bootstrap tether Core JavaScript -->
     <script src="assets/node_modules/popper/popper.min.js"></script>
     <script src="assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Sweet-Alert  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--Custom JavaScript -->
     <script type="text/javascript">
         $(function() {
@@ -155,8 +169,20 @@ if(isset($_POST["login"])){
         $('#to-login').on("click", function() {
             $("#recoverform").fadeOut();
             $("#loginform").slideDown();
-            
         });
+
+        $("#recoverform").submit(function(e) {
+            e.preventDefault();
+            Swal.fire(
+                'Password reset email sent!',
+                'Please check your email for new password.',
+                'success'
+            ).then(() => {
+                $("#recoverform #email").val('');
+                $("#recoverform").fadeOut();
+                $("#loginform").slideDown();
+            })
+        })
     </script>
 
 </body>
