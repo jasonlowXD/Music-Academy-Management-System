@@ -11,7 +11,7 @@
                 </li>
                 <li> <a class="waves-effect waves-dark" href="ACourse.php"><i class="icon-menu"></i><span class="hide-menu">Course</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="icon-people"></i><span class="hide-menu">Parent & Children</span></a>
+                <li> <a class="waves-effect waves-dark" href="AParent.php"><i class="icon-people"></i><span class="hide-menu">Parent & Children</span></a>
                 </li>
                 <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="ti-credit-card"></i><span class="hide-menu">Invoice & Receipt</span></a>
                 </li>
