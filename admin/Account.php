@@ -115,7 +115,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Edit Account Information</h5>
-                                <form class="form-material form-horizontal" id="editAccountForm">
+                                <form class="form-material" id="editAccountForm">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-text">Name</span>
@@ -134,6 +134,14 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title text-uppercase">Change Password</h5>
+                                <form class="form-material" id="editPasswordForm">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-old-password">Old Password</span>
@@ -206,7 +214,7 @@
         $("#editAccountForm").submit(function(e) {
             e.preventDefault();
             Swal.fire({
-                title: 'Confirm Edit?',
+                title: 'Confirm Edit Information?',
                 icon: 'warning',
                 allowOutsideClick: false,
                 showCancelButton: true,
@@ -219,6 +227,29 @@
                     Swal.fire(
                         'Done!',
                         'Account Edited.',
+                        'success'
+                    ).then(() => {
+                        window.location.href = "Account.php";
+                    })
+                }
+            })
+        })
+        $("#editPasswordForm").submit(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Confirm Change Password?',
+                icon: 'warning',
+                allowOutsideClick: false,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, confirm!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // DO CHANGE PASSWORD HERE THEN FIRE SWAL
+                    Swal.fire(
+                        'Done!',
+                        'Password Changed.',
                         'success'
                     ).then(() => {
                         window.location.href = "Account.php";

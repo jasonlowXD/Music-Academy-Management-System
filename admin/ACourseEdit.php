@@ -81,7 +81,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Edit Course Information</h5>
-                                <form class="form-material form-horizontal" id="editCourseForm">
+                                <form class="form-material" id="editCourseForm">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-text">Course Name</span>
@@ -117,9 +117,11 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                        <a href="ACourse.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
+                                    </div>
 
-                                    <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Submit</button>
-                                    <a href="ACourse.php" type="button" class="btn btn-danger waves-effect waves-light">Cancel</a>
                                 </form>
                             </div>
                         </div>

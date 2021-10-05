@@ -81,7 +81,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Edit Teacher Information</h5>
-                                <form class="form-material form-horizontal" id="editTeacherForm">
+                                <form class="form-material" id="editTeacherForm">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-text">Name</span>
@@ -105,12 +105,14 @@
                                             <label class="col-md-12" for="example-phone">Teacher Phone Number</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-phone" name="example-phone" class="form-control text-muted" placeholder="enter teacher phone" value="+6012-3456789"  required>
+                                                <input type="text" id="example-phone" name="example-phone" class="form-control text-muted" placeholder="enter teacher phone" value="+6012-3456789" required>
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Submit</button>
-                                    <a href="ATeacher.php" type="button" class="btn btn-danger waves-effect waves-light">Cancel</a>
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                        <a href="ATeacher.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
+                                    </div>
                                 </form>
                             </div>
                         </div>

@@ -117,7 +117,7 @@
                                                 </div>
                                                 <div class="ml-auto">
                                                     <div class="form-group">
-                                                        <input id="table-search" type="text" placeholder="Search" autocomplete="off">
+                                                        <input id="table-search" style="margin-left:0px !important;" type="text" placeholder="Search" autocomplete="off">
                                                     </div>
                                                 </div>
                                             </div>
@@ -253,8 +253,10 @@
                                                     </div>
                                                 </div>
 
-                                                <button type="submit" class="btn btn-info waves-effect waves-light m-r-10">Submit</button>
-                                                <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
+                                                <div class="form-actions">
+                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                                    <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
