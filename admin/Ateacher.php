@@ -129,7 +129,7 @@
                                                             <th>Name</th>
                                                             <th>Email</th>
                                                             <th>Phone</th>
-                                                            <th>Action</th>
+                                                            <th data-sort-ignore="true">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -139,7 +139,7 @@
                                                             <td>teachera@gmail.com</td>
                                                             <td>+123 456 789</td>
                                                             <td>
-                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</a>
+                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
@@ -149,7 +149,7 @@
                                                             <td>aaa@gmail.com</td>
                                                             <td>+1 789</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
@@ -159,7 +159,7 @@
                                                             <td>bba@gmail.com</td>
                                                             <td>+666</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
@@ -169,7 +169,7 @@
                                                             <td>cca@gmail.com</td>
                                                             <td>+777</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
@@ -179,7 +179,7 @@
                                                             <td>hhh@gmail.com</td>
                                                             <td>+999</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>
@@ -189,7 +189,7 @@
                                                             <td>ttt@gmail.com</td>
                                                             <td>+444</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                         </tr>

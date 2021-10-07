@@ -142,7 +142,7 @@
                                                             <td>parentA@gmail.com</td>
                                                             <td>+123 456 789</td>
                                                             <td>
-                                                                <a href="AParentEdit.php" type="button" class="btn btn-xl btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</a>
+                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                             <td>childrena</td>
@@ -154,7 +154,7 @@
                                                             <td>aaa@gmail.com</td>
                                                             <td>+1 789</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                             <td>kida</td>
@@ -165,7 +165,7 @@
                                                             <td>bba@gmail.com</td>
                                                             <td>+666</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                             <td>cccc</td>
@@ -177,7 +177,7 @@
                                                             <td>cca@gmail.com</td>
                                                             <td>+777</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                             <td>eeee</td>
@@ -190,7 +190,7 @@
                                                             <td>hhh@gmail.com</td>
                                                             <td>+999</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                             <td>yyyy</td>
@@ -202,7 +202,7 @@
                                                             <td>ttt@gmail.com</td>
                                                             <td>+444</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i> Edit</button>
+                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
                                                                 <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                             </td>
                                                             <td>kkkkk</td>
