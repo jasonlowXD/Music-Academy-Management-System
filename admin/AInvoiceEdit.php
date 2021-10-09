@@ -103,13 +103,13 @@
                                     <div class="tab-pane active" id="invoiceDetails" role="tabpanel">
                                         <div class="p-20">
                                             <div id="invoicePrint">
-                                                <h3><b>INVOICE</b> <span class="pull-right">#5669626</span></h3>
+                                                <h3><b>INVOICE</b> <span class="pull-right">#1</span></h3>
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="pull-left">
                                                             <address>
-                                                                <h3> &nbsp;<b class="text-danger">Elite Admin</b></h3>
+                                                                <h3> &nbsp;<b class="text-danger">Music Academy</b></h3>
                                                                 <p class="text-muted m-l-5">E 104, Dharti-2,
                                                                     <br /> Nr' Viswakarma Temple,
                                                                     <br /> Talaja Road,
@@ -120,14 +120,13 @@
                                                         <div class="pull-right text-right">
                                                             <address>
                                                                 <h3>To,</h3>
-                                                                <h4 class="font-bold">Gaala & Sons,</h4>
+                                                                <h4 class="font-bold">Parent ABC,</h4>
                                                                 <p class="text-muted m-l-30">E 104, Dharti-2,
                                                                     <br /> Nr' Viswakarma Temple,
                                                                     <br /> Talaja Road,
                                                                     <br /> Bhavnagar - 364002
                                                                 </p>
-                                                                <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> 23rd Jan 2017</p>
-                                                                <p><b>Due Date :</b> <i class="fa fa-calendar"></i> 25th Jan 2017</p>
+                                                                <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> 01-01-2021</p>
                                                             </address>
                                                         </div>
                                                     </div>
@@ -138,39 +137,24 @@
                                                                     <tr>
                                                                         <th class="text-center">#</th>
                                                                         <th>Description</th>
-                                                                        <th class="text-right">Quantity</th>
-                                                                        <th class="text-right">Unit Cost</th>
                                                                         <th class="text-right">Total</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
                                                                     <tr>
                                                                         <td class="text-center">1</td>
-                                                                        <td>Milk Powder</td>
-                                                                        <td class="text-right">2 </td>
-                                                                        <td class="text-right"> $24 </td>
-                                                                        <td class="text-right"> $48 </td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td class="text-right"> RM 120 </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-center">2</td>
-                                                                        <td>Air Conditioner</td>
-                                                                        <td class="text-right"> 3 </td>
-                                                                        <td class="text-right"> $500 </td>
-                                                                        <td class="text-right"> $1500 </td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td class="text-right"> RM 120 </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-center">3</td>
-                                                                        <td>RC Cars</td>
-                                                                        <td class="text-right"> 20 </td>
-                                                                        <td class="text-right"> %600 </td>
-                                                                        <td class="text-right"> $12000 </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-center">4</td>
-                                                                        <td>Down Coat</td>
-                                                                        <td class="text-right"> 60 </td>
-                                                                        <td class="text-right">$5 </td>
-                                                                        <td class="text-right"> $300 </td>
+                                                                        <td>Guitar Grade 2</td>
+                                                                        <td class="text-right"> RM 300 </td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -178,10 +162,8 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="pull-right m-t-30 text-right">
-                                                            <p>Sub - Total amount: $13,848</p>
-                                                            <p>vat (10%) : $138 </p>
                                                             <hr>
-                                                            <h3><b>Total :</b> $13,986</h3>
+                                                            <h3><b>Total :</b> RM 540</h3>
                                                         </div>
                                                         <div class="clearfix"></div>
                                                         <hr>
@@ -199,48 +181,60 @@
                                     <!-- edit invoice panel -->
                                     <div class="tab-pane" id="editInvoice" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material">
+                                            <form class="form-material" id="editInvoiceForm">
                                                 <div class="form-group">
-                                                    <label class="col-md-12" for="example-text">Invoice Number</span>
-                                                    </label>
-                                                    <div class="col-md-12">
-                                                        <input type="text" id="example-text" name="example-text" class="form-control text-muted" value="0032-1103" disabled>
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-text">Invoice Number</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="example-text" name="example-text" class="form-control text-muted" value="1" disabled>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-md-12" for="bdate">Invoice Date</span>
-                                                    </label>
-                                                    <div class="col-md-12">
-                                                        <input type="text" id="bdate" name="bdate" class="form-control mydatepicker text-muted" value="06/11/2017" disabled>
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="bdate">Invoice Date</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="bdate" name="bdate" class="form-control text-muted" value="01-01-2021" disabled>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-md-12" for="example-text3">Parent Name</span>
-                                                    </label>
-                                                    <div class="col-md-12">
-                                                        <input type="text" id="example-text3" name="example-text" class="form-control text-muted" value="John doe" disabled>
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-text3">Parent Name</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="example-text3" name="example-text" class="form-control text-muted" value="Parent ABC" disabled>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-sm-12">Status</label>
-                                                    <div class="col-sm-12">
-                                                        <select class="form-control text-muted">
-                                                            <option>Unpaid</option>
-                                                            <option>Paid</option>
-                                                        </select>
+                                                    <div class="row">
+                                                        <label class="col-sm-12">Status</label>
+                                                        <div class="col-sm-12">
+                                                            <select class="form-control text-muted">
+                                                                <option>Unpaid</option>
+                                                                <option>Paid</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-md-12" for="example-text4">Amount</span>
-                                                    </label>
-                                                    <div class="col-md-12">
-                                                        <input type="text" id="example-text4" name="example-text" class="form-control text-muted" value="$24">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-text4">Total Amount (RM)</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="example-text4" name="example-text" class="form-control text-muted" value="540">
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="col-md-12">Description</label>
-                                                    <div class="col-md-12">
-                                                        <textarea class="form-control text-muted" rows="3">Lorem ipsum doler set amet</textarea>
+                                                    <div class="row">
+                                                        <label class="col-md-12">Description</label>
+                                                        <div class="col-md-12">
+                                                            <textarea class="form-control text-muted" rows="3">Piano Grade 1&#13;&#10;Piano Grade 1&#13;&#10;Guitar Grade 2</textarea>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-actions">
@@ -296,6 +290,8 @@
     <!-- Custom Theme JavaScript -->
     <script src="../dist/js/pages/jasny-bootstrap.js"></script>
     <script src="../dist/js/pages/mask.js"></script>
+    <!-- Sweet-Alert  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // print invoice
         function printDiv(invoicePrint) {
@@ -319,6 +315,31 @@
             }, 500);
             return false;
         }
+
+        // edit invoice form
+        $("#editInvoiceForm").submit(function(e) {
+            e.preventDefault();
+            Swal.fire({
+                title: 'Confirm Edit?',
+                icon: 'warning',
+                allowOutsideClick: false,
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, confirm!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // DO EDIT INVOICE HERE THEN FIRE SWAL
+                    Swal.fire(
+                        'Done!',
+                        'Invoice Edited.',
+                        'success'
+                    ).then(() => {
+                        window.location.href = "AInvoiceEdit.php";
+                    })
+                }
+            })
+        })
     </script>
 
 </body>
