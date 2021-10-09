@@ -122,8 +122,8 @@
                                                 <td>1</td>
                                                 <td>Parent A</td>
                                                 <td>1/1/2021</td>
-                                                <td>120</td>
-                                                <td><span class="label label-danger">Unpaid</span></td>
+                                                <td>540</td>
+                                                <td><span class="label label-success">Paid</span></td>
                                                 <td>
                                                     <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
                                                     <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
@@ -252,22 +252,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // tab panel javascript
-        // $('a[data-toggle="tab"]').click(function(e) {
-        //     e.preventDefault();
-        //     $(this).tab('show');
-        // });
-
-        // $('a[data-toggle="tab"]').on("shown.bs.tab", function(e) {
-        //     var id = $(e.target).attr("href");
-        //     sessionStorage.setItem('selectedTab', id)
-        // });
-        // var selectedTab = sessionStorage.getItem('selectedTab');
-        // if (selectedTab != null) {
-        //     $('a[data-toggle="tab"][href="' + selectedTab + '"]').tab('show');
-        // }
-
-        ///////////////////////////////////////////////////////////////
         // footable
         $('#mytable').footable();
         $('#table-entries').on('change', function(e) {
@@ -285,34 +269,6 @@
             addrow.trigger('footable_filter', {
                 filter: $(this).val()
             });
-        });
-
-        addrow.footable().on('click', '#delete-row-btn', function(e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    //get the footable object
-                    var footable = addrow.data('footable');
-                    //get the row we are wanting to delete
-                    var row = $(this).parents('tr:first');
-                    //delete the TEACHER AND FIRE SWAL
-                    footable.removeRow(row);
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
-                }
-            })
         });
     </script>
 
