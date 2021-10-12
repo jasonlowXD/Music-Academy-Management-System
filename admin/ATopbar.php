@@ -91,9 +91,7 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown u-pro">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="hidden-md-down">Admin &nbsp;
-                            <i class="fa fa-angle-down"></i>
-                        </span>
+                        <span class="hidden-md-down" id="userProfile">Admin &nbsp;<i class="fa fa-angle-down"></i></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <!-- text-->
