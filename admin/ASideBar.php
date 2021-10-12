@@ -17,7 +17,7 @@
                 </li>
                 <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="icon-folder"></i><span class="hide-menu">Learning Resource</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="icon-graduation"></i><span class="hide-menu">Student Progression</span></a>
+                <li> <a class="waves-effect waves-dark" href="AProgression.php"><i class="icon-graduation"></i><span class="hide-menu">Student Progression</span></a>
                 </li>
 
                 <li class="nav-small-cap">--- SETTINGS</li>
