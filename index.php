@@ -16,14 +16,14 @@ if (isset($_POST["login"])) {
         }
     } else if ($email == "teacher@123") {
         if ($password == "123") {
-            header("Location:admin/TCalendar.php");
+            header("Location:teacher/TCalendar.php");
             die();
         } else {
             $passErr = "Wrong password";
         }
     } else if ($email == "parent@123") {
         if ($password == "123") {
-            header("Location:admin/PCalendar.php");
+            header("Location:parent/PCalendar.php");
             die();
         } else {
             $passErr = "Wrong password";
