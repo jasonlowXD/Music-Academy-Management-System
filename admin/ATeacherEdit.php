@@ -109,7 +109,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-actions">
+                                    <div class="button-group">
                                         <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                         <a href="ATeacher.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
                                     </div>

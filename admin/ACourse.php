@@ -139,9 +139,11 @@
                                                             <td>150</td>
                                                             <td>30</td>
                                                             <td>
-                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -150,9 +152,11 @@
                                                             <td>200</td>
                                                             <td>60</td>
                                                             <td>
-                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -161,9 +165,11 @@
                                                             <td>150</td>
                                                             <td>30</td>
                                                             <td>
-                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -172,9 +178,11 @@
                                                             <td>220</td>
                                                             <td>60</td>
                                                             <td>
-                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -183,9 +191,11 @@
                                                             <td>300</td>
                                                             <td>60</td>
                                                             <td>
-                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -194,9 +204,11 @@
                                                             <td>150</td>
                                                             <td>30</td>
                                                             <td>
-                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -253,7 +265,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="form-actions">
+                                                <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                                     <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                 </div>

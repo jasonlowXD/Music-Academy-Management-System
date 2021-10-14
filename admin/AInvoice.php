@@ -125,8 +125,10 @@
                                                 <td>540</td>
                                                 <td><span class="label label-success">Paid</span></td>
                                                 <td>
-                                                    <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                    <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    <div class="button-group">
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -136,8 +138,10 @@
                                                 <td>150</td>
                                                 <td><span class="label label-success">Paid</span></td>
                                                 <td>
-                                                    <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                    <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    <div class="button-group">
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -147,8 +151,10 @@
                                                 <td>320</td>
                                                 <td><span class="label label-danger">Unpaid</span></td>
                                                 <td>
-                                                    <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                    <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    <div class="button-group">
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -158,8 +164,10 @@
                                                 <td>120</td>
                                                 <td><span class="label label-danger">Unpaid</span></td>
                                                 <td>
-                                                    <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                    <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    <div class="button-group">
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -169,8 +177,10 @@
                                                 <td>150</td>
                                                 <td><span class="label label-success">Paid</span></td>
                                                 <td>
-                                                    <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                    <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    <div class="button-group">
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -180,8 +190,10 @@
                                                 <td>150</td>
                                                 <td><span class="label label-danger">Unpaid</span></td>
                                                 <td>
-                                                    <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                    <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    <div class="button-group">
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>

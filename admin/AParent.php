@@ -142,8 +142,10 @@
                                                             <td>parentA@gmail.com</td>
                                                             <td>+123 456 789</td>
                                                             <td>
-                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                             <td>childrena</td>
                                                             <td>childrenb</td>
@@ -154,8 +156,10 @@
                                                             <td>aaa@gmail.com</td>
                                                             <td>+1 789</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                             <td>kida</td>
                                                         </tr>
@@ -165,8 +169,10 @@
                                                             <td>bba@gmail.com</td>
                                                             <td>+666</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                             <td>cccc</td>
                                                             <td>dddd</td>
@@ -177,8 +183,10 @@
                                                             <td>cca@gmail.com</td>
                                                             <td>+777</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                             <td>eeee</td>
                                                             <td>ddaaa</td>
@@ -190,8 +198,10 @@
                                                             <td>hhh@gmail.com</td>
                                                             <td>+999</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                             <td>yyyy</td>
                                                             <td>qqqqq</td>
@@ -202,8 +212,10 @@
                                                             <td>ttt@gmail.com</td>
                                                             <td>+444</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                             <td>kkkkk</td>
                                                             <td>Cllll</td>
@@ -302,7 +314,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-actions">
+                                                <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                                     <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                     <button type="button" id="addChildren" class="btn btn-primary waves-effect waves-light">Add Children</button>
@@ -426,9 +438,9 @@
         $('#addChildren').click(function() {
             i++;
             var clone = $('#cloneChildrenForm').clone().find('input').val('').end();
-            clone.attr("id","cloneChildrenForm-"+i);
+            clone.attr("id", "cloneChildrenForm-" + i);
 
-            var removebtn = '<button type="button" id="'+i+'" class="btn btn-danger btn-xs ml-auto btn_remove"><i class="fa fa-times"></i></button>';
+            var removebtn = '<button type="button" id="' + i + '" class="btn btn-danger btn-xs ml-auto btn_remove"><i class="fa fa-times"></i></button>';
 
             clone.find('#childrenHeaderDiv').append(removebtn);
 
@@ -436,10 +448,10 @@
         });
 
         //remove children clone
-        $(document).on('click', '.btn_remove', function(){ 
+        $(document).on('click', '.btn_remove', function() {
             var btn_id = $(this).attr("id");
             console.log(btn_id);
-            $('#cloneChildrenForm-'+btn_id).remove();  
+            $('#cloneChildrenForm-' + btn_id).remove();
             i--;
         });
     </script>

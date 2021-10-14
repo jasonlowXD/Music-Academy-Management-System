@@ -138,7 +138,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-actions">
+                                                <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                                     <a href="AParent.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
                                                 </div>
@@ -185,7 +185,7 @@
                                                         <option value='teacher C'>teacher C</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-actions">
+                                                <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                                     <button type="button" class="btn btn-danger waves-effect waves-light delete-children-btn">Delete</button>
                                                 </div>
@@ -231,7 +231,7 @@
                                                         <option value='teacher C'>teacher C</option>
                                                     </select>
                                                 </div>
-                                                <div class="form-actions">
+                                                <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                                     <button type="button" class="btn btn-danger waves-effect waves-light delete-children-btn">Delete</button>
                                                 </div>

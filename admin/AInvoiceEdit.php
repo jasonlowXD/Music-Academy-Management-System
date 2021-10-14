@@ -170,7 +170,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="text-right">
+                                            <div class="text-right button-group">
                                                 <a href="AInvoice.php" type="button" class="btn btn-primary">Return</a>
                                                 <button onclick="printDiv('invoicePrint')" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
                                             </div>
@@ -237,9 +237,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-actions">
-                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                                </div>
+                                                <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                             </form>
                                         </div>
                                     </div>

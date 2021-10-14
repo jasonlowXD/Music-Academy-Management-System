@@ -145,7 +145,7 @@
                                                             <td>540</td>
                                                             <td>if pay by online and upload file</td>
                                                             <td>Online</td>
-                                                            <td><a href="../img/receipttest.pdf" download>receipttest.pdf</td>
+                                                            <td><a href="../img/receipttest.pdf" download>receipttest.pdf</a></td>
                                                             <td>
                                                                 <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal">Edit</button>
                                                             </td>
@@ -230,8 +230,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-actions">
+                                                <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                                    <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                 </div>
                                             </form>
                                         </div>

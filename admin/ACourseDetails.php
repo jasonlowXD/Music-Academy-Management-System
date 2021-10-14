@@ -102,7 +102,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <div class="form-actions">
+                                <div class="button-group">
                                     <a href="ACourseEdit.php" type="button" class="btn btn-info waves-effect waves-light">Edit Course</a>
                                     <a href="ACourse.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
                                 </div>

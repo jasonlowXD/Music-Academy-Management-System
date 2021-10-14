@@ -139,8 +139,10 @@
                                                             <td>teachera@gmail.com</td>
                                                             <td>+123 456 789</td>
                                                             <td>
-                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -149,8 +151,10 @@
                                                             <td>aaa@gmail.com</td>
                                                             <td>+1 789</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -159,8 +163,10 @@
                                                             <td>bba@gmail.com</td>
                                                             <td>+666</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -169,8 +175,10 @@
                                                             <td>cca@gmail.com</td>
                                                             <td>+777</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -179,8 +187,10 @@
                                                             <td>hhh@gmail.com</td>
                                                             <td>+999</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -189,8 +199,10 @@
                                                             <td>ttt@gmail.com</td>
                                                             <td>+444</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -238,7 +250,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-actions">
+                                                <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                                     <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                 </div>

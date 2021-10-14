@@ -139,11 +139,13 @@
                                                             <td>Children A</td>
                                                             <td>Admin</td>
                                                             <td>20210101 class photo</td>
-                                                            <td><a href="../img/neko.jpg">neko.jpg</td>
+                                                            <td><a href="../img/neko.jpg">neko.jpg</a></td>
                                                             <td>
-                                                                <a href="AProgressionDetail.php" type="button" class="btn btn-outline-success">View</a>
-                                                                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="AProgressionDetail.php" type="button" class="btn btn-outline-success">View</a>
+                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -151,11 +153,13 @@
                                                             <td>Children ABC</td>
                                                             <td>Teacher ABC</td>
                                                             <td>20210201 class video</td>
-                                                            <td><a href="../img/Jounetsu Tairiku.mp4">Jounetsu Tairiku.mp4</td>
+                                                            <td><a href="../img/Jounetsu Tairiku.mp4">Jounetsu Tairiku.mp4</a></td>
                                                             <td>
-                                                                <a href="AProgressionDetail.php" type="button" class="btn btn-outline-success">View</a>
-                                                                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <div class="button-group">
+                                                                    <a href="AProgressionDetail.php" type="button" class="btn btn-outline-success">View</a>
+                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                </div>
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -213,7 +217,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-actions">
+                                                <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                                     <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                 </div>
@@ -237,20 +241,20 @@
                             <form class="form-material" id="editProgressionForm">
                                 <div class="modal-body">
                                     <div class='form-group'>
-                                        <label class='control-label'>Select Children</label>
-                                        <select class='form-control text-muted' name='children' required>
-                                            <option selected value='Children A'>Children A</option>
-                                            <option value='Children B'>Children B</option>
-                                            <option value='Children C'>Children C</option>
-                                        </select>
+                                        <label class='control-label col-md-12'>Select Children</label>
+                                        <div class="col-md-12">
+                                            <select class='form-control text-muted' name='children' required>
+                                                <option selected value='Children A'>Children A</option>
+                                                <option value='Children B'>Children B</option>
+                                                <option value='Children C'>Children C</option>
+                                            </select>
+                                        </div>
                                     </div>
                                     <div class="form-group">
-                                        <div class="row">
-                                            <label class="col-md-12" for="example-text">Progression Title</span>
-                                            </label>
-                                            <div class="col-md-12">
-                                                <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter title" value="20210101 class photo" required>
-                                            </div>
+                                        <label class="col-md-12" for="example-text">Progression Title</span>
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter title" value="20210101 class photo" required>
                                         </div>
                                     </div>
                                     <div class="form-group">

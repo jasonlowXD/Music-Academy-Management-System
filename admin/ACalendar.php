@@ -128,13 +128,13 @@
                                             <div class='col-md-12'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Course</label>
-                                                    <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" />
+                                                    <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1 (auto set based on children take what course)" disabled/>
                                                 </div>
                                             </div>
                                             <div class='col-md-12'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Class duration (min)</label>
-                                                    <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" />
+                                                    <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60 (auto set based on the course name)" disabled/>
                                                 </div>
                                             </div>
                                             <div class='col-md-6'>
@@ -220,15 +220,17 @@
                                         <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Attendance</span>
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <!-- respond reschedule request tab link -->
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#rescheduleRequest" role="tab">
                                         <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Reschedule Request</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content tabcontent-border">
+                                <!-- edit class tab -->
                                 <div class="tab-pane active" id="editClass" role="tabpanel">
                                     <form class="edit-modal-form">
                                         <div class="modal-body">
@@ -256,13 +258,13 @@
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Course</label>
-                                                        <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" />
+                                                        <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled/>
                                                     </div>
                                                 </div>
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Class duration (min)</label>
-                                                        <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" />
+                                                        <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" disabled/>
                                                     </div>
                                                 </div>
                                                 <div class='col-md-6'>
@@ -291,13 +293,13 @@
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Location</label>
-                                                        <input class='form-control' placeholder='Academy or Insert Online Link here' type='text' name='location' value="" />
+                                                        <input class='form-control' placeholder='Academy or Insert Online Link here' type='text' name='location' value="studio A or www.googleMeet.com" />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Description</label>
-                                                        <input class='form-control' placeholder='Description here' type='text' name='desc' value="" />
+                                                        <input class='form-control' placeholder='Description here' type='text' name='desc' value="description of the class" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -309,6 +311,7 @@
                                         </div>
                                     </form>
                                 </div>
+                                <!-- edit attendance tab -->
                                 <div class="tab-pane" id="editAttandance" role="tabpanel">
                                     <form action="" class="edit-attendance-form">
                                         <div class="modal-body">
@@ -336,7 +339,8 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div class="tab-pane" id="rescheduleRequest" role="tabpanel">
+                                <!-- respond reschedule request tab -->
+                                <!-- <div class="tab-pane" id="rescheduleRequest" role="tabpanel">
                                     <div class="modal-body">
                                         <div class="table-responsive ">
                                             <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
@@ -382,7 +386,7 @@
                                                         </td>
                                                     </tr>
                                                 </tbody>
-                                                <!-- <tfoot>
+                                                <tfoot>
                                                     <tr>
                                                         <td colspan="7">
                                                             <div class="text-right">
@@ -390,11 +394,11 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                </tfoot> -->
+                                                </tfoot>
                                             </table>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
 
 
@@ -474,7 +478,7 @@
                 title: 'teacher A,children B',
                 startTime: '10:00',
                 endTime: '12:00',
-                startRecur: '2021-09-01',
+                startRecur: '2021-10-01',
                 daysOfWeek: [1],
                 className: 'bg-primary',
                 extendedProps: {
@@ -499,7 +503,7 @@
                 title: 'teacher C,children A',
                 startTime: '16:00',
                 endTime: '17:00',
-                startRecur: '2021-10-01',
+                startRecur: '2021-11-01',
                 daysOfWeek: [3],
                 className: 'bg-primary',
                 extendedProps: {
