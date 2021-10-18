@@ -91,11 +91,11 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown u-pro">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="hidden-md-down" id="userProfile">Teacher Name &nbsp;<i class="fa fa-angle-down"></i></span>
+                        <span class="hidden-md-down" id="userProfile">Teacher ABC &nbsp;<i class="fa fa-angle-down"></i></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <!-- text-->
-                        <a href="Account.php" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
+                        <a href="TAccount.php" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                         <!-- text-->
                         <a href="../index.php" class="dropdown-item"><i class="ti-power-off"></i> Logout</a>
                     </div>
