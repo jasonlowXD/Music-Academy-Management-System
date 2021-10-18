@@ -95,19 +95,6 @@
                                         <p>admin@gmail.com</p>
                                     </div>
                                 </div>
-
-                                <!-- THIS ONE PUT IN PARENT AND TEACHER -->
-                                <!-- <div class="row text-center m-t-10">
-                                    <div class="col-md-6 border-right">
-                                        <h4><strong>Email Address</strong></h4>
-                                        <p>admin@gmail.com</p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <h4><strong>Phone Number</strong></h4>
-                                        <p>+123 456 789</p>
-                                    </div>
-                                </div> -->
-
                             </div>
                         </div>
                     </div>
