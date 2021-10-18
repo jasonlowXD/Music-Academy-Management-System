@@ -128,13 +128,13 @@
                                             <div class='col-md-12'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Course</label>
-                                                    <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1 (auto set based on children take what course)" disabled/>
+                                                    <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1 (auto set based on children take what course)" disabled />
                                                 </div>
                                             </div>
                                             <div class='col-md-12'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Class duration (min)</label>
-                                                    <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60 (auto set based on the course name)" disabled/>
+                                                    <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60 (auto set based on the course name)" disabled />
                                                 </div>
                                             </div>
                                             <div class='col-md-6'>
@@ -258,13 +258,13 @@
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Course</label>
-                                                        <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled/>
+                                                        <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Class duration (min)</label>
-                                                        <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" disabled/>
+                                                        <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" disabled />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-6'>
@@ -306,7 +306,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
+                                            <button type="button" class="btn btn-danger delete-event waves-effect waves-light">Delete</button>
                                             <span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light edit-event'><i class='fa fa-check'></i> Save</button></span>
                                         </div>
                                     </form>
@@ -453,6 +453,8 @@
 
     <!-- fullcalendar bundle -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.js'></script>
+    <!-- Sweet-Alert  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Clock Plugin JavaScript -->
     <script src="../assets/node_modules/clockpicker/dist/jquery-clockpicker.min.js"></script>
@@ -484,7 +486,7 @@
                 extendedProps: {
                     location: 'www.google.com',
                     description: 'learn beginner things',
-                    attendance:0
+                    attendance: 0
                 }
             }, {
                 groupId: 2,
@@ -676,7 +678,7 @@
                             break;
                     }
                     var id = eventObj.groupId;
-                    
+
                     var eventGroupId = calendar.getEvents().filter(function(event) {
                         return event.groupId === id;
                     });
@@ -701,7 +703,7 @@
                     editform.find("input[name='day']").val(dayName);
                     editform.find("input[name='startTime']").val(startTime);
 
-                    var attendance=eventObj.extendedProps.attendance;
+                    var attendance = eventObj.extendedProps.attendance;
                     console.log(attendance);
                     editAttendanceForm.find("input[name='options']").val([attendance]);
 
@@ -710,13 +712,13 @@
                     editAttendanceForm.off("submit").on('submit', function() {
                         var attendance = editAttendanceForm.find("input[name='options']:checked").val();
                         // console.log(attendance);
-                        var className,attend;
+                        var className, attend;
                         if (attendance == 1) {
                             className = 'bg-success';
-                            attend=1;
+                            attend = 1;
                         } else if (attendance == 0) {
                             className = 'bg-danger';
-                            attend=0;
+                            attend = 0;
                         }
 
                         eventGroupId.forEach(myFunction);
@@ -734,15 +736,15 @@
                             // var valueStartDate = valueStartMoment.format('YYYY-MM-DD');
                             // console.log(valueStartDate);
 
-                            if(value.startStr==eventObj.startStr){
+                            if (value.startStr == eventObj.startStr) {
                                 console.log("same date here");
-                                value.setExtendedProp('attendance',attend );
-                                value.setProp('classNames',className );
+                                value.setExtendedProp('attendance', attend);
+                                value.setProp('classNames', className);
                                 // console.log(value.extendedProps.attendance);
                             }
                             console.log(value.extendedProps.attendance);
 
-                            
+
                         }
 
                         $modal.modal('hide');
@@ -760,26 +762,61 @@
                         var startTimeMoment = moment(startTime, 'HH:mm');
                         var endTime = startTimeMoment.add(duration, 'm').format('HH:mm');
 
-                        eventGroupId.forEach(myFunction);
+                        Swal.fire({
+                            title: 'Confirm Edit?',
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, confirm!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                eventGroupId.forEach(myFunction);
 
-                        function myFunction(value) {
-                            value.setProp('title', teacher + "," + children);
-                            // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
-                        }
+                                function myFunction(value) {
+                                    value.setProp('title', teacher + "," + children);
+                                    // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
+                                }
 
-                        $modal.modal('hide');
+                                $modal.modal('hide');
+                                Swal.fire(
+                                    'Done!',
+                                    'Class Edited.',
+                                    'success'
+                                )
+                            }
+                        })
                         // console.log("run done");
                         return false;
                     });
 
                     // DELETE EVENT
                     $modal.find('.delete-event').off('click').click(function() {
-                        eventGroupId.forEach(myFunction);
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                eventGroupId.forEach(myFunction);
 
-                        function myFunction(value) {
-                            value.remove();
-                        }
-                        $modal.modal('hide');
+                                function myFunction(value) {
+                                    value.remove();
+                                }
+                                $modal.modal('hide');
+                                Swal.fire(
+                                    'Deleted!',
+                                    'The class has been deleted.',
+                                    'success'
+                                )
+                            }
+                        })
                     });
 
                 },
