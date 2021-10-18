@@ -84,7 +84,7 @@ if (isset($_POST["login"])) {
 
                         <div class="form-group m-b-30 <?php echo (!empty($emailErr)) ? 'has-danger' : ''; ?>">
                             <div class="col-xs-12">
-                                <input class="form-control <?php echo (!empty($emailErr)) ? 'form-control-danger' : ''; ?>" value="<?php echo htmlspecialchars($email ?? '') ?>" type="email" name="email" required="" placeholder="Email">
+                                <input class="form-control <?php echo (!empty($emailErr)) ? 'form-control-danger' : ''; ?>" value="<?php echo htmlspecialchars($email ?? '') ?>" type="email" name="email" required="" placeholder="Email" autofocus>
                                 <span class="form-control-feedback"><?php echo $emailErr; ?></span>
                             </div>
                         </div>
