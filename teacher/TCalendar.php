@@ -128,13 +128,13 @@
                                             <div class='col-md-12'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Course</label>
-                                                    <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled/>
+                                                    <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled />
                                                 </div>
                                             </div>
                                             <div class='col-md-12'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Class duration (min)</label>
-                                                    <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" disabled/>
+                                                    <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" disabled />
                                                 </div>
                                             </div>
                                             <div class='col-md-6'>
@@ -244,13 +244,13 @@
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Course</label>
-                                                        <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled/>
+                                                        <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Class duration (min)</label>
-                                                        <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" disabled/>
+                                                        <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" disabled />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-6'>
@@ -292,7 +292,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Close</button>
-                                            <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
+                                            <button type="button" class="btn btn-danger delete-event waves-effect waves-light">Delete</button>
                                             <span class='input-group-btn'><button type='submit' class='btn btn-success waves-effect waves-light edit-event'><i class='fa fa-check'></i> Save</button></span>
                                         </div>
                                     </form>
@@ -329,7 +329,7 @@
                                 <div class="tab-pane" id="rescheduleRequest" role="tabpanel">
                                     <div class="modal-body">
                                         <div class="table-responsive ">
-                                            <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
+                                            <table id="rescheduleListTable" class="table m-t-5 table-hover contact-list" data-page-size="5">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
@@ -366,8 +366,8 @@
                                                         <td>Pending</td>
                                                         <td>
                                                             <div class="btn-group-vertical">
-                                                                <button type="button" class="btn btn-sm btn-info mb-1"> Accept</button>
-                                                                <button type="button" class="btn btn-sm btn-danger mt-1">Reject</button>
+                                                                <button type="button" id="accept" class="btn btn-sm btn-info mb-1"> Accept</button>
+                                                                <button type="button" id="reject" class="btn btn-sm btn-danger mt-1">Reject</button>
                                                             </div>
                                                         </td>
                                                     </tr>
@@ -439,6 +439,8 @@
 
     <!-- fullcalendar bundle -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.js'></script>
+    <!-- Sweet-Alert  -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Clock Plugin JavaScript -->
     <script src="../assets/node_modules/clockpicker/dist/jquery-clockpicker.min.js"></script>
@@ -629,11 +631,13 @@
                     var $modal = $('#edit-event-modal');
                     var editform = $modal.find('.edit-modal-form');
                     var editAttendanceForm = $modal.find('.edit-attendance-form');
+                    var rescheduleListTable = $modal.find('#rescheduleListTable');
+
                     $modal.modal({
                         backdrop: 'static'
                     });
 
-                    // GET EXISTING VALUE
+                    // GET EXISTING VALUE of selected event
                     var eventObj = info.event;
                     // console.log(info.event.start.getDay()); 
                     var day = eventObj.start.getDay(); //get the day (0=sunday, 1=monday...)
@@ -666,7 +670,7 @@
                     var eventGroupId = calendar.getEvents().filter(function(event) {
                         return event.groupId === id;
                     });
-                    console.log(eventGroupId);
+                    // console.log(eventGroupId);
                     var teacherChildren = eventObj.title.split(",");
                     teacher = teacherChildren[0];
                     children = teacherChildren[1];
@@ -679,6 +683,7 @@
                     var startTimeMoment = moment(startTimeInfo, 'HH:mm'); //convert to moment object
                     startTime = startTimeMoment.format('HH:mm')
 
+                    // SET DATA VALUE INTO UI FORM
                     editform.find("select[name='teacher']").val(teacher);
                     editform.find("select[name='children']").val(children);
                     // editform.find("input[name='course']").val(calEvent.course);
@@ -688,7 +693,7 @@
                     editform.find("input[name='startTime']").val(startTime);
 
                     var attendance = eventObj.extendedProps.attendance;
-                    console.log(attendance);
+                    // console.log(attendance);
                     editAttendanceForm.find("input[name='options']").val([attendance]);
 
 
@@ -746,28 +751,91 @@
                         var startTimeMoment = moment(startTime, 'HH:mm');
                         var endTime = startTimeMoment.add(duration, 'm').format('HH:mm');
 
-                        eventGroupId.forEach(myFunction);
+                        Swal.fire({
+                            title: 'Confirm Edit?',
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, confirm!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                eventGroupId.forEach(myFunction);
 
-                        function myFunction(value) {
-                            value.setProp('title', teacher + "," + children);
-                            // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
-                        }
+                                function myFunction(value) {
+                                    value.setProp('title', teacher + "," + children);
+                                    // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
+                                }
 
-                        $modal.modal('hide');
+                                $modal.modal('hide');
+                                Swal.fire(
+                                    'Done!',
+                                    'Class Edited.',
+                                    'success'
+                                )
+                            }
+                        })
                         // console.log("run done");
                         return false;
                     });
 
-                    // DELETE EVENT
-                    $modal.find('.delete-event').off('click').click(function() {
-                        eventGroupId.forEach(myFunction);
+                    // ACCEPT RESCHEDULE EVENT
+                    rescheduleListTable.on('click', '#accept', function() {
+                        var $row = $(this).closest("tr"); // Finds the closest row <tr> 
+                        var $rowId = $row.find("td:nth-child(1)"); // Finds the 2nd <td> element
 
-                        function myFunction(value) {
-                            value.remove();
-                        }
-                        $modal.modal('hide');
+                        //row id
+                        console.log($rowId.text());
+                        Swal.fire(
+                            'Accepted!',
+                            'id '+$rowId.text()+ ' request has been accepted.',
+                            'success'
+                        )
+
                     });
 
+                    // REJECT RESCHEDULE EVENT
+                    rescheduleListTable.on('click', '#reject', function() {
+                        var $row = $(this).closest("tr"); // Finds the closest row <tr> 
+                        var $rowId = $row.find("td:nth-child(1)"); // Finds the 2nd <td> element
+                        //row id
+                        console.log($rowId.text());
+                        Swal.fire(
+                            'Rejected!',
+                            'id '+$rowId.text()+ ' request has been rejected.',
+                            'success'
+                        )
+
+                    });
+
+                    // DELETE EVENT
+                    $modal.find('.delete-event').off('click').click(function() {
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                eventGroupId.forEach(myFunction);
+
+                                function myFunction(value) {
+                                    value.remove();
+                                }
+                                $modal.modal('hide');
+                                Swal.fire(
+                                    'Deleted!',
+                                    'The class has been deleted.',
+                                    'success'
+                                )
+                            }
+                        })
+                    });
                 },
                 events: dataEvent,
             });
