@@ -83,7 +83,7 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-8 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Children A, 20210201 class video</h4>
@@ -101,9 +101,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
+                    <div class="col-md-4 col-sm-12 col-12">
                         <div class="card">
                             <div class="card-body border-bottom">
                                 <h4 class="card-title">Comments</h4>
@@ -116,7 +114,7 @@
                                 <!-- Comment by own account (can delete) -->
                                 <div class="d-flex flex-row comment-row border-bottom deletableCommentDiv">
                                     <div class="comment-text w-100">
-                                        <div class="d-flex">
+                                        <div class="d-flex no-block">
                                             <h5 class="mr-auto"><strong>Admin</strong></h5>
                                             <div class="ml-auto">
                                                 <button type="button" id="deleteCommentBtn" class="btn btn-default btn-lg p-0">
@@ -134,6 +132,14 @@
                                     <div class="comment-text w-100">
                                         <div class="d-flex">
                                             <h5><strong>Parent A</strong></h5>
+                                        </div>
+                                        <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row comment-row border-bottom">
+                                    <div class="comment-text w-100">
+                                        <div class="d-flex">
+                                            <h5><strong>Teacher ABC</strong></h5>
                                         </div>
                                         <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.</p>
                                     </div>
@@ -242,7 +248,7 @@
             // console.log(commentContent);
             var commentLayout = '<div class="d-flex flex-row comment-row border-bottom deletableCommentDiv">' +
                 '<div class="comment-text w-100">' +
-                '<div class="d-flex">' +
+                '<div class="d-flex no-block">' +
                 '<h5 class="mr-auto"><strong>' + user + '</strong></h5>' +
                 '<div class="ml-auto">' +
                 '<button type="button" id="deleteCommentBtn" class="btn btn-default btn-lg p-0">' +
