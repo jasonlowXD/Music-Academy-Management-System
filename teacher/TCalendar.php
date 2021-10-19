@@ -20,8 +20,12 @@
     <link href="../assets/node_modules/clockpicker/dist/jquery-clockpicker.css" rel="stylesheet">
     <!-- Date picker plugins css -->
     <link href="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
-
+    <style>
+        .datepicker {
+            z-index: 1600 !important;
+            /* has to be larger than 1050 */
+        }
+    </style>
 </head>
 
 <body class="skin-green-dark fixed-layout">
@@ -105,17 +109,6 @@
                                         <div class='row'>
                                             <div class='col-md-6'>
                                                 <div class='form-group'>
-                                                    <label class='control-label'>Select Teacher</label>
-                                                    <select class='form-control' name='teacher'>
-                                                        <option hidden disabled selected value=""> -- select a teacher -- </option>
-                                                        <option value='teacher A'>teacher A</option>
-                                                        <option value='teacher B'>teacher B</option>
-                                                        <option value='teacher C'>teacher C</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class='col-md-6'>
-                                                <div class='form-group'>
                                                     <label class='control-label'>Select children</label>
                                                     <select class='form-control' name='children'>
                                                         <option hidden disabled selected value=""> -- select a children -- </option>
@@ -125,7 +118,7 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class='col-md-12'>
+                                            <div class='col-md-6'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Course</label>
                                                     <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled />
@@ -223,16 +216,6 @@
                                             <div class='row'>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Select Teacher</label>
-                                                        <select class='form-control' name='teacher'>
-                                                            <option value='teacher A'>teacher A</option>
-                                                            <option value='teacher B'>teacher B</option>
-                                                            <option value='teacher C'>teacher C</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                                <div class='col-md-6'>
-                                                    <div class='form-group'>
                                                         <label class='control-label'>Select children</label>
                                                         <select class='form-control' name='children'>
                                                             <option value='children A'>children A</option>
@@ -241,7 +224,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class='col-md-12'>
+                                                <div class='col-md-6'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Course</label>
                                                         <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled />
@@ -255,13 +238,13 @@
                                                 </div>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Selected Date</label>
-                                                        <input class='form-control' type='text' name='date' value="" disabled />
+                                                        <label class='control-label'>Date</label>
+                                                        <input type="text" id="bdate" name="date" class="form-control mydatepicker" value="" />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Selected Day</label>
+                                                        <label class='control-label'>Day</label>
                                                         <input class='form-control' type='text' name='day' value="" disabled />
                                                     </div>
                                                 </div>
@@ -436,21 +419,26 @@
     <script src="../assets/node_modules/calendar/jquery-ui.min.js"></script>
     <script src="../assets/node_modules/moment/moment.js"></script>
     <!-- <script src='../assets/node_modules/calendar/dist/fullcalendar.min.js'></script> -->
-
     <!-- fullcalendar bundle -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.js'></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <!-- Clock Plugin JavaScript -->
     <script src="../assets/node_modules/clockpicker/dist/jquery-clockpicker.min.js"></script>
-    <script src="../assets/node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 
     <script>
         // CLOCKPICKER
         // https://weareoutman.github.io/clockpicker/
         $('.clockpicker').clockpicker();
+
+        // Date Picker
+        $('.mydatepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true
+        });
 
         // add the responsive classes after page initialization
         window.onload = function() {
@@ -460,10 +448,10 @@
         //FULLCALENDAR V5
         document.addEventListener('DOMContentLoaded', function() {
             var day, dayName, fulldate, datestring;
-            var teacher, children, course, duration, startTime, location, desc;
+            var children, course, duration, startTime, location, desc;
             var dataEvent = [{
                 groupId: 1,
-                title: 'teacher A,children B',
+                title: 'children B',
                 startTime: '10:00',
                 endTime: '12:00',
                 startRecur: '2021-10-01',
@@ -476,7 +464,7 @@
                 }
             }, {
                 groupId: 2,
-                title: 'teacher B,children C',
+                title: 'children C',
                 startTime: '08:00',
                 endTime: '09:00',
                 startRecur: '2021-09-30',
@@ -488,7 +476,7 @@
                 }
             }, {
                 groupId: 3,
-                title: 'teacher C,children A',
+                title: 'children A',
                 startTime: '16:00',
                 endTime: '17:00',
                 startRecur: '2021-11-01',
@@ -587,7 +575,6 @@
 
                     addform.off('submit').on('submit', function() {
                         // console.log("on submit");
-                        teacher = addform.find("select[name='teacher']").val();
                         children = addform.find("select[name='children']").val();
                         // course = addform.find("input[name='course']").val();
                         duration = addform.find("input[name='duration']").val();
@@ -600,10 +587,10 @@
                         // desc = addform.find("input[name='desc']").val();
                         var categoryClass = ("bg-primary");
 
-                        if (teacher !== null && children !== null) {
+                        if (children !== null) {
                             calendar.addEvent({
                                 groupId: 4,
-                                title: teacher + "," + children,
+                                title: children,
                                 startTime: startTime,
                                 endTime: endTime,
                                 startRecur: arg.startStr,
@@ -613,7 +600,7 @@
                             });
                             $modal.modal('hide');
                         } else {
-                            alert('please select teacher and children');
+                            alert('please select children');
                         }
                         return false;
                     });
@@ -671,9 +658,8 @@
                         return event.groupId === id;
                     });
                     // console.log(eventGroupId);
-                    var teacherChildren = eventObj.title.split(",");
-                    teacher = teacherChildren[0];
-                    children = teacherChildren[1];
+                    children = eventObj.title;
+                    console.log(children);
 
                     var datestringInfo = eventObj.start;
                     var datestringMoment = moment(datestringInfo, "YYYY-MM-DD");
@@ -684,7 +670,6 @@
                     startTime = startTimeMoment.format('HH:mm')
 
                     // SET DATA VALUE INTO UI FORM
-                    editform.find("select[name='teacher']").val(teacher);
                     editform.find("select[name='children']").val(children);
                     // editform.find("input[name='course']").val(calEvent.course);
                     // editform.find("input[name='duration']").val(calEvent.duration);
@@ -696,6 +681,44 @@
                     // console.log(attendance);
                     editAttendanceForm.find("input[name='options']").val([attendance]);
 
+                    // EDIT CLASS DETAILS EVENT
+                    editform.off("submit").on('submit', function() {
+                        // console.log("edit start");
+                        children = editform.find("select[name='children']").val();
+                        // course = editform.find("input[name='course']").val();
+                        duration = editform.find("input[name='duration']").val();
+                        startTime = editform.find("input[name='startTime']").val();
+                        var startTimeMoment = moment(startTime, 'HH:mm');
+                        var endTime = startTimeMoment.add(duration, 'm').format('HH:mm');
+
+                        Swal.fire({
+                            title: 'Confirm Edit?',
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, confirm!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                eventGroupId.forEach(myFunction);
+
+                                function myFunction(value) {
+                                    value.setProp('title', children);
+                                    // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
+                                }
+
+                                $modal.modal('hide');
+                                Swal.fire(
+                                    'Done!',
+                                    'Class Edited.',
+                                    'success'
+                                )
+                            }
+                        })
+                        // console.log("run done");
+                        return false;
+                    });
 
                     // EDIT ATTENDANCE EVENT
                     editAttendanceForm.off("submit").on('submit', function() {
@@ -740,46 +763,6 @@
                         return false;
                     });
 
-                    // EDIT CLASS DETAILS EVENT
-                    editform.off("submit").on('submit', function() {
-                        // console.log("edit start");
-                        teacher = editform.find("select[name='teacher']").val();
-                        children = editform.find("select[name='children']").val();
-                        // course = editform.find("input[name='course']").val();
-                        duration = editform.find("input[name='duration']").val();
-                        startTime = editform.find("input[name='startTime']").val();
-                        var startTimeMoment = moment(startTime, 'HH:mm');
-                        var endTime = startTimeMoment.add(duration, 'm').format('HH:mm');
-
-                        Swal.fire({
-                            title: 'Confirm Edit?',
-                            icon: 'warning',
-                            allowOutsideClick: false,
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, confirm!'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                eventGroupId.forEach(myFunction);
-
-                                function myFunction(value) {
-                                    value.setProp('title', teacher + "," + children);
-                                    // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
-                                }
-
-                                $modal.modal('hide');
-                                Swal.fire(
-                                    'Done!',
-                                    'Class Edited.',
-                                    'success'
-                                )
-                            }
-                        })
-                        // console.log("run done");
-                        return false;
-                    });
-
                     // ACCEPT RESCHEDULE EVENT
                     rescheduleListTable.on('click', '#accept', function() {
                         var $row = $(this).closest("tr"); // Finds the closest row <tr> 
@@ -789,7 +772,7 @@
                         console.log($rowId.text());
                         Swal.fire(
                             'Accepted!',
-                            'id '+$rowId.text()+ ' request has been accepted.',
+                            'id ' + $rowId.text() + ' request has been accepted.',
                             'success'
                         )
 
@@ -803,7 +786,7 @@
                         console.log($rowId.text());
                         Swal.fire(
                             'Rejected!',
-                            'id '+$rowId.text()+ ' request has been rejected.',
+                            'id ' + $rowId.text() + ' request has been rejected.',
                             'success'
                         )
 

@@ -20,8 +20,14 @@
     <link href="../assets/node_modules/clockpicker/dist/jquery-clockpicker.css" rel="stylesheet">
     <!-- Date picker plugins css -->
     <link href="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <link href="../assets/node_modules/bootstrap-material-datetimepicker/css/bootstrap-material-datetimepicker.css" rel="stylesheet">
-
+    <!-- Date picker plugins css -->
+    <link href="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <style>
+        .datepicker {
+            z-index: 1600 !important;
+            /* has to be larger than 1050 */
+        }
+    </style>
 </head>
 
 <body class="skin-blue-dark fixed-layout">
@@ -220,12 +226,6 @@
                                         <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Attendance</span>
                                     </a>
                                 </li>
-                                <!-- respond reschedule request tab link -->
-                                <!-- <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#rescheduleRequest" role="tab">
-                                        <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Reschedule Request</span>
-                                    </a>
-                                </li> -->
                             </ul>
 
                             <!-- Tab panes -->
@@ -269,13 +269,13 @@
                                                 </div>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Selected Date</label>
-                                                        <input class='form-control' type='text' name='date' value="" disabled />
+                                                        <label class='control-label'>Date</label>
+                                                        <input type="text" id="bdate" name="date" class="form-control mydatepicker" value="" />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Selected Day</label>
+                                                        <label class='control-label'>Day</label>
                                                         <input class='form-control' type='text' name='day' value="" disabled />
                                                     </div>
                                                 </div>
@@ -329,76 +329,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
-
-
                                         </div>
                                         <div class="modal-footer">
                                             <button type='submit' class='btn btn-success waves-effect waves-light'><i class='fa fa-check'></i> Save</button>
                                         </div>
                                     </form>
                                 </div>
-                                <!-- respond reschedule request tab -->
-                                <!-- <div class="tab-pane" id="rescheduleRequest" role="tabpanel">
-                                    <div class="modal-body">
-                                        <div class="table-responsive ">
-                                            <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th style="width:15%">Parent</th>
-                                                        <th style="width:20%">New Date</th>
-                                                        <th style="width:15%">New Time</th>
-                                                        <th style="width:30%">Description</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Parent A</td>
-                                                        <td>2021-09-30</td>
-                                                        <td>11:00</td>
-                                                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis sollicitudin orci, vitae convallis est. Cras tempor, lectus feugiat placerat condimentum, sem nisi vehicula ex, fermentum tincidunt eros velit nec felis. </td>
-                                                        <td>Rejected</td>
-                                                        <td>
-                                                            <div class="btn-group-vertical">
-                                                                <button type="button" class="btn btn-sm btn-info mb-1" disabled> Accept</button>
-                                                                <button type="button" class="btn btn-sm btn-danger mt-1" disabled>Reject</button>
-                                                            </div>
-
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>Parent A</td>
-                                                        <td>2021-10-05</td>
-                                                        <td>10:00</td>
-                                                        <td>not free that day</td>
-                                                        <td>Pending</td>
-                                                        <td>
-                                                            <div class="btn-group-vertical">
-                                                                <button type="button" class="btn btn-sm btn-info mb-1"> Accept</button>
-                                                                <button type="button" class="btn btn-sm btn-danger mt-1">Reject</button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td colspan="7">
-                                                            <div class="text-right">
-                                                                <ul class="pagination"> </ul>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div> -->
                             </div>
 
 
@@ -450,21 +387,26 @@
     <script src="../assets/node_modules/calendar/jquery-ui.min.js"></script>
     <script src="../assets/node_modules/moment/moment.js"></script>
     <!-- <script src='../assets/node_modules/calendar/dist/fullcalendar.min.js'></script> -->
-
     <!-- fullcalendar bundle -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.js'></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
     <!-- Clock Plugin JavaScript -->
     <script src="../assets/node_modules/clockpicker/dist/jquery-clockpicker.min.js"></script>
-    <script src="../assets/node_modules/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js"></script>
-
+    <!-- Date Picker Plugin JavaScript -->
+    <script src="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 
     <script>
         // CLOCKPICKER
         // https://weareoutman.github.io/clockpicker/
         $('.clockpicker').clockpicker();
+
+        // Date Picker
+        $('.mydatepicker').datepicker({
+            format: 'yyyy-mm-dd',
+            autoclose: true,
+            todayHighlight: true,
+        });
 
         // add the responsive classes after page initialization
         window.onload = function() {
@@ -707,6 +649,45 @@
                     console.log(attendance);
                     editAttendanceForm.find("input[name='options']").val([attendance]);
 
+                    // EDIT CLASS DETAILS EVENT
+                    editform.off("submit").on('submit', function() {
+                        // console.log("edit start");
+                        teacher = editform.find("select[name='teacher']").val();
+                        children = editform.find("select[name='children']").val();
+                        // course = editform.find("input[name='course']").val();
+                        duration = editform.find("input[name='duration']").val();
+                        startTime = editform.find("input[name='startTime']").val();
+                        var startTimeMoment = moment(startTime, 'HH:mm');
+                        var endTime = startTimeMoment.add(duration, 'm').format('HH:mm');
+
+                        Swal.fire({
+                            title: 'Confirm Edit?',
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, confirm!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                eventGroupId.forEach(myFunction);
+
+                                function myFunction(value) {
+                                    value.setProp('title', teacher + "," + children);
+                                    // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
+                                }
+
+                                $modal.modal('hide');
+                                Swal.fire(
+                                    'Done!',
+                                    'Class Edited.',
+                                    'success'
+                                )
+                            }
+                        })
+                        // console.log("run done");
+                        return false;
+                    });
 
                     // EDIT ATTENDANCE EVENT
                     editAttendanceForm.off("submit").on('submit', function() {
@@ -748,46 +729,6 @@
                         }
 
                         $modal.modal('hide');
-                        return false;
-                    });
-
-                    // EDIT CLASS DETAILS EVENT
-                    editform.off("submit").on('submit', function() {
-                        // console.log("edit start");
-                        teacher = editform.find("select[name='teacher']").val();
-                        children = editform.find("select[name='children']").val();
-                        // course = editform.find("input[name='course']").val();
-                        duration = editform.find("input[name='duration']").val();
-                        startTime = editform.find("input[name='startTime']").val();
-                        var startTimeMoment = moment(startTime, 'HH:mm');
-                        var endTime = startTimeMoment.add(duration, 'm').format('HH:mm');
-
-                        Swal.fire({
-                            title: 'Confirm Edit?',
-                            icon: 'warning',
-                            allowOutsideClick: false,
-                            showCancelButton: true,
-                            confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, confirm!'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                eventGroupId.forEach(myFunction);
-
-                                function myFunction(value) {
-                                    value.setProp('title', teacher + "," + children);
-                                    // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
-                                }
-
-                                $modal.modal('hide');
-                                Swal.fire(
-                                    'Done!',
-                                    'Class Edited.',
-                                    'success'
-                                )
-                            }
-                        })
-                        // console.log("run done");
                         return false;
                     });
 
