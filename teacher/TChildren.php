@@ -111,53 +111,54 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
+                                                <th>Age</th>
                                                 <th>Parent</th>
                                                 <th>Course</th>
-                                                <th>Age</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <td>1</td>
                                                 <td>Children A</td>
+                                                <td>12</td>
                                                 <td>Parent ABC</td>
                                                 <td>Piano Grade 1</td>
-                                                <td>12</td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
                                                 <td>Children ABC</td>
+                                                <td>16</td>
                                                 <td>Parent ABC</td>
                                                 <td>Piano Grade 2</td>
-                                                <td>16</td>
                                             </tr>
                                             <tr>
                                                 <td>3</td>
                                                 <td>Children Abu</td>
+                                                <td>13</td>
                                                 <td>Parent CCC</td>
                                                 <td>Guitar Grade 1</td>
-                                                <td>13</td>
+                                                
                                             </tr>
                                             <tr>
                                                 <td>4</td>
                                                 <td>Chong ABAC</td>
+                                                <td>12</td>
                                                 <td>Parent AAA</td>
                                                 <td>Bass Guitar Grade 1</td>
-                                                <td>12</td>
                                             </tr>
                                             <tr>
                                                 <td>5</td>
                                                 <td>Ali Abu</td>
+                                                <td>14</td>
                                                 <td>Parent CCC</td>
                                                 <td>Piano Grade 1</td>
-                                                <td>14</td>
                                             </tr>
                                             <tr>
                                                 <td>6</td>
                                                 <td>Children DDD</td>
+                                                <td>12</td>
                                                 <td>Parent DDD</td>
                                                 <td>Saxophone Grade 1</td>
-                                                <td>12</td>
                                             </tr>
                                         </tbody>
                                         <tfoot>

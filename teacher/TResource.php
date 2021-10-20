@@ -24,8 +24,6 @@
 
 </head>
 
-<!-- this body color megna is for parent -->
-<!-- <body class="skin-megna-dark fixed-layout"> --> 
 <body class="skin-green-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
