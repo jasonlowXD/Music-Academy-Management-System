@@ -20,7 +20,13 @@
     <!-- page css -->
     <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
     <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
-
+    <style>
+        .childrenTable td {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+            border-top: 0px !important;
+        }
+    </style>
 
 </head>
 
@@ -147,8 +153,26 @@
                                                                     <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                                 </div>
                                                             </td>
-                                                            <td>childrena</td>
-                                                            <td>childrenb</td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>childrenABC</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>childrenBBC</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>2</td>
@@ -161,7 +185,16 @@
                                                                     <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                                 </div>
                                                             </td>
-                                                            <td>kida</td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>kidA</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>3</td>
@@ -174,8 +207,26 @@
                                                                     <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                                 </div>
                                                             </td>
-                                                            <td>cccc</td>
-                                                            <td>dddd</td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>cccc</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>dddd</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>4</td>
@@ -188,9 +239,36 @@
                                                                     <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                                 </div>
                                                             </td>
-                                                            <td>eeee</td>
-                                                            <td>ddaaa</td>
-                                                            <td>qpqpq</td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>eeee</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>aadddaa</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>qpqpqp</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>5</td>
@@ -203,8 +281,26 @@
                                                                     <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                                 </div>
                                                             </td>
-                                                            <td>yyyy</td>
-                                                            <td>qqqqq</td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>yyyy</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>qqqqq</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td>6</td>
@@ -217,8 +313,26 @@
                                                                     <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
                                                                 </div>
                                                             </td>
-                                                            <td>kkkkk</td>
-                                                            <td>Cllll</td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>kkkkk</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            <td>
+                                                                <table class="childrenTable">
+                                                                    <tr>
+                                                                        <td>clllll</td>
+                                                                        <td>15</td>
+                                                                        <td>Piano Grade 1</td>
+                                                                        <td>teacher A</td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                     <tfoot>
@@ -432,7 +546,7 @@
                 $('#mytable').data('footable').toggleDetail(this);
             });
         });
-
+        document.querySelector("#mytable > tbody > tr.footable-row-detail > td > div > div:nth-child(1)").classList.add('d-flex')
         // clone children input
         var i = 1;
         $('#addChildren').click(function() {
