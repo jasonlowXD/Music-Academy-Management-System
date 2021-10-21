@@ -351,7 +351,7 @@
                                     <!-- add parent panel -->
                                     <div class="tab-pane" id="addteacher" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material">
+                                            <form class="form-material" id="newParentForm">
                                                 <!-- parent form -->
                                                 <div class="form-group">
                                                     <div class="row">
@@ -395,7 +395,7 @@
                                                                 <label class="col-md-12" for="example-text">Children Name</span>
                                                                 </label>
                                                                 <div class="col-md-12">
-                                                                    <input type="text" id="example-text" name="example-text[]" class="form-control" placeholder="enter child name" required>
+                                                                    <input type="text" id="example-text" name="childrenName[]" class="form-control" placeholder="enter child name" required>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -404,13 +404,13 @@
                                                                 <label class="col-md-12" for="example-age">Children Age</span>
                                                                 </label>
                                                                 <div class="col-md-12">
-                                                                    <input type="number" id="example-age" name="example-age[]" class="form-control" placeholder="enter child age" required>
+                                                                    <input type="number" id="example-age" name="childrenAge[]" class="form-control" placeholder="enter child age" required>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class='form-group'>
                                                             <label class='control-label'>Select Course</label>
-                                                            <select class='form-control' name='course[]' required>
+                                                            <select class='form-control' name='childrenCourse[]' required>
                                                                 <option hidden disabled selected value=""> -- select a course -- </option>
                                                                 <option value=''>Piano Grade 1</option>
                                                                 <option value=''>Piano Grade 2</option>
@@ -419,7 +419,7 @@
                                                         </div>
                                                         <div class='form-group'>
                                                             <label class='control-label'>Select Teacher</label>
-                                                            <select class='form-control' name='teacher[]' required>
+                                                            <select class='form-control' name='childrenTeacher[]' required>
                                                                 <option hidden disabled selected value=""> -- select a teacher -- </option>
                                                                 <option value='teacher A'>teacher A</option>
                                                                 <option value='teacher B'>teacher B</option>
@@ -546,8 +546,7 @@
                 $('#mytable').data('footable').toggleDetail(this);
             });
         });
-        document.querySelector("#mytable > tbody > tr.footable-row-detail > td > div > div:nth-child(1)").classList.add('d-flex')
-        // clone children input
+        // clone children input UI
         var i = 1;
         $('#addChildren').click(function() {
             i++;
@@ -561,12 +560,30 @@
             $('.childrenDiv').append(clone);
         });
 
-        //remove children clone
+        //remove children clone UI
         $(document).on('click', '.btn_remove', function() {
             var btn_id = $(this).attr("id");
             console.log(btn_id);
             $('#cloneChildrenForm-' + btn_id).remove();
             i--;
+        });
+
+        // TEST GET MULTIPLE CHILDREN VALUE
+        $('#newParentForm').on('submit', function() {
+            var form = $('#newParentForm');
+
+            var childrenName = form.find("input[name^='childrenName']");
+            var childrenAge = form.find("input[name^='childrenAge']");
+            var name = []; 
+            var age = [];
+            childrenName.each(function(){
+                name.push(childrenName.val());
+                age.push(childrenAge.val());
+            });
+            console.log(name);
+            console.log(age);
+            
+            return false;
         });
     </script>
 
