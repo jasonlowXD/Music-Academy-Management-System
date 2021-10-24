@@ -92,14 +92,20 @@
                                     <!-- for children nav-link, get children data from database, use looping to display based on number of children -->
                                     <!-- loop1 -->
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#Children 1" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-pencil-alt"></i></span> <span class="hidden-xs-down">Children 1</span>
+                                        <a class="nav-link" data-toggle="tab" href="#Children ABC" role="tab">
+                                            <span class="hidden-sm-up"><i class="ti-pencil-alt"></i></span> <span class="hidden-xs-down">Children ABC</span>
                                         </a>
                                     </li>
                                     <!-- loop2 -->
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#Children 2" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-pencil-alt"></i></span> <span class="hidden-xs-down">Children 2</span>
+                                        <a class="nav-link" data-toggle="tab" href="#Kid ABC" role="tab">
+                                            <span class="hidden-sm-up"><i class="ti-pencil-alt"></i></span> <span class="hidden-xs-down">Kid ABC</span>
+                                        </a>
+                                    </li>
+
+                                    <li class="nav-item">
+                                        <a class="nav-link" data-toggle="tab" href="#addChildren" role="tab">
+                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Children</span>
                                         </a>
                                     </li>
 
@@ -146,9 +152,9 @@
                                         </div>
                                     </div>
                                     <!-- edit children tab -->
-                                    <!-- get children name from database, use children number(i) looping to display id(Children+i) and form id(editChildrenForm+i) which i is number of children -->
+                                    <!-- get children name from database, use children name as div id for each tab and form id(editChildrenForm+i) which i is number of children -->
                                     <!-- loop1 -->
-                                    <div class="tab-pane" id="Children 1" role="tabpanel">
+                                    <div class="tab-pane" id="Children ABC" role="tabpanel">
                                         <div class="p-20">
                                             <form class="form-material childrenForm" id="editChildrenForm1">
                                                 <div class="form-group">
@@ -156,7 +162,7 @@
                                                         <label class="col-md-12" for="example-text">Children Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter child name" value="Children A" required>
+                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter child name" value="Children ABC" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -194,7 +200,7 @@
                                     </div>
 
                                     <!-- loop2 -->
-                                    <div class="tab-pane" id="Children 2" role="tabpanel">
+                                    <div class="tab-pane" id="Kid ABC" role="tabpanel">
                                         <div class="p-20">
                                             <form class="form-material childrenForm" id="editChildrenForm2">
                                                 <div class="form-group">
@@ -202,7 +208,7 @@
                                                         <label class="col-md-12" for="example-text">Children Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter child name" value="Children B" required>
+                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter child name" value="Kid ABC" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -234,6 +240,54 @@
                                                 <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                                     <button type="button" class="btn btn-danger waves-effect waves-light delete-children-btn">Delete</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <!-- add new children tab -->
+                                    <div class="tab-pane" id="addChildren" role="tabpanel">
+                                        <div class="p-20">
+                                            <form class="form-material childrenForm" id="">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-text">Children Name</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter child name" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-age">Children Age</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="number" id="example-age" name="example-age" class="form-control" placeholder="enter child age" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label class='control-label'>Select Course</label>
+                                                    <select class='form-control' name='course' required>
+                                                        <option hidden disabled selected value=""> -- select a course -- </option>
+                                                        <option value='1'>Piano Grade 1</option>
+                                                        <option value='2'>Piano Grade 2</option>
+                                                        <option value='3'>Guitar Grade 1</option>
+                                                    </select>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label class='control-label'>Select Teacher</label>
+                                                    <select class='form-control' name='teacher' required>
+                                                        <option hidden disabled selected value=""> -- select a teacher -- </option>
+                                                        <option value='teacher A'>teacher A</option>
+                                                        <option value='teacher B'>teacher B</option>
+                                                        <option value='teacher C'>teacher C</option>
+                                                    </select>
+                                                </div>
+                                                <div class="button-group">
+                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                                    <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                 </div>
                                             </form>
                                         </div>
