@@ -287,7 +287,7 @@
                                         <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
                                             <div class="form-control" data-trigger="fileinput">
                                                 <i class="glyphicon glyphicon-file fileinput-exists"></i>
-                                                <span class="fileinput-filename"></span>
+                                                <span class="fileinput-filename">receipttest.pdf</span>
                                             </div>
                                             <span class="input-group-addon btn btn-default btn-file">
                                                 <span class="fileinput-new">Select file</span>
