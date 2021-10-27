@@ -25,6 +25,10 @@
             z-index: 1600 !important;
             /* has to be larger than 1050 */
         }
+
+        .fc .fc-popover {
+            z-index: 1040 !important;
+        }
     </style>
 </head>
 
@@ -105,16 +109,16 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist" id="">
-                                <li class="nav-item">
+                            <ul class="nav nav-tabs" role="tablist" id="myTabs">
+                                <li class="nav-item" id="classDetailTabLink">
                                     <a class="nav-link active" data-toggle="tab" href="#classdetail" role="tab">
                                         <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Class Details</span>
                                     </a>
                                 </li>
                                 <!-- respond reschedule request tab link -->
-                                <li class="nav-item">
+                                <li class="nav-item" id="rescheduleTabLink">
                                     <a class="nav-link" data-toggle="tab" href="#makeRescheduleRequest" role="tab">
-                                        <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Make Reschedule Request</span>
+                                        <span class="hidden-sm-up"><i class="ti-marker-alt"></i></span> <span class="hidden-xs-down">Make Reschedule Request</span>
                                     </a>
                                 </li>
                             </ul>
@@ -223,44 +227,46 @@
                                         </form>
 
                                         <hr>
-                                        <h4><strong>Request Respond</strong></h4>
-                                        <div class="table-responsive ">
-                                            <table id="rescheduleListTable" class="table m-t-5 table-hover contact-list" data-page-size="5">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th width="130">New Date</th>
-                                                        <th width="130">New Time</th>
-                                                        <th>Description</th>
-                                                        <th>Status</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>2021-09-30</td>
-                                                        <td>11:00</td>
-                                                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis sollicitudin orci, vitae convallis est. Cras tempor, lectus feugiat placerat condimentum, sem nisi vehicula ex, fermentum tincidunt eros velit nec felis. </td>
-                                                        <td>Rejected</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>2021-10-05</td>
-                                                        <td>10:00</td>
-                                                        <td>not free that day</td>
-                                                        <td>Pending</td>
-                                                    </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td colspan="7">
-                                                            <div class="text-right">
-                                                                <ul class="pagination"> </ul>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
+                                        <div class='d-none' id="requestRespondTable">
+                                            <h4><strong>Request Respond</strong></h4>
+                                            <div class="table-responsive ">
+                                                <table id="rescheduleListTable" class="table m-t-5 table-hover contact-list" data-page-size="5">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th width="130">New Date</th>
+                                                            <th width="130">New Time</th>
+                                                            <th>Description</th>
+                                                            <th>Status</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>2021-09-30</td>
+                                                            <td>11:00</td>
+                                                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis sollicitudin orci, vitae convallis est. Cras tempor, lectus feugiat placerat condimentum, sem nisi vehicula ex, fermentum tincidunt eros velit nec felis. </td>
+                                                            <td>Rejected</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>2021-10-05</td>
+                                                            <td>10:00</td>
+                                                            <td>not free that day</td>
+                                                            <td>Pending</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="7">
+                                                                <div class="text-right">
+                                                                    <ul class="pagination"> </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -333,7 +339,8 @@
         $('.mydatepicker').datepicker({
             format: 'yyyy-mm-dd',
             autoclose: true,
-            todayHighlight: true
+            todayHighlight: true,
+            clearBtn: true,
         });
 
         // add the responsive classes after page initialization
@@ -345,48 +352,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             var day, dayName, fulldate, datestring;
             var teacher, children, course, duration, startTime, location, desc;
-            var dataEvent = [{
-                groupId: 1,
-                title: 'teacher A,children B',
-                startTime: '10:00',
-                endTime: '12:00',
-                startRecur: '2021-10-01',
-                daysOfWeek: [1],
-                className: 'bg-primary',
-                extendedProps: {
-                    location: 'www.google.com',
-                    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse interdum a est quis sagittis. Praesent euismod, tortor ut mattis condimentum, dui dui efficitur eros, eget porttitor purus magna ut quam.',
-                    attendance: 0
-                }
-            }, {
-                groupId: 2,
-                title: 'teacher B,children C',
-                startTime: '08:00',
-                endTime: '09:00',
-                startRecur: '2021-09-30',
-                daysOfWeek: [6],
-                className: 'bg-primary',
-                extendedProps: {
-                    location: 'www.googleMeet.com',
-                    description: 'learn piano things',
-                    attendance: 1
-                }
-            }, {
-                groupId: 3,
-                title: 'teacher C,children A',
-                startTime: '16:00',
-                endTime: '17:00',
-                startRecur: '2021-11-01',
-                daysOfWeek: [3],
-                className: 'bg-primary',
-                extendedProps: {
-                    location: 'www.meetgoogle.com',
-                    description: 'learn pro things'
-                }
-            }];
+
+            var dataEvent = dummyData();
 
             var calendarEl = document.getElementById('calendar');
-
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
@@ -487,11 +456,11 @@
                             dayName = 'Saturday';
                             break;
                     }
-                    var id = eventObj.groupId;
-
-                    var eventGroupId = calendar.getEvents().filter(function(event) {
-                        return event.groupId === id;
-                    });
+                    var id = eventObj.id;
+                    // var id = eventObj.groupId;
+                    // var eventGroupId = calendar.getEvents().filter(function(event) {
+                    //     return event.groupId === id;
+                    // });
                     // console.log(eventGroupId);
                     var teacherChildren = eventObj.title.split(",");
                     teacher = teacherChildren[0];
@@ -517,7 +486,7 @@
                     detailTable.find(".teacherName").text(teacher);
                     detailTable.find(".childrenName").text(children);
                     detailTable.find(".courseName").text('Piano grade 1');
-                    detailTable.find(".duration").text('60');
+                    detailTable.find(".duration").text(duration);
                     detailTable.find(".date").text(datestring);
                     detailTable.find(".startTime").text(startTime);
                     detailTable.find(".endTime").text(endTime);
@@ -530,14 +499,23 @@
                     var presentHTML = '<h4 class="remove"><span class="label label-success">Present</span></h4>';
                     var absentHTML = '<h4 class="remove"><span class="label label-danger">Absent</span></h4>';
                     var nullAttendHTML = '<span class="remove">-</span>';
-                    if (attendance == 1) {
+                    if (attendance == '1') {
                         detailTable.find(".attendance").append(presentHTML);
-                    } else if (attendance == 0) {
+                    } else if (attendance == '0') {
                         detailTable.find(".attendance").append(absentHTML);
-                    } else {
+                    } else if (attendance == '') {
                         detailTable.find(".attendance").append(nullAttendHTML);
                     }
 
+                    // CHECK THE EVENT GOT RESCHEDULE REQUEST OR NOT, IF GOT REQUEST THEN DISPLAY THE REQUEST TABLE
+                    // console.log(eventObj.classNames[0])
+                    if (eventObj.classNames[0] == 'bg-warning') {
+                        // console.log('warning here')
+                        $("#requestRespondTable").removeClass('d-none');
+                    } else if (eventObj.classNames[0] == 'bg-success' || eventObj.classNames[0] == 'bg-danger' || eventObj.classNames[0] == 'bg-primary') {
+                        // console.log('others here')
+                        $("#requestRespondTable").addClass('d-none');
+                    }
                     // SET SELECTED DATE AND TIME IN RESCHEDULE REQUEST FORM UI
                     var newRequestForm = $modal.find('.newRequest-modal-form');
                     newRequestForm.find("input[name='selectedDate']").val(datestring);
@@ -545,8 +523,27 @@
 
                     // NEW RESCHEDULE REQUEST SUBMIT
                     newRequestForm.on('submit', function() {
-                        console.log("submitted");
 
+                        Swal.fire({
+                            title: 'Submit Request?',
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, confirm!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                console.log("submitted");
+                                newRequestForm[0].reset();
+                                $modal.modal('hide');
+                                Swal.fire(
+                                    'Done!',
+                                    'The request is sent to the ' + teacher,
+                                    'success'
+                                )
+                            }
+                        })
                         return false;
                     });
                 },
@@ -555,6 +552,252 @@
 
             calendar.render();
         });
+
+        function dummyData() {
+            var dataEvent = [{
+                id: 1,
+                title: 'teacher A,children B',
+                start: '2021-10-04T10:00:00',
+                end: '2021-10-04T11:00:00',
+                className: 'bg-danger',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: '0'
+                }
+            }, {
+                id: 2,
+                title: 'teacher A,children B',
+                start: '2021-10-11T10:00:00',
+                end: '2021-10-11T11:00:00',
+                className: 'bg-success',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: '1'
+                }
+            }, {
+                id: 3,
+                title: 'teacher A,children B',
+                start: '2021-10-18T10:00:00',
+                end: '2021-10-18T11:00:00',
+                className: 'bg-warning',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 4,
+                title: 'teacher A,children B',
+                start: '2021-10-25T10:00:00',
+                end: '2021-10-25T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 5,
+                title: 'teacher A,children B',
+                start: '2021-11-01T10:00:00',
+                end: '2021-11-01T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 6,
+                title: 'teacher A,children B',
+                start: '2021-11-08T10:00:00',
+                end: '2021-11-08T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 7,
+                title: 'teacher A,children B',
+                start: '2021-11-15T10:00:00',
+                end: '2021-11-15T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 8,
+                title: 'teacher A,children B',
+                start: '2021-11-22T10:00:00',
+                end: '2021-11-22T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 9,
+                title: 'teacher A,children B',
+                start: '2021-11-29T10:00:00',
+                end: '2021-11-29T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 10,
+                title: 'teacher A,children B',
+                start: '2021-12-06T10:00:00',
+                end: '2021-12-06T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 11,
+                title: 'teacher A,children B',
+                start: '2021-12-13T10:00:00',
+                end: '2021-12-13T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 12,
+                title: 'teacher A,children B',
+                start: '2021-12-20T10:00:00',
+                end: '2021-12-20T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 13,
+                title: 'teacher A,children B',
+                start: '2021-12-27T10:00:00',
+                end: '2021-12-27T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 14,
+                title: 'teacher C,children A',
+                start: '2021-10-07T14:00:00',
+                end: '2021-10-07T15:00:00',
+                className: 'bg-warning',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 15,
+                title: 'teacher C,children A',
+                start: '2021-10-14T14:00:00',
+                end: '2021-10-14T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 16,
+                title: 'teacher C,children A',
+                start: '2021-10-21T14:00:00',
+                end: '2021-10-21T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 17,
+                title: 'teacher C,children A',
+                start: '2021-10-28T14:00:00',
+                end: '2021-10-28T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 18,
+                title: 'teacher B,children A',
+                start: '2021-10-18T13:00:00',
+                end: '2021-10-18T14:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 3,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 19,
+                title: 'teacher B,children A',
+                start: '2021-10-18T15:00:00',
+                end: '2021-10-18T16:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 4,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 20,
+                title: 'teacher B,children A',
+                start: '2021-10-18T17:00:00',
+                end: '2021-10-18T18:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 5,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }];
+
+            return dataEvent;
+        }
     </script>
 
 </body>

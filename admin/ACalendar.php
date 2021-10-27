@@ -27,10 +27,14 @@
             z-index: 1600 !important;
             /* has to be larger than 1050 */
         }
+
+        .fc .fc-popover {
+            z-index: 1040 !important;
+        }
     </style>
 </head>
 
-<body class="skin-blue-dark fixed-layout">
+<body class="skin-default-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -112,7 +116,7 @@
                                             <div class='col-md-6'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Select Teacher</label>
-                                                    <select class='form-control' name='teacher'>
+                                                    <select class='form-control' name='teacher' required>
                                                         <option hidden disabled selected value=""> -- select a teacher -- </option>
                                                         <option value='teacher A'>teacher A</option>
                                                         <option value='teacher B'>teacher B</option>
@@ -123,7 +127,7 @@
                                             <div class='col-md-6'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Select children</label>
-                                                    <select class='form-control' name='children'>
+                                                    <select class='form-control' name='children' required>
                                                         <option hidden disabled selected value=""> -- select a children -- </option>
                                                         <option value='children A'>children A</option>
                                                         <option value='children B'>children B</option>
@@ -131,31 +135,37 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class='col-md-12'>
+                                            <div class='col-md-6'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Course</label>
-                                                    <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1 (auto set based on children take what course)" disabled />
-                                                </div>
-                                            </div>
-                                            <div class='col-md-12'>
-                                                <div class='form-group'>
-                                                    <label class='control-label'>Class duration (min)</label>
-                                                    <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60 (auto set based on the course name)" disabled />
+                                                    <input class='form-control' placeholder='Insert Course Name' type='text' name='course' value="Piano grade 1" disabled />
                                                 </div>
                                             </div>
                                             <div class='col-md-6'>
                                                 <div class='form-group'>
-                                                    <label class='control-label'>Selected Date</label>
+                                                    <label class='control-label'>Class duration (min)</label>
+                                                    <input class='form-control' placeholder='Insert class duration' type='text' name='duration' value="60" disabled />
+                                                </div>
+                                            </div>
+                                            <div class='col-md-6'>
+                                                <div class='form-group'>
+                                                    <label class='control-label'>Start Date</label>
                                                     <input class='form-control' type='text' name='date' value="" disabled />
                                                 </div>
                                             </div>
                                             <div class='col-md-6'>
                                                 <div class='form-group'>
-                                                    <label class='control-label'>Selected Day</label>
+                                                    <label class='control-label'>End Date</label>
+                                                    <input type="text" id="bdate" name="endDate" class="form-control mydatepicker" placeholder="yyyy/mm/dd" required>
+                                                </div>
+                                            </div>
+                                            <div class='col-md-6'>
+                                                <div class='form-group'>
+                                                    <label class='control-label'>Day Repeat</label>
                                                     <input class='form-control' type='text' name='day' value="" disabled />
                                                 </div>
                                             </div>
-                                            <div class='col-md-12'>
+                                            <div class='col-md-6'>
                                                 <div class='form-group'>
                                                     <label class="control-label">Start Time</label>
                                                     <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
@@ -178,28 +188,12 @@
                                                     <input class='form-control' placeholder='Description here' type='text' name='desc' value="" />
                                                 </div>
                                             </div>
-                                            <!-- <div class='col-md-12'>
-                                                <div class='form-group'>
-                                                    <label class='control-label'>Category</label>
-                                                    <select class='form-control' name='category'>
-                                                        <option value='bg-danger'>Danger</option>
-                                                        <option value='bg-success'>Success</option>
-                                                        <option value='bg-purple'>Purple</option>
-                                                        <option value='bg-primary'>Primary</option>
-                                                        <option value='bg-dark'>Dark</option>
-                                                        <option value='bg-info'>Info</option>
-                                                        <option value='bg-warning'>Warning</option>
-                                                    </select>
-                                                </div>
-                                            </div> -->
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary cancel-event waves-effect" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-success create-event waves-effect waves-light">Create Class</button>
+                                    <button type="submit" class="btn btn-success create-event waves-effect waves-light">Create Class</button>
                                 </div>
                             </form>
                         </div>
@@ -238,7 +232,7 @@
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Select Teacher</label>
-                                                        <select class='form-control' name='teacher'>
+                                                        <select class='form-control' name='teacher' required>
                                                             <option value='teacher A'>teacher A</option>
                                                             <option value='teacher B'>teacher B</option>
                                                             <option value='teacher C'>teacher C</option>
@@ -248,7 +242,7 @@
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Select children</label>
-                                                        <select class='form-control' name='children'>
+                                                        <select class='form-control' name='children' required>
                                                             <option value='children A'>children A</option>
                                                             <option value='children B'>children B</option>
                                                             <option value='children C'>children C</option>
@@ -269,13 +263,13 @@
                                                 </div>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Date</label>
-                                                        <input type="text" id="bdate" name="date" class="form-control mydatepicker" value="" />
+                                                        <label class='control-label'>Class Date</label>
+                                                        <input type="text" id="bdate" name="date" class="form-control mydatepicker" value="" required />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Day</label>
+                                                        <label class='control-label'>Class Day</label>
                                                         <input class='form-control' type='text' name='day' value="" disabled />
                                                     </div>
                                                 </div>
@@ -283,7 +277,7 @@
                                                     <div class='form-group'>
                                                         <label class="control-label">Start Time</label>
                                                         <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                            <input type="text" class="form-control" value="" name="startTime" placeholder="Select time">
+                                                            <input type="text" class="form-control" value="" name="startTime" placeholder="Select time" required>
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
                                                             </div>
@@ -293,13 +287,13 @@
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Location</label>
-                                                        <input class='form-control' placeholder='Academy or Insert Online Link here' type='text' name='location' value="studio A or www.googleMeet.com" />
+                                                        <input class='form-control' placeholder='Academy or Insert Online Link here' type='text' name='location' />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Description</label>
-                                                        <input class='form-control' placeholder='Description here' type='text' name='desc' value="description of the class" />
+                                                        <input class='form-control' placeholder='Description here' type='text' name='desc' />
                                                     </div>
                                                 </div>
                                             </div>
@@ -406,6 +400,7 @@
             format: 'yyyy-mm-dd',
             autoclose: true,
             todayHighlight: true,
+            clearBtn: true,
         });
 
         // add the responsive classes after page initialization
@@ -413,51 +408,59 @@
             $('.fc-toolbar.fc-header-toolbar').addClass('row col-12');
         };
 
+        // dummy id for create new event
+        var id = 100;
+        // dummy classGroup as groupid for create new event
+        var classGroup = 100;
+
         //FULLCALENDAR V5
         document.addEventListener('DOMContentLoaded', function() {
             var day, dayName, fulldate, datestring;
-            var teacher, children, course, duration, startTime, location, desc;
-            var dataEvent = [{
-                groupId: 1,
-                title: 'teacher A,children B',
-                startTime: '10:00',
-                endTime: '12:00',
-                startRecur: '2021-10-01',
-                daysOfWeek: [1],
-                className: 'bg-primary',
-                extendedProps: {
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: 0
-                }
-            }, {
-                groupId: 2,
-                title: 'teacher B,children C',
-                startTime: '08:00',
-                endTime: '09:00',
-                startRecur: '2021-09-30',
-                daysOfWeek: [6],
-                className: 'bg-primary',
-                extendedProps: {
-                    location: 'www.google.com',
-                    description: 'learn beginner things'
-                }
-            }, {
-                groupId: 3,
-                title: 'teacher C,children A',
-                startTime: '16:00',
-                endTime: '17:00',
-                startRecur: '2021-11-01',
-                daysOfWeek: [3],
-                className: 'bg-primary',
-                extendedProps: {
-                    location: 'www.google.com',
-                    description: 'learn beginner things'
-                }
-            }];
+            var teacher, children, course, duration, startDate, endDate, startTime, loca, desc;
+
+            // RECURSIVE METHOD (GOT PROBLEM)
+            // var dataEvent = [{
+            //     groupId: 1,
+            //     title: 'teacher A,children B',
+            //     startTime: '10:00',
+            //     endTime: '12:00',
+            //     startRecur: '2021-10-01',
+            //     daysOfWeek: [1],
+            //     className: 'bg-primary',
+            //     extendedProps: {
+            //         location: 'www.google.com',
+            //         description: 'learn beginner things',
+            //         attendance: 0
+            //     }
+            // }, {
+            //     groupId: 2,
+            //     title: 'teacher B,children C',
+            //     startTime: '08:00',
+            //     endTime: '09:00',
+            //     startRecur: '2021-09-30',
+            //     daysOfWeek: [6],
+            //     className: 'bg-primary',
+            //     extendedProps: {
+            //         location: 'www.google.com',
+            //         description: 'learn beginner things'
+            //     }
+            // }, {
+            //     groupId: 3,
+            //     title: 'teacher C,children A',
+            //     startTime: '16:00',
+            //     endTime: '17:00',
+            //     startRecur: '2021-11-01',
+            //     daysOfWeek: [3],
+            //     className: 'bg-primary',
+            //     extendedProps: {
+            //         location: 'www.google.com',
+            //         description: 'learn beginner things'
+            //     }
+            // }];
+
+            var dataEvent = dummyData();
 
             var calendarEl = document.getElementById('calendar');
-
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
@@ -545,38 +548,68 @@
                         // console.log("on submit");
                         teacher = addform.find("select[name='teacher']").val();
                         children = addform.find("select[name='children']").val();
-                        // course = addform.find("input[name='course']").val();
+                        course = addform.find("input[name='course']").val();
                         duration = addform.find("input[name='duration']").val();
+                        // console.log(duration);
+                        endDate = addform.find("input[name='endDate']").val();
+                        // console.log(endDate);
                         startTime = addform.find("input[name='startTime']").val();
                         var startTimeMoment = moment(startTime, 'HH:mm'); //convert from value to moment format
-                        // console.log(startTime);
-                        var endTime = startTimeMoment.add(duration, 'm').format('HH:mm'); //add duration to startTime in moment format
-                        // console.log(endTimeValue);
-                        // location = addform.find("input[name='location']").val();
-                        // desc = addform.find("input[name='desc']").val();
+                        var startTimeStr = startTimeMoment.format('HH:mm:ss');
+                        // console.log(startTimeStr);
+                        var endTime = startTimeMoment.add(duration, 'm').format('HH:mm:ss'); //add duration to startTime in moment format
+                        // console.log(endTime);
+                        loca = addform.find("input[name='location']").val();
+                        desc = addform.find("input[name='desc']").val();
                         var categoryClass = ("bg-primary");
 
-                        if (teacher !== null && children !== null) {
+                        // if (teacher !== null && children !== null) {
+
+                        // RECURSIVE METHOD (GOT PROBLEM)
+                        // calendar.addEvent({
+                        //     groupId: 4,
+                        //     title: teacher + "," + children,
+                        //     startTime: startTime,
+                        //     endTime: endTime,
+                        //     startRecur: arg.startStr,
+                        //     daysOfWeek: [arg.start.getDay()],
+                        //     allDay: false,
+                        //     className: categoryClass
+                        // });
+
+                        // NORMAL METHOD
+                        var currentDate = arg.startStr;
+
+                        while (moment(currentDate).isBefore(endDate) || moment(currentDate).isSame(endDate)) {
+                            // console.log('true');
                             calendar.addEvent({
-                                groupId: 4,
+                                id: id,
                                 title: teacher + "," + children,
-                                startTime: startTime,
-                                endTime: endTime,
-                                startRecur: arg.startStr,
-                                daysOfWeek: [arg.start.getDay()],
-                                allDay: false,
-                                className: categoryClass
+                                start: currentDate + 'T' + startTimeStr,
+                                end: currentDate + 'T' + endTime,
+                                className: categoryClass,
+                                extendedProps: {
+                                    classGroup: classGroup,
+                                    location: loca,
+                                    description: desc,
+                                    attendance: ''
+                                }
                             });
-                            $modal.modal('hide');
-                        } else {
-                            alert('please select teacher and children');
+                            currentDate = moment(currentDate, "YYYY-MM-DD").add(7, 'days'); //add weekly days
+                            currentDate = currentDate.format('YYYY-MM-DD'); //convert back format
+                            id++;
                         }
+                        classGroup++;
+                        $modal.modal('hide');
+                        // } else {
+                        //     alert('please select teacher and children');
+                        // }
                         return false;
                     });
 
-                    $modal.find('.create-event').off('click').click(function() {
-                        addform.submit();
-                    });
+                    // $modal.find('.create-event').off('click').click(function() {
+                    //     addform.submit();
+                    // });
 
                     addform[0].reset();
                     calendar.unselect();
@@ -619,12 +652,12 @@
                             dayName = 'Saturday';
                             break;
                     }
-                    var id = eventObj.groupId;
-
-                    var eventGroupId = calendar.getEvents().filter(function(event) {
-                        return event.groupId === id;
-                    });
-                    console.log(eventGroupId);
+                    var id = eventObj.id;
+                    // var id = eventObj.groupId;
+                    console.log(eventObj);
+                    // var eventGroupId = calendar.getEvents().filter(function(event) {
+                    //     return event.Id === id;
+                    // });
                     var teacherChildren = eventObj.title.split(",");
                     teacher = teacherChildren[0];
                     children = teacherChildren[1];
@@ -637,6 +670,9 @@
                     var startTimeMoment = moment(startTimeInfo, 'HH:mm'); //convert to moment object
                     startTime = startTimeMoment.format('HH:mm')
 
+                    loca = eventObj.extendedProps.location;
+                    desc = eventObj.extendedProps.description;
+
                     editform.find("select[name='teacher']").val(teacher);
                     editform.find("select[name='children']").val(children);
                     // editform.find("input[name='course']").val(calEvent.course);
@@ -644,9 +680,10 @@
                     editform.find("input[name='date']").val(datestring);
                     editform.find("input[name='day']").val(dayName);
                     editform.find("input[name='startTime']").val(startTime);
+                    editform.find("input[name='location']").val(loca);
+                    editform.find("input[name='desc']").val(desc);
 
                     var attendance = eventObj.extendedProps.attendance;
-                    console.log(attendance);
                     editAttendanceForm.find("input[name='options']").val([attendance]);
 
                     // EDIT CLASS DETAILS EVENT
@@ -656,33 +693,83 @@
                         children = editform.find("select[name='children']").val();
                         // course = editform.find("input[name='course']").val();
                         duration = editform.find("input[name='duration']").val();
+                        startDate = editform.find("input[name='date']").val();
                         startTime = editform.find("input[name='startTime']").val();
                         var startTimeMoment = moment(startTime, 'HH:mm');
-                        var endTime = startTimeMoment.add(duration, 'm').format('HH:mm');
+                        var startTimeStr = startTimeMoment.format('HH:mm:ss');
+                        var endTime = startTimeMoment.add(duration, 'm').format('HH:mm:ss');
+                        loca = editform.find("input[name='location']").val();
+                        desc = editform.find("input[name='desc']").val();
 
                         Swal.fire({
                             title: 'Confirm Edit?',
                             icon: 'warning',
                             allowOutsideClick: false,
-                            showCancelButton: true,
                             confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, confirm!'
+                            confirmButtonText: 'This Class Only!',
+                            showDenyButton: true,
+                            denyButtonColor: '#009c75',
+                            denyButtonText: 'This and following class!',
+                            showCloseButton: true
                         }).then((result) => {
+                            // EDIT ONLY CURRENT SELECTED CLASS
                             if (result.isConfirmed) {
-                                eventGroupId.forEach(myFunction);
 
-                                function myFunction(value) {
-                                    value.setProp('title', teacher + "," + children);
-                                    // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
-                                }
+                                // RECURSIVE METHOD (GOT PROBLEM)
+                                // eventGroupId.forEach(myFunction);
+                                // function myFunction(value) {
+                                //     value.setProp('title', teacher + "," + children);
+                                //     // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
+                                // }
+
+                                // NORMAL METHOD
+                                var event = calendar.getEventById(id);
+                                // console.log(event);
+                                event.setProp('title', teacher + "," + children);
+                                event.setStart(startDate + 'T' + startTime);
+                                event.setEnd(startDate + 'T' + endTime);
+
+                                event.setExtendedProp('location', loca);
+                                event.setExtendedProp('description', desc);
 
                                 $modal.modal('hide');
                                 Swal.fire(
                                     'Done!',
-                                    'Class Edited.',
+                                    'Class id: ' + id + ' Edited.',
                                     'success'
                                 )
+                            }
+                            // EDIT CURRENT AND FOLLOWING WITH SAME CLASSGROUP CLASS
+                            else if (result.isDenied) {
+                                // get selected class groupid
+                                var thisClassGroupId = eventObj.extendedProps.classGroup;
+                                // get all classes with same groupid as selected class
+                                var allclassGroupId = calendar.getEvents().filter(function(event) {
+                                    return event.extendedProps.classGroup === thisClassGroupId;
+                                });
+                                // console.log(allclassGroupId);
+
+                                // loop each class with same groupid
+                                allclassGroupId.forEach(myFunction);
+
+                                function myFunction(value) {
+                                    // if current loop class date is same with selected class date, or
+                                    // if current loop class date is after the selected class date
+                                    if (moment(value.start).isSame(eventObj.start) || moment(value.start).isAfter(eventObj.start)) {
+                                        // console.log('before is'+value.start);
+                                        value.setProp('title', teacher + "," + children);
+                                        value.setStart(startDate + 'T' + startTime);
+                                        value.setEnd(startDate + 'T' + endTime);
+                                        value.setExtendedProp('location', loca);
+                                        value.setExtendedProp('description', desc);
+                                        startDate = moment(startDate, "YYYY-MM-DD").add(7, 'days'); //add weekly days
+                                        startDate = startDate.format('YYYY-MM-DD'); //convert back format
+                                        // console.log('after is'+value.start);
+                                    }
+                                }
+
+                                $modal.modal('hide');
+                                Swal.fire('Done!', 'Class Edited', 'success')
                             }
                         })
                         // console.log("run done");
@@ -696,66 +783,115 @@
                         var className, attend;
                         if (attendance == 1) {
                             className = 'bg-success';
-                            attend = 1;
+                            attend = '1';
                         } else if (attendance == 0) {
                             className = 'bg-danger';
-                            attend = 0;
+                            attend = '0';
                         }
 
-                        eventGroupId.forEach(myFunction);
-
+                        // RECURSIVE METHOD (GOT PROBLEM)
+                        // eventGroupId.forEach(myFunction);
                         // console.log(datestring);
+                        // function myFunction(value, index, arr) {
+                        //     // console.log(arr);
+                        //     // console.log(index);
+                        //     // console.log(eventObj);
+                        //     // var valueStart = value.start;
+                        //     // var valueStartMoment = moment(valueStart, "YYYY-MM-DD");
+                        //     // var valueStartDate = valueStartMoment.format('YYYY-MM-DD');
+                        //     // console.log(valueStartDate);
 
-                        function myFunction(value, index, arr) {
-                            // console.log(arr);
-                            // console.log(index);
+                        //     if (value.startStr == eventObj.startStr) {
+                        //         console.log("same date here");
+                        //         value.setExtendedProp('attendance', attend);
+                        //         value.setProp('classNames', className);
+                        //         // console.log(value.extendedProps.attendance);
+                        //     }
+                        //     console.log(value.extendedProps.attendance);
+                        //     console.log(value);
+                        // }
 
-                            // console.log(value);
-                            // console.log(eventObj);
-                            // var valueStart = value.start;
-                            // var valueStartMoment = moment(valueStart, "YYYY-MM-DD");
-                            // var valueStartDate = valueStartMoment.format('YYYY-MM-DD');
-                            // console.log(valueStartDate);
+                        Swal.fire({
+                            title: 'Confirm Edit Attendance?',
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, confirm!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // NORMAL METHOD
+                                var event = calendar.getEventById(id);
+                                event.setExtendedProp('attendance', attend);
+                                event.setProp('classNames', className);
+                                // console.log(event);
 
-                            if (value.startStr == eventObj.startStr) {
-                                console.log("same date here");
-                                value.setExtendedProp('attendance', attend);
-                                value.setProp('classNames', className);
-                                // console.log(value.extendedProps.attendance);
+                                $modal.modal('hide');
+                                Swal.fire(
+                                    'Done!',
+                                    'Class id: ' + id + ' Attendance Changed.',
+                                    'success'
+                                )
                             }
-                            console.log(value.extendedProps.attendance);
-
-
-                        }
-
-                        $modal.modal('hide');
+                        })
                         return false;
                     });
 
                     // DELETE EVENT
                     $modal.find('.delete-event').off('click').click(function() {
                         Swal.fire({
-                            title: 'Are you sure?',
+                            title: 'Confirm Delete?',
                             text: "You won't be able to revert this!",
                             icon: 'warning',
                             allowOutsideClick: false,
-                            showCancelButton: true,
                             confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, delete it!'
+                            confirmButtonText: 'This class only!',
+                            showDenyButton: true,
+                            denyButtonColor: '#009c75',
+                            denyButtonText: 'This and following class!',
+                            showCloseButton: true
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                eventGroupId.forEach(myFunction);
 
-                                function myFunction(value) {
-                                    value.remove();
-                                }
+                                // RECURSIVE METHOD (GOT PROBLEM)
+                                // eventGroupId.forEach(myFunction);
+                                // function myFunction(value) {
+                                //     value.remove();
+                                // }
+
+                                // NORMAL METHOD
+                                var event = calendar.getEventById(id);
+                                event.remove();
+
                                 $modal.modal('hide');
                                 Swal.fire(
                                     'Deleted!',
-                                    'The class has been deleted.',
+                                    'The class id: ' + id + ' has been deleted.',
                                     'success'
                                 )
+                            } else if (result.isDenied) {
+                                // get selected class groupid
+                                var thisClassGroupId = eventObj.extendedProps.classGroup;
+                                // get all classes with same groupid as selected class
+                                var allclassGroupId = calendar.getEvents().filter(function(event) {
+                                    return event.extendedProps.classGroup === thisClassGroupId;
+                                });
+                                // console.log(allclassGroupId);
+
+                                // loop each class with same groupid
+                                allclassGroupId.forEach(myFunction);
+
+                                function myFunction(value) {
+                                    // if current loop class date is same with selected class date, or
+                                    // if current loop class date is after the selected class date
+                                    if (moment(value.start).isSame(eventObj.start) || moment(value.start).isAfter(eventObj.start)) {
+                                        value.remove();
+                                    }
+                                }
+
+                                $modal.modal('hide');
+                                Swal.fire('Deleted!', 'All classes are deleted', 'success')
                             }
                         })
                     });
@@ -767,167 +903,251 @@
             calendar.render();
         });
 
-        // BELOW IS FULLCALENDAR V3
-        // ! function($) {
-        //     "use strict";
-        //     var CalendarApp = function() {
-        //         this.$calendar = $('#calendar'),
-        //             this.$calendarObj = null,
-        //             this.$day = null
-        //     };
+        function dummyData() {
+            var dataEvent = [{
+                id: 1,
+                title: 'teacher A,children B',
+                start: '2021-10-04T10:00:00',
+                end: '2021-10-04T11:00:00',
+                className: 'bg-danger',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: '0'
+                }
+            }, {
+                id: 2,
+                title: 'teacher A,children B',
+                start: '2021-10-11T10:00:00',
+                end: '2021-10-11T11:00:00',
+                className: 'bg-success',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: '1'
+                }
+            }, {
+                id: 3,
+                title: 'teacher A,children B',
+                start: '2021-10-18T10:00:00',
+                end: '2021-10-18T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 4,
+                title: 'teacher A,children B',
+                start: '2021-10-25T10:00:00',
+                end: '2021-10-25T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 5,
+                title: 'teacher A,children B',
+                start: '2021-11-01T10:00:00',
+                end: '2021-11-01T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 6,
+                title: 'teacher A,children B',
+                start: '2021-11-08T10:00:00',
+                end: '2021-11-08T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 7,
+                title: 'teacher A,children B',
+                start: '2021-11-15T10:00:00',
+                end: '2021-11-15T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 8,
+                title: 'teacher A,children B',
+                start: '2021-11-22T10:00:00',
+                end: '2021-11-22T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 9,
+                title: 'teacher A,children B',
+                start: '2021-11-29T10:00:00',
+                end: '2021-11-29T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 10,
+                title: 'teacher A,children B',
+                start: '2021-12-06T10:00:00',
+                end: '2021-12-06T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 11,
+                title: 'teacher A,children B',
+                start: '2021-12-13T10:00:00',
+                end: '2021-12-13T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 12,
+                title: 'teacher A,children B',
+                start: '2021-12-20T10:00:00',
+                end: '2021-12-20T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 13,
+                title: 'teacher A,children B',
+                start: '2021-12-27T10:00:00',
+                end: '2021-12-27T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 14,
+                title: 'teacher C,children A',
+                start: '2021-10-07T14:00:00',
+                end: '2021-10-07T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 15,
+                title: 'teacher C,children A',
+                start: '2021-10-14T14:00:00',
+                end: '2021-10-14T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 16,
+                title: 'teacher C,children A',
+                start: '2021-10-21T14:00:00',
+                end: '2021-10-21T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 17,
+                title: 'teacher C,children A',
+                start: '2021-10-28T14:00:00',
+                end: '2021-10-28T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 18,
+                title: 'teacher B,children A',
+                start: '2021-10-18T13:00:00',
+                end: '2021-10-18T14:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 3,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 19,
+                title: 'teacher B,children A',
+                start: '2021-10-18T15:00:00',
+                end: '2021-10-18T16:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 4,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 20,
+                title: 'teacher B,children A',
+                start: '2021-10-18T17:00:00',
+                end: '2021-10-18T18:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 5,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }];
 
-        //     /* on click exist class & edit or delete class*/
-        //     CalendarApp.prototype.onEventClick = function(calEvent, jsEvent, view) {
-        //             // console.log("edit&delete here");
-        //             var $this = this;
-        //             var $modal = $('#edit-event');
-        //             var editform = $modal.find('.edit-modal-form');
-        //             editform.find("input[name='title']").val(calEvent.title);
-
-        //             $modal.modal({
-        //                 backdrop: 'static'
-        //             });
-
-        //             $modal.find('.delete-event').off('click').click(function() {
-        //                 $this.$calendarObj.fullCalendar('removeEvents', function(ev) {
-        //                     return (ev._id == calEvent._id);
-        //                 });
-        //                 $modal.modal('hide');
-        //             });
-
-        //             editform.off("submit").on('submit', function() {
-        //                 // console.log("run start");
-        //                 calEvent.title = editform.find("input[type=text]").val();
-        //                 $this.$calendarObj.fullCalendar('updateEvent', calEvent);
-        //                 $modal.modal('hide');
-        //                 // console.log("run done");
-        //                 return false;
-        //             });
-        //         },
-
-        //         /* select day & add new class */
-        //         CalendarApp.prototype.onSelect = function(start, end, allDay) {
-        //             // console.log("add here");
-        //             var $this = this;
-        //             var $modal = $('#add-event');
-        //             var addform = $modal.find('.add-modal-form');
-        //             $modal.modal({
-        //                 backdrop: 'static'
-        //             });
-
-        //             addform.off('submit').on('submit', function() {
-        //                 // console.log("on submit");
-        //                 var teacher = addform.find("select[name='teacher']").val();
-        //                 var children = addform.find("select[name='children']").val();
-        //                 var categoryClass = ("bg-primary");
-
-        //                 if (teacher !== null && children !== null) {
-        //                     $this.$calendarObj.fullCalendar('renderEvent', {
-        //                         title: teacher + " " + children,
-        //                         startTime: '11:00',
-        //                         endTime: '12:00',
-        //                         dow: [$this.$day],
-        //                         startRecur: '2021-09-01',
-        //                         allDay: false,
-        //                         className: categoryClass
-        //                     }, true);
-        //                     $modal.modal('hide');
-        //                 } else {
-        //                     alert('please select teacher and children');
-        //                 }
-        //                 return false;
-        //             });
-
-        //             $modal.find('.create-event').off('click').click(function() {
-        //                 addform.submit();
-        //             });
-
-        //             addform[0].reset();
-        //             $this.$calendarObj.fullCalendar('unselect');
-        //         },
-
-        //         /* Initializing */
-        //         CalendarApp.prototype.init = function() {
-        //             /*  Initialize the calendar  */
-        //             var date = new Date();
-        //             var d = date.getDate();
-        //             var m = date.getMonth();
-        //             var y = date.getFullYear();
-        //             var form = '';
-        //             var today = new Date($.now());
-        //             var defaultEvents = [{
-        //                 title: 'Piano class grade 1',
-        //                 start: '10:00',
-        //                 end: '12:00',
-        //                 dow: [1],
-        //                 className: 'bg-info'
-        //             }, {
-        //                 title: 'Piano class grade 3',
-        //                 start: '15:00',
-        //                 end: '16:00',
-        //                 dow: [2],
-        //                 className: 'bg-info'
-        //             }, {
-        //                 title: 'guitar class',
-        //                 start: '15:00',
-        //                 end: '16:00',
-        //                 dow: [3],
-        //                 className: 'bg-info'
-        //             }, {
-        //                 title: 'violin class',
-        //                 start: '12:00',
-        //                 end: '13:00',
-        //                 dow: [6],
-        //                 className: 'bg-info'
-        //             }, {
-        //                 title: 'bass class',
-        //                 start: '08:00',
-        //                 end: '09:00',
-        //                 dow: [0],
-        //                 className: 'bg-info'
-        //             }];
-        //             var $this = this;
-        //             $this.$calendarObj = $this.$calendar.fullCalendar({
-        //                 slotDuration: '00:15:00',
-        //                 /* If we want to split day time each 15minutes */
-        //                 minTime: '08:00:00',
-        //                 maxTime: '19:00:00',
-        //                 defaultView: 'month',
-        //                 handleWindowResize: true,
-
-        //                 header: {
-        //                     left: 'prev,next today',
-        //                     center: 'title',
-        //                     right: 'month,agendaWeek,agendaDay,listWeek'
-        //                 },
-        //                 events: defaultEvents,
-        //                 editable: false,
-        //                 droppable: false, // this allows things to be dropped onto the calendar !!!
-        //                 eventLimit: true, // allow "more" link when too many events
-        //                 selectable: true,
-        //                 select: function(start, end, allDay) {
-        //                     $this.onSelect(start, end, allDay);
-        //                 },
-        //                 eventClick: function(calEvent, jsEvent, view) {
-        //                     $this.onEventClick(calEvent, jsEvent, view);
-        //                 },
-        //                 dayClick: function(date, jsEvent, view) {
-        //                     $this.$day = date.day(); // number 0-6 with Sunday as 0 and Saturday as 6
-        //                 }
-
-        //             });
-        //         },
-
-        //         //init CalendarApp
-        //         $.CalendarApp = new CalendarApp, $.CalendarApp.Constructor = CalendarApp
-
-        // }(window.jQuery),
-
-        // //initializing CalendarApp
-        // function($) {
-        //     "use strict";
-        //     $.CalendarApp.init()
-        // }(window.jQuery);
+            return dataEvent;
+        }
     </script>
 
 </body>

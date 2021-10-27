@@ -110,7 +110,7 @@
                                             <div class='col-md-6'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Select children</label>
-                                                    <select class='form-control' name='children'>
+                                                    <select class='form-control' name='children' required>
                                                         <option hidden disabled selected value=""> -- select a children -- </option>
                                                         <option value='children A'>children A</option>
                                                         <option value='children B'>children B</option>
@@ -132,17 +132,23 @@
                                             </div>
                                             <div class='col-md-6'>
                                                 <div class='form-group'>
-                                                    <label class='control-label'>Selected Date</label>
+                                                    <label class='control-label'>Start Date</label>
                                                     <input class='form-control' type='text' name='date' value="" disabled />
                                                 </div>
                                             </div>
                                             <div class='col-md-6'>
                                                 <div class='form-group'>
-                                                    <label class='control-label'>Selected Day</label>
+                                                    <label class='control-label'>End Date</label>
+                                                    <input type="text" id="bdate" name="endDate" class="form-control mydatepicker" placeholder="yyyy/mm/dd" required>
+                                                </div>
+                                            </div>
+                                            <div class='col-md-6'>
+                                                <div class='form-group'>
+                                                    <label class='control-label'>Day Repeat</label>
                                                     <input class='form-control' type='text' name='day' value="" disabled />
                                                 </div>
                                             </div>
-                                            <div class='col-md-12'>
+                                            <div class='col-md-6'>
                                                 <div class='form-group'>
                                                     <label class="control-label">Start Time</label>
                                                     <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
@@ -172,7 +178,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary cancel-event waves-effect" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-success create-event waves-effect waves-light">Create Class</button>
+                                    <button type="submit" class="btn btn-success create-event waves-effect waves-light">Create Class</button>
                                 </div>
                             </form>
                         </div>
@@ -188,8 +194,8 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist" id="">
-                                <li class="nav-item">
+                            <ul class="nav nav-tabs" role="tablist" id="myTabs">
+                                <li class="nav-item" id="editClassTabLink">
                                     <a class="nav-link active" data-toggle="tab" href="#editClass" role="tab">
                                         <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Class Edit</span>
                                     </a>
@@ -200,9 +206,9 @@
                                     </a>
                                 </li>
                                 <!-- respond reschedule request tab link -->
-                                <li class="nav-item">
+                                <li class="nav-item" id="rescheduleTabLink">
                                     <a class="nav-link" data-toggle="tab" href="#rescheduleRequest" role="tab">
-                                        <span class="hidden-sm-up"><i class="ti-user"></i></span> <span class="hidden-xs-down">Reschedule Request</span>
+                                        <span class="hidden-sm-up"><i class="ti-help"></i></span> <span class="hidden-xs-down">Reschedule Request</span>
                                     </a>
                                 </li>
                             </ul>
@@ -238,13 +244,13 @@
                                                 </div>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Date</label>
-                                                        <input type="text" id="bdate" name="date" class="form-control mydatepicker" value="" />
+                                                        <label class='control-label'>Class Date</label>
+                                                        <input type="text" id="bdate" name="date" class="form-control mydatepicker" value="" required />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Day</label>
+                                                        <label class='control-label'>Class Day</label>
                                                         <input class='form-control' type='text' name='day' value="" disabled />
                                                     </div>
                                                 </div>
@@ -252,7 +258,7 @@
                                                     <div class='form-group'>
                                                         <label class="control-label">Start Time</label>
                                                         <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                            <input type="text" class="form-control" value="" name="startTime" placeholder="Select time">
+                                                            <input type="text" class="form-control" value="" name="startTime" placeholder="Select time" required>
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
                                                             </div>
@@ -311,60 +317,65 @@
                                 <!-- respond reschedule request tab -->
                                 <div class="tab-pane" id="rescheduleRequest" role="tabpanel">
                                     <div class="modal-body">
-                                        <div class="table-responsive ">
-                                            <table id="rescheduleListTable" class="table m-t-5 table-hover contact-list" data-page-size="5">
-                                                <thead>
-                                                    <tr>
-                                                        <th>#</th>
-                                                        <th style="width:15%">Parent</th>
-                                                        <th style="width:20%">New Date</th>
-                                                        <th style="width:15%">New Time</th>
-                                                        <th style="width:30%">Description</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Parent A</td>
-                                                        <td>2021-09-30</td>
-                                                        <td>11:00</td>
-                                                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis sollicitudin orci, vitae convallis est. Cras tempor, lectus feugiat placerat condimentum, sem nisi vehicula ex, fermentum tincidunt eros velit nec felis. </td>
-                                                        <td>Rejected</td>
-                                                        <td>
-                                                            <div class="btn-group-vertical">
-                                                                <button type="button" class="btn btn-sm btn-info mb-1" disabled> Accept</button>
-                                                                <button type="button" class="btn btn-sm btn-danger mt-1" disabled>Reject</button>
-                                                            </div>
+                                        <div class='d-none' id="noRequestDiv">
+                                            <p>no request from parent</p>
+                                        </div>
+                                        <div class='d-none' id="requestRespondTable">
+                                            <div class="table-responsive ">
+                                                <table id="rescheduleListTable" class="table m-t-5 table-hover contact-list" data-page-size="5">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>#</th>
+                                                            <th style="width:15%">Parent</th>
+                                                            <th style="width:20%">New Date</th>
+                                                            <th style="width:15%">New Time</th>
+                                                            <th style="width:30%">Description</th>
+                                                            <th>Status</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>1</td>
+                                                            <td>Parent A</td>
+                                                            <td>2021-09-30</td>
+                                                            <td>11:00</td>
+                                                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis sollicitudin orci, vitae convallis est. Cras tempor, lectus feugiat placerat condimentum, sem nisi vehicula ex, fermentum tincidunt eros velit nec felis. </td>
+                                                            <td>Rejected</td>
+                                                            <td>
+                                                                <div class="btn-group-vertical">
+                                                                    <button type="button" class="btn btn-sm btn-info mb-1" disabled> Accept</button>
+                                                                    <button type="button" class="btn btn-sm btn-danger mt-1" disabled>Reject</button>
+                                                                </div>
 
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>Parent A</td>
-                                                        <td>2021-10-05</td>
-                                                        <td>10:00</td>
-                                                        <td>not free that day</td>
-                                                        <td>Pending</td>
-                                                        <td>
-                                                            <div class="btn-group-vertical">
-                                                                <button type="button" id="accept" class="btn btn-sm btn-info mb-1"> Accept</button>
-                                                                <button type="button" id="reject" class="btn btn-sm btn-danger mt-1">Reject</button>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td colspan="7">
-                                                            <div class="text-right">
-                                                                <ul class="pagination"> </ul>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>2</td>
+                                                            <td>Parent A</td>
+                                                            <td>2021-10-05</td>
+                                                            <td>10:00</td>
+                                                            <td>not free that day</td>
+                                                            <td>Pending</td>
+                                                            <td>
+                                                                <div class="btn-group-vertical">
+                                                                    <button type="button" id="accept" class="btn btn-sm btn-info mb-1"> Accept</button>
+                                                                    <button type="button" id="reject" class="btn btn-sm btn-danger mt-1">Reject</button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td colspan="7">
+                                                                <div class="text-right">
+                                                                    <ul class="pagination"> </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -437,7 +448,8 @@
         $('.mydatepicker').datepicker({
             format: 'yyyy-mm-dd',
             autoclose: true,
-            todayHighlight: true
+            todayHighlight: true,
+            clearBtn: true,
         });
 
         // add the responsive classes after page initialization
@@ -445,51 +457,59 @@
             $('.fc-toolbar.fc-header-toolbar').addClass('row col-12');
         };
 
+        // dummy id for create new event
+        var id = 100;
+        // dummy classGroup as groupid for create new event
+        var classGroup = 100;
+
         //FULLCALENDAR V5
         document.addEventListener('DOMContentLoaded', function() {
             var day, dayName, fulldate, datestring;
-            var children, course, duration, startTime, location, desc;
-            var dataEvent = [{
-                groupId: 1,
-                title: 'children B',
-                startTime: '10:00',
-                endTime: '12:00',
-                startRecur: '2021-10-01',
-                daysOfWeek: [1],
-                className: 'bg-primary',
-                extendedProps: {
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: 0
-                }
-            }, {
-                groupId: 2,
-                title: 'children C',
-                startTime: '08:00',
-                endTime: '09:00',
-                startRecur: '2021-09-30',
-                daysOfWeek: [6],
-                className: 'bg-primary',
-                extendedProps: {
-                    location: 'www.google.com',
-                    description: 'learn beginner things'
-                }
-            }, {
-                groupId: 3,
-                title: 'children A',
-                startTime: '16:00',
-                endTime: '17:00',
-                startRecur: '2021-11-01',
-                daysOfWeek: [3],
-                className: 'bg-primary',
-                extendedProps: {
-                    location: 'www.google.com',
-                    description: 'learn beginner things'
-                }
-            }];
+            var children, course, duration, startDate, endDate, startTime, loca, desc;
+
+            // RECURSIVE METHOD (GOT PROBLEM)
+            // var dataEvent = [{
+            //     groupId: 1,
+            //     title: 'children B',
+            //     startTime: '10:00',
+            //     endTime: '12:00',
+            //     startRecur: '2021-10-01',
+            //     daysOfWeek: [1],
+            //     className: 'bg-primary',
+            //     extendedProps: {
+            //         location: 'www.google.com',
+            //         description: 'learn beginner things',
+            //         attendance: 0
+            //     }
+            // }, {
+            //     groupId: 2,
+            //     title: 'children C',
+            //     startTime: '08:00',
+            //     endTime: '09:00',
+            //     startRecur: '2021-09-30',
+            //     daysOfWeek: [6],
+            //     className: 'bg-primary',
+            //     extendedProps: {
+            //         location: 'www.google.com',
+            //         description: 'learn beginner things'
+            //     }
+            // }, {
+            //     groupId: 3,
+            //     title: 'children A',
+            //     startTime: '16:00',
+            //     endTime: '17:00',
+            //     startRecur: '2021-11-01',
+            //     daysOfWeek: [3],
+            //     className: 'bg-primary',
+            //     extendedProps: {
+            //         location: 'www.google.com',
+            //         description: 'learn beginner things'
+            //     }
+            // }];
+
+            var dataEvent = dummyData();
 
             var calendarEl = document.getElementById('calendar');
-
 
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 headerToolbar: {
@@ -576,38 +596,66 @@
                     addform.off('submit').on('submit', function() {
                         // console.log("on submit");
                         children = addform.find("select[name='children']").val();
-                        // course = addform.find("input[name='course']").val();
+                        course = addform.find("input[name='course']").val();
                         duration = addform.find("input[name='duration']").val();
+                        endDate = addform.find("input[name='endDate']").val();
                         startTime = addform.find("input[name='startTime']").val();
                         var startTimeMoment = moment(startTime, 'HH:mm'); //convert from value to moment format
+                        var startTimeStr = startTimeMoment.format('HH:mm:ss');
                         // console.log(startTime);
                         var endTime = startTimeMoment.add(duration, 'm').format('HH:mm'); //add duration to startTime in moment format
                         // console.log(endTimeValue);
-                        // location = addform.find("input[name='location']").val();
-                        // desc = addform.find("input[name='desc']").val();
+                        loca = addform.find("input[name='location']").val();
+                        desc = addform.find("input[name='desc']").val();
                         var categoryClass = ("bg-primary");
 
-                        if (children !== null) {
+                        // if (children !== null) {
+
+                        // RECURSIVE METHOD (GOT PROBLEM)
+                        // calendar.addEvent({
+                        //     groupId: 4,
+                        //     title: children,
+                        //     startTime: startTime,
+                        //     endTime: endTime,
+                        //     startRecur: arg.startStr,
+                        //     daysOfWeek: [arg.start.getDay()],
+                        //     allDay: false,
+                        //     className: categoryClass
+                        // });
+
+                        // NORMAL METHOD
+                        var currentDate = arg.startStr;
+
+                        while (moment(currentDate).isBefore(endDate) || moment(currentDate).isSame(endDate)) {
+                            // console.log('true');
                             calendar.addEvent({
-                                groupId: 4,
+                                id: id,
                                 title: children,
-                                startTime: startTime,
-                                endTime: endTime,
-                                startRecur: arg.startStr,
-                                daysOfWeek: [arg.start.getDay()],
-                                allDay: false,
-                                className: categoryClass
+                                start: currentDate + 'T' + startTimeStr,
+                                end: currentDate + 'T' + endTime,
+                                className: categoryClass,
+                                extendedProps: {
+                                    classGroup: classGroup,
+                                    location: loca,
+                                    description: desc,
+                                    attendance: ''
+                                }
                             });
-                            $modal.modal('hide');
-                        } else {
-                            alert('please select children');
+                            currentDate = moment(currentDate, "YYYY-MM-DD").add(7, 'days'); //add weekly days
+                            currentDate = currentDate.format('YYYY-MM-DD'); //convert back format
+                            id++;
                         }
+                        classGroup++;
+                        $modal.modal('hide');
+                        // } else {
+                        //     alert('please select children');
+                        // }
                         return false;
                     });
 
-                    $modal.find('.create-event').off('click').click(function() {
-                        addform.submit();
-                    });
+                    // $modal.find('.create-event').off('click').click(function() {
+                    //     addform.submit();
+                    // });
 
                     addform[0].reset();
                     calendar.unselect();
@@ -618,7 +666,6 @@
                     var $modal = $('#edit-event-modal');
                     var editform = $modal.find('.edit-modal-form');
                     var editAttendanceForm = $modal.find('.edit-attendance-form');
-                    var rescheduleListTable = $modal.find('#rescheduleListTable');
 
                     $modal.modal({
                         backdrop: 'static'
@@ -652,14 +699,15 @@
                             dayName = 'Saturday';
                             break;
                     }
-                    var id = eventObj.groupId;
-
-                    var eventGroupId = calendar.getEvents().filter(function(event) {
-                        return event.groupId === id;
-                    });
+                    var id = eventObj.id;
+                    // var id = eventObj.groupId;
+                    console.log(eventObj);
+                    // var eventGroupId = calendar.getEvents().filter(function(event) {
+                    //     return event.groupId === id;
+                    // });
                     // console.log(eventGroupId);
                     children = eventObj.title;
-                    console.log(children);
+                    // console.log(children);
 
                     var datestringInfo = eventObj.start;
                     var datestringMoment = moment(datestringInfo, "YYYY-MM-DD");
@@ -667,7 +715,10 @@
 
                     var startTimeInfo = eventObj.start;
                     var startTimeMoment = moment(startTimeInfo, 'HH:mm'); //convert to moment object
-                    startTime = startTimeMoment.format('HH:mm')
+                    startTime = startTimeMoment.format('HH:mm');
+
+                    loca = eventObj.extendedProps.location;
+                    desc = eventObj.extendedProps.description;
 
                     // SET DATA VALUE INTO UI FORM
                     editform.find("select[name='children']").val(children);
@@ -676,6 +727,8 @@
                     editform.find("input[name='date']").val(datestring);
                     editform.find("input[name='day']").val(dayName);
                     editform.find("input[name='startTime']").val(startTime);
+                    editform.find("input[name='location']").val(loca);
+                    editform.find("input[name='desc']").val(desc);
 
                     var attendance = eventObj.extendedProps.attendance;
                     // console.log(attendance);
@@ -687,33 +740,81 @@
                         children = editform.find("select[name='children']").val();
                         // course = editform.find("input[name='course']").val();
                         duration = editform.find("input[name='duration']").val();
+                        startDate = editform.find("input[name='date']").val();
                         startTime = editform.find("input[name='startTime']").val();
                         var startTimeMoment = moment(startTime, 'HH:mm');
+                        var startTimeStr = startTimeMoment.format('HH:mm:ss');
                         var endTime = startTimeMoment.add(duration, 'm').format('HH:mm');
+                        loca = editform.find("input[name='location']").val();
+                        desc = editform.find("input[name='desc']").val();
 
                         Swal.fire({
                             title: 'Confirm Edit?',
                             icon: 'warning',
                             allowOutsideClick: false,
-                            showCancelButton: true,
                             confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, confirm!'
+                            confirmButtonText: 'This Class Only!',
+                            showDenyButton: true,
+                            denyButtonColor: '#009c75',
+                            denyButtonText: 'This and following class!',
+                            showCloseButton: true
                         }).then((result) => {
+                            // EDIT ONLY CURRENT SELECTED CLASS
                             if (result.isConfirmed) {
-                                eventGroupId.forEach(myFunction);
 
-                                function myFunction(value) {
-                                    value.setProp('title', children);
-                                    // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
-                                }
+                                // RECURSIVE METHOD (GOT PROBLEM)
+                                // eventGroupId.forEach(myFunction);
+                                // function myFunction(value) {
+                                //     value.setProp('title', children);
+                                //     // THIS PART IS EDIT, BUT ONLY CAN EDIT TITLE
+                                // }
+                                // NORMAL METHOD
+                                var event = calendar.getEventById(id);
+                                // console.log(event);
+                                event.setProp('title', children);
+                                event.setStart(startDate + 'T' + startTime);
+                                event.setEnd(startDate + 'T' + endTime);
 
+                                event.setExtendedProp('location', loca);
+                                event.setExtendedProp('description', desc);
                                 $modal.modal('hide');
                                 Swal.fire(
                                     'Done!',
                                     'Class Edited.',
                                     'success'
                                 )
+                            }
+                            // EDIT CURRENT AND FOLLOWING WITH SAME CLASSGROUP CLASS
+                            else if (result.isDenied) {
+                                // get selected class groupid
+                                var thisClassGroupId = eventObj.extendedProps.classGroup;
+                                // get all classes with same groupid as selected class
+                                var allclassGroupId = calendar.getEvents().filter(function(event) {
+                                    return event.extendedProps.classGroup === thisClassGroupId;
+                                });
+                                // console.log(allclassGroupId);
+
+                                // loop each class with same groupid
+                                allclassGroupId.forEach(myFunction);
+
+                                function myFunction(value) {
+                                    // if current loop class date is same with selected class date, or
+                                    // if current loop class date is after the selected class date
+                                    if (moment(value.start).isSame(eventObj.start) || moment(value.start).isAfter(eventObj.start)) {
+                                        // console.log('before is'+value.start);
+                                        value.setProp('title', children);
+                                        value.setStart(startDate + 'T' + startTime);
+                                        value.setEnd(startDate + 'T' + endTime);
+                                        value.setExtendedProp('location', loca);
+                                        value.setExtendedProp('description', desc);
+                                        startDate = moment(startDate, "YYYY-MM-DD").add(7, 'days'); //add weekly days
+                                        startDate = startDate.format('YYYY-MM-DD'); //convert back format
+                                        // console.log('after is'+value.start);
+                                    }
+                                }
+
+                                $modal.modal('hide');
+                                Swal.fire('Done!', 'Class Edited', 'success')
                             }
                         })
                         // console.log("run done");
@@ -733,40 +834,75 @@
                             attend = 0;
                         }
 
-                        eventGroupId.forEach(myFunction);
+                        // RECURSIVE METHOD (GOT PROBLEM)
+                        // eventGroupId.forEach(myFunction);
+                        // // console.log(datestring);
+                        // function myFunction(value, index, arr) {
+                        //     // console.log(arr);
+                        //     // console.log(index);
 
-                        // console.log(datestring);
+                        //     // console.log(value);
+                        //     // console.log(eventObj);
+                        //     // var valueStart = value.start;
+                        //     // var valueStartMoment = moment(valueStart, "YYYY-MM-DD");
+                        //     // var valueStartDate = valueStartMoment.format('YYYY-MM-DD');
+                        //     // console.log(valueStartDate);
 
-                        function myFunction(value, index, arr) {
-                            // console.log(arr);
-                            // console.log(index);
+                        //     if (value.startStr == eventObj.startStr) {
+                        //         console.log("same date here");
+                        //         value.setExtendedProp('attendance', attend);
+                        //         value.setProp('classNames', className);
+                        //         // console.log(value.extendedProps.attendance);
+                        //     }
+                        //     console.log(value.extendedProps.attendance);
+                        // }
 
-                            // console.log(value);
-                            // console.log(eventObj);
-                            // var valueStart = value.start;
-                            // var valueStartMoment = moment(valueStart, "YYYY-MM-DD");
-                            // var valueStartDate = valueStartMoment.format('YYYY-MM-DD');
-                            // console.log(valueStartDate);
+                        Swal.fire({
+                            title: 'Confirm Edit Attendance?',
+                            icon: 'warning',
+                            allowOutsideClick: false,
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, confirm!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // NORMAL METHOD
+                                var event = calendar.getEventById(id);
+                                event.setExtendedProp('attendance', attend);
+                                event.setProp('classNames', className);
+                                // console.log(event);
 
-                            if (value.startStr == eventObj.startStr) {
-                                console.log("same date here");
-                                value.setExtendedProp('attendance', attend);
-                                value.setProp('classNames', className);
-                                // console.log(value.extendedProps.attendance);
+                                $modal.modal('hide');
+                                Swal.fire(
+                                    'Done!',
+                                    'Class id: ' + id + ' Attendance Changed.',
+                                    'success'
+                                )
                             }
-                            console.log(value.extendedProps.attendance);
-
-
-                        }
-
-                        $modal.modal('hide');
+                        })
                         return false;
                     });
+
+
+                    // CHECK THE EVENT GOT RESCHEDULE REQUEST OR NOT, IF GOT REQUEST THEN DISPLAY THE REQUEST TABLE
+                    // console.log(eventObj.classNames[0])
+                    if (eventObj.classNames[0] == 'bg-warning') {
+                        // console.log('warning here')
+                        $("#requestRespondTable").removeClass('d-none');
+                        $("#noRequestDiv").addClass('d-none');
+                    } else if (eventObj.classNames[0] == 'bg-success' || eventObj.classNames[0] == 'bg-danger' || eventObj.classNames[0] == 'bg-primary') {
+                        // console.log('others here')
+                        $("#noRequestDiv").removeClass('d-none');
+                        $("#requestRespondTable").addClass('d-none');
+                    }
+
+                    var rescheduleListTable = $modal.find('#rescheduleListTable');
 
                     // ACCEPT RESCHEDULE EVENT
                     rescheduleListTable.on('click', '#accept', function() {
                         var $row = $(this).closest("tr"); // Finds the closest row <tr> 
-                        var $rowId = $row.find("td:nth-child(1)"); // Finds the 2nd <td> element
+                        var $rowId = $row.find("td:nth-child(1)"); // Finds the 1st <td> element
 
                         //row id
                         console.log($rowId.text());
@@ -795,27 +931,54 @@
                     // DELETE EVENT
                     $modal.find('.delete-event').off('click').click(function() {
                         Swal.fire({
-                            title: 'Are you sure?',
+                            title: 'Confirm Delete?',
                             text: "You won't be able to revert this!",
                             icon: 'warning',
                             allowOutsideClick: false,
-                            showCancelButton: true,
                             confirmButtonColor: '#3085d6',
-                            cancelButtonColor: '#d33',
-                            confirmButtonText: 'Yes, delete it!'
+                            confirmButtonText: 'This class only!',
+                            showDenyButton: true,
+                            denyButtonColor: '#009c75',
+                            denyButtonText: 'This and following class!',
+                            showCloseButton: true
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                eventGroupId.forEach(myFunction);
 
-                                function myFunction(value) {
-                                    value.remove();
-                                }
+                                // RECURSIVE METHOD (GOT PROBLEM)
+                                // eventGroupId.forEach(myFunction);
+                                // function myFunction(value) {
+                                //     value.remove();
+                                // }
+                                var event = calendar.getEventById(id);
+                                event.remove();
                                 $modal.modal('hide');
                                 Swal.fire(
                                     'Deleted!',
-                                    'The class has been deleted.',
+                                    'The class id: ' + id + ' has been deleted.',
                                     'success'
                                 )
+                            } else if (result.isDenied) {
+                                // get selected class groupid
+                                var thisClassGroupId = eventObj.extendedProps.classGroup;
+                                // get all classes with same groupid as selected class
+                                var allclassGroupId = calendar.getEvents().filter(function(event) {
+                                    return event.extendedProps.classGroup === thisClassGroupId;
+                                });
+                                // console.log(allclassGroupId);
+
+                                // loop each class with same groupid
+                                allclassGroupId.forEach(myFunction);
+
+                                function myFunction(value) {
+                                    // if current loop class date is same with selected class date, or
+                                    // if current loop class date is after the selected class date
+                                    if (moment(value.start).isSame(eventObj.start) || moment(value.start).isAfter(eventObj.start)) {
+                                        value.remove();
+                                    }
+                                }
+
+                                $modal.modal('hide');
+                                Swal.fire('Deleted!', 'All classes are deleted', 'success')
                             }
                         })
                     });
@@ -825,6 +988,252 @@
 
             calendar.render();
         });
+
+        function dummyData() {
+            var dataEvent = [{
+                id: 1,
+                title: 'children B',
+                start: '2021-10-04T10:00:00',
+                end: '2021-10-04T11:00:00',
+                className: 'bg-danger',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: '0'
+                }
+            }, {
+                id: 2,
+                title: 'children B',
+                start: '2021-10-11T10:00:00',
+                end: '2021-10-11T11:00:00',
+                className: 'bg-success',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: '1'
+                }
+            }, {
+                id: 3,
+                title: 'children B',
+                start: '2021-10-18T10:00:00',
+                end: '2021-10-18T11:00:00',
+                className: 'bg-warning',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 4,
+                title: 'children B',
+                start: '2021-10-25T10:00:00',
+                end: '2021-10-25T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 5,
+                title: 'children B',
+                start: '2021-11-01T10:00:00',
+                end: '2021-11-01T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 6,
+                title: 'children B',
+                start: '2021-11-08T10:00:00',
+                end: '2021-11-08T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 7,
+                title: 'children B',
+                start: '2021-11-15T10:00:00',
+                end: '2021-11-15T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 8,
+                title: 'children B',
+                start: '2021-11-22T10:00:00',
+                end: '2021-11-22T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 9,
+                title: 'children B',
+                start: '2021-11-29T10:00:00',
+                end: '2021-11-29T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 10,
+                title: 'children B',
+                start: '2021-12-06T10:00:00',
+                end: '2021-12-06T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 11,
+                title: 'children B',
+                start: '2021-12-13T10:00:00',
+                end: '2021-12-13T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 12,
+                title: 'children B',
+                start: '2021-12-20T10:00:00',
+                end: '2021-12-20T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 13,
+                title: 'children B',
+                start: '2021-12-27T10:00:00',
+                end: '2021-12-27T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 14,
+                title: 'children A',
+                start: '2021-10-07T14:00:00',
+                end: '2021-10-07T15:00:00',
+                className: 'bg-warning',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 15,
+                title: 'children A',
+                start: '2021-10-14T14:00:00',
+                end: '2021-10-14T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 16,
+                title: 'children A',
+                start: '2021-10-21T14:00:00',
+                end: '2021-10-21T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 17,
+                title: 'children A',
+                start: '2021-10-28T14:00:00',
+                end: '2021-10-28T15:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 2,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 18,
+                title: 'children A',
+                start: '2021-10-18T13:00:00',
+                end: '2021-10-18T14:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 3,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 19,
+                title: 'children A',
+                start: '2021-10-18T15:00:00',
+                end: '2021-10-18T16:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 4,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 20,
+                title: 'children A',
+                start: '2021-10-18T17:00:00',
+                end: '2021-10-18T18:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 5,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }];
+
+            return dataEvent;
+        }
     </script>
 
 </body>
