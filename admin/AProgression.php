@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="skin-blue-dark fixed-layout">
+<body class="skin-default-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -142,9 +142,9 @@
                                                             <td><a href="../img/neko.jpg">neko.jpg</a></td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="AProgressionDetail.php" type="button" class="btn btn-outline-success">View</a>
-                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="AProgressionDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -156,9 +156,9 @@
                                                             <td><a href="../img/Jounetsu Tairiku.mp4">Jounetsu Tairiku.mp4</a></td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="AProgressionDetail.php" type="button" class="btn btn-outline-success">View</a>
-                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="AProgressionDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>

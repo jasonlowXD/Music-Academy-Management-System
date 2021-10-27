@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="skin-blue-dark fixed-layout">
+<body class="skin-default-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -126,8 +126,8 @@
                                                 <td><span class="label label-success">Paid</span></td>
                                                 <td>
                                                     <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -139,8 +139,8 @@
                                                 <td><span class="label label-success">Paid</span></td>
                                                 <td>
                                                     <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -152,8 +152,8 @@
                                                 <td><span class="label label-danger">Unpaid</span></td>
                                                 <td>
                                                     <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -165,8 +165,8 @@
                                                 <td><span class="label label-danger">Unpaid</span></td>
                                                 <td>
                                                     <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -178,8 +178,8 @@
                                                 <td><span class="label label-success">Paid</span></td>
                                                 <td>
                                                     <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -191,8 +191,8 @@
                                                 <td><span class="label label-danger">Unpaid</span></td>
                                                 <td>
                                                     <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success">Details</a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info">Receipt</a>
+                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

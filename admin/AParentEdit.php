@@ -18,7 +18,7 @@
 
 </head>
 
-<body class="skin-blue-dark fixed-layout">
+<body class="skin-default-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->

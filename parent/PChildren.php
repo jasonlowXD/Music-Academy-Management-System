@@ -124,7 +124,7 @@
                                                 <td>12</td>
                                                 <td>Teacher ABC</td>
                                                 <td>Piano Grade 1</td>
-                                                <td><a href="PCourseDetails.php" type="button" class="btn btn-outline-success">Course Details</a></td>
+                                                <td><a href="PCourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
@@ -132,14 +132,14 @@
                                                 <td>16</td>
                                                 <td>Teacher ABC</td>
                                                 <td>Piano Grade 2</td>
-                                                <td><a href="PCourseDetails.php" type="button" class="btn btn-outline-success">Course Details</a></td>                                            </tr>
+                                                <td><a href="PCourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
                                             <tr>
                                                 <td>3</td>
                                                 <td>Children Abu</td>
                                                 <td>13</td>
                                                 <td>Teacher CCC</td>
                                                 <td>Guitar Grade 1</td>
-                                                <td><a href="PCourseDetails.php" type="button" class="btn btn-outline-success">Course Details</a></td>                                            </tr>
+                                                <td><a href="PCourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
                                         </tbody>
                                         <tfoot>
                                             <tr>

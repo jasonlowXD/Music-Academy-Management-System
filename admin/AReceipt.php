@@ -30,7 +30,7 @@
 
 </head>
 
-<body class="skin-blue-dark fixed-layout">
+<body class="skin-default-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -104,7 +104,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#addReceiptTab" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-pencil"></i></span> <span class="hidden-xs-down">Add Receipt</span>
+                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add Receipt</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -136,7 +136,7 @@
                                                             <td>Cash</td>
                                                             <td>-</td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal">Edit</button>
+                                                                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -147,7 +147,8 @@
                                                             <td>Online</td>
                                                             <td><a href="../img/receipttest.pdf" download>receipttest.pdf</a></td>
                                                             <td>
-                                                                <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal">Edit</button>
+                                                            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
+
                                                             </td>
                                                         </tr>
 

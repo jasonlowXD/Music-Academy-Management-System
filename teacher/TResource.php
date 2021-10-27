@@ -95,7 +95,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#addResourceTab" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-pencil"></i></span> <span class="hidden-xs-down">Add Resource</span>
+                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add Resource</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -143,8 +143,8 @@
                                                             <td>-</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -156,8 +156,8 @@
                                                             <td><a href="../img/resourceFile.pdf" download>resourceFile.pdf</a></td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>

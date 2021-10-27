@@ -104,7 +104,7 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#addReceiptTab" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-pencil"></i></span> <span class="hidden-xs-down">Upload Receipt</span>
+                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Upload Receipt</span>
                                         </a>
                                     </li>
                                 </ul>

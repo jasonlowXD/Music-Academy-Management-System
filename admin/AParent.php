@@ -30,7 +30,7 @@
 
 </head>
 
-<body class="skin-blue-dark fixed-layout">
+<body class="skin-default-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -149,8 +149,8 @@
                                                             <td>+123 456 789</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -181,8 +181,8 @@
                                                             <td>+1 789</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -203,8 +203,8 @@
                                                             <td>+666</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -235,8 +235,8 @@
                                                             <td>+777</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -277,8 +277,8 @@
                                                             <td>+999</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -309,8 +309,8 @@
                                                             <td>+444</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <button type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -574,15 +574,15 @@
 
             var childrenName = form.find("input[name^='childrenName']");
             var childrenAge = form.find("input[name^='childrenAge']");
-            var name = []; 
+            var name = [];
             var age = [];
-            childrenName.each(function(){
+            childrenName.each(function() {
                 name.push(childrenName.val());
                 age.push(childrenAge.val());
             });
             console.log(name);
             console.log(age);
-            
+
             return false;
         });
     </script>

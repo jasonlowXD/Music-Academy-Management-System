@@ -24,7 +24,7 @@
 
 </head>
 
-<body class="skin-blue-dark fixed-layout">
+<body class="skin-default-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -140,9 +140,9 @@
                                                             <td>30</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -153,9 +153,9 @@
                                                             <td>60</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -166,9 +166,9 @@
                                                             <td>30</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -179,9 +179,9 @@
                                                             <td>60</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -192,9 +192,9 @@
                                                             <td>60</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -205,9 +205,9 @@
                                                             <td>30</td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success">Details</a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" aria-hidden="true"></i>Edit</a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" aria-hidden="true"></i>Delete</button>
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>

@@ -91,12 +91,13 @@
                                 <ul class="nav nav-tabs" role="tablist">
                                     <li role="presentation" class="nav-item">
                                         <a href="#card" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">
-                                            <span class="visible-xs"><i class="ti-home"></i></span><span class="hidden-xs">Credit/Debit Card</span>
+                                            <span class="visible-xs"><i class="fa fa-credit-card"></i></span>
+                                            <span class="hidden-xs">Credit/Debit Card</span>
                                         </a>
                                     </li>
                                     <li role="presentation" class="nav-item">
                                         <a href="#onlineBank" class="nav-link" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false">
-                                            <span class="visible-xs"><i class="ti-user"></i></span>
+                                            <span class="visible-xs"><i class="fa fa-bank"></i></span>
                                             <span class="hidden-xs">Online Banking</span>
                                         </a>
                                     </li>
@@ -154,7 +155,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <a href="PPaymentDone.php" class="btn btn-info">Make Payment</a>
+                                                    <a href="PPaymentDone.php" class="btn btn-info"><span><i class="fa fa-money"></i> </span>Make Payment</a>
                                                 </form>
                                             </div>
                                             <div class="col-md-4 ml-auto">
