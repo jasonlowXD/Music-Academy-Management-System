@@ -29,6 +29,9 @@
                 <li class="nav-item"> <a class="nav-link nav-toggler d-block d-md-none waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
                 <li class="nav-item"> <a class="nav-link sidebartoggler d-none d-lg-block d-md-block waves-effect waves-dark" href="javascript:void(0)"><i class="icon-menu"></i></a> </li>
             </ul>
+            <div class="navbar-nav mr-auto">
+                <h2 class="text-white m-auto font-weight-bold">Admin</h2>
+            </div>
             <!-- ============================================================== -->
             <!-- User profile -->
             <!-- ============================================================== -->
@@ -43,43 +46,51 @@
                     <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
                         <ul>
                             <li>
-                                <div class="drop-title">Notifications</div>
+                                <div class="drop-title">Recent Notifications</div>
                             </li>
                             <li>
                                 <div class="message-center">
                                     <!-- Message -->
                                     <a href="javascript:void(0)">
-                                        <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Luanch Admin</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span>
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">Class Changed by Teacher A </h5>
+                                            <p class=" text-muted">Teacher A changed 1/10/2021 8am class to 7/10/2021 2pm class</p> <span class="text-info">9:30 AM</span>
                                         </div>
                                     </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="btn btn-success btn-circle"><i class="ti-calendar"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Event today</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span>
+                                     <!-- Message -->
+                                     <a href="javascript:void(0)">
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">Invoice Paid by Parent A </h5>
+                                            <p class=" text-muted">Invoice ID 1 is paid complete by Parent A</p> <span class="text-info">11:30 PM</span>
                                         </div>
                                     </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="btn btn-info btn-circle"><i class="ti-settings"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Settings</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span>
+                                     <!-- Message -->
+                                     <a href="javascript:void(0)">
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">Class Cancel by Teacher B </h5>
+                                            <p class=" text-muted">Teacher B cancel 10/10/2021 9am class</p> <span class="text-info">10:30 AM</span>
                                         </div>
                                     </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="btn btn-primary btn-circle"><i class="ti-user"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
+                                     <!-- Message -->
+                                     <a href="javascript:void(0)">
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">test notification </h5>
+                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-info">9:30 AM</span>
                                         </div>
                                     </a>
+                                     <!-- Message -->
+                                     <a href="javascript:void(0)">
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">test notification </h5>
+                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-info">9:30 AM</span>
+                                        </div>
+                                    </a>
+                                    
                                 </div>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a class="nav-link text-center link" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>

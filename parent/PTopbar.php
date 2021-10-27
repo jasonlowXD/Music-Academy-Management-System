@@ -4,7 +4,7 @@
         <!-- Logo -->
         <!-- ============================================================== -->
         <div class="navbar-header">
-            <a class="navbar-brand" href="ACalendar.php">
+            <a class="navbar-brand" href="PCalendar.php">
                 <!-- Logo icon -->
                 <b class="m-l-5 m-r-5">
                     <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
@@ -47,39 +47,53 @@
                             </li>
                             <li>
                                 <div class="message-center">
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="btn btn-danger btn-circle"><i class="fa fa-link"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Luanch Admin</h5> <span class="mail-desc">Just see the my new admin!</span> <span class="time">9:30 AM</span>
+                                     <!-- Message -->
+                                     <a href="javascript:void(0)">
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">Class Changed by Teacher A </h5>
+                                            <p class=" text-muted">Teacher A changed 1/10/2021 8am class to 7/10/2021 2pm class</p> <span class="text-info">9:30 AM</span>
+                                        </div>
+                                    </a>
+                                     <!-- Message -->
+                                     <a href="javascript:void(0)">
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">New invoice generated</h5>
+                                            <p class=" text-muted">Your this month invoice is generated, please check</p> <span class="text-info">11:30 PM</span>
+                                        </div>
+                                    </a>
+                                     <!-- Message -->
+                                     <a href="javascript:void(0)">
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">Class Cancel by Teacher B </h5>
+                                            <p class=" text-muted">Teacher B cancel 10/10/2021 9am class</p> <span class="text-info">10:30 AM</span>
                                         </div>
                                     </a>
                                     <!-- Message -->
                                     <a href="javascript:void(0)">
-                                        <div class="btn btn-success btn-circle"><i class="ti-calendar"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Event today</h5> <span class="mail-desc">Just a reminder that you have event</span> <span class="time">9:10 AM</span>
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">Reschedule request has been rejected </h5>
+                                            <p class=" text-muted">Your reschedule request on 18/10/2021 has been rejected by Teacher A</p> <span class="text-info">10:30 AM</span>
                                         </div>
                                     </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="btn btn-info btn-circle"><i class="ti-settings"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Settings</h5> <span class="mail-desc">You can customize this template as you want</span> <span class="time">9:08 AM</span>
+                                     <!-- Message -->
+                                     <a href="javascript:void(0)">
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">test notification </h5>
+                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-info">9:30 AM</span>
                                         </div>
                                     </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="btn btn-primary btn-circle"><i class="ti-user"></i></div>
-                                        <div class="mail-contnet">
-                                            <h5>Pavan kumar</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
+                                     <!-- Message -->
+                                     <a href="javascript:void(0)">
+                                        <div class="">
+                                            <h5 class=" font-weight-bold">test notification </h5>
+                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-info">9:30 AM</span>
                                         </div>
                                     </a>
                                 </div>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a class="nav-link text-center link" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
+                            </li> -->
                         </ul>
                     </div>
                 </li>
