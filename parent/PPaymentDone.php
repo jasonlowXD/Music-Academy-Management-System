@@ -17,7 +17,7 @@
     <!-- page css -->
     <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
     <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
-    <meta http-equiv='refresh' content='4; URL=http://localhost/fyp/parent/PInvoice.php'>
+    <meta http-equiv='refresh' content='3; URL=http://localhost/fyp/parent/PInvoice.php'>
 
 </head>
 
@@ -86,7 +86,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h1>Payment Success !</h1>
-                                <p class="m-t-40">Redirecting back to Invoices in 3 seconds...</p>
+                                <p class="m-t-40">Redirecting back to Invoices in <span id="countdown">3</span> seconds...</p>
                             </div>
 
                         </div>
@@ -138,6 +138,15 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
 
+        // countdown time and display in html ui
+        var timeleft = 3;
+        var downloadTimer = setInterval(function() {
+            timeleft--;
+            document.getElementById("countdown").innerHTML = timeleft;
+            if (timeleft <= 0) {
+                clearInterval(downloadTimer);
+            } 
+        }, 1000);
     </script>
 
 </body>
