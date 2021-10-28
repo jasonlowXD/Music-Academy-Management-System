@@ -42,55 +42,70 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
                         <ul>
-                            <li>
-                                <div class="drop-title">Notifications</div>
-                            </li>
-                            <li>
-                                <div class="message-center">
-                                     <!-- Message -->
-                                     <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" font-weight-bold">Class Changed by Teacher A </h5>
-                                            <p class=" text-muted">Teacher A changed 1/10/2021 8am class to 7/10/2021 2pm class</p> <span class="text-info">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                     <!-- Message -->
-                                     <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" font-weight-bold">New invoice generated</h5>
-                                            <p class=" text-muted">Your this month invoice is generated, please check</p> <span class="text-info">11:30 PM</span>
-                                        </div>
-                                    </a>
-                                     <!-- Message -->
-                                     <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" font-weight-bold">Class Cancel by Teacher B </h5>
-                                            <p class=" text-muted">Teacher B cancel 10/10/2021 9am class</p> <span class="text-info">10:30 AM</span>
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" font-weight-bold">Reschedule request has been rejected </h5>
-                                            <p class=" text-muted">Your reschedule request on 18/10/2021 has been rejected by Teacher A</p> <span class="text-info">10:30 AM</span>
-                                        </div>
-                                    </a>
-                                     <!-- Message -->
-                                     <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" font-weight-bold">test notification </h5>
-                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-info">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                     <!-- Message -->
-                                     <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" font-weight-bold">test notification </h5>
-                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-info">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
+                            <div class="message-center">
+                                <li>
+                                    <div class="drop-title  font-weight-bold pl-3">New Notifications</div>
+                                </li>
+                                <li>
+                                    <div class="">
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class=" font-weight-bold">Class Changed by Teacher A </h5>
+                                                <p class=" text-muted">Teacher A changed 1/10/2021 8am class to 7/10/2021 2pm class</p> <span class="text-info">9:30 AM</span>
+                                            </div>
+                                        </a>
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class=" font-weight-bold">New invoice generated</h5>
+                                                <p class=" text-muted">Your this month invoice is generated, please check</p> <span class="text-info">11:30 PM</span>
+                                            </div>
+                                        </a>
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class=" font-weight-bold">Class Cancel by Teacher B </h5>
+                                                <p class=" text-muted">Teacher B cancel 10/10/2021 9am class</p> <span class="text-info">10:30 AM</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="drop-title  font-weight-bold  pl-3">Viewed Notifications</div>
+                                </li>
+                                <li>
+                                    <div class="">
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class="">Reschedule request has been rejected </h5>
+                                                <p class=" text-muted">Your reschedule request on 18/10/2021 has been rejected by Teacher A</p> <span class="text-muted">10:30 AM</span>
+                                            </div>
+                                        </a>
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class="">test notification </h5>
+                                                <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
+                                            </div>
+                                        </a>
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class="">test notification </h5>
+                                                <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
+                                            </div>
+                                        </a>
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class="">test notification </h5>
+                                                <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                            </div>
                             <!-- <li>
                                 <a class="nav-link text-center link" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
                             </li> -->
