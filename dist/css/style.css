@@ -11782,7 +11782,7 @@ html body .navbar-dark .mailbox ul li .nav-link {
 html body .navbar-dark .mailbox .message-center {
   /* height: 500px; */
   /*for my fyp use only*/
-  max-height: 500px; 
+  max-height: 800px; 
   overflow: auto;
   position: relative; }
   html body .navbar-dark .mailbox .message-center a {
