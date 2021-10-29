@@ -117,6 +117,18 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <label class="col-md-12" for="example-phone">Course Status</span>
+                                            </label>
+                                            <div class="col-md-12">
+                                                <select class='form-control' name='' required>
+                                                    <option selected value='active'>Active</option>
+                                                    <option value='inactive'>Inactive</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="button-group">
                                         <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                         <a href="ACourse.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
