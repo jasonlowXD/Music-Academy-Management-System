@@ -223,7 +223,7 @@
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Select children</label>
-                                                        <select class='form-control' name='children'>
+                                                        <select class='form-control' name='children' disabled>
                                                             <option value='children A'>children A</option>
                                                             <option value='children B'>children B</option>
                                                             <option value='children C'>children C</option>

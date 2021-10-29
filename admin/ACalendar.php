@@ -232,7 +232,7 @@
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Select Teacher</label>
-                                                        <select class='form-control' name='teacher' required>
+                                                        <select class='form-control' name='teacher' disabled>
                                                             <option value='teacher A'>teacher A</option>
                                                             <option value='teacher B'>teacher B</option>
                                                             <option value='teacher C'>teacher C</option>
@@ -242,7 +242,7 @@
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Select children</label>
-                                                        <select class='form-control' name='children' required>
+                                                        <select class='form-control' name='children' disabled>
                                                             <option value='children A'>children A</option>
                                                             <option value='children B'>children B</option>
                                                             <option value='children C'>children C</option>
