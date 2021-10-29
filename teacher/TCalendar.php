@@ -341,7 +341,7 @@
                                                             <td>2021-09-30</td>
                                                             <td>11:00</td>
                                                             <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis sollicitudin orci, vitae convallis est. Cras tempor, lectus feugiat placerat condimentum, sem nisi vehicula ex, fermentum tincidunt eros velit nec felis. </td>
-                                                            <td>Rejected</td>
+                                                            <td><span class="label label-danger">Rejected</span></td>
                                                             <td>
                                                                 <div class="btn-group-vertical">
                                                                     <button type="button" class="btn btn-sm btn-info mb-1" disabled> Accept</button>
@@ -356,7 +356,7 @@
                                                             <td>2021-10-05</td>
                                                             <td>10:00</td>
                                                             <td>not free that day</td>
-                                                            <td>Pending</td>
+                                                            <td><span class="label label-warning">Pending</span></td>
                                                             <td>
                                                                 <div class="btn-group-vertical">
                                                                     <button type="button" id="accept" class="btn btn-sm btn-info mb-1"> Accept</button>

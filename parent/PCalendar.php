@@ -246,14 +246,14 @@
                                                             <td>2021-09-30</td>
                                                             <td>11:00</td>
                                                             <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis sollicitudin orci, vitae convallis est. Cras tempor, lectus feugiat placerat condimentum, sem nisi vehicula ex, fermentum tincidunt eros velit nec felis. </td>
-                                                            <td>Rejected</td>
+                                                            <td><span class="label label-danger">Rejected</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td>2</td>
                                                             <td>2021-10-05</td>
                                                             <td>10:00</td>
                                                             <td>not free that day</td>
-                                                            <td>Pending</td>
+                                                            <td><span class="label label-warning">Pending</span></td>
                                                         </tr>
                                                     </tbody>
                                                     <tfoot>
