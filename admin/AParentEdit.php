@@ -144,6 +144,18 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-phone">Parent Status</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <select class='form-control' name='' required>
+                                                                <option selected value='active'>Active</option>
+                                                                <option value='inactive'>Inactive</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                                     <a href="AParent.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
@@ -191,10 +203,14 @@
                                                         <option value='teacher C'>teacher C</option>
                                                     </select>
                                                 </div>
-                                                <div class="button-group">
-                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                                    <button type="button" class="btn btn-danger waves-effect waves-light delete-children-btn">Delete</button>
+                                                <div class="form-group">
+                                                    <label class="control-label" for="example-phone">Children Status</label>
+                                                    <select class='form-control' name='' required>
+                                                        <option selected value='active'>Active</option>
+                                                        <option value='inactive'>Inactive</option>
+                                                    </select>
                                                 </div>
+                                                <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                             </form>
                                         </div>
                                     </div>
@@ -237,10 +253,14 @@
                                                         <option value='teacher C'>teacher C</option>
                                                     </select>
                                                 </div>
-                                                <div class="button-group">
-                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                                    <button type="button" class="btn btn-danger waves-effect waves-light delete-children-btn">Delete</button>
+                                                <div class="form-group">
+                                                    <label class="control-label" for="example-phone">Children Status</label>
+                                                    <select class='form-control' name='' required>
+                                                        <option value='active'>Active</option>
+                                                        <option selected value='inactive'>Inactive</option>
+                                                    </select>
                                                 </div>
+                                                <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                             </form>
                                         </div>
                                     </div>
@@ -285,10 +305,7 @@
                                                         <option value='teacher C'>teacher C</option>
                                                     </select>
                                                 </div>
-                                                <div class="button-group">
-                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                                    <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
-                                                </div>
+                                                <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                             </form>
                                         </div>
                                     </div>

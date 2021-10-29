@@ -129,6 +129,7 @@
                                                             <th>Name</th>
                                                             <th>Email</th>
                                                             <th>Phone</th>
+                                                            <th>Status</th>
                                                             <th data-sort-ignore="true">Action</th>
                                                         </tr>
                                                     </thead>
@@ -138,11 +139,12 @@
                                                             <td>teacher A</td>
                                                             <td>teachera@gmail.com</td>
                                                             <td>+123 456 789</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <!-- <div class="button-group"> -->
+                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                <!-- <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button> -->
+                                                                <!-- </div> -->
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -150,11 +152,9 @@
                                                             <td>tasd</td>
                                                             <td>aaa@gmail.com</td>
                                                             <td>+1 789</td>
+                                                            <td><span class="label label-danger">Inactive</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -162,11 +162,9 @@
                                                             <td>dsa</td>
                                                             <td>bba@gmail.com</td>
                                                             <td>+666</td>
+                                                            <td><span class="label label-danger">Inactive</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -174,11 +172,9 @@
                                                             <td>tdsa</td>
                                                             <td>cca@gmail.com</td>
                                                             <td>+777</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -186,11 +182,9 @@
                                                             <td>gdsg</td>
                                                             <td>hhh@gmail.com</td>
                                                             <td>+999</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -198,11 +192,9 @@
                                                             <td>tre</td>
                                                             <td>ttt@gmail.com</td>
                                                             <td>+444</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
                                                     </tbody>

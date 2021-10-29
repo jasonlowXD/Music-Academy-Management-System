@@ -21,6 +21,12 @@
     <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
     <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
     <style>
+        .childrenTable th {
+            padding-top: 0px !important;
+            padding-bottom: 0px !important;
+            border-top: 0px !important;
+        }
+
         .childrenTable td {
             padding-top: 0px !important;
             padding-bottom: 0px !important;
@@ -135,10 +141,9 @@
                                                             <th>Name</th>
                                                             <th>Email</th>
                                                             <th>Phone</th>
+                                                            <th>Status</th>
                                                             <th data-sort-ignore="true">Action</th>
-                                                            <th data-hide="all">Children 1</th>
-                                                            <th data-hide="all">Children 2</th>
-                                                            <th data-hide="all">Children 3</th>
+                                                            <th data-hide="all">Children</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -147,29 +152,32 @@
                                                             <td>parenta</td>
                                                             <td>parentA@gmail.com</td>
                                                             <td>+123 456 789</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                             <td>
                                                                 <table class="childrenTable">
+                                                                    <tr>
+                                                                        <th>Name</th>
+                                                                        <th>Age</th>
+                                                                        <th>Course</th>
+                                                                        <th>Teacher</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>childrenABC</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-success">Active</span></td>
                                                                     </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
                                                                     <tr>
                                                                         <td>childrenBBC</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-danger">Inactive</span></td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
@@ -179,19 +187,25 @@
                                                             <td>parentb</td>
                                                             <td>aaa@gmail.com</td>
                                                             <td>+1 789</td>
+                                                            <td><span class="label label-danger">Inactive</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                             <td>
                                                                 <table class="childrenTable">
+                                                                    <tr>
+                                                                        <th>Name</th>
+                                                                        <th>Age</th>
+                                                                        <th>Course</th>
+                                                                        <th>Teacher</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>kidA</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-danger">Inactive</span></td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
@@ -201,29 +215,32 @@
                                                             <td>dsa</td>
                                                             <td>bba@gmail.com</td>
                                                             <td>+666</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                             <td>
                                                                 <table class="childrenTable">
+                                                                    <tr>
+                                                                        <th>Name</th>
+                                                                        <th>Age</th>
+                                                                        <th>Course</th>
+                                                                        <th>Teacher</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>cccc</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-danger">Inactive</span></td>
                                                                     </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
                                                                     <tr>
                                                                         <td>dddd</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-success">Active</span></td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
@@ -233,39 +250,39 @@
                                                             <td>tdsa</td>
                                                             <td>cca@gmail.com</td>
                                                             <td>+777</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                             <td>
                                                                 <table class="childrenTable">
+                                                                    <tr>
+                                                                        <th>Name</th>
+                                                                        <th>Age</th>
+                                                                        <th>Course</th>
+                                                                        <th>Teacher</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>eeee</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-success">Active</span></td>
                                                                     </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
                                                                     <tr>
                                                                         <td>aadddaa</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-danger">Inactive</span></td>
                                                                     </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
                                                                     <tr>
                                                                         <td>qpqpqp</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-success">Active</span></td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
@@ -275,29 +292,32 @@
                                                             <td>gdsg</td>
                                                             <td>hhh@gmail.com</td>
                                                             <td>+999</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                             <td>
                                                                 <table class="childrenTable">
+                                                                    <tr>
+                                                                        <th>Name</th>
+                                                                        <th>Age</th>
+                                                                        <th>Course</th>
+                                                                        <th>Teacher</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>yyyy</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-success">Active</span></td>
                                                                     </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
                                                                     <tr>
                                                                         <td>qqqqq</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-success">Active</span></td>
                                                                     </tr>
                                                                 </table>
                                                             </td>
@@ -307,29 +327,32 @@
                                                             <td>tre</td>
                                                             <td>ttt@gmail.com</td>
                                                             <td>+444</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
-                                                                <div class="button-group">
-                                                                    <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
+                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
                                                             <td>
                                                                 <table class="childrenTable">
+                                                                    <tr>
+                                                                        <th>Name</th>
+                                                                        <th>Age</th>
+                                                                        <th>Course</th>
+                                                                        <th>Teacher</th>
+                                                                        <th>Status</th>
+                                                                    </tr>
                                                                     <tr>
                                                                         <td>kkkkk</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-success">Active</span></td>
                                                                     </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
                                                                     <tr>
                                                                         <td>clllll</td>
                                                                         <td>15</td>
                                                                         <td>Piano Grade 1</td>
                                                                         <td>teacher A</td>
+                                                                        <td><span class="label label-success">Active</span></td>
                                                                     </tr>
                                                                 </table>
                                                             </td>

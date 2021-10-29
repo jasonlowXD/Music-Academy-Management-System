@@ -129,6 +129,7 @@
                                                             <th>Name</th>
                                                             <th>Fee per month (RM)</th>
                                                             <th>Duration (min)</th>
+                                                            <th>Status</th>
                                                             <th data-sort-ignore="true">Action</th>
                                                         </tr>
                                                     </thead>
@@ -138,11 +139,12 @@
                                                             <td>Piano Grade 1</td>
                                                             <td>150</td>
                                                             <td>30</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
                                                                 <div class="button-group">
                                                                     <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                     <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
+                                                                    <!-- <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button> -->
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -151,11 +153,11 @@
                                                             <td>Piano Grade 2</td>
                                                             <td>200</td>
                                                             <td>60</td>
+                                                            <td><span class="label label-danger">Inactive</span></td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                     <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -164,11 +166,11 @@
                                                             <td>Guitar Grade 1</td>
                                                             <td>150</td>
                                                             <td>30</td>
+                                                            <td><span class="label label-danger">Inactive</span></td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                     <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -177,11 +179,11 @@
                                                             <td>Bass Guitar Grade 1</td>
                                                             <td>220</td>
                                                             <td>60</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
                                                                 <div class="button-group">
                                                                     <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                     <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -190,11 +192,11 @@
                                                             <td>Saxophone Grade 1</td>
                                                             <td>300</td>
                                                             <td>60</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
                                                                 <div class="button-group">
                                                                     <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                     <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -203,11 +205,11 @@
                                                             <td>Violin Grade 1</td>
                                                             <td>150</td>
                                                             <td>30</td>
+                                                            <td><span class="label label-success">Active</span></td>
                                                             <td>
                                                                 <div class="button-group">
                                                                     <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                     <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
                                                             </td>
                                                         </tr>
