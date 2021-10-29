@@ -145,7 +145,7 @@
                                                             <td>540</td>
                                                             <td>if pay by online and upload file</td>
                                                             <td>Online</td>
-                                                            <td><a href="../img/receipttest.pdf" download>receipttest.pdf</a></td>
+                                                            <td><a href="../img/receipttest.pdf" target="_blank" rel="noopener noreferrer">receipttest.pdf</a></td>
                                                             <td>
                                                             <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
 

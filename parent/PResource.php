@@ -123,7 +123,7 @@
                                                 <td>Children A</td>
                                                 <td>Teacher ABC</td>
                                                 <td>Topic 1 resource with Url</td>
-                                                <td><a href="https://youtu.be/aob0n2fJcyQ">https://www.youtube.com/watch?v=aob0n2fJcyQ&ab_channel=JunichiInoue</a></td>
+                                                <td><a href="https://youtu.be/aob0n2fJcyQ" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=aob0n2fJcyQ&ab_channel=JunichiInoue</a></td>
                                                 <td>-</td>
                                             </tr>
                                             <tr>
@@ -132,7 +132,7 @@
                                                 <td>Teacher CCC</td>
                                                 <td>Topic 2 resource with file</td>
                                                 <td>-</td>
-                                                <td><a href="../img/resourceFile.pdf" download>resourceFile.pdf</a></td>
+                                                <td><a href="../img/resourceFile.pdf" target="_blank" rel="noopener noreferrer">resourceFile.pdf</a></td>
                                             </tr>
 
                                         </tbody>

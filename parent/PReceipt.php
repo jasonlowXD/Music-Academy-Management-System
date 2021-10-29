@@ -141,7 +141,7 @@
                                                             <td>540</td>
                                                             <td>if pay by online and upload file</td>
                                                             <td>Online</td>
-                                                            <td><a href="../img/receipttest.pdf" download>receipttest.pdf</a></td>
+                                                            <td><a href="../img/receipttest.pdf" target="_blank" rel="noopener noreferrer">receipttest.pdf</a></td>
                                                         </tr>
 
                                                     </tbody>

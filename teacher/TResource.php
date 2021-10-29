@@ -139,7 +139,7 @@
                                                             <td>1</td>
                                                             <td>Children A</td>
                                                             <td>Topic 1 resource with Url</td>
-                                                            <td><a href="https://youtu.be/aob0n2fJcyQ">https://www.youtube.com/watch?v=aob0n2fJcyQ&ab_channel=JunichiInoue</a></td>
+                                                            <td><a href="https://youtu.be/aob0n2fJcyQ" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=aob0n2fJcyQ&ab_channel=JunichiInoue</a></td>
                                                             <td>-</td>
                                                             <td>
                                                                 <div class="button-group">
@@ -153,7 +153,7 @@
                                                             <td>Children ABC</td>
                                                             <td>Topic 2 resource with file</td>
                                                             <td>-</td>
-                                                            <td><a href="../img/resourceFile.pdf" download>resourceFile.pdf</a></td>
+                                                            <td><a href="../img/resourceFile.pdf" target="_blank" rel="noopener noreferrer">resourceFile.pdf</a></td>
                                                             <td>
                                                                 <div class="button-group">
                                                                     <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>

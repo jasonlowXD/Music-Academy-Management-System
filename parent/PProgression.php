@@ -123,7 +123,7 @@
                                                 <td>Children A</td>
                                                 <td>Admin</td>
                                                 <td>20210101 class photo</td>
-                                                <td><a href="../img/neko.jpg">neko.jpg</a></td>
+                                                <td><a href="../img/neko.jpg" target="_blank" rel="noopener noreferrer">neko.jpg</a></td>
                                                 <td><a href="PProgressionDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
                                             </tr>
                                             <tr>
@@ -131,7 +131,7 @@
                                                 <td>Children ABC</td>
                                                 <td>Teacher ABC</td>
                                                 <td>20210201 class video</td>
-                                                <td><a href="../img/Jounetsu Tairiku.mp4">Jounetsu Tairiku.mp4</a></td>
+                                                <td><a href="../img/Jounetsu Tairiku.mp4" target="_blank" rel="noopener noreferrer">Jounetsu Tairiku.mp4</a></td>
                                                 <td><a href="PProgressionDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
                                             </tr>
                                         </tbody>
