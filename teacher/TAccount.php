@@ -132,7 +132,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <label class="col-md-12" for="example-phone">Email</span>
+                                            <label class="col-md-12" for="example-phone">Phone Number</span>
                                             </label>
                                             <div class="col-md-12">
                                                 <input type="text" id="example-phone" name="example-phone" class="form-control text-muted" placeholder="enter phone" value="+123 456 789" required>
