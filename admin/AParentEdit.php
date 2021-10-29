@@ -254,7 +254,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="control-label" for="example-phone">Children Status</label>
+                                                    <label class="control-label">Children Status</label>
                                                     <select class='form-control' name='' required>
                                                         <option value='active'>Active</option>
                                                         <option selected value='inactive'>Inactive</option>
