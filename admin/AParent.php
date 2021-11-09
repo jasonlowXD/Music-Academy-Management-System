@@ -592,19 +592,33 @@
         });
 
         // TEST GET MULTIPLE CHILDREN VALUE
+        // https://stackoverflow.com/questions/2627813/how-to-get-an-array-with-jquery-multiple-input-with-the-same-name
         $('#newParentForm').on('submit', function() {
             var form = $('#newParentForm');
 
-            var childrenName = form.find("input[name^='childrenName']");
-            var childrenAge = form.find("input[name^='childrenAge']");
-            var name = [];
-            var age = [];
-            childrenName.each(function() {
-                name.push(childrenName.val());
-                age.push(childrenAge.val());
-            });
+            var childrenName = form.find('input[name="childrenName[]"]');
+            var childrenAge = form.find('input[name="childrenAge[]"]');
+
+            var name = childrenName.map(function() {
+                return $(this).val()
+            }).get();
             console.log(name);
+
+            var age = childrenAge.map(function() {
+                return $(this).val()
+            }).get();
             console.log(age);
+
+
+            // var name = [];
+            // var age = [];
+
+            // childrenName.each(function() {
+            //     name.push(childrenName.val());
+            //     age.push(childrenAge.val());
+            // });
+            // console.log(name);
+            // console.log(age);
 
             return false;
         });
