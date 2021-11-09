@@ -464,7 +464,7 @@
 
         //FULLCALENDAR V5
         document.addEventListener('DOMContentLoaded', function() {
-            var day, dayName, fulldate, datestring;
+            var day, dayName, fulldate, datestring, timeString;
             var children, course, duration, startDate, endDate, startTime, loca, desc;
 
             // RECURSIVE METHOD (GOT PROBLEM)
@@ -569,11 +569,21 @@
                     }
                     // console.log(dayName);
 
+                    //calendar week view and day view dateStr is "2021-10-13T10:30:00+08:00", need use split function to get date only
+                    //toTimeString() will get "00:00:00 GMT+0800 (Malaysia Time)", need use split function to get time only
+
                     datestring = info.dateStr;
-                    // console.log(datestring);
+                    var finalDateString = datestring.split("T")[0];
+                    // console.log(finalDateString);
+
+                    timeString = info.date.toTimeString();
+                    var finalTimeString = timeString.split(" ")[0];
+                    // console.log(finalTimeString);
+
                     var $modal = $('#add-event-modal');
                     var addform = $modal.find('.add-modal-form');
-                    addform.find("input[name='date']").val(datestring);
+                    addform.find("input[name='date']").val(finalDateString);
+                    addform.find("input[name='startTime']").val(finalTimeString);
                     addform.find("input[name='day']").val(dayName);
                 },
 
@@ -625,14 +635,16 @@
 
                         // NORMAL METHOD
                         var currentDate = arg.startStr;
+                        var finalCurrentDate = currentDate.split("T")[0];
+                        console.log(finalCurrentDate);
 
-                        while (moment(currentDate).isBefore(endDate) || moment(currentDate).isSame(endDate)) {
+                        while (moment(finalCurrentDate).isBefore(endDate) || moment(finalCurrentDate).isSame(endDate)) {
                             // console.log('true');
                             calendar.addEvent({
                                 id: id,
                                 title: children,
-                                start: currentDate + 'T' + startTimeStr,
-                                end: currentDate + 'T' + endTime,
+                                start: finalCurrentDate + 'T' + startTimeStr,
+                                end: finalCurrentDate + 'T' + endTime,
                                 className: categoryClass,
                                 extendedProps: {
                                     classGroup: classGroup,
@@ -641,8 +653,8 @@
                                     attendance: ''
                                 }
                             });
-                            currentDate = moment(currentDate, "YYYY-MM-DD").add(7, 'days'); //add weekly days
-                            currentDate = currentDate.format('YYYY-MM-DD'); //convert back format
+                            finalCurrentDate = moment(finalCurrentDate, "YYYY-MM-DD").add(7, 'days'); //add weekly days
+                            finalCurrentDate = finalCurrentDate.format('YYYY-MM-DD'); //convert back format
                             id++;
                         }
                         classGroup++;
@@ -814,7 +826,7 @@
                                 }
 
                                 $modal.modal('hide');
-                                Swal.fire('Done!', 'Class Edited', 'success')
+                                Swal.fire('Done!', 'All classes are edited', 'success')
                             }
                         })
                         // console.log("run done");
@@ -992,9 +1004,9 @@
         function dummyData() {
             var dataEvent = [{
                 id: 1,
-                title: 'children B',
-                start: '2021-10-04T10:00:00',
-                end: '2021-10-04T11:00:00',
+                title: 'teacher A,children B',
+                start: '2021-11-01T10:00:00',
+                end: '2021-11-01T11:00:00',
                 className: 'bg-danger',
                 extendedProps: {
                     classGroup: 1,
@@ -1004,9 +1016,9 @@
                 }
             }, {
                 id: 2,
-                title: 'children B',
-                start: '2021-10-11T10:00:00',
-                end: '2021-10-11T11:00:00',
+                title: 'teacher A,children B',
+                start: '2021-11-08T10:00:00',
+                end: '2021-11-08T11:00:00',
                 className: 'bg-success',
                 extendedProps: {
                     classGroup: 1,
@@ -1016,9 +1028,9 @@
                 }
             }, {
                 id: 3,
-                title: 'children B',
-                start: '2021-10-18T10:00:00',
-                end: '2021-10-18T11:00:00',
+                title: 'teacher A,children B',
+                start: '2021-11-15T10:00:00',
+                end: '2021-11-15T11:00:00',
                 className: 'bg-warning',
                 extendedProps: {
                     classGroup: 1,
@@ -1028,55 +1040,7 @@
                 }
             }, {
                 id: 4,
-                title: 'children B',
-                start: '2021-10-25T10:00:00',
-                end: '2021-10-25T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 5,
-                title: 'children B',
-                start: '2021-11-01T10:00:00',
-                end: '2021-11-01T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 6,
-                title: 'children B',
-                start: '2021-11-08T10:00:00',
-                end: '2021-11-08T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 7,
-                title: 'children B',
-                start: '2021-11-15T10:00:00',
-                end: '2021-11-15T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 8,
-                title: 'children B',
+                title: 'teacher A,children B',
                 start: '2021-11-22T10:00:00',
                 end: '2021-11-22T11:00:00',
                 className: 'bg-primary',
@@ -1087,8 +1051,8 @@
                     attendance: ''
                 }
             }, {
-                id: 9,
-                title: 'children B',
+                id: 5,
+                title: 'teacher A,children B',
                 start: '2021-11-29T10:00:00',
                 end: '2021-11-29T11:00:00',
                 className: 'bg-primary',
@@ -1099,8 +1063,8 @@
                     attendance: ''
                 }
             }, {
-                id: 10,
-                title: 'children B',
+                id: 6,
+                title: 'teacher A,children B',
                 start: '2021-12-06T10:00:00',
                 end: '2021-12-06T11:00:00',
                 className: 'bg-primary',
@@ -1111,8 +1075,8 @@
                     attendance: ''
                 }
             }, {
-                id: 11,
-                title: 'children B',
+                id: 7,
+                title: 'teacher A,children B',
                 start: '2021-12-13T10:00:00',
                 end: '2021-12-13T11:00:00',
                 className: 'bg-primary',
@@ -1123,8 +1087,8 @@
                     attendance: ''
                 }
             }, {
-                id: 12,
-                title: 'children B',
+                id: 8,
+                title: 'teacher A,children B',
                 start: '2021-12-20T10:00:00',
                 end: '2021-12-20T11:00:00',
                 className: 'bg-primary',
@@ -1135,8 +1099,8 @@
                     attendance: ''
                 }
             }, {
-                id: 13,
-                title: 'children B',
+                id: 9,
+                title: 'teacher A,children B',
                 start: '2021-12-27T10:00:00',
                 end: '2021-12-27T11:00:00',
                 className: 'bg-primary',
@@ -1147,10 +1111,58 @@
                     attendance: ''
                 }
             }, {
+                id: 10,
+                title: 'teacher A,children B',
+                start: '2022-01-03T10:00:00',
+                end: '2022-01-03T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 11,
+                title: 'teacher A,children B',
+                start: '2022-01-10T10:00:00',
+                end: '2022-01-10T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 12,
+                title: 'teacher A,children B',
+                start: '2022-01-17T10:00:00',
+                end: '2022-01-17T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
+                id: 13,
+                title: 'teacher A,children B',
+                start: '2022-01-24T10:00:00',
+                end: '2022-01-24T11:00:00',
+                className: 'bg-primary',
+                extendedProps: {
+                    classGroup: 1,
+                    location: 'www.google.com',
+                    description: 'learn beginner things',
+                    attendance: ''
+                }
+            }, {
                 id: 14,
-                title: 'children A',
-                start: '2021-10-07T14:00:00',
-                end: '2021-10-07T15:00:00',
+                title: 'teacher C,children A',
+                start: '2021-11-11T14:00:00',
+                end: '2021-11-11T15:00:00',
                 className: 'bg-warning',
                 extendedProps: {
                     classGroup: 2,
@@ -1160,9 +1172,9 @@
                 }
             }, {
                 id: 15,
-                title: 'children A',
-                start: '2021-10-14T14:00:00',
-                end: '2021-10-14T15:00:00',
+                title: 'teacher C,children A',
+                start: '2021-11-18T14:00:00',
+                end: '2021-11-18T15:00:00',
                 className: 'bg-primary',
                 extendedProps: {
                     classGroup: 2,
@@ -1172,9 +1184,9 @@
                 }
             }, {
                 id: 16,
-                title: 'children A',
-                start: '2021-10-21T14:00:00',
-                end: '2021-10-21T15:00:00',
+                title: 'teacher C,children A',
+                start: '2021-11-25T14:00:00',
+                end: '2021-11-25T15:00:00',
                 className: 'bg-primary',
                 extendedProps: {
                     classGroup: 2,
@@ -1184,9 +1196,9 @@
                 }
             }, {
                 id: 17,
-                title: 'children A',
-                start: '2021-10-28T14:00:00',
-                end: '2021-10-28T15:00:00',
+                title: 'teacher C,children A',
+                start: '2021-12-02T14:00:00',
+                end: '2021-12-02T15:00:00',
                 className: 'bg-primary',
                 extendedProps: {
                     classGroup: 2,
@@ -1196,9 +1208,9 @@
                 }
             }, {
                 id: 18,
-                title: 'children A',
-                start: '2021-10-18T13:00:00',
-                end: '2021-10-18T14:00:00',
+                title: 'teacher B,children A',
+                start: '2021-11-22T13:00:00',
+                end: '2021-11-22T14:00:00',
                 className: 'bg-primary',
                 extendedProps: {
                     classGroup: 3,
@@ -1208,9 +1220,9 @@
                 }
             }, {
                 id: 19,
-                title: 'children A',
-                start: '2021-10-18T15:00:00',
-                end: '2021-10-18T16:00:00',
+                title: 'teacher B,children A',
+                start: '2021-11-22T15:00:00',
+                end: '2021-11-22T16:00:00',
                 className: 'bg-primary',
                 extendedProps: {
                     classGroup: 4,
@@ -1220,9 +1232,9 @@
                 }
             }, {
                 id: 20,
-                title: 'children A',
-                start: '2021-10-18T17:00:00',
-                end: '2021-10-18T18:00:00',
+                title: 'teacher B,children A',
+                start: '2021-11-22T17:00:00',
+                end: '2021-11-22T18:00:00',
                 className: 'bg-primary',
                 extendedProps: {
                     classGroup: 5,
