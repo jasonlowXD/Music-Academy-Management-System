@@ -90,7 +90,7 @@
                                 <ul class="nav nav-tabs" role="tablist" id="progressionTab">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" href="#progressionlist" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Student Progression List</span>
+                                            <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Children Progression List</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
