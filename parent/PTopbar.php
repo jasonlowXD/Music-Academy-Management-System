@@ -1,3 +1,19 @@
+<?php
+session_start();
+
+if (!($_SESSION["logged"])) {
+    $_SESSION["logged"] = "";
+    header("Location:../index.php");
+} else {
+    if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 0) {
+        // admin
+        header("Location:../admin/ACalendar.php");
+    } else if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 1) {
+        // teacher
+        header("Location:../teacher/TCalendar.php");
+    }
+}
+?>
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <!-- ============================================================== -->
@@ -126,7 +142,7 @@
                         <!-- text-->
                         <a href="PAccount.php" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                         <!-- text-->
-                        <a href="../index.php" class="dropdown-item"><i class="ti-power-off"></i> Logout</a>
+                        <a href="../logout.php" class="dropdown-item"><i class="ti-power-off"></i> Logout</a>
                     </div>
                 </li>
                 <!-- ============================================================== -->

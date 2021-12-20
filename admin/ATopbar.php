@@ -1,3 +1,19 @@
+<?php
+session_start();
+
+if (!($_SESSION["logged"])) {
+    $_SESSION["logged"] = "";
+    header("Location:../index.php");
+} else {
+    if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 2) {
+        // parent
+        header("Location:../parent/PCalendar.php");
+    } else if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 1) {
+        // teacher
+        header("Location:../teacher/TCalendar.php");
+    }
+}
+?>
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
         <!-- ============================================================== -->
@@ -45,72 +61,72 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
                         <ul>
-                        <div class="message-center">
-                            <li>
-                                <div class="drop-title  font-weight-bold pl-3">New Notifications</div>
-                            </li>
-                            <li>
-                                <div class="">
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" font-weight-bold">Class Changed by Teacher A </h5>
-                                            <p class=" text-muted">Teacher A changed 1/10/2021 8am class to 7/10/2021 2pm class</p> <span class="text-info">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" font-weight-bold">Invoice Paid by Parent A </h5>
-                                            <p class=" text-muted">Invoice ID 1 is paid complete by Parent A</p> <span class="text-info">11:30 PM</span>
-                                        </div>
-                                    </a>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="drop-title  font-weight-bold  pl-3">Viewed Notifications</div>
-                            </li>
-                            <li>
-                                <div class="">
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" ">Class Cancel by Teacher B </h5>
-                                            <p class=" text-muted">Teacher B cancel 10/10/2021 9am class</p> <span class="text-muted">10:30 AM</span>
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class=" ">test notification </h5>
-                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                    <!-- Message -->
-                                    <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class="">test notification </h5>
-                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                     <!-- Message -->
-                                     <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class="">test notification </h5>
-                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
-                                        </div>
-                                    </a>
-                                     <!-- Message -->
-                                     <a href="javascript:void(0)">
-                                        <div class="">
-                                            <h5 class="">test notification </h5>
-                                            <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
-                                        </div>
-                                    </a>
+                            <div class="message-center">
+                                <li>
+                                    <div class="drop-title  font-weight-bold pl-3">New Notifications</div>
+                                </li>
+                                <li>
+                                    <div class="">
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class=" font-weight-bold">Class Changed by Teacher A </h5>
+                                                <p class=" text-muted">Teacher A changed 1/10/2021 8am class to 7/10/2021 2pm class</p> <span class="text-info">9:30 AM</span>
+                                            </div>
+                                        </a>
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class=" font-weight-bold">Invoice Paid by Parent A </h5>
+                                                <p class=" text-muted">Invoice ID 1 is paid complete by Parent A</p> <span class="text-info">11:30 PM</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="drop-title  font-weight-bold  pl-3">Viewed Notifications</div>
+                                </li>
+                                <li>
+                                    <div class="">
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class=" ">Class Cancel by Teacher B </h5>
+                                                <p class=" text-muted">Teacher B cancel 10/10/2021 9am class</p> <span class="text-muted">10:30 AM</span>
+                                            </div>
+                                        </a>
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class=" ">test notification </h5>
+                                                <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
+                                            </div>
+                                        </a>
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class="">test notification </h5>
+                                                <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
+                                            </div>
+                                        </a>
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class="">test notification </h5>
+                                                <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
+                                            </div>
+                                        </a>
+                                        <!-- Message -->
+                                        <a href="javascript:void(0)">
+                                            <div class="">
+                                                <h5 class="">test notification </h5>
+                                                <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
+                                            </div>
+                                        </a>
 
-                                </div>
-                            </li>
-                        </div>
+                                    </div>
+                                </li>
+                            </div>
                             <!-- <li>
                                 <a class="nav-link text-center link" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
                             </li> -->
@@ -131,7 +147,7 @@
                         <!-- text-->
                         <a href="Account.php" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
                         <!-- text-->
-                        <a href="../index.php" class="dropdown-item"><i class="ti-power-off"></i> Logout</a>
+                        <a href="../logout.php" class="dropdown-item"><i class="ti-power-off"></i> Logout</a>
                     </div>
                 </li>
                 <!-- ============================================================== -->

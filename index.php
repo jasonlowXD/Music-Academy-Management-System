@@ -1,35 +1,160 @@
 <?php
+$emailErr = null;
+$passErr = null;
+session_start();
 
-$email = '';
-$emailErr = '';
-$passErr = '';
+if (!isset($_SESSION["logged"])) {
+    $_SESSION["logged"] = "";
+}
+
+if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 0) {
+    // admin
+    header("Location:admin/ACalendar.php");
+} else if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 1) {
+    // teacher
+    header("Location:teacher/TCalendar.php");
+} else if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 2) {
+    // parent
+    header("Location:parent/PCalendar.php");
+}
+
+
 if (isset($_POST["login"])) {
     $email = $_POST["email"];
     $password = $_POST["password"];
+    $passValid = FALSE;
 
-    if ($email == "admin@123") {
-        if ($password == "123") {
-            header("Location:admin/ACalendar.php");
-            die();
-        } else {
-            $passErr = "Wrong password";
+    $conn = mysqli_connect("localhost", "root", "", "music_academy");
+
+    if ($conn) {
+        $admin_sql = "SELECT * FROM ADMIN";
+        $admin_result = $conn->query($admin_sql);
+
+        $teacher_sql = "SELECT TEACHER_ID,TEACHER_NAME,TEACHER_EMAIL,TEACHER_PASS FROM TEACHER";
+        $teacher_result = $conn->query($teacher_sql);
+
+        $parent_sql = "SELECT PARENT_ID,PARENT_NAME,PARENT_EMAIL,PARENT_PASS FROM PARENT";
+        $parent_result = $conn->query($parent_sql);
+
+        // CHECK ADMIN
+        if (mysqli_query($conn, $admin_sql)) {
+            while ($row = $admin_result->fetch_assoc()) {
+                $tempUserID = $row["ADMIN_ID"];
+                $tempName = $row["ADMIN_NAME"];
+                $tempEmail = $row["ADMIN_EMAIL"];
+                $tempPass = $row["ADMIN_PASS"];
+
+                // check email
+                if ($email == $tempEmail) {
+                    // echo "admin yes email" . "</br>";
+                    $adminCheck = true;
+                    $emailErr = '';
+                    // check password
+                    if (md5($password) == $tempPass) {
+                        $_SESSION["logged"] = TRUE;
+                        $_SESSION["email"] = $email;
+                        $_SESSION["userID"] = $tempUserID;
+                        $_SESSION["userName"] = $tempName;
+                        $_SESSION["accType"] = 0; //admin
+                        $passErr = '';
+                        break;
+                    } else {
+                        $passErr = "Wrong password";
+                    }
+                    break;
+                } else {
+                    // echo "admin no email" . "</br>";
+                    $adminCheck = false;
+                    $emailErr = "email does not exists";
+                }
+            }
         }
-    } else if ($email == "teacher@123") {
-        if ($password == "123") {
-            header("Location:teacher/TCalendar.php");
-            die();
-        } else {
-            $passErr = "Wrong password";
-        }
-    } else if ($email == "parent@123") {
-        if ($password == "123") {
-            header("Location:parent/PCalendar.php");
-            die();
-        } else {
-            $passErr = "Wrong password";
+
+        if (!$adminCheck) {
+            // CHECK TEACHER
+            if (mysqli_query($conn, $teacher_sql)) {
+                while ($row = $teacher_result->fetch_assoc()) {
+                    $tempUserID = $row["TEACHER_ID"];
+                    $tempName = $row["TEACHER_NAME"];
+                    $tempEmail = $row["TEACHER_EMAIL"];
+                    $tempPass = $row["TEACHER_PASS"];
+
+                    // check email
+                    if ($email == $tempEmail) {
+                        // echo "teacher yes email" . "</br>";
+                        $teacherCheck = true;
+                        $emailErr = '';
+
+                        // check password
+                        if (md5($password) == $tempPass) {
+                            $_SESSION["logged"] = TRUE;
+                            $_SESSION["email"] = $email;
+                            $_SESSION["userID"] = $tempUserID;
+                            $_SESSION["userName"] = $tempName;
+                            $_SESSION["accType"] = 1; //teacher
+                            $passErr = '';
+                            break;
+                        } else {
+                            $passErr = "Wrong password";
+                        }
+                        break;
+                    } else {
+                        // echo "teacher no email" . "</br>";
+                        $teacherCheck = false;
+                        $emailErr = "email does not exists";
+                    }
+                }
+            }
+            if (!$teacherCheck) {
+                // CHECK PARENT
+                if (mysqli_query($conn, $parent_sql)) {
+                    while ($row = $parent_result->fetch_assoc()) {
+                        $tempUserID = $row["PARENT_ID"];
+                        $tempName = $row["PARENT_NAME"];
+                        $tempEmail = $row["PARENT_EMAIL"];
+                        $tempPass = $row["PARENT_PASS"];
+
+                        // check email
+                        if ($email == $tempEmail) {
+                            // echo "parent yes email" . "</br>";
+                            $emailErr = '';
+
+                            // check password
+                            if (md5($password) == $tempPass) {
+                                $_SESSION["logged"] = TRUE;
+                                $_SESSION["email"] = $email;
+                                $_SESSION["userID"] = $tempUserID;
+                                $_SESSION["userName"] = $tempName;
+                                $_SESSION["accType"] = 2; //parent
+                                $passErr = '';
+                                break;
+                            } else {
+                                $passErr = "Wrong password";
+                            }
+                            break;
+                        } else {
+                            // echo "parent no email" . "</br>";
+                            $emailErr = "email does not exists";
+                        }
+                    }
+                }
+            }
         }
     } else {
-        $emailErr = "username not exists";
+        die("FATAL ERROR");
+    }
+
+    $conn->close();
+
+    if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 0) {
+        // admin
+        header("Location:admin/ACalendar.php");
+    } else if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 1) {
+        // teacher
+        header("Location:teacher/TCalendar.php");
+    } else if ($_SESSION["logged"] == TRUE &&  $_SESSION["accType"] == 2) {
+        // parent
+        header("Location:parent/PCalendar.php");
     }
 }
 
@@ -114,16 +239,16 @@ if (isset($_POST["login"])) {
                             </div>
                         </div> -->
                     </form>
-                    <form class="form-horizontal" id="recoverform" action="#">
+                    <form class="form-horizontal" id="recoverform" action="resetPass.php" method="post">
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <h3>Recover Password</h3>
+                                <h3>Reset Password</h3>
                                 <p class="text-muted">Enter your Email and a new password will be sent to you! </p>
                             </div>
                         </div>
                         <div class="form-group ">
                             <div class="col-xs-12">
-                                <input class="form-control" type="email" id="email" required="" placeholder="Email">
+                                <input class="form-control" type="email" id="email" name="email" required="" placeholder="Email">
                             </div>
                         </div>
                         <div class="form-group text-center m-t-20">
@@ -171,18 +296,18 @@ if (isset($_POST["login"])) {
             $("#loginform").slideDown();
         });
 
-        $("#recoverform").submit(function(e) {
-            e.preventDefault();
-            Swal.fire(
-                'Password reset email sent!',
-                'Please check your email for new password.',
-                'success'
-            ).then(() => {
-                $("#recoverform #email").val('');
-                $("#recoverform").fadeOut();
-                $("#loginform").slideDown();
-            })
-        })
+        // $("#recoverform").submit(function(e) {
+        //     e.preventDefault();
+            // Swal.fire(
+            //     'Password reset email sent!',
+            //     'Please check your email for new password.',
+            //     'success'
+            // ).then(() => {
+            //     $("#recoverform #email").val('');
+            //     $("#recoverform").fadeOut();
+            //     $("#loginform").slideDown();
+            // })
+        // })
     </script>
 
 </body>
