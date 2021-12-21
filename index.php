@@ -54,7 +54,7 @@ if (isset($_POST["login"])) {
                         $_SESSION["logged"] = TRUE;
                         $_SESSION["email"] = $email;
                         $_SESSION["userID"] = $tempUserID;
-                        $_SESSION["userName"] = $tempName;
+                        $_SESSION["name"] = $tempName;
                         $_SESSION["accType"] = 0; //admin
                         $passErr = '';
                         break;
@@ -90,7 +90,7 @@ if (isset($_POST["login"])) {
                             $_SESSION["logged"] = TRUE;
                             $_SESSION["email"] = $email;
                             $_SESSION["userID"] = $tempUserID;
-                            $_SESSION["userName"] = $tempName;
+                            $_SESSION["name"] = $tempName;
                             $_SESSION["accType"] = 1; //teacher
                             $passErr = '';
                             break;
@@ -124,7 +124,7 @@ if (isset($_POST["login"])) {
                                 $_SESSION["logged"] = TRUE;
                                 $_SESSION["email"] = $email;
                                 $_SESSION["userID"] = $tempUserID;
-                                $_SESSION["userName"] = $tempName;
+                                $_SESSION["name"] = $tempName;
                                 $_SESSION["accType"] = 2; //parent
                                 $passErr = '';
                                 break;
@@ -296,18 +296,37 @@ if (isset($_POST["login"])) {
             $("#loginform").slideDown();
         });
 
-        // $("#recoverform").submit(function(e) {
-        //     e.preventDefault();
-            // Swal.fire(
-            //     'Password reset email sent!',
-            //     'Please check your email for new password.',
-            //     'success'
-            // ).then(() => {
-            //     $("#recoverform #email").val('');
-            //     $("#recoverform").fadeOut();
-            //     $("#loginform").slideDown();
-            // })
-        // })
+        $("#recoverform").submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+                    url: $("#recoverform").attr('action'),
+                    type: $("#recoverform").attr('method'),
+                    data: $("#recoverform").serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    Swal.fire(
+                        response.title,
+                        response.message,
+                        response.status
+                    ).then(() => {
+                        $("#recoverform #email").val('');
+                        $("#recoverform").fadeOut();
+                        $("#loginform").slideDown();
+                    })
+                })
+                .fail(function() {
+                    Swal.fire(
+                        'Oops...',
+                        'Something went wrong with ajax !',
+                        'error'
+                    ).then(() => {
+                        $("#recoverform #email").val('');
+                        $("#recoverform").fadeOut();
+                        $("#loginform").slideDown();
+                    })
+                })
+        })
     </script>
 
 </body>

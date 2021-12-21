@@ -83,7 +83,7 @@
                                 <div class="row text-center m-t-10">
                                     <div class="col-md-12">
                                         <h4><strong>Name</strong></h4>
-                                        <p>Admin</p>
+                                        <p><?php echo $_SESSION["name"] ?></p>
                                     </div>
                                 </div>
                                 <hr>
@@ -92,7 +92,7 @@
                                 <div class="row text-center m-t-10">
                                     <div class="col-md-12">
                                         <h4><strong>Email Address</strong></h4>
-                                        <p>admin@gmail.com</p>
+                                        <p> <?php echo $_SESSION["email"] ?></p>
                                     </div>
                                 </div>
                             </div>
@@ -102,13 +102,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Edit Account Information</h5>
-                                <form class="form-material" id="editAccountForm">
+                                <form class="form-material" id="editAccountForm" method="post" action="editAccount.php">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-text">Name</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter admin name" value="Admin" required>
+                                                <input type="text" name="name" class="form-control text-muted" placeholder="enter admin name" value="<?php echo $_SESSION["name"] ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@
                                             <label class="col-md-12" for="example-email">Admin Email</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="email" id="example-email" name="example-email" class="form-control text-muted" placeholder="enter admin email" value="admin@gmail.com" required>
+                                                <input type="email" name="email" class="form-control text-muted" placeholder="enter admin email" value="<?php echo $_SESSION["email"] ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -128,13 +128,13 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Change Password</h5>
-                                <form class="form-material" id="editPasswordForm">
+                                <form class="form-material" id="editPasswordForm" method="post" action="editPass.php">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-old-password">Old Password</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="password" id="example-old-password" name="example-old-password" class="form-control text-muted" placeholder="enter old password" value="" required>
+                                                <input type="password" id="example-old-password" name="oldPassword" class="form-control text-muted" placeholder="enter old password" value="" required>
                                             </div>
                                         </div>
                                     </div>
@@ -143,7 +143,7 @@
                                             <label class="col-md-12" for="example-new-password">New Password</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="password" id="example-new-password" name="example-new-password" class="form-control text-muted" placeholder="enter new password" value="" required>
+                                                <input type="password" id="example-new-password" name="newPassword" class="form-control text-muted" placeholder="enter new password" value="" required>
                                             </div>
                                         </div>
                                     </div>
@@ -210,17 +210,42 @@
                 confirmButtonText: 'Yes, confirm!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // DO EDIT ACCOUNT HERE THEN FIRE SWAL
-                    Swal.fire(
-                        'Done!',
-                        'Account Edited.',
-                        'success'
-                    ).then(() => {
-                        window.location.href = "Account.php";
-                    })
+                    $.ajax({
+                            url: $("#editAccountForm").attr('action'),
+                            type: $("#editAccountForm").attr('method'),
+                            data: $("#editAccountForm").serialize(),
+                            dataType: 'json'
+                        })
+                        .done(function(response) {
+                            if (response.title == 'Done!') {
+                                Swal.fire(
+                                    response.title,
+                                    response.message,
+                                    response.status
+                                ).then(() => {
+                                    location.reload();
+                                })
+                            } else {
+                                Swal.fire(
+                                    response.title,
+                                    response.message,
+                                    response.status
+                                )
+                            }
+                        })
+                        .fail(function() {
+                            Swal.fire(
+                                'Oops...',
+                                'Something went wrong with ajax !',
+                                'error'
+                            ).then(() => {
+                                location.reload();
+                            })
+                        })
                 }
             })
         })
+
         $("#editPasswordForm").submit(function(e) {
             e.preventDefault();
             Swal.fire({
@@ -233,14 +258,38 @@
                 confirmButtonText: 'Yes, confirm!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // DO CHANGE PASSWORD HERE THEN FIRE SWAL
-                    Swal.fire(
-                        'Done!',
-                        'Password Changed.',
-                        'success'
-                    ).then(() => {
-                        window.location.href = "Account.php";
-                    })
+                    $.ajax({
+                            url: $("#editPasswordForm").attr('action'),
+                            type: $("#editPasswordForm").attr('method'),
+                            data: $("#editPasswordForm").serialize(),
+                            dataType: 'json'
+                        })
+                        .done(function(response) {
+                            if (response.title == 'Error!') {
+                                Swal.fire(
+                                    response.title,
+                                    response.message,
+                                    response.status
+                                )
+                            } else if (response.title == 'Done!') {
+                                Swal.fire(
+                                    response.title,
+                                    response.message,
+                                    response.status
+                                ).then(() => {
+                                    location.reload();
+                                })
+                            }
+                        })
+                        .fail(function() {
+                            Swal.fire(
+                                'Oops...',
+                                'Something went wrong with ajax !',
+                                'error'
+                            ).then(() => {
+                                location.reload();
+                            })
+                        })
                 }
             })
         })

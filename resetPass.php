@@ -1,27 +1,7 @@
-<!-- check email in database -->
-<!-- if email exist and correct compare, update password database and send email -->
-
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!-- Favicon icon -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
-    <title>Reset Password</title>
-
-    <!-- page css -->
-    <link href="dist/css/pages/login-register-lock.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="dist/css/style.css" rel="stylesheet">
-    <script src="assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
-    <!-- Sweet-Alert  -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-
 <?php
+
+$response = array();
+
 require_once('mailServer.php');
 
 function random_str(
@@ -134,54 +114,46 @@ if ($conn) {
 $conn->close();
 
 if ($flag == TRUE) {
-
+    // echo 'flag true';
     $mail->setFrom('musicacademyfypp@gmail.com', 'Music Academy');
     $mail->addAddress($email);
     $mail->isHTML(true);
     $mail->Subject = 'Reset Password';
     $mail->Body    = "Hi, 
-	<br />
-	Your new password is: '$newPass'
-	<br />
+    <br />
+    Your new password is: '$newPass'
+    <br />
     You can edit your password after you login.
     <br />
     <br />
-	Thanks & Regard";
+    Thanks & Regard";
     $mailsend = $mail->send();
     if ($mailsend) {
-?>
-        <script>
-            $(document).ready(function() {
-                Swal.fire(
-                    'Password reset email sent!',
-                    'Please check your email for new password.',
-                    'success'
-                ).then(() => {
-                    window.location.replace('index.php');
-                })
-            })
-        </script>
-    <?php
+        $response['title']  = 'Reset success';
+        $response['message'] = 'Please check your email for new password.';
+        $response['status']  = 'success';
     } else {
-        echo 'email fail';
+        $response['title']  = 'Email error';
+        $response['message'] = 'email error.';
+        $response['status']  = 'error';
     }
 } else {
-    ?>
-    <script>
-        $(document).ready(function() {
-            Swal.fire(
-                'Email does not exist',
-                'Please check your email again.',
-                'error'
-            ).then(() => {
-                window.location.replace('index.php');
-            })
-        })
-    </script>
-<?php
+    // echo 'flag false';
+    $response['title']  = 'Email does not exist';
+    $response['message'] = 'Please check your email again.';
+    $response['status']  = 'error';
 }
-?>
 
-<body class="skin-blue card-no-border login-bg">
+echo json_encode($response);
 
-</body>
+
+
+ 
+//EXAMPLE OF SIMPLE PHP RETURN TO AJAX
+
+// $name = $_POST['name'];
+
+// $response['status']  = 'success';
+// $response['message'] = $name . ' is get';
+// echo json_encode($response); //with json dataType return
+// echo $name." success"; //with no dataType return
