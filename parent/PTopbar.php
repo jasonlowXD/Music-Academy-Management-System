@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if (!($_SESSION["logged"])) {
     $_SESSION["logged"] = "";
     header("Location:../index.php");
@@ -136,7 +135,7 @@ if (!($_SESSION["logged"])) {
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown u-pro">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="hidden-md-down" id="userProfile">Parent ABC &nbsp;<i class="fa fa-angle-down"></i></span>
+                        <span class="hidden-md-down" id="userProfile"><?php echo $_SESSION["name"] ?> &nbsp;<i class="fa fa-angle-down"></i></span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right animated flipInY">
                         <!-- text-->
