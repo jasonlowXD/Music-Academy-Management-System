@@ -121,7 +121,7 @@ if ($flag == TRUE) {
     $mail->Subject = 'Reset Password';
     $mail->Body    = "Hi, 
     <br />
-    Your new password is: '$newPass'
+    Your new password is: $newPass
     <br />
     You can edit your password after you login.
     <br />
@@ -145,15 +145,3 @@ if ($flag == TRUE) {
 }
 
 echo json_encode($response);
-
-
-
- 
-//EXAMPLE OF SIMPLE PHP RETURN TO AJAX
-
-// $name = $_POST['name'];
-
-// $response['status']  = 'success';
-// $response['message'] = $name . ' is get';
-// echo json_encode($response); //with json dataType return
-// echo $name." success"; //with no dataType return
