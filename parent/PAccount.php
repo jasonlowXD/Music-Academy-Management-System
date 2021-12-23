@@ -109,6 +109,7 @@
                                         while ($row = $result->fetch_assoc()) {
                                             $_SESSION["phone"] = $row["PARENT_PHONE_NUM"];
                                         }
+                                        $conn->close();
                                         ?>
 
                                         <p><?php echo $_SESSION["phone"] ?></p>
@@ -137,7 +138,7 @@
                                             <label class="col-md-12" for="example-email">Email</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="email" id="example-email" name="email" class="form-control text-muted" placeholder="enter email" value="<?php echo $_SESSION["email"] ?>" required>
+                                                <input type="email" id="example-email" name="email" class="form-control text-muted" placeholder="enter email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" value="<?php echo $_SESSION["email"] ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -146,7 +147,7 @@
                                             <label class="col-md-12" for="example-phone">Phone Number</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-phone" name="phone" class="form-control text-muted" placeholder="enter phone" value="<?php echo $_SESSION["phone"] ?>" required>
+                                                <input type="text" id="example-phone" name="phone" class="form-control text-muted" placeholder="01x-xxxxxxx OR 011-xxxxxxxx" pattern="^(01)[02-46-9][-][0-9]{7}$|^(01)[1][-][0-9]{8}$" value="<?php echo $_SESSION["phone"] ?>" required>
                                             </div>
                                         </div>
                                     </div>
