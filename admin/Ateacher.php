@@ -134,20 +134,48 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>teacher A</td>
-                                                            <td>teachera@gmail.com</td>
-                                                            <td>+123 456 789</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <!-- <div class="button-group"> -->
-                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                <!-- <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button> -->
-                                                                <!-- </div> -->
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
+                                                        <?php
+                                                        $userID = $_SESSION["userID"];
+                                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                        if ($conn) {
+                                                            $sql = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID'";
+                                                            $result = $conn->query($sql);
+                                                            while ($row = $result->fetch_assoc()) {
+                                                                $teacher_id = $row["TEACHER_ID"];
+                                                                $teacher_name = $row["TEACHER_NAME"];
+                                                                $teacher_email = $row["TEACHER_EMAIL"];
+                                                                $teacher_phone = $row["TEACHER_PHONE_NUM"];
+                                                                $teacher_status = $row["TEACHER_STATUS"];
+                                                        ?>
+                                                                <tr>
+                                                                    <td><?php echo $teacher_id; ?></td>
+                                                                    <td><?php echo $teacher_name; ?></td>
+                                                                    <td><?php echo $teacher_email; ?></td>
+                                                                    <td><?php echo $teacher_phone; ?></td>
+                                                                    <?php
+                                                                    if ($teacher_status == "active") {
+                                                                    ?>
+                                                                        <td><span class="label label-success"><?php echo $teacher_status; ?></span></td>
+                                                                    <?php
+                                                                    } else {
+                                                                    ?>
+                                                                        <td><span class="label label-danger"><?php echo $teacher_status; ?></span></td>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                    <td>
+                                                                        <a href="ATeacherEdit.php?teacher_id=<?= $teacher_id ?>" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+
+                                                        $conn->close();
+                                                        ?>
+                                                        <!-- <tr>
                                                             <td>2</td>
                                                             <td>tasd</td>
                                                             <td>aaa@gmail.com</td>
@@ -156,47 +184,7 @@
                                                             <td>
                                                                 <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>dsa</td>
-                                                            <td>bba@gmail.com</td>
-                                                            <td>+666</td>
-                                                            <td><span class="label label-danger">Inactive</span></td>
-                                                            <td>
-                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>tdsa</td>
-                                                            <td>cca@gmail.com</td>
-                                                            <td>+777</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>gdsg</td>
-                                                            <td>hhh@gmail.com</td>
-                                                            <td>+999</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>6</td>
-                                                            <td>tre</td>
-                                                            <td>ttt@gmail.com</td>
-                                                            <td>+444</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <a href="ATeacherEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                        </tr>
+                                                        </tr> -->
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
@@ -214,13 +202,13 @@
                                     <!-- add teacher panel -->
                                     <div class="tab-pane" id="addteacher" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material">
+                                            <form class="form-material" id="addTeacherForm" method="post" action="addTeacher.php">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-md-12" for="example-text">Teacher Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter teacher name" required>
+                                                            <input type="text" id="example-text" name="teacherName" class="form-control" placeholder="enter teacher name" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -229,7 +217,7 @@
                                                         <label class="col-md-12" for="example-email">Teacher Email</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="email" id="example-email" name="example-email" class="form-control" placeholder="enter teacher email" required>
+                                                            <input type="email" id="example-email" name="teacherEmail" class="form-control" placeholder="enter teacher email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -238,7 +226,7 @@
                                                         <label class="col-md-12" for="example-phone">Teacher Phone Number</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-phone" name="example-phone" class="form-control" placeholder="enter teacher phone" required>
+                                                            <input type="text" id="example-phone" name="teacherPhone" class="form-control" placeholder="01x-xxxxxxx OR 011-xxxxxxxx" pattern="^(01)[02-46-9][-][0-9]{7}$|^(01)[1][-][0-9]{8}$" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -339,33 +327,44 @@
             });
         });
 
-        addrow.footable().on('click', '#delete-row-btn', function(e) {
+        $("#addTeacherForm").submit(function(e) {
             e.preventDefault();
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    //get the footable object
-                    var footable = addrow.data('footable');
-                    //get the row we are wanting to delete
-                    var row = $(this).parents('tr:first');
-                    //delete the TEACHER AND FIRE SWAL
-                    footable.removeRow(row);
+            $('html, body').css("cursor", "wait");
+            $.ajax({
+                    url: $("#addTeacherForm").attr('action'),
+                    type: $("#addTeacherForm").attr('method'),
+                    data: $("#addTeacherForm").serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.title == 'Done!') {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            location.reload();
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
                     Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
                     )
-                }
-            })
-        });
+                    $('html, body').css("cursor", "auto");
+                    // alert(errorThrown);
+                })
+        })
     </script>
 
 </body>

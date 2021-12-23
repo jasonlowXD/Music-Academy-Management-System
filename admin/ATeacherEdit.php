@@ -76,18 +76,37 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <?php
+                $userID = $_SESSION["userID"];
+                $teacher_id = $_GET["teacher_id"];
+                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+
+                if ($conn) {
+                    $sql = "SELECT * FROM TEACHER WHERE TEACHER_ID = '$teacher_id' AND ADMIN_ID = '$userID'";
+                    $result = $conn->query($sql);
+                    while ($row = $result->fetch_assoc()) {
+                        $teacher_name = $row["TEACHER_NAME"];
+                        $teacher_email = $row["TEACHER_EMAIL"];
+                        $teacher_phone = $row["TEACHER_PHONE_NUM"];
+                        $teacher_status = $row["TEACHER_STATUS"];
+                    }
+                } else {
+                    die("FATAL ERROR");
+                }
+                $conn->close();
+                ?>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Edit Teacher Information</h5>
-                                <form class="form-material" id="editTeacherForm">
+                                <form class="form-material" id="editTeacherForm" method="post" action="editTeacher.php?teacher_id=<?= $teacher_id ?>">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-text">Name</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter teacher name" value="Teacher ABC" required>
+                                                <input type="text" id="example-text" name="teacherName" class="form-control text-muted" placeholder="enter teacher name" value="<?php echo $teacher_name; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +115,7 @@
                                             <label class="col-md-12" for="example-email">Teacher Email</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="email" id="example-email" name="example-email" class="form-control text-muted" placeholder="enter teacher email" value="TeacherABC@abc.com" required>
+                                                <input type="email" id="example-email" name="teacherEmail" class="form-control text-muted" placeholder="enter teacher email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" value="<?php echo $teacher_email; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -105,18 +124,29 @@
                                             <label class="col-md-12" for="example-phone">Teacher Phone Number</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-phone" name="example-phone" class="form-control text-muted" placeholder="enter teacher phone" value="+6012-3456789" required>
+                                                <input type="text" id="example-phone" name="teacherPhone" class="form-control text-muted" placeholder="01x-xxxxxxx OR 011-xxxxxxxx" pattern="^(01)[02-46-9][-][0-9]{7}$|^(01)[1][-][0-9]{8}$" value="<?php echo $teacher_phone; ?>" required>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <label class="col-md-12" for="example-phone">Teacher Status</span>
+                                            <label class="col-md-12">Teacher Status</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <select class='form-control' name='' required>
-                                                    <option selected value='active'>Active</option>
-                                                    <option value='inactive'>Inactive</option>
+                                                <select class='form-control' name='teacherStatus' required>
+                                                    <?php
+                                                    if ($teacher_status == "active") {
+                                                    ?>
+                                                        <option selected value='active'>Active</option>
+                                                        <option value='inactive'>Inactive</option>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <option value='active'>Active</option>
+                                                        <option selected value='inactive'>Inactive</option>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -177,27 +207,66 @@
     <script>
         $("#editTeacherForm").submit(function(e) {
             e.preventDefault();
-            Swal.fire({
-                title: 'Confirm Edit?',
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, confirm!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // DO EDIT TEACHER HERE THEN FIRE SWAL
+            $('html, body').css("cursor", "wait");
+            $.ajax({
+                    url: $("#editTeacherForm").attr('action'),
+                    type: $("#editTeacherForm").attr('method'),
+                    data: $("#editTeacherForm").serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.title == 'Done!') {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            window.location.href = "ATeacher.php";
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
                     Swal.fire(
-                        'Done!',
-                        'Teacher Edited.',
-                        'success'
-                    ).then(() => {
-                        window.location.href = "ATeacher.php";
-                    })
-                }
-            })
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
+                    )
+                    $('html, body').css("cursor", "auto");
+                    // alert(errorThrown);
+                })
         })
+
+        // $("#editTeacherForm").submit(function(e) {
+        //     e.preventDefault();
+        //     Swal.fire({
+        //         title: 'Confirm Edit?',
+        //         icon: 'warning',
+        //         allowOutsideClick: false,
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Yes, confirm!'
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             // DO EDIT TEACHER HERE THEN FIRE SWAL
+        //             Swal.fire(
+        //                 'Done!',
+        //                 'Teacher Edited.',
+        //                 'success'
+        //             ).then(() => {
+        //                 window.location.href = "ATeacher.php";
+        //             })
+        //         }
+        //     })
+        // })
     </script>
 
 </body>
