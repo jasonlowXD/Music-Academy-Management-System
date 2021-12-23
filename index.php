@@ -30,10 +30,10 @@ if (isset($_POST["login"])) {
         $admin_sql = "SELECT * FROM ADMIN";
         $admin_result = $conn->query($admin_sql);
 
-        $teacher_sql = "SELECT TEACHER_ID,TEACHER_NAME,TEACHER_EMAIL,TEACHER_PASS FROM TEACHER";
+        $teacher_sql = "SELECT TEACHER_ID,TEACHER_NAME,TEACHER_EMAIL,TEACHER_PASS,TEACHER_STATUS FROM TEACHER";
         $teacher_result = $conn->query($teacher_sql);
 
-        $parent_sql = "SELECT PARENT_ID,PARENT_NAME,PARENT_EMAIL,PARENT_PASS FROM PARENT";
+        $parent_sql = "SELECT PARENT_ID,PARENT_NAME,PARENT_EMAIL,PARENT_PASS,PARENT_STATUS FROM PARENT";
         $parent_result = $conn->query($parent_sql);
 
         // CHECK ADMIN
@@ -65,7 +65,7 @@ if (isset($_POST["login"])) {
                 } else {
                     // echo "admin no email" . "</br>";
                     $adminCheck = false;
-                    $emailErr = "email does not exists";
+                    $emailErr = "Email does not exists!";
                 }
             }
         }
@@ -78,9 +78,10 @@ if (isset($_POST["login"])) {
                     $tempName = $row["TEACHER_NAME"];
                     $tempEmail = $row["TEACHER_EMAIL"];
                     $tempPass = $row["TEACHER_PASS"];
+                    $tempStatus = $row["TEACHER_STATUS"];
 
-                    // check email
-                    if ($email == $tempEmail) {
+                    // check email and status
+                    if ($email == $tempEmail && $tempStatus == 'active') {
                         // echo "teacher yes email" . "</br>";
                         $teacherCheck = true;
                         $emailErr = '';
@@ -98,10 +99,15 @@ if (isset($_POST["login"])) {
                             $passErr = "Wrong password";
                         }
                         break;
+                    } else if ($email == $tempEmail && $tempStatus == 'inactive') {
+                        // echo "teacher no active" . "</br>";
+                        $teacherCheck = TRUE;
+                        $emailErr = "Your email is currently inactive, please contact your admin!";
+                        break;
                     } else {
                         // echo "teacher no email" . "</br>";
                         $teacherCheck = false;
-                        $emailErr = "email does not exists";
+                        $emailErr = "Email does not exists!";
                     }
                 }
             }
@@ -113,9 +119,10 @@ if (isset($_POST["login"])) {
                         $tempName = $row["PARENT_NAME"];
                         $tempEmail = $row["PARENT_EMAIL"];
                         $tempPass = $row["PARENT_PASS"];
+                        $tempStatus = $row["PARENT_STATUS"];
 
-                        // check email
-                        if ($email == $tempEmail) {
+                        // check email and status
+                        if ($email == $tempEmail && $tempStatus == 'active') {
                             // echo "parent yes email" . "</br>";
                             $emailErr = '';
 
@@ -131,6 +138,10 @@ if (isset($_POST["login"])) {
                             } else {
                                 $passErr = "Wrong password";
                             }
+                            break;
+                        } else if ($email == $tempEmail && $tempStatus == 'inactive') {
+                            // echo "parent no active" . "</br>";
+                            $emailErr = "Your email is currently inactive, please contact your admin!";
                             break;
                         } else {
                             // echo "parent no email" . "</br>";
@@ -298,6 +309,7 @@ if (isset($_POST["login"])) {
 
         $("#recoverform").submit(function(e) {
             e.preventDefault();
+            $('html, body').css("cursor", "wait");
             $.ajax({
                     url: $("#recoverform").attr('action'),
                     type: $("#recoverform").attr('method'),
@@ -314,8 +326,10 @@ if (isset($_POST["login"])) {
                         $("#recoverform").fadeOut();
                         $("#loginform").slideDown();
                     })
+                    $('html, body').css("cursor", "auto");
                 })
-                .fail(function() {
+                .fail(function(xhr, textStatus, errorThrown) {
+                    // alert(errorThrown);
                     Swal.fire(
                         'Oops...',
                         'Something went wrong with ajax !',
@@ -325,6 +339,7 @@ if (isset($_POST["login"])) {
                         $("#recoverform").fadeOut();
                         $("#loginform").slideDown();
                     })
+                    $('html, body').css("cursor", "auto");
                 })
         })
     </script>
