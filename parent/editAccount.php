@@ -45,7 +45,6 @@ if ($conn) {
             if ($admin_email_count > 0 || $teacher_email_count > 0 || $parent_email_count > 0) {
                 $emailCrash = true;
             }
-
         }
 
         // IF INPUT PHONE IS NOT SAME AS CURRENT PHONE, CHECK GOT CRASH IN DATABASE OR NOT 
@@ -63,7 +62,7 @@ if ($conn) {
                 $parent_phone_count = $row2_1["COUNT(*)"];
             }
 
-            // IF EMAIL CRASH IN DATABASE
+            // IF PHONE CRASH IN DATABASE
             if ($teacher_phone_count > 0 || $parent_phone_count > 0) {
                 $phoneCrash = true;
             }
@@ -91,5 +90,9 @@ if ($conn) {
             }
         }
     }
+} else {
+    die("FATAL ERROR");
 }
+
+$conn->close();
 echo json_encode($response);

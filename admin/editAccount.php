@@ -1,5 +1,5 @@
 <?php
-$emailCrash=false;
+$emailCrash = false;
 session_start();
 $response = array();
 $userID = $_SESSION["userID"];
@@ -61,5 +61,9 @@ if ($conn) {
             }
         }
     }
+} else {
+    die("FATAL ERROR");
 }
+
+$conn->close();
 echo json_encode($response);

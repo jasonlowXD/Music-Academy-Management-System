@@ -35,5 +35,9 @@ if ($conn) {
             }
         }
     }
+} else {
+    die("FATAL ERROR");
 }
+
+$conn->close();
 echo json_encode($response);
