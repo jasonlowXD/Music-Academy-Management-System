@@ -134,7 +134,50 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
+                                                        <?php
+                                                        $userID = $_SESSION["userID"];
+                                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                        if ($conn) {
+                                                            $sql = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID'";
+                                                            $result = $conn->query($sql);
+                                                            while ($row = $result->fetch_assoc()) {
+                                                                $course_id = $row["COURSE_ID"];
+                                                                $course_name = $row["COURSE_NAME"];
+                                                                $course_fee = $row["COURSE_FEE"];
+                                                                $course_duration = $row["COURSE_DURATION"];
+                                                                $course_status = $row["COURSE_STATUS"];
+                                                        ?>
+                                                                <tr>
+                                                                    <td><?php echo $course_id; ?></td>
+                                                                    <td><?php echo $course_name; ?></td>
+                                                                    <td><?php echo $course_fee; ?></td>
+                                                                    <td><?php echo $course_duration; ?></td>
+                                                                    <?php
+                                                                    if ($course_status == "active") {
+                                                                    ?>
+                                                                        <td><span class="label label-success"><?php echo $course_status; ?></span></td>
+                                                                    <?php
+                                                                    } else {
+                                                                    ?>
+                                                                        <td><span class="label label-danger"><?php echo $course_status; ?></span></td>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                    <td>
+                                                                        <a href="ACourseDetails.php?course_id=<?= $course_id ?>" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                        <a href="ACourseEdit.php?course_id=<?= $course_id ?>" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                </tr>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+
+                                                        $conn->close();
+                                                        ?>
+
+                                                        <!-- <tr>
                                                             <td>1</td>
                                                             <td>Piano Grade 1</td>
                                                             <td>150</td>
@@ -144,75 +187,10 @@
                                                                 <div class="button-group">
                                                                     <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                     <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <!-- <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button> -->
                                                                 </div>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Piano Grade 2</td>
-                                                            <td>200</td>
-                                                            <td>60</td>
-                                                            <td><span class="label label-danger">Inactive</span></td>
-                                                            <td>
-                                                                <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>Guitar Grade 1</td>
-                                                            <td>150</td>
-                                                            <td>30</td>
-                                                            <td><span class="label label-danger">Inactive</span></td>
-                                                            <td>
-                                                                <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>Bass Guitar Grade 1</td>
-                                                            <td>220</td>
-                                                            <td>60</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>Saxophone Grade 1</td>
-                                                            <td>300</td>
-                                                            <td>60</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>6</td>
-                                                            <td>Violin Grade 1</td>
-                                                            <td>150</td>
-                                                            <td>30</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <div class="button-group">
-                                                                    <a href="ACourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <a href="ACourseEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                        </tr> -->
+
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
@@ -230,13 +208,13 @@
                                     <!-- add course panel -->
                                     <div class="tab-pane" id="addcourse" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material">
+                                            <form class="form-material" id="addCourseForm" method="post" action="addCourse.php">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-md-12" for="example-text">Course Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter course name" required>
+                                                            <input type="text" id="example-text" name="courseName" class="form-control" placeholder="enter course name" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -245,7 +223,7 @@
                                                         <label class="col-md-12" for="example-text">Course Fee per Month (RM)</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter course fee" required>
+                                                            <input type="number" id="example-text" name="courseFee" class="form-control" placeholder="enter course fee" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -254,7 +232,7 @@
                                                         <label class="col-md-12" for="example-text">Course Duration (min)</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter course duration" required>
+                                                            <input type="number" id="example-text" name="courseDuration" class="form-control" placeholder="enter course duration" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -262,7 +240,7 @@
                                                     <div class="row">
                                                         <label class="col-md-12">Description</label>
                                                         <div class="col-md-12">
-                                                            <textarea class="form-control" rows="5" placeholder="enter course description" required></textarea>
+                                                            <textarea class="form-control" name="courseDesc" rows="5" placeholder="enter course description (max: 500 words)" maxlength="500" required></textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -364,33 +342,44 @@
             });
         });
 
-        addrow.footable().on('click', '#delete-row-btn', function(e) {
+        $("#addCourseForm").submit(function(e) {
             e.preventDefault();
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    //get the footable object
-                    var footable = addrow.data('footable');
-                    //get the row we are wanting to delete
-                    var row = $(this).parents('tr:first');
-                    //delete the COURSE AND FIRE SWAL
-                    footable.removeRow(row);
+            $('html, body').css("cursor", "wait");
+            $.ajax({
+                    url: $("#addCourseForm").attr('action'),
+                    type: $("#addCourseForm").attr('method'),
+                    data: $("#addCourseForm").serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.title == 'Done!') {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            location.reload();
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
                     Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
                     )
-                }
-            })
-        });
+                    $('html, body').css("cursor", "auto");
+                    // alert(errorThrown);
+                })
+        })
     </script>
 
 </body>

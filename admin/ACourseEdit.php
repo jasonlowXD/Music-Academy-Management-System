@@ -76,18 +76,38 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <?php
+                $userID = $_SESSION["userID"];
+                $course_id = $_GET["course_id"];
+                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+
+                if ($conn) {
+                    $sql = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID' AND COURSE_ID = '$course_id'";
+                    $result = $conn->query($sql);
+                    while ($row = $result->fetch_assoc()) {
+                        $course_name = $row["COURSE_NAME"];
+                        $course_fee = $row["COURSE_FEE"];
+                        $course_duration = $row["COURSE_DURATION"];
+                        $course_desc = $row["COURSE_DESC"];
+                        $course_status = $row["COURSE_STATUS"];
+                    }
+                } else {
+                    die("FATAL ERROR");
+                }
+                $conn->close();
+                ?>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Edit Course Information</h5>
-                                <form class="form-material" id="editCourseForm">
+                                <form class="form-material" id="editCourseForm" method="post" action="editCourse.php?course_id=<?= $course_id ?>">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-text">Course Name</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter course name" value="Piano Grade 1" required>
+                                                <input type="text" id="example-text" name="courseName" class="form-control text-muted" placeholder="enter course name" value="<?php echo $course_name; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +116,7 @@
                                             <label class="col-md-12" for="example-text">Course Fee per Month (RM)</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter course fee" value="150" required>
+                                                <input type="number" id="example-text" name="courseFee" class="form-control text-muted" placeholder="enter course fee" value="<?php echo $course_fee; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +125,7 @@
                                             <label class="col-md-12" for="example-text">Course Duration (min)</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter course duration" value="30" required>
+                                                <input type="number" id="example-text" name="courseDuration" class="form-control text-muted" placeholder="enter course duration" value="<?php echo $course_duration; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -113,7 +133,7 @@
                                         <div class="row">
                                             <label class="col-md-12">Description</label>
                                             <div class="col-md-12">
-                                                <textarea class="form-control text-muted" rows="5" placeholder="enter course description" required>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuriesIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</textarea>
+                                                <textarea class="form-control text-muted" name="courseDesc" rows="5" placeholder="enter course description (max: 500 words)" maxlength="500" required><?php echo $course_desc; ?></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -122,9 +142,20 @@
                                             <label class="col-md-12" for="example-phone">Course Status</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <select class='form-control' name='' required>
-                                                    <option selected value='active'>Active</option>
-                                                    <option value='inactive'>Inactive</option>
+                                                <select class='form-control' name='courseStatus' required>
+                                                    <?php
+                                                    if ($course_status == "active") {
+                                                    ?>
+                                                        <option selected value='active'>Active</option>
+                                                        <option value='inactive'>Inactive</option>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <option value='active'>Active</option>
+                                                        <option selected value='inactive'>Inactive</option>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -186,26 +217,41 @@
     <script>
         $("#editCourseForm").submit(function(e) {
             e.preventDefault();
-            Swal.fire({
-                title: 'Confirm Edit?',
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, confirm!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // DO EDIT COURSE HERE THEN FIRE SWAL
+            $('html, body').css("cursor", "wait");
+            $.ajax({
+                    url: $("#editCourseForm").attr('action'),
+                    type: $("#editCourseForm").attr('method'),
+                    data: $("#editCourseForm").serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.title == 'Done!') {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            window.location.href = "ACourse.php";
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
                     Swal.fire(
-                        'Done!',
-                        'Course Edited.',
-                        'success'
-                    ).then(() => {
-                        window.location.href = "ACourse.php";
-                    })
-                }
-            })
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
+                    )
+                    $('html, body').css("cursor", "auto");
+                    // alert(errorThrown);
+                })
         })
     </script>
 
