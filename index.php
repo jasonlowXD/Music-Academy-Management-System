@@ -257,9 +257,10 @@ if (isset($_POST["login"])) {
                                 <p class="text-muted">Enter your Email and a new password will be sent to you! </p>
                             </div>
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group" id="resetPassEmailDiv">
                             <div class="col-xs-12">
-                                <input class="form-control" type="email" id="email" name="email" required="" placeholder="Email">
+                                <input class="form-control" type="email" id="resetEmailInput" name="email" required="" placeholder="Email">
+                                <span id="feedback"></span>
                             </div>
                         </div>
                         <div class="form-group text-center m-t-20">
@@ -303,6 +304,11 @@ if (isset($_POST["login"])) {
         });
 
         $('#to-login').on("click", function() {
+            $("#resetPassEmailDiv").removeClass("has-danger");
+            $("#resetEmailInput").removeClass("form-control-danger");
+            $("#resetEmailInput").val("");
+            $("#feedback").removeClass("form-control-feedback");
+            $("#feedback").html("");
             $("#recoverform").fadeOut();
             $("#loginform").slideDown();
         });
@@ -317,15 +323,27 @@ if (isset($_POST["login"])) {
                     dataType: 'json'
                 })
                 .done(function(response) {
-                    Swal.fire(
-                        response.title,
-                        response.message,
-                        response.status
-                    ).then(() => {
-                        $("#recoverform #email").val('');
-                        $("#recoverform").fadeOut();
-                        $("#loginform").slideDown();
-                    })
+                    if (response.status == 'error') {
+                        $("#resetPassEmailDiv").addClass("has-danger");
+                        $("#resetEmailInput").addClass("form-control-danger");
+                        $("#feedback").addClass("form-control-feedback");
+                        $("#feedback").html("Email does not exist! <br> Please check your email again!");
+                    } else {
+                        $("#resetPassEmailDiv").removeClass("has-danger");
+                        $("#resetEmailInput").removeClass("form-control-danger");
+                        $("#resetEmailInput").val("");
+                        $("#feedback").removeClass("form-control-feedback");
+                        $("#feedback").html("");
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            $("#recoverform #email").val('');
+                            $("#recoverform").fadeOut();
+                            $("#loginform").slideDown();
+                        })
+                    }
                     $('html, body').css("cursor", "auto");
                 })
                 .fail(function(xhr, textStatus, errorThrown) {

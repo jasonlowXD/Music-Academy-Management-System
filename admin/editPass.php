@@ -18,11 +18,11 @@ if ($conn) {
         while ($row = $result->fetch_assoc()) {
             $tempPass = $row["ADMIN_PASS"];
             if ($md5newPassword == $tempPass) {
-                $response['title']  = 'Error!';
+                $response['title']  = 'Error new password';
                 $response['status']  = 'error';
                 $response['message'] = 'New password cannot same as your current password!';
             } else if ($md5oldPass != $tempPass) {
-                $response['title']  = 'Error!';
+                $response['title']  = 'Error old password';
                 $response['status']  = 'error';
                 $response['message'] = 'Your old password is not match with your current password!';
             } else if ($md5oldPass == $tempPass && $md5newPassword != $tempPass) {
