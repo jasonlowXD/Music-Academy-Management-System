@@ -20,7 +20,7 @@
 
                 <li class="nav-small-cap">--- SETTINGS</li>
                 <li> <a class="waves-effect waves-dark" href="PAccount.php" aria-expanded="false"><i class="icon-settings text-info"></i><span class="hide-menu">Account Settings</span></a></li>
-                <li> <a class="waves-effect waves-dark" href="../index.php" aria-expanded="false"><i class="icon-logout text-danger"></i><span class="hide-menu">Log Out</span></a></li>
+                <li> <a class="waves-effect waves-dark" href="../logout.php" aria-expanded="false"><i class="icon-logout text-danger"></i><span class="hide-menu">Log Out</span></a></li>
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
