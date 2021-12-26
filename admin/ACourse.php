@@ -248,7 +248,7 @@
 
                                                 <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                                    <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
+                                                    <button type="reset" id="btnReset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -341,6 +341,10 @@
             addrow.trigger('footable_filter', {
                 filter: $(this).val()
             });
+        });
+        
+        $('#btnReset').click(function() {
+            courseNameRemoveClass();
         });
 
         $("#addCourseForm").submit(function(e) {
