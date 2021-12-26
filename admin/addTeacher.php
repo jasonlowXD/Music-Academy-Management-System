@@ -77,11 +77,11 @@ if ($conn) {
     }
 
     if ($emailCrash) {
-        $response['title']  = 'Error!';
+        $response['title']  = 'Error email';
         $response['status']  = 'error';
         $response['message'] = 'Email existed! Please use other email!';
     } else if ($phoneCrash) {
-        $response['title']  = 'Error!';
+        $response['title']  = 'Error phone';
         $response['status']  = 'error';
         $response['message'] = 'Phone number existed! Please use other phone number!';
     }

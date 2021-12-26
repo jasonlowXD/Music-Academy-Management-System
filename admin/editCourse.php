@@ -48,7 +48,7 @@ if ($conn) {
         }
 
         if ($nameCrash) {
-            $response['title']  = 'Error!';
+            $response['title']  = 'Error course name';
             $response['status']  = 'error';
             $response['message'] = 'Course name is existed in database!';
         }

@@ -101,13 +101,14 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Edit Course Information</h5>
-                                <form class="form-material" id="editCourseForm" method="post" action="editCourse.php?course_id=<?= $course_id ?>">
+                                <form class="form-control-line" id="editCourseForm" method="post" action="editCourse.php?course_id=<?= $course_id ?>">
                                     <div class="form-group">
-                                        <div class="row">
+                                        <div class="row" id="courseNameDiv">
                                             <label class="col-md-12" for="example-text">Course Name</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-text" name="courseName" class="form-control text-muted" placeholder="enter course name" value="<?php echo $course_name; ?>" required>
+                                                <input type="text" id="courseNameInput" name="courseName" class="form-control text-muted" placeholder="enter course name" value="<?php echo $course_name; ?>" required>
+                                                <span id="courseNameFeedback"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -225,7 +226,8 @@
                     dataType: 'json'
                 })
                 .done(function(response) {
-                    if (response.title == 'Done!') {
+                    if (response.status == 'success') {
+                        courseNameRemoveClass();
                         Swal.fire(
                             response.title,
                             response.message,
@@ -234,7 +236,11 @@
                             window.location.href = "ACourse.php";
                         })
                         $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error course name') {
+                        courseNameAddClass(response.message);
+                        $('html, body').css("cursor", "auto");
                     } else {
+                        courseNameRemoveClass();
                         Swal.fire(
                             response.title,
                             response.message,

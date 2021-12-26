@@ -208,13 +208,14 @@
                                     <!-- add course panel -->
                                     <div class="tab-pane" id="addcourse" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material" id="addCourseForm" method="post" action="addCourse.php">
+                                            <form class="form-control-line" id="addCourseForm" method="post" action="addCourse.php">
                                                 <div class="form-group">
-                                                    <div class="row">
+                                                    <div class="row" id="courseNameDiv">
                                                         <label class="col-md-12" for="example-text">Course Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="courseName" class="form-control" placeholder="enter course name" required>
+                                                            <input type="text" id="courseNameInput" name="courseName" class="form-control" placeholder="enter course name" required>
+                                                            <span id="courseNameFeedback"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -352,7 +353,8 @@
                     dataType: 'json'
                 })
                 .done(function(response) {
-                    if (response.title == 'Done!') {
+                    if (response.status == 'success') {
+                        courseNameRemoveClass();
                         Swal.fire(
                             response.title,
                             response.message,
@@ -361,7 +363,11 @@
                             location.reload();
                         })
                         $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error course name') {
+                        courseNameAddClass(response.message);
+                        $('html, body').css("cursor", "auto");
                     } else {
+                        courseNameRemoveClass();
                         Swal.fire(
                             response.title,
                             response.message,

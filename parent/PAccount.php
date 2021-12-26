@@ -123,7 +123,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Edit Account Information</h5>
-                                <form class="form-material" id="editAccountForm" method="post" action="editAccount.php">
+                                <form class="form-control-line" id="editAccountForm" method="post" action="editAccount.php">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-text">Name</span>
@@ -133,21 +133,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="emailDiv">
                                         <div class="row">
                                             <label class="col-md-12" for="example-email">Email</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="email" id="example-email" name="email" class="form-control text-muted" placeholder="enter email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" value="<?php echo $_SESSION["email"] ?>" required>
+                                                <input type="email" id="emailInput" name="email" class="form-control text-muted" placeholder="enter email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" value="<?php echo $_SESSION["email"] ?>" required>
+                                                <span id="emailFeedback"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="phoneDiv">
                                         <div class="row">
                                             <label class="col-md-12" for="example-phone">Phone Number</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-phone" name="phone" class="form-control text-muted" placeholder="01x-xxxxxxx OR 011-xxxxxxxx" pattern="^(01)[02-46-9][-][0-9]{7}$|^(01)[1][-][0-9]{8}$" value="<?php echo $_SESSION["phone"] ?>" required>
+                                                <input type="text" id="phoneInput" name="phone" class="form-control text-muted" placeholder="01x-xxxxxxx OR 011-xxxxxxxx" pattern="^(01)[02-46-9][-][0-9]{7}$|^(01)[1][-][0-9]{8}$" value="<?php echo $_SESSION["phone"] ?>" required>
+                                                <span id="phoneFeedback"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -158,22 +160,24 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Change Password</h5>
-                                <form class="form-material" id="editPasswordForm" method="post" action="editPass.php">
-                                    <div class="form-group">
+                                <form class="form-control-line" id="editPasswordForm" method="post" action="editPass.php">
+                                    <div class="form-group" id="oldPassDiv">
                                         <div class="row">
                                             <label class="col-md-12" for="example-old-password">Old Password</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="password" id="example-old-password" name="oldPassword" class="form-control text-muted" placeholder="enter old password" value="" required>
+                                                <input type="password" id="oldPassInput" name="oldPassword" class="form-control text-muted" placeholder="enter old password" value="" required>
+                                                <span id="oldPassFeedback"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="newPassDiv">
                                         <div class="row">
                                             <label class="col-md-12" for="example-new-password">New Password</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="password" id="example-new-password" name="newPassword" class="form-control text-muted" placeholder="enter new password" value="" required>
+                                                <input type="password" id="newPassInput" name="newPassword" class="form-control text-muted" placeholder="enter new password" value="" required>
+                                                <span id="newPassFeedback"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -230,51 +234,50 @@
     <script>
         $("#editAccountForm").submit(function(e) {
             e.preventDefault();
-            Swal.fire({
-                title: 'Confirm Edit Information?',
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, confirm!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                            url: $("#editAccountForm").attr('action'),
-                            type: $("#editAccountForm").attr('method'),
-                            data: $("#editAccountForm").serialize(),
-                            dataType: 'json'
+            $.ajax({
+                    url: $("#editAccountForm").attr('action'),
+                    type: $("#editAccountForm").attr('method'),
+                    data: $("#editAccountForm").serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.status == 'success') {
+                        emailRemoveClass();
+                        phoneRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            location.reload();
                         })
-                        .done(function(response) {
-                            if (response.title == 'Done!') {
-                                Swal.fire(
-                                    response.title,
-                                    response.message,
-                                    response.status
-                                ).then(() => {
-                                    location.reload();
-                                })
-                            } else {
-                                Swal.fire(
-                                    response.title,
-                                    response.message,
-                                    response.status
-                                )
-                            }
-                        })
-                        .fail(function() {
-                            Swal.fire(
-                                'Oops...',
-                                'Something went wrong with ajax !',
-                                'error'
-                            ).then(() => {
-                                location.reload();
-                            })
-                        })
-                }
-            })
+                    } else if (response.status == 'error' && response.title == 'Error email') {
+                        emailAddClass(response.message);
+                        phoneRemoveClass();
+                    } else if (response.status == 'error' && response.title == 'Error phone') {
+                        phoneAddClass(response.message);
+                        emailRemoveClass();
+                    } else {
+                        emailRemoveClass();
+                        phoneRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                    }
+                })
+                .fail(function() {
+                    Swal.fire(
+                        'Oops...',
+                        'Something went wrong with ajax !',
+                        'error'
+                    ).then(() => {
+                        location.reload();
+                    })
+                })
         })
+
         $("#editPasswordForm").submit(function(e) {
             e.preventDefault();
             Swal.fire({
@@ -294,13 +297,15 @@
                             dataType: 'json'
                         })
                         .done(function(response) {
-                            if (response.title == 'Error!') {
-                                Swal.fire(
-                                    response.title,
-                                    response.message,
-                                    response.status
-                                )
-                            } else if (response.title == 'Done!') {
+                            if (response.status == 'error' && response.title == 'Error new password') {
+                                oldPassRemoveClass();
+                                newPassAddClass(response.message);
+                            } else if (response.status == 'error' && response.title == 'Error old password') {
+                                newPassRemoveClass();
+                                oldPassAddClass(response.message);
+                            } else if (response.status == 'success') {
+                                oldPassRemoveClass();
+                                newPassRemoveClass();
                                 Swal.fire(
                                     response.title,
                                     response.message,

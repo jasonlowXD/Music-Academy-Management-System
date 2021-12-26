@@ -100,7 +100,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <h5 class="card-title text-uppercase">Edit Teacher Information</h5>
-                                <form class="form-material" id="editTeacherForm" method="post" action="editTeacher.php?teacher_id=<?= $teacher_id ?>">
+                                <form class="form-control-line" id="editTeacherForm" method="post" action="editTeacher.php?teacher_id=<?= $teacher_id ?>">
                                     <div class="form-group">
                                         <div class="row">
                                             <label class="col-md-12" for="example-text">Name</span>
@@ -110,21 +110,23 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="emailDiv">
                                         <div class="row">
                                             <label class="col-md-12" for="example-email">Teacher Email</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="email" id="example-email" name="teacherEmail" class="form-control text-muted" placeholder="enter teacher email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" value="<?php echo $teacher_email; ?>" required>
+                                                <input type="email" id="emailInput" name="teacherEmail" class="form-control text-muted" placeholder="enter teacher email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" value="<?php echo $teacher_email; ?>" required>
+                                                <span id="emailFeedback"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="phoneDiv">
                                         <div class="row">
                                             <label class="col-md-12" for="example-phone">Teacher Phone Number</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="text" id="example-phone" name="teacherPhone" class="form-control text-muted" placeholder="01x-xxxxxxx OR 011-xxxxxxxx" pattern="^(01)[02-46-9][-][0-9]{7}$|^(01)[1][-][0-9]{8}$" value="<?php echo $teacher_phone; ?>" required>
+                                                <input type="text" id="phoneInput" name="teacherPhone" class="form-control text-muted" placeholder="01x-xxxxxxx OR 011-xxxxxxxx" pattern="^(01)[02-46-9][-][0-9]{7}$|^(01)[1][-][0-9]{8}$" value="<?php echo $teacher_phone; ?>" required>
+                                                <span id="phoneFeedback"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +217,9 @@
                     dataType: 'json'
                 })
                 .done(function(response) {
-                    if (response.title == 'Done!') {
+                    if (response.status == 'success') {
+                        emailRemoveClass();
+                        phoneRemoveClass();
                         Swal.fire(
                             response.title,
                             response.message,
@@ -224,7 +228,17 @@
                             window.location.href = "ATeacher.php";
                         })
                         $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error email') {
+                        emailAddClass(response.message);
+                        phoneRemoveClass();
+                        $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error phone') {
+                        phoneAddClass(response.message);
+                        emailRemoveClass();
+                        $('html, body').css("cursor", "auto");
                     } else {
+                        emailRemoveClass();
+                        phoneRemoveClass();
                         Swal.fire(
                             response.title,
                             response.message,
