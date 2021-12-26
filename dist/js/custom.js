@@ -21,7 +21,7 @@ $(function () {
             $("body").removeClass("mini-sidebar");
             $('.navbar-brand span').show();
         }
-         var height = ((window.innerHeight > 0) ? window.innerHeight : this.screen.height) - 1;
+        var height = ((window.innerHeight > 0) ? window.innerHeight : this.screen.height) - 1;
         height = height - topOffset;
         if (height < 1) height = 1;
         if (height > topOffset) {
@@ -67,20 +67,20 @@ $(function () {
     $('.floating-labels .form-control').on('focus blur', function (e) {
         $(this).parents('.form-group').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
     }).trigger('blur');
-    
+
     // ============================================================== 
     //tooltip
     // ============================================================== 
     $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
+        $('[data-toggle="tooltip"]').tooltip()
+    })
     // ============================================================== 
     //Popover
     // ============================================================== 
     $(function () {
-         $('[data-toggle="popover"]').popover()
+        $('[data-toggle="popover"]').popover()
     })
-       
+
     // ============================================================== 
     // Perfact scrollbar
     // ============================================================== 
@@ -114,3 +114,78 @@ $(function () {
         $(this).closest('.card').removeClass().slideUp('fast');
     });
 });
+
+// EMAIL 
+function emailRemoveClass() {
+    $("#emailDiv").removeClass("has-danger");
+    $("#emailInput").removeClass("form-control-danger");
+    $("#emailFeedback").removeClass("form-control-feedback");
+    $("#emailFeedback").html("");
+}
+
+function emailAddClass(message) {
+    $("#emailDiv").addClass("has-danger");
+    $("#emailInput").addClass("form-control-danger");
+    $("#emailFeedback").addClass("form-control-feedback");
+    $("#emailFeedback").html(message);
+}
+
+// PHONE NUMBER 
+function phoneRemoveClass() {
+    $("#phoneDiv").removeClass("has-danger");
+    $("#phoneInput").removeClass("form-control-danger");
+    $("#phoneFeedback").removeClass("form-control-feedback");
+    $("#phoneFeedback").html("");
+}
+
+function phoneAddClass(message) {
+    $("#phoneDiv").addClass("has-danger");
+    $("#phoneInput").addClass("form-control-danger");
+    $("#phoneFeedback").addClass("form-control-feedback");
+    $("#phoneFeedback").html(message);
+}
+
+// OLD PASSWORD
+function oldPassRemoveClass() {
+    $("#oldPassDiv").removeClass("has-danger");
+    $("#oldPassInput").removeClass("form-control-danger");
+    $("#oldPassFeedback").removeClass("form-control-feedback");
+    $("#oldPassFeedback").html('');
+}
+
+function oldPassAddClass(message) {
+    $("#oldPassDiv").addClass("has-danger");
+    $("#oldPassInput").addClass("form-control-danger");
+    $("#oldPassFeedback").addClass("form-control-feedback");
+    $("#oldPassFeedback").html(message);
+}
+
+// NEW PASSWORD 
+function newPassRemoveClass() {
+    $("#newPassDiv").removeClass("has-danger");
+    $("#newPassInput").removeClass("form-control-danger");
+    $("#newPassFeedback").removeClass("form-control-feedback");
+    $("#newPassFeedback").html('');
+}
+
+function newPassAddClass(message) {
+    $("#newPassDiv").addClass("has-danger");
+    $("#newPassInput").addClass("form-control-danger");
+    $("#newPassFeedback").addClass("form-control-feedback");
+    $("#newPassFeedback").html(message);
+}
+
+// COURSE NAME 
+function courseNameRemoveClass() {
+    $("#courseNameDiv").removeClass("has-danger");
+    $("#courseNameInput").removeClass("form-control-danger");
+    $("#courseNameFeedback").removeClass("form-control-feedback");
+    $("#courseNameFeedback").html('');
+}
+
+function courseNameAddClass(message) {
+    $("#courseNameDiv").addClass("has-danger");
+    $("#courseNameInput").addClass("form-control-danger");
+    $("#courseNameFeedback").addClass("form-control-feedback");
+    $("#courseNameFeedback").html(message);
+}
