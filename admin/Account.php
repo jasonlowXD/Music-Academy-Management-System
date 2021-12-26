@@ -201,20 +201,6 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        function emailRemoveClass() {
-            $("#emailDiv").removeClass("has-danger");
-            $("#emailInput").removeClass("form-control-danger");
-            $("#emailFeedback").removeClass("form-control-feedback");
-            $("#emailFeedback").html("");
-        }
-
-        function emailAddClass(message) {
-            $("#emailDiv").addClass("has-danger");
-            $("#emailInput").addClass("form-control-danger");
-            $("#emailFeedback").addClass("form-control-feedback");
-            $("#emailFeedback").html(message);
-        }
-
         $("#editAccountForm").submit(function(e) {
             e.preventDefault();
             $.ajax({
@@ -255,34 +241,6 @@
                 })
 
         })
-
-        function oldPassRemoveClass() {
-            $("#oldPassDiv").removeClass("has-danger");
-            $("#oldPassInput").removeClass("form-control-danger");
-            $("#oldPassFeedback").removeClass("form-control-feedback");
-            $("#oldPassFeedback").html('');
-        }
-
-        function oldPassAddClass(message) {
-            $("#oldPassDiv").addClass("has-danger");
-            $("#oldPassInput").addClass("form-control-danger");
-            $("#oldPassFeedback").addClass("form-control-feedback");
-            $("#oldPassFeedback").html(message);
-        }
-
-        function newPassRemoveClass() {
-            $("#newPassDiv").removeClass("has-danger");
-            $("#newPassInput").removeClass("form-control-danger");
-            $("#newPassFeedback").removeClass("form-control-feedback");
-            $("#newPassFeedback").html('');
-        }
-
-        function newPassAddClass(message) {
-            $("#newPassDiv").addClass("has-danger");
-            $("#newPassInput").addClass("form-control-danger");
-            $("#newPassFeedback").addClass("form-control-feedback");
-            $("#newPassFeedback").html(message);
-        }
 
         $("#editPasswordForm").submit(function(e) {
             e.preventDefault();
