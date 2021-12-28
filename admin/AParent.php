@@ -101,12 +101,12 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist" id="teacherTab">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#teacherlist" role="tab">
+                                        <a class="nav-link active" data-toggle="tab" href="#parentlist" role="tab">
                                             <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Parent List</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#addteacher" role="tab">
+                                        <a class="nav-link" data-toggle="tab" href="#addParent" role="tab">
                                             <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Parent</span>
                                         </a>
                                     </li>
@@ -114,7 +114,7 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content tabcontent-border">
                                     <!-- parent list panel -->
-                                    <div class="tab-pane active" id="teacherlist" role="tabpanel">
+                                    <div class="tab-pane active" id="parentlist" role="tabpanel">
                                         <div class="p-20">
                                             <div class="d-flex">
                                                 <div class="mr-auto">
@@ -147,7 +147,94 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
+                                                        <?php
+                                                        $userID = $_SESSION["userID"];
+                                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                        if ($conn) {
+                                                            $sql = "SELECT * FROM PARENT WHERE ADMIN_ID = '$userID'";
+                                                            $result = $conn->query($sql);
+                                                            while ($row = $result->fetch_assoc()) {
+                                                                $parent_id = $row["PARENT_ID"];
+                                                                $parent_name = $row["PARENT_NAME"];
+                                                                $parent_email = $row["PARENT_EMAIL"];
+                                                                $parent_phone = $row["PARENT_PHONE_NUM"];
+                                                                $parent_status = $row["PARENT_STATUS"];
+                                                        ?>
+                                                                <tr>
+                                                                    <td><?php echo $parent_id; ?></td>
+                                                                    <td><?php echo $parent_name; ?></td>
+                                                                    <td><?php echo $parent_email; ?></td>
+                                                                    <td><?php echo $parent_phone; ?></td>
+                                                                    <?php
+                                                                    if ($parent_status == "active") {
+                                                                    ?>
+                                                                        <td><span class="label label-success"><?php echo $parent_status; ?></span></td>
+                                                                    <?php
+                                                                    } else {
+                                                                    ?>
+                                                                        <td><span class="label label-danger"><?php echo $parent_status; ?></span></td>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                    <td>
+                                                                        <a href="AParentEdit.php?parent_id=<?= $parent_id ?>" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    </td>
+                                                                    <!-- children table part  -->
+                                                                    <td>
+                                                                        <table class="childrenTable">
+                                                                            <tr>
+                                                                                <th>Name</th>
+                                                                                <th>Age</th>
+                                                                                <th>Course</th>
+                                                                                <th>Teacher</th>
+                                                                                <th>Status</th>
+                                                                                <th>Relationship</th>
+                                                                            </tr>
+                                                                            <?php
+
+                                                                            $sql2 = "SELECT * FROM CHILD LEFT JOIN TEACHER ON CHILD.TEACHER_ID = TEACHER.TEACHER_ID LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID LEFT JOIN PARENT ON CHILD.PARENT_ID = PARENT.PARENT_ID WHERE CHILD.PARENT_ID = '$parent_id' ";
+                                                                            $result2 = $conn->query($sql2);
+                                                                            while ($row2 = $result2->fetch_assoc()) {
+                                                                                $child_name = $row2["CHILD_NAME"];
+                                                                                $child_age = $row2["CHILD_AGE"];
+                                                                                $course_name = $row2["COURSE_NAME"];
+                                                                                $teacher_name = $row2["TEACHER_NAME"];
+                                                                                $child_status = $row2["CHILD_STATUS"];
+                                                                                $relationship = $row2["PARENT_RELATIONSHIP"];
+                                                                            ?>
+                                                                                <tr>
+                                                                                    <td><?php echo $child_name; ?></td>
+                                                                                    <td><?php echo $child_age; ?></td>
+                                                                                    <td><?php echo $course_name; ?></td>
+                                                                                    <td><?php echo $teacher_name; ?></td>
+                                                                                    <?php
+                                                                                    if ($child_status == "active") {
+                                                                                    ?>
+                                                                                        <td><span class="label label-success"><?php echo $child_status; ?></span></td>
+                                                                                    <?php
+                                                                                    } else {
+                                                                                    ?>
+                                                                                        <td><span class="label label-danger"><?php echo $child_status; ?></span></td>
+                                                                                    <?php
+                                                                                    }
+                                                                                    ?>
+                                                                                    <td><?php echo $relationship; ?></td>
+                                                                                </tr>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+                                                                        </table>
+                                                                    </td>
+                                                                </tr>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+
+                                                        $conn->close();
+                                                        ?>
+                                                        <!-- <tr>
                                                             <td>1</td>
                                                             <td>parenta</td>
                                                             <td>parentA@gmail.com</td>
@@ -181,182 +268,7 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>parentb</td>
-                                                            <td>aaa@gmail.com</td>
-                                                            <td>+1 789</td>
-                                                            <td><span class="label label-danger">Inactive</span></td>
-                                                            <td>
-                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
-                                                                    <tr>
-                                                                        <th>Name</th>
-                                                                        <th>Age</th>
-                                                                        <th>Course</th>
-                                                                        <th>Teacher</th>
-                                                                        <th>Status</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>kidA</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-danger">Inactive</span></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>3</td>
-                                                            <td>dsa</td>
-                                                            <td>bba@gmail.com</td>
-                                                            <td>+666</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
-                                                                    <tr>
-                                                                        <th>Name</th>
-                                                                        <th>Age</th>
-                                                                        <th>Course</th>
-                                                                        <th>Teacher</th>
-                                                                        <th>Status</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>cccc</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-danger">Inactive</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>dddd</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-success">Active</span></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>4</td>
-                                                            <td>tdsa</td>
-                                                            <td>cca@gmail.com</td>
-                                                            <td>+777</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
-                                                                    <tr>
-                                                                        <th>Name</th>
-                                                                        <th>Age</th>
-                                                                        <th>Course</th>
-                                                                        <th>Teacher</th>
-                                                                        <th>Status</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>eeee</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-success">Active</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>aadddaa</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-danger">Inactive</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>qpqpqp</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-success">Active</span></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>5</td>
-                                                            <td>gdsg</td>
-                                                            <td>hhh@gmail.com</td>
-                                                            <td>+999</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
-                                                                    <tr>
-                                                                        <th>Name</th>
-                                                                        <th>Age</th>
-                                                                        <th>Course</th>
-                                                                        <th>Teacher</th>
-                                                                        <th>Status</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>yyyy</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-success">Active</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>qqqqq</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-success">Active</span></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>6</td>
-                                                            <td>tre</td>
-                                                            <td>ttt@gmail.com</td>
-                                                            <td>+444</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
-                                                                    <tr>
-                                                                        <th>Name</th>
-                                                                        <th>Age</th>
-                                                                        <th>Course</th>
-                                                                        <th>Teacher</th>
-                                                                        <th>Status</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>kkkkk</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-success">Active</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>clllll</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-success">Active</span></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr>
+                                                        </tr> -->
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
@@ -372,38 +284,48 @@
                                         </div>
                                     </div>
                                     <!-- add parent panel -->
-                                    <div class="tab-pane" id="addteacher" role="tabpanel">
+                                    <div class="tab-pane" id="addParent" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material" id="newParentForm">
+                                            <form class="form-control-line" id="addParentForm" method="post" action="addParent.php">
                                                 <!-- parent form -->
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-md-12" for="example-text">Parent Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter parent name" required>
+                                                            <input type="text" id="example-text" name="parentName" class="form-control" placeholder="enter parent name" required>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" id="emailDiv">
                                                     <div class="row">
                                                         <label class="col-md-12" for="example-email">Parent Email</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="email" id="example-email" name="example-email" class="form-control" placeholder="enter parent email" required>
+                                                            <input type="email" id="emailInput" name="parentEmail" class="form-control" placeholder="enter teacher email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" required>
+                                                            <span id="emailFeedback"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group" id="phoneDiv">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-phone">Parent Phone Number</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <input type="text" id="phoneInput" name="parentPhone" class="form-control" placeholder="01x-xxxxxxx OR 011-xxxxxxxx" pattern="^(01)[02-46-9][-][0-9]{7}$|^(01)[1][-][0-9]{8}$" required>
+                                                            <span id="phoneFeedback"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-phone">Parent Phone Number</span>
+                                                        <label class="col-md-12" for="example-text">Relationship</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-phone" name="example-phone" class="form-control" placeholder="enter parent phone" required>
+                                                            <input type="text" id="example-text" name="parentRelationship" class="form-control" placeholder="Relationship with children (ex: mother)" required>
                                                         </div>
                                                     </div>
                                                 </div>
-
 
                                                 <!-- children form -->
                                                 <div class="childrenDiv">
@@ -434,26 +356,54 @@
                                                         <div class='form-group'>
                                                             <label class='control-label'>Select Course</label>
                                                             <select class='form-control' name='childrenCourse[]' required>
-                                                                <option hidden disabled selected value=""> -- select a course -- </option>
-                                                                <option value=''>Piano Grade 1</option>
-                                                                <option value=''>Piano Grade 2</option>
-                                                                <option value=''>Guitar Grade 1</option>
+                                                                <option hidden disabled selected value="0"> -- select a course -- </option>
+                                                                <?php
+                                                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                                if ($conn) {
+                                                                    $sql3 = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID' AND COURSE_STATUS ='active'";
+                                                                    $result3 = $conn->query($sql3);
+                                                                    while ($row3 = $result3->fetch_assoc()) {
+                                                                        $course_id = $row3["COURSE_ID"];
+                                                                        $course_name = $row3["COURSE_NAME"];
+                                                                ?>
+                                                                        <option value="<?php echo $course_id ?>"><?php echo $course_name ?></option>
+                                                                <?php
+                                                                    }
+                                                                } else {
+                                                                    die("FATAL ERROR");
+                                                                }
+                                                                $conn->close();
+                                                                ?>
                                                             </select>
                                                         </div>
                                                         <div class='form-group'>
                                                             <label class='control-label'>Select Teacher</label>
                                                             <select class='form-control' name='childrenTeacher[]' required>
-                                                                <option hidden disabled selected value=""> -- select a teacher -- </option>
-                                                                <option value='teacher A'>teacher A</option>
-                                                                <option value='teacher B'>teacher B</option>
-                                                                <option value='teacher C'>teacher C</option>
+                                                                <option hidden disabled selected value="0"> -- select a teacher -- </option>
+                                                                <?php
+                                                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                                if ($conn) {
+                                                                    $sql4 = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_STATUS ='active'";
+                                                                    $result4 = $conn->query($sql4);
+                                                                    while ($row4 = $result4->fetch_assoc()) {
+                                                                        $teacher_id = $row4["TEACHER_ID"];
+                                                                        $teacher_name = $row4["TEACHER_NAME"];
+                                                                ?>
+                                                                        <option value="<?php echo $teacher_id ?>"><?php echo $teacher_name ?></option>
+                                                                <?php
+                                                                    }
+                                                                } else {
+                                                                    die("FATAL ERROR");
+                                                                }
+                                                                $conn->close();
+                                                                ?>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                                    <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
+                                                    <button type="reset" id="btnReset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                     <button type="button" id="addChildren" class="btn btn-primary waves-effect waves-light">Add Children</button>
                                                 </div>
                                             </form>
@@ -533,33 +483,9 @@
             });
         });
 
-        //delete button
-        $('#mytable').footable().on('click', '#delete-row-btn', function(e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    //get the footable object
-                    var footable = $('#mytable').data('footable');
-                    //get the row we are wanting to delete
-                    var row = $(this).parents('tr:first');
-                    //delete the TEACHER AND FIRE SWAL
-                    footable.removeRow(row);
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
-                }
-            })
+        $('#btnReset').click(function() {
+            emailRemoveClass();
+            phoneRemoveClass();
         });
 
         // Accordion
@@ -588,40 +514,96 @@
             var btn_id = $(this).attr("id");
             console.log(btn_id);
             $('#cloneChildrenForm-' + btn_id).remove();
-            i--;
         });
+
+
+        $("#addParentForm").submit(function(e) {
+            e.preventDefault();
+            $('html, body').css("cursor", "wait");
+            $.ajax({
+                    url: $("#addParentForm").attr('action'),
+                    type: $("#addParentForm").attr('method'),
+                    data: $("#addParentForm").serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.status == 'success') {
+                        emailRemoveClass();
+                        phoneRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            location.reload();
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error email') {
+                        emailAddClass(response.message);
+                        phoneRemoveClass();
+                        $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error phone') {
+                        phoneAddClass(response.message);
+                        emailRemoveClass();
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        emailRemoveClass();
+                        phoneRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
+                    Swal.fire(
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
+                    )
+                    // alert(errorThrown);
+                    // console.log(xhr);
+                    $('html, body').css("cursor", "auto");
+                })
+        })
+
 
         // TEST GET MULTIPLE CHILDREN VALUE
         // https://stackoverflow.com/questions/2627813/how-to-get-an-array-with-jquery-multiple-input-with-the-same-name
-        $('#newParentForm').on('submit', function() {
-            var form = $('#newParentForm');
+        // $('#addParentForm').on('submit', function() {
+        //     var form = $('#addParentForm');
 
-            var childrenName = form.find('input[name="childrenName[]"]');
-            var childrenAge = form.find('input[name="childrenAge[]"]');
+        //     var childrenName = form.find('input[name="childrenName[]"]');
+        //     var childrenAge = form.find('input[name="childrenAge[]"]');
+        //     var childrenCourse = form.find('select[name="childrenCourse[]"]');
+        //     var childrenTeacher = form.find('select[name="childrenTeacher[]"]');
 
-            var name = childrenName.map(function() {
-                return $(this).val()
-            }).get();
-            console.log(name);
+        //     var name = childrenName.map(function() {
+        //         return $(this).val()
+        //     }).get();
+        //     console.log(name);
 
-            var age = childrenAge.map(function() {
-                return $(this).val()
-            }).get();
-            console.log(age);
+        //     var age = childrenAge.map(function() {
+        //         return $(this).val()
+        //     }).get();
+        //     console.log(age);
 
+        //     // var course = childrenCourse.val();
 
-            // var name = [];
-            // var age = [];
+        //     var course = childrenCourse.map(function() {
+        //         return $(this).find(":selected").val();
+        //     }).get();
+        //     console.log(course);
 
-            // childrenName.each(function() {
-            //     name.push(childrenName.val());
-            //     age.push(childrenAge.val());
-            // });
-            // console.log(name);
-            // console.log(age);
+        //     var teacher = childrenTeacher.map(function() {
+        //         return $(this).find(":selected").val();
+        //     }).get();
+        //     console.log(teacher);
 
-            return false;
-        });
+        //     return false;
+        // });
     </script>
 
 </body>
