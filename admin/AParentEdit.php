@@ -77,6 +77,25 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+                <?php
+                $userID = $_SESSION["userID"];
+                $parent_id = $_GET["parent_id"];
+                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+
+                if ($conn) {
+                    $sql = "SELECT * FROM PARENT WHERE PARENT_ID = '$parent_id' AND ADMIN_ID = '$userID'";
+                    $result = $conn->query($sql);
+                    while ($row = $result->fetch_assoc()) {
+                        $parent_name = $row["PARENT_NAME"];
+                        $parent_email = $row["PARENT_EMAIL"];
+                        $parent_phone = $row["PARENT_PHONE_NUM"];
+                        $parent_status = $row["PARENT_STATUS"];
+                        $parent_relationship = $row["PARENT_RELATIONSHIP"];
+                    }
+                } else {
+                    die("FATAL ERROR");
+                }
+                ?>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -89,26 +108,57 @@
                                         </a>
                                     </li>
 
+                                    <?php
+                                    $children = 0;
+                                    $childId = array();
+                                    $childName = array();
+                                    $childAge = array();
+                                    $childCourse = array();
+                                    $childTeacher = array();
+                                    $childStatus = array();
+                                    if ($conn) {
+                                        $sql2 = "SELECT * FROM CHILD WHERE PARENT_ID = '$parent_id'";
+                                        $result2 = $conn->query($sql2);
+                                        while ($row2 = $result2->fetch_assoc()) {
+                                            $childId[] = $row2["CHILD_ID"];
+                                            $childName[] = $row2["CHILD_NAME"];
+                                            $childAge[] = $row2["CHILD_AGE"];
+                                            $childTeacher[] = $row2["TEACHER_ID"];
+                                            $childCourse[] = $row2["COURSE_ID"];
+                                            $childStatus[] = $row2["CHILD_STATUS"];
+                                            $children++;
+                                        }
+                                    } else {
+                                        die("FATAL ERROR");
+                                    }
+                                    // echo $children;
+                                    ?>
+
                                     <!-- for children nav-link, get children data from database, use looping to display based on number of children -->
+                                    <?php
+                                    for ($x = 0; $x < $children; $x++) {
+                                        // echo  $childId[$x];
+                                    ?>
+                                        <li class="nav-item">
+                                            <a class="nav-link" data-toggle="tab" href="#<?php echo $childId[$x] ?>" role="tab">
+                                                <span class="hidden-sm-up"><i class="ti-pencil-alt"></i></span> <span class="hidden-xs-down"><?php echo $childName[$x] ?></span>
+                                            </a>
+                                        </li>
+                                    <?php
+                                    }
+                                    ?>
                                     <!-- loop1 -->
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#Children ABC" role="tab">
                                             <span class="hidden-sm-up"><i class="ti-pencil-alt"></i></span> <span class="hidden-xs-down">Children ABC</span>
                                         </a>
-                                    </li>
-                                    <!-- loop2 -->
-                                    <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#Kid ABC" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-pencil-alt"></i></span> <span class="hidden-xs-down">Kid ABC</span>
-                                        </a>
-                                    </li>
+                                    </li> -->
 
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#addChildren" role="tab">
                                             <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Children</span>
                                         </a>
                                     </li>
-
                                 </ul>
 
                                 <!-- Tab panes -->
@@ -116,42 +166,64 @@
                                     <!-- edit parent tab -->
                                     <div class="tab-pane active" id="editParent" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material" id="editParentForm">
+                                            <form class="form-control-line" id="editParentForm" method="post" action="editParent.php?parent_id=<?= $parent_id ?>">
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-md-12" for="example-text">Parent Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter parent name" value="Parent ABC" required>
+                                                            <input type="text" id="example-text" name="parentName" class="form-control text-muted" placeholder="enter parent name" value="<?php echo $parent_name; ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" id="emailDiv">
                                                     <div class="row">
                                                         <label class="col-md-12" for="example-email">Parent Email</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="email" id="example-email" name="example-email" class="form-control text-muted" placeholder="enter parent email" value="ParentABC@abc.com" required>
+                                                            <input type="email" id="emailInput" name="parentEmail" class="form-control text-muted" placeholder="enter teacher email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" value="<?php echo $parent_email; ?>" required>
+                                                            <span id="emailFeedback"></span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" id="phoneDiv">
                                                     <div class="row">
                                                         <label class="col-md-12" for="example-phone">Parent Phone Number</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-phone" name="example-phone" class="form-control text-muted" placeholder="enter parent phone" value="+6012-3456789" required>
+                                                            <input type="text" id="phoneInput" name="parentPhone" class="form-control text-muted" placeholder="01x-xxxxxxx OR 011-xxxxxxxx" pattern="^(01)[02-46-9][-][0-9]{7}$|^(01)[1][-][0-9]{8}$" value="<?php echo $parent_phone; ?>" required>
+                                                            <span id="phoneFeedback"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-phone">Parent Status</span>
+                                                        <label class="col-md-12" for="example-text">Relationship</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <select class='form-control' name='' required>
-                                                                <option selected value='active'>Active</option>
-                                                                <option value='inactive'>Inactive</option>
+                                                            <input type="text" id="example-text" name="parentRelationship" class="form-control text-muted" placeholder="Relationship with children (ex: mother)" value="<?php echo $parent_relationship; ?>" required>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12">Parent Status</span>
+                                                        </label>
+                                                        <div class="col-md-12">
+                                                            <select class='form-control' name='parentStatus' required>
+                                                                <?php
+                                                                if ($parent_status == "active") {
+                                                                ?>
+                                                                    <option selected value='active'>Active</option>
+                                                                    <option value='inactive'>Inactive</option>
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <option value='active'>Active</option>
+                                                                    <option selected value='inactive'>Inactive</option>
+                                                                <?php
+                                                                }
+                                                                ?>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -164,9 +236,109 @@
                                         </div>
                                     </div>
                                     <!-- edit children tab -->
-                                    <!-- get children name from database, use children name as div id for each tab and form id(editChildrenForm+i) which i is number of children -->
+                                    <!-- get child id from database, use child id as div id for each tab and set form id as editChildrenForm(i) which i is child id -->
+                                    <?php
+                                    for ($x = 0; $x < $children; $x++) {
+                                        // echo  $childId[$x];
+                                    ?>
+                                        <div class="tab-pane" id="<?php echo $childId[$x] ?>" role="tabpanel">
+                                            <div class="p-20">
+                                                <form class="form-control-line childrenForm" id="editChildrenForm<?php echo $childId[$x] ?>" method="post" action="editChild.php?child_id=<?= $childId[$x] ?>">
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label class="col-md-12" for="example-text">Child Name</span>
+                                                            </label>
+                                                            <div class="col-md-12">
+                                                                <input type="text" id="example-text" name="childName" class="form-control text-muted" placeholder="enter child name" value="<?php echo $childName[$x] ?>" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label class="col-md-12" for="example-age">Child Age</span>
+                                                            </label>
+                                                            <div class="col-md-12">
+                                                                <input type="number" id="example-age" name="childAge" class="form-control text-muted" placeholder="enter child age" value="<?php echo $childAge[$x] ?>" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class='form-group'>
+                                                        <label class='control-label'>Select Course</label>
+                                                        <select class='form-control text-muted' name='childCourse' required>
+                                                            <?php
+                                                            if ($conn) {
+                                                                $sql3 = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID' AND COURSE_STATUS ='active'";
+                                                                $result3 = $conn->query($sql3);
+                                                                while ($row3 = $result3->fetch_assoc()) {
+                                                                    $course_id = $row3["COURSE_ID"];
+                                                                    $course_name = $row3["COURSE_NAME"];
+                                                            ?>
+                                                                    <!-- <option selected value='1'>Piano Grade 1</option>
+                                                                    <option value='2'>Piano Grade 2</option>
+                                                                    <option value='3'>Guitar Grade 1</option> -->
+                                                                    <option value="<?php echo $course_id ?>" <?php if ($childCourse[$x] == $course_id) {
+                                                                                                                    echo 'selected';
+                                                                                                                } ?>><?php echo $course_name ?></option>
+                                                            <?php
+                                                                }
+                                                            } else {
+                                                                die("FATAL ERROR");
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class='form-group'>
+                                                        <label class='control-label'>Select Teacher</label>
+                                                        <select class='form-control text-muted' name='childTeacher' required>
+                                                            <?php
+                                                            if ($conn) {
+                                                                $sql4 = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_STATUS ='active'";
+                                                                $result4 = $conn->query($sql4);
+                                                                while ($row4 = $result4->fetch_assoc()) {
+                                                                    $teacher_id = $row4["TEACHER_ID"];
+                                                                    $teacher_name = $row4["TEACHER_NAME"];
+                                                            ?>
+                                                                    <!-- <option selected value='teacher A'>teacher A</option>
+                                                                    <option value='teacher B'>teacher B</option>
+                                                                    <option value='teacher C'>teacher C</option> -->
+                                                                    <option value="<?php echo $teacher_id ?>" <?php if ($childTeacher[$x] == $teacher_id) {
+                                                                                                                    echo 'selected';
+                                                                                                                } ?>><?php echo $teacher_name ?></option>
+                                                            <?php
+                                                                }
+                                                            } else {
+                                                                die("FATAL ERROR");
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="control-label">Child Status</label>
+                                                        <select class='form-control' name='childStatus' required>
+                                                            <?php
+                                                            if ($childStatus[$x] == "active") {
+                                                            ?>
+                                                                <option selected value='active'>Active</option>
+                                                                <option value='inactive'>Inactive</option>
+                                                            <?php
+                                                            } else {
+                                                            ?>
+                                                                <option value='active'>Active</option>
+                                                                <option selected value='inactive'>Inactive</option>
+                                                            <?php
+                                                            }
+                                                            ?>
+                                                        </select>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    <?php
+                                    }
+                                    ?>
                                     <!-- loop1 -->
-                                    <div class="tab-pane" id="Children ABC" role="tabpanel">
+                                    <!-- <div class="tab-pane" id="Children ABC" role="tabpanel">
                                         <div class="p-20">
                                             <form class="form-material childrenForm" id="editChildrenForm1">
                                                 <div class="form-group">
@@ -213,96 +385,70 @@
                                                 <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                             </form>
                                         </div>
-                                    </div>
-
-                                    <!-- loop2 -->
-                                    <div class="tab-pane" id="Kid ABC" role="tabpanel">
-                                        <div class="p-20">
-                                            <form class="form-material childrenForm" id="editChildrenForm2">
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="example-text">Children Name</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter child name" value="Kid ABC" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="example-age">Children Age</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="number" id="example-age" name="example-age" class="form-control" placeholder="enter child age" value="12" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='form-group'>
-                                                    <label class='control-label'>Select Course</label>
-                                                    <select class='form-control' name='course' required>
-                                                        <option value='1'>Piano Grade 1</option>
-                                                        <option selected value='2'>Piano Grade 2</option>
-                                                        <option value='3'>Guitar Grade 1</option>
-                                                    </select>
-                                                </div>
-                                                <div class='form-group'>
-                                                    <label class='control-label'>Select Teacher</label>
-                                                    <select class='form-control' name='teacher' required>
-                                                        <option value='teacher A'>teacher A</option>
-                                                        <option selected value='teacher B'>teacher B</option>
-                                                        <option value='teacher C'>teacher C</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label">Children Status</label>
-                                                    <select class='form-control' name='' required>
-                                                        <option value='active'>Active</option>
-                                                        <option selected value='inactive'>Inactive</option>
-                                                    </select>
-                                                </div>
-                                                <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    </div> -->
 
                                     <!-- add new children tab -->
                                     <div class="tab-pane" id="addChildren" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material childrenForm" id="">
+                                            <form class="form-control-line" id="addChildForm" method="post" action="addChild.php?parent_id=<?= $parent_id ?>">
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-text">Children Name</span>
+                                                        <label class="col-md-12" for="example-text">Child Name</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter child name" required>
+                                                            <input type="text" id="example-text" name="childrenName" class="form-control" placeholder="enter child name" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-age">Children Age</span>
+                                                        <label class="col-md-12" for="example-age">Child Age</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="number" id="example-age" name="example-age" class="form-control" placeholder="enter child age" required>
+                                                            <input type="number" id="example-age" name="childrenAge" class="form-control" placeholder="enter child age" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Select Course</label>
-                                                    <select class='form-control' name='course' required>
+                                                    <select class='form-control' name='childrenCourse' required>
                                                         <option hidden disabled selected value=""> -- select a course -- </option>
-                                                        <option value='1'>Piano Grade 1</option>
-                                                        <option value='2'>Piano Grade 2</option>
-                                                        <option value='3'>Guitar Grade 1</option>
+                                                        <?php
+                                                        if ($conn) {
+                                                            $sql5 = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID' AND COURSE_STATUS ='active'";
+                                                            $result5 = $conn->query($sql5);
+                                                            while ($row5 = $result5->fetch_assoc()) {
+                                                                $course_id = $row5["COURSE_ID"];
+                                                                $course_name = $row5["COURSE_NAME"];
+                                                        ?>
+                                                                <option value="<?php echo $course_id ?>"><?php echo $course_name ?></option>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Select Teacher</label>
-                                                    <select class='form-control' name='teacher' required>
+                                                    <select class='form-control' name='childrenTeacher' required>
                                                         <option hidden disabled selected value=""> -- select a teacher -- </option>
-                                                        <option value='teacher A'>teacher A</option>
-                                                        <option value='teacher B'>teacher B</option>
-                                                        <option value='teacher C'>teacher C</option>
+                                                        <?php
+                                                        if ($conn) {
+                                                            $sql6 = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_STATUS ='active'";
+                                                            $result6 = $conn->query($sql6);
+                                                            while ($row6 = $result6->fetch_assoc()) {
+                                                                $teacher_id = $row6["TEACHER_ID"];
+                                                                $teacher_name = $row6["TEACHER_NAME"];
+                                                        ?>
+                                                                <option value="<?php echo $teacher_id ?>"><?php echo $teacher_name ?></option>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
@@ -315,6 +461,7 @@
                         </div>
                     </div>
                 </div>
+                <?php $conn->close(); ?>
                 <!-- End PAge Content -->
                 <!-- ============================================================== -->
 
@@ -362,26 +509,53 @@
     <script>
         $("#editParentForm").submit(function(e) {
             e.preventDefault();
-            Swal.fire({
-                title: 'Confirm Edit?',
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, confirm!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // DO EDIT PARENT HERE THEN FIRE SWAL
+            $('html, body').css("cursor", "wait");
+            $.ajax({
+                    url: $("#editParentForm").attr('action'),
+                    type: $("#editParentForm").attr('method'),
+                    data: $("#editParentForm").serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.status == 'success') {
+                        emailRemoveClass();
+                        phoneRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            window.location.href = "AParent.php";
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error email') {
+                        emailAddClass(response.message);
+                        phoneRemoveClass();
+                        $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error phone') {
+                        phoneAddClass(response.message);
+                        emailRemoveClass();
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        emailRemoveClass();
+                        phoneRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
                     Swal.fire(
-                        'Done!',
-                        'Parent Edited.',
-                        'success'
-                    ).then(() => {
-                        window.location.href = "AParent.php";
-                    })
-                }
-            })
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
+                    )
+                    $('html, body').css("cursor", "auto");
+                    // alert(errorThrown);
+                })
         })
 
         $('.childrenForm').each(function(e) {
@@ -391,54 +565,82 @@
             // console.log(childrenName)
             $('#' + formid).submit(function(e) {
                 e.preventDefault();
-                Swal.fire({
-                    title: 'Confirm Edit?',
-                    icon: 'warning',
-                    allowOutsideClick: false,
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, confirm!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // DO EDIT CHILDREN HERE THEN FIRE SWAL
+                $('html, body').css("cursor", "wait");
+                $.ajax({
+                        url: $('#' + formid).attr('action'),
+                        type: $('#' + formid).attr('method'),
+                        data: $('#' + formid).serialize(),
+                        dataType: 'json'
+                    })
+                    .done(function(response) {
+                        if (response.status == 'success') {
+                            Swal.fire(
+                                response.title,
+                                response.message,
+                                response.status
+                            ).then(() => {
+                                window.location.href = "AParent.php";
+                            })
+                            $('html, body').css("cursor", "auto");
+                        } else {
+                            Swal.fire(
+                                response.title,
+                                response.message,
+                                response.status
+                            )
+                            $('html, body').css("cursor", "auto");
+                        }
+                    })
+                    .fail(function(xhr, textStatus, errorThrown) {
                         Swal.fire(
-                            'Done!',
-                            childrenName + ' Edited.',
-                            'success'
-                        ).then(() => {
-                            window.location.href = "AParent.php";
-                        })
-                    }
-                })
+                            'Oops...',
+                            'Something went wrong with ajax!',
+                            'error'
+                        )
+                        $('html, body').css("cursor", "auto");
+                        // alert(errorThrown);
+                    })
             })
-
-            $('#' + formid).on('click', '.delete-children-btn', function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    allowOutsideClick: false,
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // DO DELETE CHILDREN HERE THEN FIRE SWAL
-                        Swal.fire(
-                            'Done!',
-                            childrenName + ' Deleted.',
-                            'success'
-                        ).then(() => {
-                            window.location.href = "AParent.php";
-                        })
-                    }
-                })
-            })
-
         });
+
+        $("#addChildForm").submit(function(e) {
+            e.preventDefault();
+            $('html, body').css("cursor", "wait");
+            $.ajax({
+                    url: $('#addChildForm').attr('action'),
+                    type: $('#addChildForm').attr('method'),
+                    data: $('#addChildForm').serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.status == 'success') {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            window.location.href = "AParent.php";
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
+                    Swal.fire(
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
+                    )
+                    $('html, body').css("cursor", "auto");
+                    // alert(errorThrown);
+                })
+        })
     </script>
 
 </body>
