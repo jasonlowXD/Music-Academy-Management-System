@@ -23,13 +23,14 @@
     <style>
         .childrenTable th {
             padding-top: 0px !important;
-            padding-bottom: 0px !important;
+            padding-bottom: 5px !important;
             border-top: 0px !important;
+            border-bottom: 1px solid #d9d9d9;
         }
 
         .childrenTable td {
-            padding-top: 0px !important;
-            padding-bottom: 0px !important;
+            padding-top: 5px !important;
+            padding-bottom: 3px !important;
             border-top: 0px !important;
         }
     </style>
@@ -332,12 +333,12 @@
                                                     <div id="cloneChildrenForm">
                                                         <hr class="m-t-40">
                                                         <div class="d-flex no-block align-items-center" id="childrenHeaderDiv">
-                                                            <h4 class="card-title">Children Info</h4>
+                                                            <h4 class="card-title">Child Info</h4>
                                                         </div>
 
                                                         <div class="form-group">
                                                             <div class="row">
-                                                                <label class="col-md-12" for="example-text">Children Name</span>
+                                                                <label class="col-md-12" for="example-text">Child Name</span>
                                                                 </label>
                                                                 <div class="col-md-12">
                                                                     <input type="text" id="example-text" name="childrenName[]" class="form-control" placeholder="enter child name" required>
@@ -346,7 +347,7 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="row">
-                                                                <label class="col-md-12" for="example-age">Children Age</span>
+                                                                <label class="col-md-12" for="example-age">Child Age</span>
                                                                 </label>
                                                                 <div class="col-md-12">
                                                                     <input type="number" id="example-age" name="childrenAge[]" class="form-control" placeholder="enter child age" required>
@@ -356,7 +357,7 @@
                                                         <div class='form-group'>
                                                             <label class='control-label'>Select Course</label>
                                                             <select class='form-control' name='childrenCourse[]' required>
-                                                                <option hidden disabled selected value="0"> -- select a course -- </option>
+                                                                <option hidden disabled selected value=""> -- select a course -- </option>
                                                                 <?php
                                                                 $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                                 if ($conn) {
@@ -379,7 +380,7 @@
                                                         <div class='form-group'>
                                                             <label class='control-label'>Select Teacher</label>
                                                             <select class='form-control' name='childrenTeacher[]' required>
-                                                                <option hidden disabled selected value="0"> -- select a teacher -- </option>
+                                                                <option hidden disabled selected value=""> -- select a teacher -- </option>
                                                                 <?php
                                                                 $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                                 if ($conn) {
