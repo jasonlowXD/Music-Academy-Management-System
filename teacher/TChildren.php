@@ -112,58 +112,68 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Age</th>
-                                                <th>Parent</th>
                                                 <th>Course</th>
+                                                <th>Parent</th>
+                                                <th>Parent Email</th>
+                                                <th>Parent Phone</th>
+                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <?php
+                                            $userID = $_SESSION["userID"];
+                                            $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                            if ($conn) {
+                                                $sql = "SELECT * FROM CHILD LEFT JOIN PARENT ON CHILD.PARENT_ID = PARENT.PARENT_ID LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID WHERE TEACHER_ID = '$userID'";
+                                                $result = $conn->query($sql);
+                                                while ($row = $result->fetch_assoc()) {
+                                                    $child_id = $row["CHILD_ID"];
+                                                    $child_name = $row["CHILD_NAME"];
+                                                    $child_age = $row["CHILD_AGE"];
+                                                    $parent_name = $row["PARENT_NAME"];
+                                                    $course_name = $row["COURSE_NAME"];
+                                                    $child_status = $row["CHILD_STATUS"];
+                                                    $parent_email = $row["PARENT_EMAIL"];
+                                                    $parent_phone = $row["PARENT_PHONE_NUM"];
+                                            ?>
+                                                    <tr>
+                                                        <td><?php echo $child_id; ?></td>
+                                                        <td><?php echo $child_name; ?></td>
+                                                        <td><?php echo $child_age; ?></td>
+                                                        <td><?php echo $course_name; ?></td>
+                                                        <td><?php echo $parent_name; ?></td>
+                                                        <td><?php echo $parent_email; ?></td>
+                                                        <td><?php echo $parent_phone; ?></td>
+                                                        <?php
+                                                        if ($child_status == "active") {
+                                                        ?>
+                                                            <td><span class="label label-success"><?php echo $child_status; ?></span></td>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <td><span class="label label-danger"><?php echo $child_status; ?></span></td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            } else {
+                                                die("FATAL ERROR");
+                                            }
+                                            $conn->close();
+                                            ?>
+                                            <!-- <tr>
                                                 <td>1</td>
                                                 <td>Children A</td>
                                                 <td>12</td>
                                                 <td>Parent ABC</td>
                                                 <td>Piano Grade 1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Children ABC</td>
-                                                <td>16</td>
-                                                <td>Parent ABC</td>
-                                                <td>Piano Grade 2</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Children Abu</td>
-                                                <td>13</td>
-                                                <td>Parent CCC</td>
-                                                <td>Guitar Grade 1</td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Chong ABAC</td>
-                                                <td>12</td>
-                                                <td>Parent AAA</td>
-                                                <td>Bass Guitar Grade 1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Ali Abu</td>
-                                                <td>14</td>
-                                                <td>Parent CCC</td>
-                                                <td>Piano Grade 1</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Children DDD</td>
-                                                <td>12</td>
-                                                <td>Parent DDD</td>
-                                                <td>Saxophone Grade 1</td>
-                                            </tr>
+                                            </tr> -->
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="7">
+                                                <td colspan="10">
                                                     <div class="text-right">
                                                         <ul class="pagination"> </ul>
                                                     </div>

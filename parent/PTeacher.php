@@ -116,24 +116,37 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <?php
+                                            $userID = $_SESSION["userID"];
+                                            $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                            if ($conn) {
+                                                $sql = "SELECT * FROM TEACHER LEFT JOIN CHILD ON TEACHER.TEACHER_ID = CHILD.TEACHER_ID WHERE CHILD.PARENT_ID = '$userID' ORDER BY TEACHER.TEACHER_ID";
+                                                $result = $conn->query($sql);
+                                                while ($row = $result->fetch_assoc()) {
+                                                    $teacher_id = $row["TEACHER_ID"];
+                                                    $teacher_name = $row["TEACHER_NAME"];
+                                                    $teacher_email = $row["TEACHER_EMAIL"];
+                                                    $teacher_phone = $row["TEACHER_PHONE_NUM"];
+                                            ?>
+                                                    <tr>
+                                                        <td><?php echo $teacher_id; ?></td>
+                                                        <td><?php echo $teacher_name; ?></td>
+                                                        <td><?php echo $teacher_email; ?></td>
+                                                        <td><?php echo $teacher_phone; ?></td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            } else {
+                                                die("FATAL ERROR");
+                                            }
+                                            $conn->close();
+                                            ?>
+                                            <!-- <tr>
                                                 <td>1</td>
                                                 <td>teacher ABC</td>
                                                 <td>teacherABC@gmail.com</td>
                                                 <td>+123 456 789</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>teacher A</td>
-                                                <td>teachera@gmail.com</td>
-                                                <td>+123 456 789</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>teacher CCC</td>
-                                                <td>teacherCCC@gmail.com</td>
-                                                <td>+123 456 789</td>
-                                            </tr>
+                                            </tr> -->
                                         </tbody>
                                         <tfoot>
                                             <tr>

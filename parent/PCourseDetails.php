@@ -80,30 +80,51 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4 border-right">
-                                        <h4><strong>Course Name</strong></h4>
-                                        <p class="text-muted">Piano Grade 1</p>
-                                    </div>
-                                    <div class="col-md-4 border-right">
-                                        <h4><strong>Course Fee per Month (RM)</strong></h4>
-                                        <p class="text-muted">150</p>
-                                    </div>
-                                    <div class="col-md-4 border-right">
-                                        <h4><strong>Course Duration (min)</strong></h4>
-                                        <p class="text-muted">30</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row mt-4">
-                                    <div class="col-md-12">
-                                        <h4><strong>Description</strong></h4>
-                                        <p class="text-muted text-justify">Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuriesIt was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                    </div>
-                                </div>
-                                <hr>
-                                <a href="PChildren.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
+                                <?php
+                                $course_id = $_GET["course_id"];
+                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                if ($conn) {
+                                    $sql = "SELECT * FROM COURSE WHERE COURSE_ID = '$course_id'";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $course_name = $row["COURSE_NAME"];
+                                        $course_fee = $row["COURSE_FEE"];
+                                        $course_duration = $row["COURSE_DURATION"];
+                                        $course_desc = $row["COURSE_DESC"];
+                                        $course_desc = str_replace("\n", "<br/>", $course_desc);
+                                ?>
+                                        <div class="row">
+                                            <div class="col-md-4 border-right">
+                                                <h4><strong>Course Name</strong></h4>
+                                                <p class="text-muted"><?php echo $course_name; ?></p>
+                                            </div>
+                                            <div class="col-md-4 border-right">
+                                                <h4><strong>Course Fee per Month (RM)</strong></h4>
+                                                <p class="text-muted"><?php echo $course_fee; ?></p>
+                                            </div>
+                                            <div class="col-md-4 border-right">
+                                                <h4><strong>Course Duration (min)</strong></h4>
+                                                <p class="text-muted"><?php echo $course_duration; ?></p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row mt-4">
+                                            <div class="col-md-12">
+                                                <h4><strong>Description</strong></h4>
+                                                <p class="text-muted text-justify"><?php echo $course_desc; ?></p>
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <a href="PChildren.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
+                                <?php
+                                    }
+                                } else {
+                                    die("FATAL ERROR");
+                                }
+                                $conn->close();
+                                ?>
                             </div>
+
                         </div>
                     </div>
                 </div>

@@ -114,36 +114,64 @@
                                                 <th>Age</th>
                                                 <th>Teacher</th>
                                                 <th>Course</th>
+                                                <th>Status</th>
                                                 <th data-sort-ignore="true">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
+                                            <?php
+                                            $userID = $_SESSION["userID"];
+                                            $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                            if ($conn) {
+                                                $sql = "SELECT * FROM CHILD LEFT JOIN TEACHER ON CHILD.TEACHER_ID = TEACHER.TEACHER_ID LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID WHERE PARENT_ID = '$userID'";
+                                                $result = $conn->query($sql);
+                                                while ($row = $result->fetch_assoc()) {
+                                                    $child_id = $row["CHILD_ID"];
+                                                    $child_name = $row["CHILD_NAME"];
+                                                    $child_age = $row["CHILD_AGE"];
+                                                    $teacher_name = $row["TEACHER_NAME"];
+                                                    $course_id = $row["COURSE_ID"];
+                                                    $course_name = $row["COURSE_NAME"];
+                                                    $child_status = $row["CHILD_STATUS"];
+                                            ?>
+                                                    <tr>
+                                                        <td><?php echo $child_id; ?></td>
+                                                        <td><?php echo $child_name; ?></td>
+                                                        <td><?php echo $child_age; ?></td>
+                                                        <td><?php echo $teacher_name; ?></td>
+                                                        <td><?php echo $course_name; ?></td>
+                                                        <?php
+                                                        if ($child_status == "active") {
+                                                        ?>
+                                                            <td><span class="label label-success"><?php echo $child_status; ?></span></td>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <td><span class="label label-danger"><?php echo $child_status; ?></span></td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <td><a href="PCourseDetails.php?course_id=<?= $course_id ?>" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            } else {
+                                                die("FATAL ERROR");
+                                            }
+                                            $conn->close();
+                                            ?>
+                                            <!-- <tr>
                                                 <td>1</td>
                                                 <td>Children A</td>
                                                 <td>12</td>
                                                 <td>Teacher ABC</td>
                                                 <td>Piano Grade 1</td>
                                                 <td><a href="PCourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Children ABC</td>
-                                                <td>16</td>
-                                                <td>Teacher ABC</td>
-                                                <td>Piano Grade 2</td>
-                                                <td><a href="PCourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Children Abu</td>
-                                                <td>13</td>
-                                                <td>Teacher CCC</td>
-                                                <td>Guitar Grade 1</td>
-                                                <td><a href="PCourseDetails.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
+                                            </tr> -->
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="7">
+                                                <td colspan="8">
                                                     <div class="text-right">
                                                         <ul class="pagination"> </ul>
                                                     </div>
