@@ -11,7 +11,7 @@
                 </li>
                 <li> <a class="waves-effect waves-dark" href="TResource.php"><i class="icon-folder"></i><span class="hide-menu">Learning Resource</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" style="padding-right: 15px;" href="TProgression.php"><i class="icon-graduation"></i><span class="hide-menu">Children Progression</span></a>
+                <li> <a class="waves-effect waves-dark" style="padding-right: 15px;" href="TPractice.php"><i class="icon-graduation"></i><span class="hide-menu">Children Practice Log</span></a>
                 </li>
 
                 <li class="nav-small-cap">--- SETTINGS</li>
