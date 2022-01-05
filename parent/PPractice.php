@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Progression</title>
+    <title>Children Practice Log</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
@@ -65,13 +65,13 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Children Progression</h4>
+                        <h4 class="text-themecolor">Children Practice Log</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="PCalendar.php">Home</a></li>
-                                <li class="breadcrumb-item active">Progression</li>
+                                <li class="breadcrumb-item active">Practice</li>
                             </ol>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Children Progression List</h4>
+                                <h4 class="card-title">Children Practice Logs</h4>
                                 <hr>
                                 <div class="d-flex">
                                     <div class="mr-auto">
@@ -111,9 +111,10 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Children</th>
-                                                <th>Upload by</th>
+                                                <th>Uploaded by</th>
+                                                <th>Upload Date</th>
                                                 <th>Title</th>
-                                                <th>File</th>
+                                                <th>File Media</th>
                                                 <th data-sort-ignore="true">Action</th>
                                             </tr>
                                         </thead>
@@ -121,18 +122,20 @@
                                             <tr>
                                                 <td>1</td>
                                                 <td>Children A</td>
-                                                <td>Admin</td>
-                                                <td>20210101 class photo</td>
-                                                <td><a href="../img/neko.jpg" target="_blank" rel="noopener noreferrer">neko.jpg</a></td>
-                                                <td><a href="PProgressionDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
+                                                <td>Sir ABC</td>
+                                                <td>2021-12-01</td>
+                                                <td>1st practice of Song A</td>
+                                                <td><a href="../img/1080p.mp4" target="_blank" rel="noopener noreferrer">1080p.mp4</a></td>
+                                                <td><a href="PPracticeDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
                                             </tr>
                                             <tr>
                                                 <td>2</td>
                                                 <td>Children ABC</td>
                                                 <td>Teacher ABC</td>
-                                                <td>20210201 class video</td>
+                                                <td>2021-12-16</td>
+                                                <td>Song ABC practice</td>
                                                 <td><a href="../img/Jounetsu Tairiku.mp4" target="_blank" rel="noopener noreferrer">Jounetsu Tairiku.mp4</a></td>
-                                                <td><a href="PProgressionDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
+                                                <td><a href="PPracticeDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
                                             </tr>
                                         </tbody>
                                         <tfoot>
@@ -215,7 +218,6 @@
                 filter: $(this).val()
             });
         });
-
     </script>
 
 </body>

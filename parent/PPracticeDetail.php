@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Progression Detail</title>
+    <title>Practice Log Detail</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 
 </head>
 
-<body class="skin-green-dark fixed-layout">
+<body class="skin-megna-dark fixed-layout">
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -40,14 +40,14 @@
         <!-- ============================================================== -->
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
-        <?php require_once("TTopbar.php") ?>
+        <?php require_once("PTopbar.php") ?>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
         <!-- ============================================================== -->
         <!-- Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
-        <?php require_once("TSideBar.php") ?>
+        <?php require_once("PSideBar.php") ?>
         <!-- ============================================================== -->
         <!-- End Left Sidebar - style you can find in sidebar.scss  -->
         <!-- ============================================================== -->
@@ -64,14 +64,14 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Progression Detail</h4>
+                        <h4 class="text-themecolor">Practice Log Detail</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="TCalendar.php">Home</a></li>
-                                <li class="breadcrumb-item"><a href="TProgression.php">Progression</a></li>
-                                <li class="breadcrumb-item active">Progression Detail</li>
+                                <li class="breadcrumb-item"><a href="PCalendar.php">Home</a></li>
+                                <li class="breadcrumb-item"><a href="PPractice.php">Practice</a></li>
+                                <li class="breadcrumb-item active">Practice Detail</li>
                             </ol>
                         </div>
                     </div>
@@ -83,10 +83,13 @@
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
                 <div class="row">
-                    <div class="col-md-8 col-sm-12 col-12">
+                    <div class="col-md-12 col-sm-12 col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Children A, 20210201 class video</h4>
+                                <div class="d-flex no-block align-items-center justify-content-between">
+                                    <h4 class="card-title mr-auto">Children A, 1st practice of Song A</h4>
+                                    <a href="PPractice.php" type="button" class="btn btn-primary btn-xs waves-effect waves-light ml-auto"><i class="fa fa-arrow-left"></i></a>
+                                </div>
                                 <hr>
                                 <!-- if file type is img -->
                                 <!-- <img class="img-fluid" src="../img/neko.jpg"> -->
@@ -101,7 +104,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-sm-12 col-12">
+                    <div class="col-md-12 col-sm-12 col-lg-4">
                         <div class="card">
                             <div class="card-body border-bottom">
                                 <h4 class="card-title">Comments</h4>
@@ -111,39 +114,32 @@
                             <!-- ============================================================== -->
                             <div class="comment-widgets m-b-20 commentDiv">
 
+                                <!-- Comment by other user (cannot delete) -->
+                                <div class="d-flex flex-row comment-row border-bottom">
+                                    <div class="comment-text w-100">
+                                        <div class="d-flex">
+                                            <h5><strong>Teacher ABC</strong></h5>
+                                        </div>
+                                        <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.</p>
+                                    </div>
+                                </div>
+
                                 <!-- Comment by own account (can delete) -->
                                 <div class="d-flex flex-row comment-row border-bottom deletableCommentDiv">
                                     <div class="comment-text w-100">
                                         <div class="d-flex no-block">
-                                            <h5 class="mr-auto"><strong>Teacher ABC</strong></h5>
+                                            <h5 class="mr-auto"><strong>Parent ABC</strong></h5>
                                             <div class="ml-auto">
-                                                <button type="button" id="deleteCommentBtn" class="btn btn-default btn-lg p-0">
-                                                    <i class="fa fa-trash-o"></i>
+                                                <button type="button" id="deleteCommentBtn" class="btn btn-danger btn-xs waves-effect waves-light">
+                                                    <i class="fa fa-times"></i>
                                                 </button>
-                                                </span>
                                             </div>
                                         </div>
                                         <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry..</p>
                                     </div>
                                 </div>
 
-                                <!-- Comment by other user (cannot delete) -->
-                                <div class="d-flex flex-row comment-row border-bottom">
-                                    <div class="comment-text w-100">
-                                        <div class="d-flex">
-                                            <h5><strong>Parent A</strong></h5>
-                                        </div>
-                                        <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.</p>
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-row comment-row border-bottom">
-                                    <div class="comment-text w-100">
-                                        <div class="d-flex">
-                                            <h5><strong>Admin</strong></h5>
-                                        </div>
-                                        <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.</p>
-                                    </div>
-                                </div>
+
                             </div>
 
                             <!-- comment input -->
@@ -230,9 +226,7 @@
                         'Deleted!',
                         'Your comment has been deleted.',
                         'success'
-                    ).then(() => {
-                        // window.location.href = "AProgressionDetail.php";
-                    })
+                    )
                 }
             })
         })
@@ -251,10 +245,9 @@
                 '<div class="d-flex no-block">' +
                 '<h5 class="mr-auto"><strong>' + user + '</strong></h5>' +
                 '<div class="ml-auto">' +
-                '<button type="button" id="deleteCommentBtn" class="btn btn-default btn-lg p-0">' +
-                '<i class="fa fa-trash-o"></i>' +
+                '<button type="button" id="deleteCommentBtn" class="btn btn-danger btn-xs waves-effect waves-light">' +
+                '<i class="fa fa-times"></i>' +
                 '</button>' +
-                '</span>' +
                 '</div>' +
                 '</div>' +
                 '<p class="m-b-5 m-t-10">' + commentContent + '</p>' +

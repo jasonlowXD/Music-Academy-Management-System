@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Manage Progression</title>
+    <title>Children Practice Log</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
@@ -65,13 +65,13 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Progression Management</h4>
+                        <h4 class="text-themecolor">Practice Log Management</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="TCalendar.php">Home</a></li>
-                                <li class="breadcrumb-item active">Progression</li>
+                                <li class="breadcrumb-item active">Practice</li>
                             </ol>
                         </div>
                     </div>
@@ -87,22 +87,22 @@
                         <div class="card">
                             <div class="card-body">
                                 <!-- Nav tabs -->
-                                <ul class="nav nav-tabs" role="tablist" id="progressionTab">
+                                <ul class="nav nav-tabs" role="tablist" id="practiceLogTab">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#progressionlist" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Children Progression List</span>
+                                        <a class="nav-link active" data-toggle="tab" href="#practiceLoglist" role="tab">
+                                            <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Children Practice Logs</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#addProgression" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Progression</span>
+                                        <a class="nav-link" data-toggle="tab" href="#addLog" role="tab">
+                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Log</span>
                                         </a>
                                     </li>
                                 </ul>
                                 <!-- Tab panes -->
                                 <div class="tab-content tabcontent-border">
                                     <!-- course list panel -->
-                                    <div class="tab-pane active" id="progressionlist" role="tabpanel">
+                                    <div class="tab-pane active" id="practiceLoglist" role="tabpanel">
                                         <div class="p-20">
                                             <div class="d-flex">
                                                 <div class="mr-auto">
@@ -127,9 +127,10 @@
                                                         <tr>
                                                             <th>#</th>
                                                             <th>Children</th>
-                                                            <th>Upload by</th>
+                                                            <th>Uploaded by</th>
+                                                            <th>Upload Date</th>
                                                             <th>Title</th>
-                                                            <th>File</th>
+                                                            <th>File Media</th>
                                                             <th data-sort-ignore="true">Action</th>
                                                         </tr>
                                                     </thead>
@@ -137,12 +138,13 @@
                                                         <tr>
                                                             <td>1</td>
                                                             <td>Children A</td>
-                                                            <td>Admin</td>
-                                                            <td>20210101 class photo</td>
-                                                            <td><a href="../img/neko.jpg" target="_blank" rel="noopener noreferrer">neko.jpg</a></td>
+                                                            <td>Sir ABC</td>
+                                                            <td>2021-12-01</td>
+                                                            <td>1st practice of Song A</td>
+                                                            <td><a href="../img/1080p.mp4" target="_blank" rel="noopener noreferrer">1080p.mp4</a></td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="TProgressionDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="TPracticeDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                     <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                     <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
@@ -152,11 +154,12 @@
                                                             <td>2</td>
                                                             <td>Children ABC</td>
                                                             <td>Teacher ABC</td>
-                                                            <td>20210201 class video</td>
+                                                            <td>2021-12-16</td>
+                                                            <td>Song ABC practice</td>
                                                             <td><a href="../img/Jounetsu Tairiku.mp4" target="_blank" rel="noopener noreferrer">Jounetsu Tairiku.mp4</a></td>
                                                             <td>
                                                                 <div class="button-group">
-                                                                    <a href="TProgressionDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    <a href="TPracticeDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                     <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                     <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
                                                                 </div>
@@ -177,7 +180,7 @@
                                         </div>
                                     </div>
                                     <!-- add progression panel -->
-                                    <div class="tab-pane" id="addProgression" role="tabpanel">
+                                    <div class="tab-pane" id="addLog" role="tabpanel">
                                         <div class="p-20">
                                             <form class="form-material">
                                                 <div class='form-group'>
@@ -191,7 +194,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-text">Progression Title</span>
+                                                        <label class="col-md-12" for="example-text">Practice Log Title</span>
                                                         </label>
                                                         <div class="col-md-12">
                                                             <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter title" required>
@@ -200,7 +203,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-sm-12">Upload Progression File</label>
+                                                        <label class="col-sm-12">Upload Practice Video File</label>
                                                         <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
                                                             <div class="form-control" data-trigger="fileinput">
                                                                 <i class="glyphicon glyphicon-file fileinput-exists"></i>
@@ -235,10 +238,10 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel1">Edit Progression</h4>
+                                <h4 class="modal-title" id="exampleModalLabel1">Edit Practice Log</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
-                            <form class="form-material" id="editProgressionForm">
+                            <form class="form-material" id="editLogForm">
                                 <div class="modal-body">
                                     <div class='form-group'>
                                         <label class='control-label col-md-12'>Select Children</label>
@@ -251,14 +254,14 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12" for="example-text">Progression Title</span>
+                                        <label class="col-md-12" for="example-text">Practice Log Title</span>
                                         </label>
                                         <div class="col-md-12">
-                                            <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter title" value="20210101 class photo" required>
+                                            <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter title" value="1st practice of Song A" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-12">Upload Progression File</label>
+                                        <label class="col-sm-12">Upload Practice Video File</label>
                                         <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
                                             <div class="form-control" data-trigger="fileinput">
                                                 <i class="glyphicon glyphicon-file fileinput-exists"></i>
@@ -381,7 +384,7 @@
         });
 
         // edit progression form
-        $("#editProgressionForm").submit(function(e) {
+        $("#editLogForm").submit(function(e) {
             e.preventDefault();
             Swal.fire({
                 title: 'Confirm Edit?',
@@ -396,10 +399,10 @@
                     // DO EDIT PROGRESSION HERE THEN FIRE SWAL
                     Swal.fire(
                         'Done!',
-                        'Progression Edited.',
+                        'Practice Log Edited.',
                         'success'
                     ).then(() => {
-                        window.location.href = "TProgression.php";
+                        window.location.href = "TPractice.php";
                     })
                 }
             })
