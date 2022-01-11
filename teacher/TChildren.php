@@ -20,6 +20,20 @@
     <!-- Footable CSS -->
     <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
     <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+    <style>
+        .parentTable th {
+            padding-top: 0px !important;
+            padding-bottom: 5px !important;
+            border-top: 0px !important;
+            border-bottom: 1px solid #d9d9d9;
+        }
+
+        .parentTable td {
+            padding-top: 5px !important;
+            padding-bottom: 3px !important;
+            border-top: 0px !important;
+        }
+    </style>
 
 
 </head>
@@ -106,27 +120,27 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive ">
-                                    <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
+                                    <table id="mytable" class="table m-t-5 table-hover contact-list toggle-arrow-tiny" data-page-size="5">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Age</th>
                                                 <th>Course</th>
-                                                <th>Parent</th>
-                                                <th>Parent Email</th>
-                                                <th>Parent Phone</th>
                                                 <th>Status</th>
+                                                <th data-hide="all">Parent</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <?php
+                                            $children_num = 0;
                                             $userID = $_SESSION["userID"];
                                             $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                             if ($conn) {
                                                 $sql = "SELECT * FROM CHILD LEFT JOIN PARENT ON CHILD.PARENT_ID = PARENT.PARENT_ID LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID WHERE TEACHER_ID = '$userID'";
                                                 $result = $conn->query($sql);
                                                 while ($row = $result->fetch_assoc()) {
+                                                    $children_num++;
                                                     $child_id = $row["CHILD_ID"];
                                                     $child_name = $row["CHILD_NAME"];
                                                     $child_age = $row["CHILD_AGE"];
@@ -135,15 +149,13 @@
                                                     $child_status = $row["CHILD_STATUS"];
                                                     $parent_email = $row["PARENT_EMAIL"];
                                                     $parent_phone = $row["PARENT_PHONE_NUM"];
+                                                    $parent_relatioship = $row["PARENT_RELATIONSHIP"];
                                             ?>
                                                     <tr>
-                                                        <td><?php echo $child_id; ?></td>
+                                                        <td><?php echo $children_num; ?></td>
                                                         <td><?php echo $child_name; ?></td>
                                                         <td><?php echo $child_age; ?></td>
                                                         <td><?php echo $course_name; ?></td>
-                                                        <td><?php echo $parent_name; ?></td>
-                                                        <td><?php echo $parent_email; ?></td>
-                                                        <td><?php echo $parent_phone; ?></td>
                                                         <?php
                                                         if ($child_status == "active") {
                                                         ?>
@@ -155,6 +167,23 @@
                                                         <?php
                                                         }
                                                         ?>
+                                                        <!-- parent table part  -->
+                                                        <td>
+                                                            <table class="parentTable">
+                                                                <tr>
+                                                                    <th>Parent Name</th>
+                                                                    <th>Parent Email</th>
+                                                                    <th>Parent Phone</th>
+                                                                    <th>Relationship</th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><?php echo $parent_name; ?></td>
+                                                                    <td><?php echo $parent_email; ?></td>
+                                                                    <td><?php echo $parent_phone; ?></td>
+                                                                    <td><?php echo $parent_relatioship; ?></td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
                                                     </tr>
                                             <?php
                                                 }
@@ -247,6 +276,14 @@
             e.preventDefault();
             addrow.trigger('footable_filter', {
                 filter: $(this).val()
+            });
+        });
+
+        // Accordion
+        // -----------------------------------------------------------------
+        $('#mytable').footable().on('footable_row_expanded', function(e) {
+            $('#mytable tbody tr.footable-detail-show').not(e.row).each(function() {
+                $('#mytable').data('footable').toggleDetail(this);
             });
         });
     </script>

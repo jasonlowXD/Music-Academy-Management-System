@@ -135,12 +135,14 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php
+                                                        $teacher_num=0;
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
                                                             $sql = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID'";
                                                             $result = $conn->query($sql);
                                                             while ($row = $result->fetch_assoc()) {
+                                                                $teacher_num++;
                                                                 $teacher_id = $row["TEACHER_ID"];
                                                                 $teacher_name = $row["TEACHER_NAME"];
                                                                 $teacher_email = $row["TEACHER_EMAIL"];
@@ -148,7 +150,7 @@
                                                                 $teacher_status = $row["TEACHER_STATUS"];
                                                         ?>
                                                                 <tr>
-                                                                    <td><?php echo $teacher_id; ?></td>
+                                                                    <td><?php echo $teacher_num; ?></td>
                                                                     <td><?php echo $teacher_name; ?></td>
                                                                     <td><?php echo $teacher_email; ?></td>
                                                                     <td><?php echo $teacher_phone; ?></td>

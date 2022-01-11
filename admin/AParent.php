@@ -149,12 +149,14 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php
+                                                        $parent_num=0;
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
                                                             $sql = "SELECT * FROM PARENT WHERE ADMIN_ID = '$userID'";
                                                             $result = $conn->query($sql);
                                                             while ($row = $result->fetch_assoc()) {
+                                                                $parent_num++;
                                                                 $parent_id = $row["PARENT_ID"];
                                                                 $parent_name = $row["PARENT_NAME"];
                                                                 $parent_email = $row["PARENT_EMAIL"];
@@ -162,7 +164,7 @@
                                                                 $parent_status = $row["PARENT_STATUS"];
                                                         ?>
                                                                 <tr>
-                                                                    <td><?php echo $parent_id; ?></td>
+                                                                    <td><?php echo $parent_num; ?></td>
                                                                     <td><?php echo $parent_name; ?></td>
                                                                     <td><?php echo $parent_email; ?></td>
                                                                     <td><?php echo $parent_phone; ?></td>

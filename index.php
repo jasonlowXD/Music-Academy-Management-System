@@ -102,7 +102,7 @@ if (isset($_POST["login"])) {
                     } else if ($email == $tempEmail && $tempStatus == 'inactive') {
                         // echo "teacher no active" . "</br>";
                         $teacherCheck = TRUE;
-                        $emailErr = "Your email is currently inactive, please contact your admin!";
+                        $emailErr = "Your email is currently inactive, <br> please contact your admin!";
                         break;
                     } else {
                         // echo "teacher no email" . "</br>";
@@ -141,7 +141,7 @@ if (isset($_POST["login"])) {
                             break;
                         } else if ($email == $tempEmail && $tempStatus == 'inactive') {
                             // echo "parent no active" . "</br>";
-                            $emailErr = "Your email is currently inactive, please contact your admin!";
+                            $emailErr = "Your email is currently inactive, <br> please contact your admin!";
                             break;
                         } else {
                             // echo "parent no email" . "</br>";

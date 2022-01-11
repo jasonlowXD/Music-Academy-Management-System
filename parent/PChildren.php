@@ -120,12 +120,14 @@
                                         </thead>
                                         <tbody>
                                             <?php
+                                            $children_num = 0;
                                             $userID = $_SESSION["userID"];
                                             $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                             if ($conn) {
                                                 $sql = "SELECT * FROM CHILD LEFT JOIN TEACHER ON CHILD.TEACHER_ID = TEACHER.TEACHER_ID LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID WHERE PARENT_ID = '$userID'";
                                                 $result = $conn->query($sql);
                                                 while ($row = $result->fetch_assoc()) {
+                                                    $children_num++;
                                                     $child_id = $row["CHILD_ID"];
                                                     $child_name = $row["CHILD_NAME"];
                                                     $child_age = $row["CHILD_AGE"];
@@ -135,7 +137,7 @@
                                                     $child_status = $row["CHILD_STATUS"];
                                             ?>
                                                     <tr>
-                                                        <td><?php echo $child_id; ?></td>
+                                                        <td><?php echo $children_num; ?></td>
                                                         <td><?php echo $child_name; ?></td>
                                                         <td><?php echo $child_age; ?></td>
                                                         <td><?php echo $teacher_name; ?></td>

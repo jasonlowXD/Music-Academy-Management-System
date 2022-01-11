@@ -135,12 +135,14 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php
+                                                        $course_num=0;
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
                                                             $sql = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID'";
                                                             $result = $conn->query($sql);
                                                             while ($row = $result->fetch_assoc()) {
+                                                                $course_num++;
                                                                 $course_id = $row["COURSE_ID"];
                                                                 $course_name = $row["COURSE_NAME"];
                                                                 $course_fee = $row["COURSE_FEE"];
@@ -148,7 +150,7 @@
                                                                 $course_status = $row["COURSE_STATUS"];
                                                         ?>
                                                                 <tr>
-                                                                    <td><?php echo $course_id; ?></td>
+                                                                    <td><?php echo $course_num; ?></td>
                                                                     <td><?php echo $course_name; ?></td>
                                                                     <td><?php echo $course_fee; ?></td>
                                                                     <td><?php echo $course_duration; ?></td>
