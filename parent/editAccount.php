@@ -71,11 +71,11 @@ if ($conn) {
         if ($emailCrash) {
             $response['title']  = 'Error email';
             $response['status']  = 'error';
-            $response['message'] = 'Email existed! Please use other email!';
+            $response['message'] = 'Email already registered in system! Please use other email!';
         } else if ($phoneCrash) {
             $response['title']  = 'Error phone';
             $response['status']  = 'error';
-            $response['message'] = 'Phone number existed! Please use other phone number!';
+            $response['message'] = 'Phone number already registered in system! Please use other phone number!';
         }
         // IF ALL NO CRASH, UPDATE DATABASE
         else {

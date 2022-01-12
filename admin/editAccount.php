@@ -47,7 +47,7 @@ if ($conn) {
         if ($emailCrash) {
             $response['title']  = 'Error!';
             $response['status']  = 'error';
-            $response['message'] = 'Email existed! Please use other email!';
+            $response['message'] = 'Email already registered in system! Please use other email!';
         }
         // IF ALL NO CRASH, UPDATE DATABASE
         else {
