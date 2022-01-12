@@ -36,21 +36,21 @@ if ($conn) {
 
         if ($teacherEmail != $db_teacher_email) {
             // CHECK EMAIL IN ADMIN TABLE 
-            $sql1 = "SELECT COUNT(*) FROM ADMIN WHERE ADMIN_ID = '$userID' AND ADMIN_EMAIL =  '$teacherEmail' ";
+            $sql1 = "SELECT COUNT(*) FROM ADMIN WHERE ADMIN_EMAIL =  '$teacherEmail' ";
             $result1 = $conn->query($sql1);
             while ($row1 = $result1->fetch_assoc()) {
                 $admin_email_count = $row1["COUNT(*)"];
             }
 
             // CHECK EMAIL IN TEACHER TABLE 
-            $sql2 = "SELECT COUNT(*) FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_EMAIL =  '$teacherEmail' ";
+            $sql2 = "SELECT COUNT(*) FROM TEACHER WHERE TEACHER_EMAIL =  '$teacherEmail' ";
             $result2 = $conn->query($sql2);
             while ($row2 = $result2->fetch_assoc()) {
                 $teacher_email_count = $row2["COUNT(*)"];
             }
 
             // CHECK EMAIL IN PARENT TABLE 
-            $sql3 = "SELECT COUNT(*) FROM PARENT WHERE ADMIN_ID = '$userID' AND PARENT_EMAIL =  '$teacherEmail' ";
+            $sql3 = "SELECT COUNT(*) FROM PARENT WHERE PARENT_EMAIL =  '$teacherEmail' ";
             $result3 = $conn->query($sql3);
             while ($row3 = $result3->fetch_assoc()) {
                 $parent_email_count = $row3["COUNT(*)"];
@@ -86,11 +86,11 @@ if ($conn) {
         if ($emailCrash) {
             $response['title']  = 'Error email';
             $response['status']  = 'error';
-            $response['message'] = 'Email existed! Please use other email!';
+            $response['message'] = 'Email already registered in system! Please use other email!';
         } else if ($phoneCrash) {
             $response['title']  = 'Error phone';
             $response['status']  = 'error';
-            $response['message'] = 'Phone number existed! Please use other phone number!';
+            $response['message'] = 'Phone number already registered in system! Please use other phone number!';
         }
 
         // IF ALL NO CRASH, UPDATE TEACHER INFO

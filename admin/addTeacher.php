@@ -32,21 +32,21 @@ if ($conn) {
     // CHECK GOT CRASH EMAIL OR PHONE NUM IN DATABASE OR NOT
 
     // CHECK EMAIL IN ADMIN TABLE 
-    $sql = "SELECT COUNT(*) FROM ADMIN WHERE ADMIN_ID = '$userID' AND ADMIN_EMAIL =  '$teacherEmail' ";
+    $sql = "SELECT COUNT(*) FROM ADMIN WHERE ADMIN_EMAIL =  '$teacherEmail' ";
     $result = $conn->query($sql);
     while ($row = $result->fetch_assoc()) {
         $admin_email_count = $row["COUNT(*)"];
     }
 
     // CHECK EMAIL IN TEACHER TABLE 
-    $sql0 = "SELECT COUNT(*) FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_EMAIL =  '$teacherEmail' ";
+    $sql0 = "SELECT COUNT(*) FROM TEACHER WHERE TEACHER_EMAIL =  '$teacherEmail' ";
     $result0 = $conn->query($sql0);
     while ($row0 = $result0->fetch_assoc()) {
         $teacher_email_count = $row0["COUNT(*)"];
     }
 
     // CHECK EMAIL IN PARENT TABLE 
-    $sql1 = "SELECT COUNT(*) FROM PARENT WHERE ADMIN_ID = '$userID' AND PARENT_EMAIL =  '$teacherEmail' ";
+    $sql1 = "SELECT COUNT(*) FROM PARENT WHERE PARENT_EMAIL =  '$teacherEmail' ";
     $result1 = $conn->query($sql1);
     while ($row1 = $result1->fetch_assoc()) {
         $parent_email_count = $row1["COUNT(*)"];
@@ -79,11 +79,11 @@ if ($conn) {
     if ($emailCrash) {
         $response['title']  = 'Error email';
         $response['status']  = 'error';
-        $response['message'] = 'Email existed! Please use other email!';
+        $response['message'] = 'Email already registered in system! Please use other email!';
     } else if ($phoneCrash) {
         $response['title']  = 'Error phone';
         $response['status']  = 'error';
-        $response['message'] = 'Phone number existed! Please use other phone number!';
+        $response['message'] = 'Phone number already registered in system! Please use other phone number!';
     }
 
     // IF ALL NO CRASH, SET RANDOM PASSWORD AND ADD NEW TEACHER
