@@ -43,14 +43,35 @@ if ($conn) {
         } else {
             $sql2 = "UPDATE CHILD SET CHILD_NAME ='$childName', CHILD_AGE = '$childAge', CHILD_STATUS = '$childStatus', TEACHER_ID = '$childTeacher' , COURSE_ID = '$childCourse' WHERE CHILD_ID = '$child_id' ";
 
-            if (mysqli_query($conn, $sql2)) {
-                $response['title']  = 'Done!';
-                $response['status']  = 'success';
-                $response['message'] = 'Child edited!';
+            // IF GOT UPDATE TO DIFFERENT TEACHER, NOTIFY 
+            if ($childTeacher !=  $db_child_teacher) {
+                // NOTIFY TEACHER
+                $title = 'You have a new child!';
+                $content = 'A new child (' . $childName . ') has assigned to you!';
+                $status = 'unseen';
+                $link = 'TChildren.php';
+                $sql3 = "INSERT INTO NOTIFICATION (NOTIFICATION_ID,ADMIN_ID,TEACHER_ID,PARENT_ID,TITLE,CONTENT,VIEW_STATUS,DATETIME,LINK) 
+                VALUES ('',NULL,'$childTeacher',NULL,'$title','$content','$status',CURRENT_TIMESTAMP(),'$link')";
+
+                if (mysqli_query($conn, $sql2) && mysqli_query($conn, $sql3)) {
+                    $response['title']  = 'Done!';
+                    $response['status']  = 'success';
+                    $response['message'] = 'Child edited!';
+                } else {
+                    $response['title']  = 'Error!';
+                    $response['status']  = 'error';
+                    $response['message'] = mysqli_error($conn);
+                }
             } else {
-                $response['title']  = 'Error!';
-                $response['status']  = 'error';
-                $response['message'] = 'mysql error';
+                if (mysqli_query($conn, $sql2)) {
+                    $response['title']  = 'Done!';
+                    $response['status']  = 'success';
+                    $response['message'] = 'Child edited!';
+                } else {
+                    $response['title']  = 'Error!';
+                    $response['status']  = 'error';
+                    $response['message'] = mysqli_error($conn);
+                }
             }
         }
     }

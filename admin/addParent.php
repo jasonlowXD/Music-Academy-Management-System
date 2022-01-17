@@ -122,7 +122,15 @@ if ($conn) {
                 $sql5 = "INSERT INTO CHILD (CHILD_ID,PARENT_ID,TEACHER_ID,COURSE_ID,CHILD_NAME,CHILD_AGE,CHILD_STATUS) 
                 VALUES ('','$last_parent_id','$tempChildrenTeacher','$tempChildrenCourse','$tempChildrenName','$tempChildrenAge','$childStatus')";
 
-                if (mysqli_query($conn, $sql5)) {
+                // NOTIFY TEACHER
+                $title = 'You have a new child!';
+                $content = 'A new child (' . $tempChildrenName . ') has assigned to you!';
+                $status = 'unseen';
+                $link = 'TChildren.php';
+                $sql6 = "INSERT INTO NOTIFICATION (NOTIFICATION_ID,ADMIN_ID,TEACHER_ID,PARENT_ID,TITLE,CONTENT,VIEW_STATUS,DATETIME,LINK) 
+                VALUES ('',NULL,'$tempChildrenTeacher',NULL,'$title','$content','$status',CURRENT_TIMESTAMP(),'$link')";
+
+                if (mysqli_query($conn, $sql5) && mysqli_query($conn, $sql6)) {
                     $flag = TRUE;
                 } else {
                     $flag = FALSE;
