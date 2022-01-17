@@ -97,6 +97,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row text-center m-t-10">
+                                    <div class="col-md-12">
+                                        <h5><strong>Having problem with the system?</strong></h5>
+                                        <p><strong>Contact:</strong> jasonlowxd@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div class="card">

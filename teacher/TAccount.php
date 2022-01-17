@@ -117,6 +117,26 @@
 
                             </div>
                         </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row text-center m-t-10">
+                                    <div class="col-md-12">
+                                        <h5><strong>Having problem?</strong></h5>
+                                        <?php
+                                        $user_id = $_SESSION["userID"];
+                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                        $sql = "SELECT * FROM TEACHER LEFT JOIN ADMIN ON TEACHER.ADMIN_ID = ADMIN.ADMIN_ID WHERE TEACHER_ID =  '$user_id' ";
+                                        $result = $conn->query($sql);
+                                        while ($row = $result->fetch_assoc()) {
+                                            $admin_email = $row["ADMIN_EMAIL"];
+                                        }
+                                        $conn->close();
+                                        ?>
+                                        <p><strong>Contact:</strong> <?php echo $admin_email ?></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-lg-8 col-xlg-9 col-md-7">
                         <div class="card">
@@ -276,7 +296,7 @@
                     })
                 })
         })
-        
+
         $("#editPasswordForm").submit(function(e) {
             e.preventDefault();
             Swal.fire({
