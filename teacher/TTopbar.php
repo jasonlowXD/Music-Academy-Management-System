@@ -13,6 +13,19 @@ if (!($_SESSION["logged"])) {
         header("Location:../parent/PCalendar.php");
     }
 }
+
+$conn = mysqli_connect("localhost", "root", "", "music_academy");
+if ($conn) {
+    $sql = "DELETE FROM NOTIFICATION WHERE DATETIME < date_sub(now(),interval 1 month)";
+    if (mysqli_query($conn, $sql)) {
+    } else {
+        echo mysqli_error($conn);
+    }
+} else {
+    die("FATAL ERROR");
+}
+
+$conn->close();
 ?>
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-dark">
@@ -54,57 +67,19 @@ if (!($_SESSION["logged"])) {
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="ti-bell"></i>
-                        <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                        <div class="notify"> <span id="heartbit" class="heartbit"></span> <span id="point" class="point"></span> </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
                         <ul>
                             <div class="message-center">
                                 <li>
-                                    <div class="drop-title  font-weight-bold pl-3">New Notifications</div>
+                                    <div class="drop-title font-weight-bold pl-3">Notifications</div>
                                 </li>
                                 <li>
-                                    <div class="">
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="">
-                                                <h5 class=" font-weight-bold">New Reschedule Request by Parent A </h5>
-                                                <p class=" text-muted">Parent A request to change 1/10/2021 8am class to 7/10/2021 2pm class</p> <span class="text-info">9:30 AM</span>
-                                            </div>
-                                        </a>
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="">
-                                                <h5 class=" font-weight-bold">You have new children assigned </h5>
-                                                <p class=" text-muted">New children (Kid ABC name) has assigned to your list</p> <span class="text-info">11:30 PM</span>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="drop-title  font-weight-bold  pl-3">Viewed Notifications</div>
-                                </li>
-                                <li>
-                                    <div class="">
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="">
-                                                <h5 class=" ">test notification </h5>
-                                                <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
-                                            </div>
-                                        </a>
-                                        <!-- Message -->
-                                        <a href="javascript:void(0)">
-                                            <div class="">
-                                                <h5 class="">test notification </h5>
-                                                <p class=" text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consectetur imperdiet ornare. </p> <span class="text-muted">9:30 AM</span>
-                                            </div>
-                                        </a>
+                                    <div class="dropdownNotification">
                                     </div>
                                 </li>
                             </div>
-                            <!-- <li>
-                                <a class="nav-link text-center link" href="javascript:void(0);"> <strong>Check all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li> -->
                         </ul>
                     </div>
                 </li>
@@ -132,3 +107,53 @@ if (!($_SESSION["logged"])) {
         </div>
     </nav>
 </header>
+
+<script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+<script>
+    // load notification 
+    function loadNotification() {
+        $.ajax({
+                type: "POST",
+                url: "loadNotification.php",
+                dataType: "json"
+            })
+            .done(function(response) {
+                // if got one notification is unseen 
+                if (response.unseen == 'true') {
+                    $("#heartbit").addClass("heartbit");
+                    $("#point").addClass("point");
+                    $('.dropdownNotification').html(response.notification);
+                } else {
+                    $("#heartbit").removeClass("heartbit");
+                    $("#point").removeClass("point");
+                    $('.dropdownNotification').html(response.notification);
+                }
+            })
+            .fail(function(xhr, textStatus, errorThrown) {
+                console.log(xhr.responseText);
+            })
+    }
+
+    loadNotification();
+
+    // auto refresh notification every 5 seconds 
+    setInterval(function() {
+        loadNotification();;
+    }, 5000);
+
+    // update notification to seen status after user click 
+    function updateNotification(id) {
+        $.ajax({
+                type: "GET",
+                url: "updateNotification.php",
+                data: {
+                    id: id,
+                }
+            }).done(function(response) {
+                console.log(response);
+            })
+            .fail(function(xhr, textStatus, errorThrown) {
+                console.log(xhr.responseText);
+            })
+    }
+</script>
