@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Children Practice Log</title>
+    <title>Children Practice Progress</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
@@ -65,7 +65,7 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Children Practice Log</h4>
+                        <h4 class="text-themecolor">Child Practice Progress</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
@@ -86,7 +86,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Children Practice Logs</h4>
+                                <h4 class="card-title">Child Practice Progress</h4>
                                 <hr>
                                 <div class="d-flex">
                                     <div class="mr-auto">
@@ -110,7 +110,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Children</th>
+                                                <th>Child</th>
                                                 <th>Uploaded by</th>
                                                 <th>Upload Date</th>
                                                 <th>Title</th>

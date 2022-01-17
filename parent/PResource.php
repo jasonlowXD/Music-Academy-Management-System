@@ -110,7 +110,7 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Children</th>
+                                                <th>Child</th>
                                                 <th>Upload by</th>
                                                 <th>Title</th>
                                                 <th>Url</th>

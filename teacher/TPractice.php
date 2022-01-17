@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Children Practice Log</title>
+    <title>Children Practice Progress</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
@@ -65,7 +65,7 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Practice Log Management</h4>
+                        <h4 class="text-themecolor">Child Practice Progress Management</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
@@ -90,12 +90,12 @@
                                 <ul class="nav nav-tabs" role="tablist" id="practiceLogTab">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" href="#practiceLoglist" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Children Practice Logs</span>
+                                            <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Child Practice Progress</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#addLog" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Log</span>
+                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Progress</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -126,7 +126,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Children</th>
+                                                            <th>Child</th>
                                                             <th>Uploaded by</th>
                                                             <th>Upload Date</th>
                                                             <th>Title</th>
@@ -184,9 +184,9 @@
                                         <div class="p-20">
                                             <form class="form-material">
                                                 <div class='form-group'>
-                                                    <label class='control-label'>Select Children</label>
+                                                    <label class='control-label'>Select Child</label>
                                                     <select class='form-control' name='children' required>
-                                                        <option hidden disabled selected value=""> -- select a children -- </option>
+                                                        <option hidden disabled selected value=""> -- select a child -- </option>
                                                         <option value='Children A'>Children A</option>
                                                         <option value='Children B'>Children B</option>
                                                         <option value='Children C'>Children C</option>
@@ -194,7 +194,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-text">Practice Log Title</span>
+                                                        <label class="col-md-12" for="example-text">Practice Progress Title</span>
                                                         </label>
                                                         <div class="col-md-12">
                                                             <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter title" required>
@@ -238,13 +238,13 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel1">Edit Practice Log</h4>
+                                <h4 class="modal-title" id="exampleModalLabel1">Edit Practice Progress</h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             </div>
                             <form class="form-material" id="editLogForm">
                                 <div class="modal-body">
                                     <div class='form-group'>
-                                        <label class='control-label col-md-12'>Select Children</label>
+                                        <label class='control-label col-md-12'>Select Child</label>
                                         <div class="col-md-12">
                                             <select class='form-control text-muted' name='children' required>
                                                 <option selected value='Children A'>Children A</option>
@@ -254,7 +254,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-md-12" for="example-text">Practice Log Title</span>
+                                        <label class="col-md-12" for="example-text">Practice Progress Title</span>
                                         </label>
                                         <div class="col-md-12">
                                             <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter title" value="1st practice of Song A" required>
@@ -399,7 +399,7 @@
                     // DO EDIT PROGRESSION HERE THEN FIRE SWAL
                     Swal.fire(
                         'Done!',
-                        'Practice Log Edited.',
+                        'Practice Progress Edited.',
                         'success'
                     ).then(() => {
                         window.location.href = "TPractice.php";

@@ -305,7 +305,7 @@
                                                         <label class="col-md-12" for="example-email">Parent Email</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="email" id="emailInput" name="parentEmail" class="form-control" placeholder="enter teacher email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" required>
+                                                            <input type="email" id="emailInput" name="parentEmail" class="form-control" placeholder="enter parent email (xxx@xxx.xxx)" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" required>
                                                             <span id="emailFeedback"></span>
                                                         </div>
                                                     </div>

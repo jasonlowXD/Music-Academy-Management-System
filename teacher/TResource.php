@@ -127,7 +127,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
-                                                            <th>Children</th>
+                                                            <th>Child</th>
                                                             <th>Title</th>
                                                             <th>Url</th>
                                                             <th>File</th>
@@ -182,9 +182,9 @@
                                         <div class="p-20">
                                             <form class="form-material" id="addResourceForm">
                                                 <div class='form-group'>
-                                                    <label class='control-label'>Select Children</label>
+                                                    <label class='control-label'>Select Child</label>
                                                     <select class='form-control' name='children' required>
-                                                        <option hidden disabled selected value=""> -- select a children -- </option>
+                                                        <option hidden disabled selected value=""> -- select a child -- </option>
                                                         <option value='Children A'>Children A</option>
                                                         <option value='Children B'>Children B</option>
                                                         <option value='Children C'>Children C</option>
@@ -250,7 +250,7 @@
                             <form class="form-material" id="editResourceForm">
                                 <div class="modal-body">
                                     <div class='form-group'>
-                                        <label class='control-label col-md-12'>Select Children</label>
+                                        <label class='control-label col-md-12'>Select Child</label>
                                         <div class="col-md-12">
                                             <select class='form-control text-muted' name='children' required>
                                                 <option selected value='Children A'>Children A</option>

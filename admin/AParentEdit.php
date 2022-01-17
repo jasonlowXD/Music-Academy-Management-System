@@ -156,7 +156,7 @@
 
                                     <li class="nav-item">
                                         <a class="nav-link" data-toggle="tab" href="#addChildren" role="tab">
-                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Children</span>
+                                            <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Child</span>
                                         </a>
                                     </li>
                                 </ul>
