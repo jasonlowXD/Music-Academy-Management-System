@@ -21,7 +21,20 @@
     <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
     <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
 
+    <style>
+        .childrenTable th {
+            padding-top: 0px !important;
+            padding-bottom: 5px !important;
+            border-top: 0px !important;
+            border-bottom: 1px solid #d9d9d9;
+        }
 
+        .childrenTable td {
+            padding-top: 5px !important;
+            padding-bottom: 3px !important;
+            border-top: 0px !important;
+        }
+    </style>
 </head>
 
 <body class="skin-default-dark fixed-layout">
@@ -122,7 +135,7 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive ">
-                                                <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
+                                                <table id="mytable" class="table m-t-5 table-hover contact-list toggle-arrow-tiny" data-page-size="5">
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
@@ -131,11 +144,12 @@
                                                             <th>Phone</th>
                                                             <th>Status</th>
                                                             <th data-sort-ignore="true">Action</th>
+                                                            <th data-hide="all">Current active child assigned</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                        $teacher_num=0;
+                                                        $teacher_num = 0;
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
@@ -167,6 +181,33 @@
                                                                     ?>
                                                                     <td>
                                                                         <a href="ATeacherEdit.php?teacher_id=<?= $teacher_id ?>" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    </td>
+
+                                                                    <!-- children table part  -->
+                                                                    <td>
+                                                                        <table class="childrenTable">
+                                                                            <tr>
+                                                                                <th>Name</th>
+                                                                                <th>Age</th>
+                                                                                <th>Course</th>
+                                                                            </tr>
+                                                                            <?php
+                                                                            $sql2 = "SELECT * FROM CHILD LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID WHERE CHILD.TEACHER_ID = '$teacher_id' AND CHILD.CHILD_STATUS = 'active'";
+                                                                            $result2 = $conn->query($sql2);
+                                                                            while ($row2 = $result2->fetch_assoc()) {
+                                                                                $child_name = $row2["CHILD_NAME"];
+                                                                                $child_age = $row2["CHILD_AGE"];
+                                                                                $course_name = $row2["COURSE_NAME"];
+                                                                            ?>
+                                                                                <tr>
+                                                                                    <td><?php echo $child_name; ?></td>
+                                                                                    <td><?php echo $child_age; ?></td>
+                                                                                    <td><?php echo $course_name; ?></td>
+                                                                                </tr>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+                                                                        </table>
                                                                     </td>
                                                                 </tr>
                                                         <?php
@@ -334,6 +375,14 @@
         $('#btnReset').click(function() {
             emailRemoveClass();
             phoneRemoveClass();
+        });
+
+        // Accordion
+        // -----------------------------------------------------------------
+        $('#mytable').footable().on('footable_row_expanded', function(e) {
+            $('#mytable tbody tr.footable-detail-show').not(e.row).each(function() {
+                $('#mytable').data('footable').toggleDetail(this);
+            });
         });
 
         $("#addTeacherForm").submit(function(e) {
