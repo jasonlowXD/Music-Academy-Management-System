@@ -15,26 +15,39 @@ $conn = mysqli_connect("localhost", "root", "", "music_academy");
 
 if ($conn) {
 
-    $sql = "INSERT INTO CHILD (CHILD_ID,PARENT_ID,TEACHER_ID,COURSE_ID,CHILD_NAME,CHILD_AGE,CHILD_STATUS) 
-    VALUES ('','$parent_id','$childrenTeacher','$childrenCourse','$childrenName','$childrenAge','$childStatus')";
+    $sql3 = "SELECT * FROM PARENT WHERE PARENT_ID = '$parent_id'";
+    $result = $conn->query($sql3);
+    while ($row = $result->fetch_assoc()) {
+        $db_parent_status = $row["PARENT_STATUS"];
+    }
 
-    // NOTIFY TEACHER
-    $title = 'You have a new child!';
-    $content = 'A new child (' . $childrenName . ') has assigned to you!';
-    $status = 'unseen';
-    $link = 'TChildren.php';
-    $sql2 = "INSERT INTO NOTIFICATION (NOTIFICATION_ID,ADMIN_ID,TEACHER_ID,PARENT_ID,TITLE,CONTENT,VIEW_STATUS,DATETIME,LINK) 
-    VALUES ('',NULL,'$childrenTeacher',NULL,'$title','$content','$status',CURRENT_TIMESTAMP(),'$link')";
-
-
-    if (mysqli_query($conn, $sql) && mysqli_query($conn, $sql2)) {
-        $response['title']  = 'Done!';
-        $response['status']  = 'success';
-        $response['message'] = 'New child added!';
-    } else {
+    // IF PARENT IS INACTIVE, CANNOT ADD CHILD FOR THIS PARENT
+    if ($db_parent_status == 'inactive') {
         $response['title']  = 'Error!';
         $response['status']  = 'error';
-        $response['message'] = mysqli_error($conn);
+        $response['message'] = 'Cannot add new child due to inactive parent!';
+    } else {
+        $sql = "INSERT INTO CHILD (CHILD_ID,PARENT_ID,TEACHER_ID,COURSE_ID,CHILD_NAME,CHILD_AGE,CHILD_STATUS) 
+        VALUES ('','$parent_id','$childrenTeacher','$childrenCourse','$childrenName','$childrenAge','$childStatus')";
+
+        // NOTIFY TEACHER
+        $title = 'You have a new child!';
+        $content = 'A new child (' . $childrenName . ') has assigned to you!';
+        $status = 'unseen';
+        $link = 'TChildren.php';
+        $sql2 = "INSERT INTO NOTIFICATION (NOTIFICATION_ID,ADMIN_ID,TEACHER_ID,PARENT_ID,TITLE,CONTENT,VIEW_STATUS,DATETIME,LINK) 
+        VALUES ('',NULL,'$childrenTeacher',NULL,'$title','$content','$status',CURRENT_TIMESTAMP(),'$link')";
+
+
+        if (mysqli_query($conn, $sql) && mysqli_query($conn, $sql2)) {
+            $response['title']  = 'Done!';
+            $response['status']  = 'success';
+            $response['message'] = 'New child added!';
+        } else {
+            $response['title']  = 'Error!';
+            $response['status']  = 'error';
+            $response['message'] = mysqli_error($conn);
+        }
     }
 } else {
     die("FATAL ERROR");
