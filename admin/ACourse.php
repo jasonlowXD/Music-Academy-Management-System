@@ -11,16 +11,23 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Manage course</title>
-    <!-- Custom CSS -->
-    <link href="../dist/css/style.css" rel="stylesheet">
-    <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
     <!-- page css -->
     <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
     <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
+    <link href="../assets/node_modules/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
     <!-- Footable CSS -->
     <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
     <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
+    <link href="../dist/css/style.css" rel="stylesheet">
 
+    <style>
+        .teacherTable td {
+            padding: 0px !important;
+            border-top: 0px !important;
+        }
+    </style>
 
 </head>
 
@@ -122,7 +129,7 @@
                                                 </div>
                                             </div>
                                             <div class="table-responsive ">
-                                                <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
+                                                <table id="mytable" class="table m-t-5 table-hover contact-list toggle-arrow-tiny" data-page-size="5">
                                                     <thead>
                                                         <tr>
                                                             <th>#</th>
@@ -131,29 +138,30 @@
                                                             <th>Duration (min)</th>
                                                             <th>Status</th>
                                                             <th data-sort-ignore="true">Action</th>
+                                                            <th data-hide="all">Current active teacher</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                        $course_num=0;
+                                                        $course_num = 0;
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
-                                                            $sql = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID'";
+                                                            $sql = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID' ORDER BY COURSE_NAME";
                                                             $result = $conn->query($sql);
                                                             while ($row = $result->fetch_assoc()) {
                                                                 $course_num++;
                                                                 $course_id = $row["COURSE_ID"];
                                                                 $course_name = $row["COURSE_NAME"];
                                                                 $course_fee = $row["COURSE_FEE"];
-                                                                $course_duration = $row["COURSE_DURATION"];
+                                                                $duration_per_class = $row["DURATION_PER_CLASS"];
                                                                 $course_status = $row["COURSE_STATUS"];
                                                         ?>
                                                                 <tr>
                                                                     <td><?php echo $course_num; ?></td>
                                                                     <td><?php echo $course_name; ?></td>
                                                                     <td><?php echo $course_fee; ?></td>
-                                                                    <td><?php echo $course_duration; ?></td>
+                                                                    <td><?php echo $duration_per_class; ?></td>
                                                                     <?php
                                                                     if ($course_status == "active") {
                                                                     ?>
@@ -168,6 +176,30 @@
                                                                     <td>
                                                                         <a href="ACourseDetails.php?course_id=<?= $course_id ?>" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                         <a href="ACourseEdit.php?course_id=<?= $course_id ?>" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                    </td>
+
+                                                                    <!-- teacher table part  -->
+                                                                    <td>
+                                                                        <table class="teacherTable">
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <ul>
+                                                                                        <?php
+                                                                                        $sql2 = "SELECT * FROM TEACHER_COURSE LEFT JOIN TEACHER ON TEACHER.TEACHER_ID = TEACHER_COURSE.TEACHER_ID WHERE TEACHER_COURSE.COURSE_ID = '$course_id' AND TEACHER.TEACHER_STATUS = 'active'";
+                                                                                        $result2 = $conn->query($sql2);
+                                                                                        while ($row2 = $result2->fetch_assoc()) {
+                                                                                            $teacher_name = $row2["TEACHER_NAME"];
+                                                                                        ?>
+                                                                                            <li>
+                                                                                                <?php echo $teacher_name; ?>
+                                                                                            </li>
+                                                                                        <?php
+                                                                                        }
+                                                                                        ?>
+                                                                                    </ul>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
                                                                     </td>
                                                                 </tr>
                                                         <?php
@@ -232,10 +264,10 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-text">Course Duration (min)</span>
+                                                        <label class="col-md-12" for="example-text">Duration Per Class (min)</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="number" id="example-text" name="courseDuration" class="form-control" placeholder="enter course duration" required>
+                                                            <input type="number" id="example-text" name="duration" class="form-control" placeholder="enter duration" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -246,6 +278,28 @@
                                                             <textarea class="form-control" name="courseDesc" rows="5" placeholder="enter course description (max: 500 words)" maxlength="500" required></textarea>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class='form-group'>
+                                                    <label class='control-label'>Select Teacher</label>
+                                                    <select id="teacher_selector" class='select2 select2-multiple' name='courseTeacher[]' style="width: 100%" multiple="multiple">
+                                                        <?php
+                                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                        if ($conn) {
+                                                            $sql3 = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_STATUS ='active'";
+                                                            $result3 = $conn->query($sql3);
+                                                            while ($row3 = $result3->fetch_assoc()) {
+                                                                $teacher_id = $row3["TEACHER_ID"];
+                                                                $teacher_name = $row3["TEACHER_NAME"];
+                                                        ?>
+                                                                <option value="<?php echo $teacher_id ?>"><?php echo $teacher_name ?></option>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+                                                        $conn->close();
+                                                        ?>
+                                                    </select>
                                                 </div>
 
                                                 <div class="button-group">
@@ -309,6 +363,8 @@
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="../assets/node_modules/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
+
     <script>
         // tab panel javascript
         // $('a[data-toggle="tab"]').click(function(e) {
@@ -326,6 +382,9 @@
         // }
 
         ///////////////////////////////////////////////////////////////
+        // For select 2
+        $(".select2").select2();
+
         // footable
         $('#mytable').footable();
         $('#table-entries').on('change', function(e) {
@@ -344,9 +403,19 @@
                 filter: $(this).val()
             });
         });
-        
+
         $('#btnReset').click(function() {
             courseNameRemoveClass();
+            $("#teacher_selector").val("");
+            $("#teacher_selector").trigger("change");
+        });
+
+        // Accordion
+        // -----------------------------------------------------------------
+        $('#mytable').footable().on('footable_row_expanded', function(e) {
+            $('#mytable tbody tr.footable-detail-show').not(e.row).each(function() {
+                $('#mytable').data('footable').toggleDetail(this);
+            });
         });
 
         $("#addCourseForm").submit(function(e) {

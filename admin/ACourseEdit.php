@@ -11,6 +11,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Edit course</title>
+    <link href="../assets/node_modules/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
@@ -87,7 +88,7 @@
                     while ($row = $result->fetch_assoc()) {
                         $course_name = $row["COURSE_NAME"];
                         $course_fee = $row["COURSE_FEE"];
-                        $course_duration = $row["COURSE_DURATION"];
+                        $duration_per_class = $row["DURATION_PER_CLASS"];
                         $course_desc = $row["COURSE_DESC"];
                         $course_status = $row["COURSE_STATUS"];
                     }
@@ -123,10 +124,10 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <label class="col-md-12" for="example-text">Course Duration (min)</span>
+                                            <label class="col-md-12" for="example-text">Duration Per Class (min)</span>
                                             </label>
                                             <div class="col-md-12">
-                                                <input type="number" id="example-text" name="courseDuration" class="form-control text-muted" placeholder="enter course duration" value="<?php echo $course_duration; ?>" required>
+                                                <input type="number" id="example-text" name="duration" class="form-control text-muted" placeholder="enter duration" value="<?php echo $duration_per_class; ?>" required>
                                             </div>
                                         </div>
                                     </div>
@@ -137,6 +138,48 @@
                                                 <textarea class="form-control text-muted" name="courseDesc" rows="5" placeholder="enter course description (max: 500 words)" maxlength="500" required><?php echo $course_desc; ?></textarea>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class='form-group'>
+                                        <label class='control-label'>Select Teacher</label>
+                                        <select id="teacher_selector" class='select2 select2-multiple' name='courseTeacher[]' style="width: 100%" multiple="multiple">
+                                            <?php
+                                            $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                            if ($conn) {
+                                                $sql2 = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_STATUS ='active'";
+                                                $result2 = $conn->query($sql2);
+                                                while ($row2 = $result2->fetch_assoc()) {
+                                                    $flag = false;
+                                                    $teacher_id = $row2["TEACHER_ID"];
+                                                    $teacher_name = $row2["TEACHER_NAME"];
+
+                                                    $sql3 = "SELECT * FROM TEACHER_COURSE WHERE COURSE_ID = '$course_id'";
+                                                    $result3 = $conn->query($sql3);
+                                                    while ($row3 = $result3->fetch_assoc()) {
+                                                        $bridge_teacher_id = $row3["TEACHER_ID"];
+                                                        if ($teacher_id == $bridge_teacher_id) {
+                                                            $flag = true;
+                                                            break;
+                                                        } else {
+                                                            $flag = false;
+                                                        }
+                                                    }
+                                                    if ($flag == true) {
+                                            ?>
+                                                        <option value="<?php echo $teacher_id ?>" selected><?php echo $teacher_name ?></option>
+
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <option value="<?php echo $teacher_id ?>"><?php echo $teacher_name ?></option>
+                                            <?php
+                                                    }
+                                                }
+                                            } else {
+                                                die("FATAL ERROR");
+                                            }
+                                            $conn->close();
+                                            ?>
+                                        </select>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
@@ -215,7 +258,13 @@
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script src="../assets/node_modules/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
+
+
     <script>
+        // For select 2
+        $(".select2").select2();
+
         $("#editCourseForm").submit(function(e) {
             e.preventDefault();
             $('html, body').css("cursor", "wait");
@@ -256,7 +305,7 @@
                         'error'
                     )
                     $('html, body').css("cursor", "auto");
-                    // alert(errorThrown);
+                    console.log(xhr);
                 })
         })
     </script>
