@@ -14,7 +14,11 @@
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
-
+    <style>
+        .border-right {
+            border-right: 2px solid #d1d1d1 !important;
+        }
+    </style>
 </head>
 
 <body class="skin-megna-dark fixed-layout">
@@ -89,7 +93,7 @@
                                     while ($row = $result->fetch_assoc()) {
                                         $course_name = $row["COURSE_NAME"];
                                         $course_fee = $row["COURSE_FEE"];
-                                        $course_duration = $row["COURSE_DURATION"];
+                                        $duration_per_class = $row["DURATION_PER_CLASS"];
                                         $course_desc = $row["COURSE_DESC"];
                                         $course_desc = str_replace("\n", "<br/>", $course_desc);
                                 ?>
@@ -102,9 +106,9 @@
                                                 <h4><strong>Course Fee per Month (RM)</strong></h4>
                                                 <p class="text-muted"><?php echo $course_fee; ?></p>
                                             </div>
-                                            <div class="col-md-4 border-right">
-                                                <h4><strong>Course Duration (min)</strong></h4>
-                                                <p class="text-muted"><?php echo $course_duration; ?></p>
+                                            <div class="col-md-4">
+                                                <h4><strong>Duration Per Class (min)</strong></h4>
+                                                <p class="text-muted"><?php echo $duration_per_class; ?></p>
                                             </div>
                                         </div>
                                         <hr>
