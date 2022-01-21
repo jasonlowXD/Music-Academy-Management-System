@@ -95,16 +95,41 @@ if ($conn) {
 
         // IF ALL NO CRASH, UPDATE TEACHER INFO
         else {
-            $sql6 = "UPDATE TEACHER SET TEACHER_NAME ='$teacherName', TEACHER_EMAIL = '$teacherEmail', TEACHER_PHONE_NUM = '$teacherPhone', TEACHER_STATUS = '$teacherStatus' WHERE TEACHER_ID = '$teacher_id' AND ADMIN_ID = '$userID' ";
+            // IF CHANGE STATUS TO INACTIVE, CHECK THIS TEACHER STILL GOT ACTIVE CHILD OR NOT 
+            if ($teacherStatus == 'inactive') {
+                $sql6 = "SELECT * FROM CHILD LEFT JOIN TEACHER ON CHILD.TEACHER_ID = TEACHER.TEACHER_ID WHERE CHILD.TEACHER_ID = '$teacher_id' AND CHILD.CHILD_STATUS = 'active'";
+                $result6 = $conn->query($sql6);
+                // IF GOT CHILD ACTIVE 
+                if ($result6->num_rows > 0) {
+                    $response['title']  = 'Error!';
+                    $response['status']  = 'error';
+                    $response['message'] = 'Cannot inactive due to this teacher still has active child assigned';
+                }
+                // IF NO CHILD ACTIVE 
+                else if ($result6->num_rows == 0) {
+                    $sql7 = "UPDATE TEACHER SET TEACHER_NAME ='$teacherName', TEACHER_EMAIL = '$teacherEmail', TEACHER_PHONE_NUM = '$teacherPhone', TEACHER_STATUS = '$teacherStatus' WHERE TEACHER_ID = '$teacher_id' AND ADMIN_ID = '$userID' ";
 
-            if (mysqli_query($conn, $sql6)) {
-                $response['title']  = 'Done!';
-                $response['status']  = 'success';
-                $response['message'] = 'Teacher edited!';
+                    if (mysqli_query($conn, $sql7)) {
+                        $response['title']  = 'Done!';
+                        $response['status']  = 'success';
+                        $response['message'] = 'Teacher edited!';
+                    } else {
+                        $response['title']  = 'Error!';
+                        $response['status']  = 'error';
+                        $response['message'] = 'mysql error';
+                    }
+                }
             } else {
-                $response['title']  = 'Error!';
-                $response['status']  = 'error';
-                $response['message'] = 'mysql error';
+                $sql8 = "UPDATE TEACHER SET TEACHER_NAME ='$teacherName', TEACHER_EMAIL = '$teacherEmail', TEACHER_PHONE_NUM = '$teacherPhone', TEACHER_STATUS = '$teacherStatus' WHERE TEACHER_ID = '$teacher_id' AND ADMIN_ID = '$userID' ";
+                if (mysqli_query($conn, $sql8)) {
+                    $response['title']  = 'Done!';
+                    $response['status']  = 'success';
+                    $response['message'] = 'Teacher edited!';
+                } else {
+                    $response['title']  = 'Error!';
+                    $response['status']  = 'error';
+                    $response['message'] = 'mysql error';
+                }
             }
         }
     }
