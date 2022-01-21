@@ -264,22 +264,37 @@
                                                     </div>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Select Course</label>
-                                                        <select class='form-control text-muted' name='childCourse' required>
+                                                        <select class='form-control course_option text-muted' name='childCourse' required>
                                                             <?php
                                                             if ($conn) {
+                                                                $sql2_5 = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID'";
+                                                                $result2_5 = $conn->query($sql2_5);
+                                                                while ($row2_5 = $result2_5->fetch_assoc()) {
+                                                                    $course_id = $row2_5["COURSE_ID"];
+                                                                    $course_name = $row2_5["COURSE_NAME"];
+                                                                    $course_status = $row2_5["COURSE_STATUS"];
+                                                                    if ($childCourse[$x] == $course_id && $course_status == 'inactive') {
+                                                            ?>
+                                                                        <option hidden value="<?php echo $course_id ?>" selected> <?php echo $course_name ?> </option>
+                                                                    <?php
+                                                                    }
+                                                                }
+
                                                                 $sql3 = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID' AND COURSE_STATUS ='active'";
                                                                 $result3 = $conn->query($sql3);
                                                                 while ($row3 = $result3->fetch_assoc()) {
                                                                     $course_id = $row3["COURSE_ID"];
                                                                     $course_name = $row3["COURSE_NAME"];
-                                                            ?>
-                                                                    <!-- <option selected value='1'>Piano Grade 1</option>
-                                                                    <option value='2'>Piano Grade 2</option>
-                                                                    <option value='3'>Guitar Grade 1</option> -->
-                                                                    <option value="<?php echo $course_id ?>" <?php if ($childCourse[$x] == $course_id) {
-                                                                                                                    echo 'selected';
-                                                                                                                } ?>><?php echo $course_name ?></option>
+                                                                    if ($childCourse[$x] == $course_id) {
+                                                                    ?>
+                                                                        <option value="<?php echo $course_id ?>" selected><?php echo $course_name ?></option>
+                                                                    <?php
+                                                                    } else {
+                                                                    ?>
+                                                                        <option value="<?php echo $course_id ?>"><?php echo $course_name ?></option>
+
                                                             <?php
+                                                                    }
                                                                 }
                                                             } else {
                                                                 die("FATAL ERROR");
@@ -289,22 +304,39 @@
                                                     </div>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Select Teacher</label>
-                                                        <select class='form-control text-muted' name='childTeacher' required>
+                                                        <select class='form-control teacher_option text-muted' name='childTeacher' required>
                                                             <?php
                                                             if ($conn) {
-                                                                $sql4 = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_STATUS ='active'";
+                                                                $sql3_5 = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID'";
+                                                                $result3_5 = $conn->query($sql3_5);
+                                                                while ($row3_5 = $result3_5->fetch_assoc()) {
+                                                                    $teacher_id = $row3_5["TEACHER_ID"];
+                                                                    $teacher_name = $row3_5["TEACHER_NAME"];
+                                                                    $teacher_status = $row3_5["TEACHER_STATUS"];
+                                                                    if ($childTeacher[$x] == $teacher_id) {
+                                                            ?>
+                                                                        <option hidden value="<?php echo $teacher_id ?>" selected> <?php echo $teacher_name ?> </option>
+                                                                    <?php
+                                                                    }
+                                                                }
+
+                                                                $course_id = $childCourse[$x];
+
+                                                                $sql4 = "SELECT * FROM TEACHER LEFT JOIN TEACHER_COURSE ON TEACHER.TEACHER_ID = TEACHER_COURSE.TEACHER_ID LEFT JOIN COURSE ON TEACHER_COURSE.COURSE_ID = COURSE.COURSE_ID 
+                                                                WHERE TEACHER.ADMIN_ID = '$userID' AND TEACHER.TEACHER_STATUS ='active' AND TEACHER_COURSE.COURSE_ID = '$course_id' AND COURSE.COURSE_STATUS = 'active'";
                                                                 $result4 = $conn->query($sql4);
                                                                 while ($row4 = $result4->fetch_assoc()) {
                                                                     $teacher_id = $row4["TEACHER_ID"];
                                                                     $teacher_name = $row4["TEACHER_NAME"];
-                                                            ?>
-                                                                    <!-- <option selected value='teacher A'>teacher A</option>
-                                                                    <option value='teacher B'>teacher B</option>
-                                                                    <option value='teacher C'>teacher C</option> -->
-                                                                    <option value="<?php echo $teacher_id ?>" <?php if ($childTeacher[$x] == $teacher_id) {
-                                                                                                                    echo 'selected';
-                                                                                                                } ?>><?php echo $teacher_name ?></option>
+                                                                    if ($childTeacher[$x] == $teacher_id) {
+                                                                    ?>
+                                                                        <option value="<?php echo $teacher_id ?>" selected><?php echo $teacher_name ?></option>
+                                                                    <?php
+                                                                    } else {
+                                                                    ?>
+                                                                        <option value="<?php echo $teacher_id ?>"><?php echo $teacher_name ?></option>
                                                             <?php
+                                                                    }
                                                                 }
                                                             } else {
                                                                 die("FATAL ERROR");
@@ -330,62 +362,16 @@
                                                             ?>
                                                         </select>
                                                     </div>
-                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                                    <div class="button-group">
+                                                        <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                                        <a href="AParent.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
+                                                    </div>
                                                 </form>
                                             </div>
                                         </div>
                                     <?php
                                     }
                                     ?>
-                                    <!-- loop1 -->
-                                    <!-- <div class="tab-pane" id="Children ABC" role="tabpanel">
-                                        <div class="p-20">
-                                            <form class="form-material childrenForm" id="editChildrenForm1">
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="example-text">Children Name</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter child name" value="Children ABC" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="example-age">Children Age</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="number" id="example-age" name="example-age" class="form-control" placeholder="enter child age" value="15" required>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class='form-group'>
-                                                    <label class='control-label'>Select Course</label>
-                                                    <select class='form-control' name='course' required>
-                                                        <option selected value='1'>Piano Grade 1</option>
-                                                        <option value='2'>Piano Grade 2</option>
-                                                        <option value='3'>Guitar Grade 1</option>
-                                                    </select>
-                                                </div>
-                                                <div class='form-group'>
-                                                    <label class='control-label'>Select Teacher</label>
-                                                    <select class='form-control' name='teacher' required>
-                                                        <option selected value='teacher A'>teacher A</option>
-                                                        <option value='teacher B'>teacher B</option>
-                                                        <option value='teacher C'>teacher C</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="control-label" for="example-phone">Children Status</label>
-                                                    <select class='form-control' name='' required>
-                                                        <option selected value='active'>Active</option>
-                                                        <option value='inactive'>Inactive</option>
-                                                    </select>
-                                                </div>
-                                                <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                            </form>
-                                        </div>
-                                    </div> -->
 
                                     <!-- add new children tab -->
                                     <div class="tab-pane" id="addChildren" role="tabpanel">
@@ -411,7 +397,7 @@
                                                 </div>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Select Course</label>
-                                                    <select class='form-control' name='childrenCourse' required>
+                                                    <select class='form-control course_option' name='childrenCourse' required>
                                                         <option hidden disabled selected value=""> -- select a course -- </option>
                                                         <?php
                                                         if ($conn) {
@@ -432,26 +418,14 @@
                                                 </div>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Select Teacher</label>
-                                                    <select class='form-control' name='childrenTeacher' required>
-                                                        <option hidden disabled selected value=""> -- select a teacher -- </option>
-                                                        <?php
-                                                        if ($conn) {
-                                                            $sql6 = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_STATUS ='active'";
-                                                            $result6 = $conn->query($sql6);
-                                                            while ($row6 = $result6->fetch_assoc()) {
-                                                                $teacher_id = $row6["TEACHER_ID"];
-                                                                $teacher_name = $row6["TEACHER_NAME"];
-                                                        ?>
-                                                                <option value="<?php echo $teacher_id ?>"><?php echo $teacher_name ?></option>
-                                                        <?php
-                                                            }
-                                                        } else {
-                                                            die("FATAL ERROR");
-                                                        }
-                                                        ?>
+                                                    <select class='form-control teacher_option' name='childrenTeacher' required>
+                                                        <option hidden disabled selected value=""> -- select a course first -- </option>
                                                     </select>
                                                 </div>
-                                                <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                                <div class="button-group">
+                                                    <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                                    <a href="AParent.php" type="button" class="btn btn-primary waves-effect waves-light">Return</a>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -507,6 +481,25 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+        // get teacher after select course 
+        $(document).on('change', 'select.course_option', function() {
+            var childFormid = $(this).closest("div[id]").attr("id");
+            var courseSelected = $(this).val();
+            $.ajax({
+                    url: 'getTeacher.php',
+                    type: 'POST',
+                    data: {
+                        course_id: courseSelected
+                    },
+                    dataType: 'json',
+                })
+                .done(function(response) {
+                    $('#' + childFormid).find(".teacher_option").html(response.output);
+                }).fail(function(xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                })
+        });
+
         $("#editParentForm").submit(function(e) {
             e.preventDefault();
             $('html, body').css("cursor", "wait");
@@ -598,7 +591,7 @@
                             'error'
                         )
                         $('html, body').css("cursor", "auto");
-                        // alert(errorThrown);
+                        console.log(xhr.responseText);
                     })
             })
         });

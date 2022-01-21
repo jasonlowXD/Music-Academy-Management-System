@@ -149,7 +149,7 @@
                                                     </thead>
                                                     <tbody>
                                                         <?php
-                                                        $parent_num=0;
+                                                        $parent_num = 0;
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
@@ -189,9 +189,9 @@
                                                                                 <th>Name</th>
                                                                                 <th>Age</th>
                                                                                 <th>Course</th>
-                                                                                <th>Teacher</th>
                                                                                 <th>Status</th>
                                                                                 <th>Relationship</th>
+                                                                                <th>Teacher</th>
                                                                             </tr>
                                                                             <?php
 
@@ -209,7 +209,6 @@
                                                                                     <td><?php echo $child_name; ?></td>
                                                                                     <td><?php echo $child_age; ?></td>
                                                                                     <td><?php echo $course_name; ?></td>
-                                                                                    <td><?php echo $teacher_name; ?></td>
                                                                                     <?php
                                                                                     if ($child_status == "active") {
                                                                                     ?>
@@ -222,6 +221,7 @@
                                                                                     }
                                                                                     ?>
                                                                                     <td><?php echo $relationship; ?></td>
+                                                                                    <td><?php echo $teacher_name; ?></td>
                                                                                 </tr>
                                                                             <?php
                                                                             }
@@ -237,41 +237,6 @@
 
                                                         $conn->close();
                                                         ?>
-                                                        <!-- <tr>
-                                                            <td>1</td>
-                                                            <td>parenta</td>
-                                                            <td>parentA@gmail.com</td>
-                                                            <td>+123 456 789</td>
-                                                            <td><span class="label label-success">Active</span></td>
-                                                            <td>
-                                                                <a href="AParentEdit.php" type="button" class="btn btn-outline-info"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                            </td>
-                                                            <td>
-                                                                <table class="childrenTable">
-                                                                    <tr>
-                                                                        <th>Name</th>
-                                                                        <th>Age</th>
-                                                                        <th>Course</th>
-                                                                        <th>Teacher</th>
-                                                                        <th>Status</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>childrenABC</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-success">Active</span></td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td>childrenBBC</td>
-                                                                        <td>15</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td>teacher A</td>
-                                                                        <td><span class="label label-danger">Inactive</span></td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                        </tr> -->
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
@@ -358,7 +323,7 @@
                                                         </div>
                                                         <div class='form-group'>
                                                             <label class='control-label'>Select Course</label>
-                                                            <select class='form-control' name='childrenCourse[]' required>
+                                                            <select class='form-control course_option' name='childrenCourse[]' required>
                                                                 <option hidden disabled selected value=""> -- select a course -- </option>
                                                                 <?php
                                                                 $conn = mysqli_connect("localhost", "root", "", "music_academy");
@@ -381,25 +346,8 @@
                                                         </div>
                                                         <div class='form-group'>
                                                             <label class='control-label'>Select Teacher</label>
-                                                            <select class='form-control' name='childrenTeacher[]' required>
-                                                                <option hidden disabled selected value=""> -- select a teacher -- </option>
-                                                                <?php
-                                                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
-                                                                if ($conn) {
-                                                                    $sql4 = "SELECT * FROM TEACHER WHERE ADMIN_ID = '$userID' AND TEACHER_STATUS ='active'";
-                                                                    $result4 = $conn->query($sql4);
-                                                                    while ($row4 = $result4->fetch_assoc()) {
-                                                                        $teacher_id = $row4["TEACHER_ID"];
-                                                                        $teacher_name = $row4["TEACHER_NAME"];
-                                                                ?>
-                                                                        <option value="<?php echo $teacher_id ?>"><?php echo $teacher_name ?></option>
-                                                                <?php
-                                                                    }
-                                                                } else {
-                                                                    die("FATAL ERROR");
-                                                                }
-                                                                $conn->close();
-                                                                ?>
+                                                            <select class='form-control teacher_option' name='childrenTeacher[]' required>
+                                                                <option hidden disabled selected value=""> -- select a course first -- </option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -489,6 +437,7 @@
         $('#btnReset').click(function() {
             emailRemoveClass();
             phoneRemoveClass();
+            $(".teacher_option").html(' <option hidden disabled selected value=""> -- select a course first -- </option>');
         });
 
         // Accordion
@@ -502,8 +451,11 @@
         var i = 1;
         $('#addChildren').click(function() {
             i++;
-            var clone = $('#cloneChildrenForm').clone().find('input').val('').end();
+            var clone = $('#cloneChildrenForm').clone().find('input').val('').end().find('select').val('').end();
             clone.attr("id", "cloneChildrenForm-" + i);
+            // clone.find('#select_course').attr("id", "select_course-" + i);
+            clone.find(".teacher_option").html(' <option hidden disabled selected value=""> -- select a course first -- </option>');
+
 
             var removebtn = '<button type="button" id="' + i + '" class="btn btn-danger btn-xs ml-auto btn_remove"><i class="fa fa-times"></i></button>';
 
@@ -515,10 +467,28 @@
         //remove children clone UI
         $(document).on('click', '.btn_remove', function() {
             var btn_id = $(this).attr("id");
-            console.log(btn_id);
+            // console.log(btn_id);
             $('#cloneChildrenForm-' + btn_id).remove();
         });
 
+        // get teacher after select course 
+        $(document).on('change', 'select.course_option', function() {
+            var childFormid = $(this).closest("div[id]").attr("id");
+            var courseSelected = $(this).val();
+            $.ajax({
+                    url: 'getTeacher.php',
+                    type: 'POST',
+                    data: {
+                        course_id: courseSelected
+                    },
+                    dataType: 'json',
+                })
+                .done(function(response) {
+                    $('#' + childFormid).find(".teacher_option").html(response.output);
+                }).fail(function(xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                })
+        });
 
         $("#addParentForm").submit(function(e) {
             e.preventDefault();
@@ -570,43 +540,7 @@
                     // console.log(xhr);
                     $('html, body').css("cursor", "auto");
                 })
-        })
-
-
-        // TEST GET MULTIPLE CHILDREN VALUE
-        // https://stackoverflow.com/questions/2627813/how-to-get-an-array-with-jquery-multiple-input-with-the-same-name
-        // $('#addParentForm').on('submit', function() {
-        //     var form = $('#addParentForm');
-
-        //     var childrenName = form.find('input[name="childrenName[]"]');
-        //     var childrenAge = form.find('input[name="childrenAge[]"]');
-        //     var childrenCourse = form.find('select[name="childrenCourse[]"]');
-        //     var childrenTeacher = form.find('select[name="childrenTeacher[]"]');
-
-        //     var name = childrenName.map(function() {
-        //         return $(this).val()
-        //     }).get();
-        //     console.log(name);
-
-        //     var age = childrenAge.map(function() {
-        //         return $(this).val()
-        //     }).get();
-        //     console.log(age);
-
-        //     // var course = childrenCourse.val();
-
-        //     var course = childrenCourse.map(function() {
-        //         return $(this).find(":selected").val();
-        //     }).get();
-        //     console.log(course);
-
-        //     var teacher = childrenTeacher.map(function() {
-        //         return $(this).find(":selected").val();
-        //     }).get();
-        //     console.log(teacher);
-
-        //     return false;
-        // });
+        });
     </script>
 
 </body>
