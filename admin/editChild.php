@@ -56,7 +56,7 @@ if ($conn) {
                 if (mysqli_query($conn, $sql2) && mysqli_query($conn, $sql3)) {
                     $response['title']  = 'Done!';
                     $response['status']  = 'success';
-                    $response['message'] = 'Child edited!';
+                    $response['message'] = 'Child '.$childName.' edited!';
                 } else {
                     $response['title']  = 'Error!';
                     $response['status']  = 'error';
@@ -66,7 +66,7 @@ if ($conn) {
                 if (mysqli_query($conn, $sql2)) {
                     $response['title']  = 'Done!';
                     $response['status']  = 'success';
-                    $response['message'] = 'Child edited!';
+                    $response['message'] = 'Child '.$childName.' edited!';
                 } else {
                     $response['title']  = 'Error!';
                     $response['status']  = 'error';
