@@ -114,6 +114,26 @@
                                         <p><?php echo $_SESSION["phone"] ?></p>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row text-center m-t-10">
+                                    <div class="col-md-12">
+                                        <h4><strong>Course Teaching</strong></h4>
+                                        <?php
+                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                        $sql = "SELECT * FROM TEACHER LEFT JOIN TEACHER_COURSE ON TEACHER.TEACHER_ID = TEACHER_COURSE.TEACHER_ID LEFT JOIN COURSE ON TEACHER_COURSE.COURSE_ID = COURSE.COURSE_ID WHERE TEACHER.TEACHER_ID =  '$user_id' AND COURSE.COURSE_STATUS = 'active' ORDER BY COURSE.COURSE_NAME";
+                                        $result = $conn->query($sql);
+                                        while ($row = $result->fetch_assoc()) {
+                                            $course_name = $row["COURSE_NAME"];
+                                        ?>
+                                            <p class=" m-0">
+                                                <?php echo $course_name ?>
+                                            </p>
+                                        <?php
+                                        }
+                                        $conn->close();
+                                        ?>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
@@ -132,7 +152,7 @@
                                         }
                                         $conn->close();
                                         ?>
-                                        <p><strong>Contact:</strong> <?php echo $admin_email ?></p>
+                                        <p><strong>Admin Contact:</strong> <?php echo $admin_email ?></p>
                                     </div>
                                 </div>
                             </div>
