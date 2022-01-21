@@ -133,7 +133,7 @@
                                         }
                                         $conn->close();
                                         ?>
-                                        <p><strong>Contact:</strong> <?php echo $admin_email ?></p>
+                                        <p><strong>Admin Contact:</strong> <?php echo $admin_email ?></p>
                                     </div>
                                 </div>
                             </div>

@@ -102,7 +102,7 @@
                                 <div class="row text-center m-t-10">
                                     <div class="col-md-12">
                                         <h5><strong>Having problem with the system?</strong></h5>
-                                        <p><strong>Contact:</strong> jasonlowxd@gmail.com</p>
+                                        <p><strong>Developer Contact:</strong> jasonlowxd@gmail.com</p>
                                     </div>
                                 </div>
                             </div>
