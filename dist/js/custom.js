@@ -189,3 +189,18 @@ function courseNameAddClass(message) {
     $("#courseNameFeedback").addClass("form-control-feedback");
     $("#courseNameFeedback").html(message);
 }
+
+// RESOURCE FILE 
+function resourceFileRemoveClass() {
+    $("#resourceFileDiv").removeClass("has-danger");
+    $("#resourceFileInput").removeClass("form-control-danger");
+    $("#resourceFileFeedback").removeClass("form-control-feedback");
+    $("#resourceFileFeedback").html('');
+}
+
+function resourceFileAddClass(message) {
+    $("#resourceFileDiv").addClass("has-danger");
+    $("#resourceFileInput").addClass("form-control-danger");
+    $("#resourceFileFeedback").addClass("form-control-feedback");
+    $("#resourceFileFeedback").html(message);
+}
