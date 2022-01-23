@@ -135,32 +135,73 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Children A</td>
-                                                            <td>Topic 1 resource with Url</td>
-                                                            <td><a href="https://youtu.be/aob0n2fJcyQ" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=aob0n2fJcyQ&ab_channel=JunichiInoue</a></td>
-                                                            <td>-</td>
-                                                            <td>
-                                                                <div class="button-group">
-                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Children ABC</td>
-                                                            <td>Topic 2 resource with file</td>
-                                                            <td>-</td>
-                                                            <td><a href="../img/resourceFile.pdf" target="_blank" rel="noopener noreferrer">resourceFile.pdf</a></td>
-                                                            <td>
-                                                                <div class="button-group">
-                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                        <?php
+                                                        $resource_num = 0;
+                                                        $userID = $_SESSION["userID"];
+                                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                        if ($conn) {
+                                                            $sql = "SELECT * FROM LEARNING_RESOURCE LEFT JOIN CHILD ON LEARNING_RESOURCE.CHILD_ID = CHILD.CHILD_ID WHERE LEARNING_RESOURCE.TEACHER_ID = '$userID' ORDER BY LEARNING_RESOURCE.RESOURCE_ID DESC";
+                                                            $result = $conn->query($sql);
+                                                            while ($row = $result->fetch_assoc()) {
+                                                                $resource_num++;
+                                                                $resource_id = $row["RESOURCE_ID"];
+                                                                $child_name = $row["CHILD_NAME"];
+                                                                $resource_title = $row["RESOURCE_TITLE"];
+                                                                if ($row["RESOURCE_URL"] != null) {
+                                                                    $url = $row["RESOURCE_URL"];
+                                                                } else {
+                                                                    $url = '-';
+                                                                }
+                                                                if ($row["RESOURCE_FILEPATH"] != null) {
+                                                                    $filepath = $row["RESOURCE_FILEPATH"];
+                                                                } else {
+                                                                    $filepath = '-';
+                                                                }
+                                                        ?>
+                                                                <tr>
+                                                                    <td><?php echo $resource_num; ?></td>
+                                                                    <td><?php echo $child_name; ?></td>
+                                                                    <td><?php echo $resource_title; ?></td>
+
+                                                                    <?php
+                                                                    if ($url == '-') {
+                                                                    ?>
+                                                                        <td><?php echo $url; ?></td>
+                                                                    <?php
+                                                                    } else {
+                                                                    ?>
+                                                                        <td><a href="<?php echo $url; ?>" target="_blank" rel="noopener noreferrer"><?php echo $url; ?></a></td>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+
+                                                                    <?php
+                                                                    if ($filepath == '-') {
+                                                                    ?>
+                                                                        <td><?php echo $filepath; ?></td>
+                                                                    <?php
+                                                                    } else {
+                                                                        $path_parts = pathinfo($filepath);
+                                                                        $file_name = $path_parts['basename']
+                                                                    ?>
+                                                                        <td><a href="<?php echo $filepath; ?>" target="_blank" rel="noopener noreferrer"><?php echo $file_name; ?></a></td>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                    <td>
+                                                                        <div class="button-group">
+                                                                            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
+                                                                            <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+                                                        $conn->close();
+                                                        ?>
 
                                                     </tbody>
                                                     <tfoot>
@@ -180,14 +221,29 @@
                                     <!-- add resource panel -->
                                     <div class="tab-pane" id="addResourceTab" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material" id="addResourceForm">
+                                            <form enctype="multipart/form-data" class="form-control-line" id="addResourceForm" method="post" action="addResource.php">
                                                 <div class='form-group'>
                                                     <label class='control-label'>Select Child</label>
-                                                    <select class='form-control' name='children' required>
+                                                    <select class='form-control' name='child' required>
                                                         <option hidden disabled selected value=""> -- select a child -- </option>
-                                                        <option value='Children A'>Children A</option>
-                                                        <option value='Children B'>Children B</option>
-                                                        <option value='Children C'>Children C</option>
+                                                        <?php
+                                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                        if ($conn) {
+                                                            $sql2 = "SELECT * FROM CHILD WHERE TEACHER_ID = '$userID' AND CHILD_STATUS ='active'";
+                                                            $result2 = $conn->query($sql2);
+                                                            while ($row2 = $result2->fetch_assoc()) {
+                                                                $child_id = $row2["CHILD_ID"];
+                                                                $child_name = $row2["CHILD_NAME"];
+                                                        ?>
+                                                                <option value="<?php echo $child_id ?>"><?php echo $child_name ?></option>
+                                                        <?php
+
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+                                                        $conn->close();
+                                                        ?>
                                                     </select>
                                                 </div>
                                                 <div class="form-group">
@@ -195,7 +251,7 @@
                                                         <label class="col-md-12" for="example-text3">Resource Title</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text3" name="example-text" class="form-control" placeholder="enter Resource title" required>
+                                                            <input type="text" id="example-text3" name="title" class="form-control" placeholder="enter resource title" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -203,11 +259,11 @@
                                                     <div class="row">
                                                         <label class="col-md-12">Resource Url</label>
                                                         <div class="col-md-12">
-                                                            <input type="url" id="example-url" name="example-url" class="form-control" placeholder="example:  https://www.youtube.com/">
+                                                            <input type="url" id="example-url" name="url" class="form-control" placeholder="example:  https://www.youtube.com/">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" id="resourceFileDiv">
                                                     <div class="row">
                                                         <label class="col-sm-12">Resource File</label>
                                                         <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
@@ -216,19 +272,20 @@
                                                                 <span class="fileinput-filename"></span>
                                                             </div>
                                                             <span class="input-group-addon btn btn-default btn-file">
-                                                                <span class="fileinput-new">Select file</span>
+                                                                <span class="fileinput-new">Select file (only accept pdf or image file, max 2MB)</span>
                                                                 <span class="fileinput-exists">Change</span>
-                                                                <input type="hidden">
+                                                               
                                                                 <!-- get file data from this below input -->
-                                                                <input type="file" name="...">
+                                                                <input type="file" id="resourceFileInput" name="resourceFile" accept="image/jpeg,image/png,application/pdf">
                                                             </span>
-                                                            <a href="javascript:void(0)" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                                            <a href="javascript:void(0)" id="btnFileRemove" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                                         </div>
+                                                        <span class="col-sm-12" id="resourceFileFeedback"></span>
                                                     </div>
                                                 </div>
                                                 <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                                    <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
+                                                    <button type="reset" id="btnReset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -272,22 +329,23 @@
                                             <input type="url" id="example-url" name="example-url" class="form-control" placeholder="example:  https://www.youtube.com/" value="https://www.youtube.com/">
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group" id="resourceFileDiv">
                                         <label class="col-sm-12">Resource File</label>
                                         <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
                                             <div class="form-control" data-trigger="fileinput">
                                                 <i class="glyphicon glyphicon-file fileinput-exists"></i>
-                                                <span class="fileinput-filename">ResourceFile.pdf</span>
+                                                <span class="fileinput-filename"></span>
                                             </div>
                                             <span class="input-group-addon btn btn-default btn-file">
                                                 <span class="fileinput-new">Select file</span>
                                                 <span class="fileinput-exists">Change</span>
                                                 <input type="hidden">
                                                 <!-- get file data from this below input -->
-                                                <input type="file" name="...">
+                                                <input type="file" id="resourceFileInput" name="...">
                                             </span>
                                             <a href="javascript:void(0)" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                         </div>
+                                        <span id="resourceFileFeedback"></span>
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -350,13 +408,6 @@
     <script src="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 
     <script>
-        // Date Picker
-        $('.mydatepicker').datepicker({
-            format: 'dd/mm/yyyy',
-            autoclose: true,
-            todayHighlight: true
-        });
-
         // footable
         $('#mytable').footable();
 
@@ -376,6 +427,64 @@
                 filter: $(this).val()
             });
         });
+
+        $('#btnFileRemove').click(function() {
+            resourceFileRemoveClass();
+            $("#resourceFileInput").val('');
+        });
+
+        $('#btnReset').click(function() {
+            resourceFileRemoveClass();
+            $("#resourceFileInput").val('');
+        });
+
+        $("#addResourceForm").submit(function(e) {
+            e.preventDefault();
+            $('html, body').css("cursor", "wait");
+            var formData = new FormData(this);
+            $.ajax({
+                    enctype: 'multipart/form-data',
+                    url: $("#addResourceForm").attr('action'),
+                    type: $("#addResourceForm").attr('method'),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.status == 'success') {
+                        resourceFileRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            location.reload();
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error resource file') {
+                        resourceFileAddClass(response.message);
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        resourceFileRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
+                    Swal.fire(
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
+                    )
+                    $('html, body').css("cursor", "auto");
+                    console.log(xhr);
+                })
+        })
 
         //delete button
         $('#mytable').footable().on('click', '#delete-row-btn', function(e) {
