@@ -118,23 +118,66 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Children A</td>
-                                                <td>Teacher ABC</td>
-                                                <td>Topic 1 resource with Url</td>
-                                                <td><a href="https://youtu.be/aob0n2fJcyQ" target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=aob0n2fJcyQ&ab_channel=JunichiInoue</a></td>
-                                                <td>-</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Children ABC</td>
-                                                <td>Teacher CCC</td>
-                                                <td>Topic 2 resource with file</td>
-                                                <td>-</td>
-                                                <td><a href="../img/resourceFile.pdf" target="_blank" rel="noopener noreferrer">resourceFile.pdf</a></td>
-                                            </tr>
+                                            <?php
+                                            $resource_num = 0;
+                                            $userID = $_SESSION["userID"];
+                                            $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                            if ($conn) {
+                                                $sql = "SELECT * FROM LEARNING_RESOURCE LEFT JOIN CHILD ON LEARNING_RESOURCE.CHILD_ID = CHILD.CHILD_ID LEFT JOIN TEACHER ON LEARNING_RESOURCE.TEACHER_ID = TEACHER.TEACHER_ID WHERE CHILD.PARENT_ID = '$userID' ORDER BY LEARNING_RESOURCE.RESOURCE_ID DESC";
+                                                $result = $conn->query($sql);
+                                                while ($row = $result->fetch_assoc()) {
+                                                    $resource_num++;
+                                                    $resource_id = $row["RESOURCE_ID"];
+                                                    $child_name = $row["CHILD_NAME"];
+                                                    $teacher_name = $row["TEACHER_NAME"];
+                                                    $resource_title = $row["RESOURCE_TITLE"];
+                                                    if ($row["RESOURCE_URL"] != null) {
+                                                        $url = $row["RESOURCE_URL"];
+                                                    } else {
+                                                        $url = '-';
+                                                    }
+                                                    if ($row["RESOURCE_FILEPATH"] != null) {
+                                                        $filepath = $row["RESOURCE_FILEPATH"];
+                                                    } else {
+                                                        $filepath = '-';
+                                                    }
 
+                                            ?>
+                                                    <tr>
+                                                        <td><?php echo $resource_num; ?></td>
+                                                        <td><?php echo $child_name; ?></td>
+                                                        <td><?php echo $teacher_name; ?></td>
+                                                        <td><?php echo $resource_title; ?></td>
+                                                        <?php
+                                                        if ($url == '-') {
+                                                        ?>
+                                                            <td><?php echo $url; ?></td>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <td><a href="<?php echo $url; ?>" target="_blank" rel="noopener noreferrer"><?php echo $url; ?></a></td>
+                                                        <?php
+                                                        }
+                                                        if ($filepath == '-') {
+                                                        ?>
+                                                            <td><?php echo $filepath; ?></td>
+                                                        <?php
+                                                        } else {
+                                                            $path_parts = pathinfo($filepath);
+                                                            $file_name = $path_parts['basename']
+                                                        ?>
+                                                            <td><a href="<?php echo $filepath; ?>" target="_blank" rel="noopener noreferrer"><?php echo $file_name; ?></a></td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            } else {
+                                                die("FATAL ERROR");
+                                            }
+                                            $conn->close();
+                                            ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -201,7 +244,6 @@
     <script src="../assets/node_modules/footable/js/footable.all.min.js"></script>
 
     <script>
-
         // footable
         $('#mytable').footable();
 
@@ -221,7 +263,6 @@
                 filter: $(this).val()
             });
         });
-
     </script>
 
 </body>
