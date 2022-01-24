@@ -204,3 +204,18 @@ function resourceFileAddClass(message) {
     $("#resourceFileFeedback").addClass("form-control-feedback");
     $("#resourceFileFeedback").html(message);
 }
+
+// EDIT RESOURCE FILE 
+function editResourceFileRemoveClass() {
+    $("#editResourceFileDiv").removeClass("has-danger");
+    $("#editResourceFileInput").removeClass("form-control-danger");
+    $("#editResourceFileFeedback").removeClass("form-control-feedback");
+    $("#editResourceFileFeedback").html('');
+}
+
+function editResourceFileAddClass(message) {
+    $("#editResourceFileDiv").addClass("has-danger");
+    $("#editResourceFileInput").addClass("form-control-danger");
+    $("#editResourceFileFeedback").addClass("form-control-feedback");
+    $("#editResourceFileFeedback").html(message);
+}
