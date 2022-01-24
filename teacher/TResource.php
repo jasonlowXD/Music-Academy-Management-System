@@ -173,9 +173,6 @@
                                                                         <td><a href="<?php echo $url; ?>" target="_blank" rel="noopener noreferrer"><?php echo $url; ?></a></td>
                                                                     <?php
                                                                     }
-                                                                    ?>
-
-                                                                    <?php
                                                                     if ($filepath == '-') {
                                                                     ?>
                                                                         <td><?php echo $filepath; ?></td>
@@ -190,8 +187,8 @@
                                                                     ?>
                                                                     <td>
                                                                         <div class="button-group">
-                                                                            <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                            <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
+                                                                            <a href="TResourceEdit.php?resource_id=<?= $resource_id ?>" class="btn btn-outline-info edit_modal" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;"></i></a>
+                                                                            <a href="#" class="btn btn-outline-danger delete_btn" id="<?php echo $resource_id ?>"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></a>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -274,7 +271,7 @@
                                                             <span class="input-group-addon btn btn-default btn-file">
                                                                 <span class="fileinput-new">Select file (only accept pdf or image file, max 2MB)</span>
                                                                 <span class="fileinput-exists">Change</span>
-                                                               
+
                                                                 <!-- get file data from this below input -->
                                                                 <input type="file" id="resourceFileInput" name="resourceFile" accept="image/jpeg,image/png,application/pdf">
                                                             </span>
@@ -297,62 +294,10 @@
                 </div>
 
                 <!-- edit receipt modal -->
-                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel1">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel1">Edit Resource</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                            <form class="form-material" id="editResourceForm">
-                                <div class="modal-body">
-                                    <div class='form-group'>
-                                        <label class='control-label col-md-12'>Select Child</label>
-                                        <div class="col-md-12">
-                                            <select class='form-control text-muted' name='children' required>
-                                                <option selected value='Children A'>Children A</option>
-                                                <option value='Children B'>Children B</option>
-                                                <option value='Children C'>Children C</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12" for="example-text3">Resource Title</span>
-                                        </label>
-                                        <div class="col-md-12">
-                                            <input type="text" id="example-text3" name="example-text" class="form-control" placeholder="enter Resource title" value="Topic 1 resource with Url" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12">Resource Url</label>
-                                        <div class="col-md-12">
-                                            <input type="url" id="example-url" name="example-url" class="form-control" placeholder="example:  https://www.youtube.com/" value="https://www.youtube.com/">
-                                        </div>
-                                    </div>
-                                    <div class="form-group" id="resourceFileDiv">
-                                        <label class="col-sm-12">Resource File</label>
-                                        <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
-                                            <div class="form-control" data-trigger="fileinput">
-                                                <i class="glyphicon glyphicon-file fileinput-exists"></i>
-                                                <span class="fileinput-filename"></span>
-                                            </div>
-                                            <span class="input-group-addon btn btn-default btn-file">
-                                                <span class="fileinput-new">Select file</span>
-                                                <span class="fileinput-exists">Change</span>
-                                                <input type="hidden">
-                                                <!-- get file data from this below input -->
-                                                <input type="file" id="resourceFileInput" name="...">
-                                            </span>
-                                            <a href="javascript:void(0)" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                        </div>
-                                        <span id="resourceFileFeedback"></span>
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-info">Submit</button>
-                                </div>
-                            </form>
+
                         </div>
                     </div>
                 </div>
@@ -386,9 +331,9 @@
     <!-- All Jquery -->
     <!-- ============================================================== -->
     <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
     <script src="../assets/node_modules/popper/popper.min.js"></script>
-    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
@@ -426,6 +371,11 @@
             $('#mytable').trigger('footable_filter', {
                 filter: $(this).val()
             });
+        });
+
+        $('.edit_modal').on('click', function(e) {
+            e.preventDefault();
+            $('#editModal').modal('show').find('.modal-content').load($(this).attr('href'));
         });
 
         $('#btnFileRemove').click(function() {
@@ -487,8 +437,10 @@
         })
 
         //delete button
-        $('#mytable').footable().on('click', '#delete-row-btn', function(e) {
+        $('.delete_btn').click(function(e) {
             e.preventDefault();
+
+            var resource_id = $(this).attr('id');
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -500,45 +452,45 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    //get the footable object
-                    var footable = $('#mytable').data('footable');
-                    //get the row we are wanting to delete
-                    var row = $(this).parents('tr:first');
-                    //delete the TEACHER AND FIRE SWAL
-                    footable.removeRow(row);
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    $('html, body').css("cursor", "wait");
+                    $.ajax({
+                            url: 'deleteResource.php',
+                            type: 'POST',
+                            data: {
+                                resource_id: resource_id
+                            },
+                            dataType: 'json'
+                        }).done(function(response) {
+                            if (response.status == 'success') {
+                                Swal.fire(
+                                    response.title,
+                                    response.message,
+                                    response.status
+                                ).then(() => {
+                                    location.reload();
+                                })
+                                $('html, body').css("cursor", "auto");
+                            } else {
+                                Swal.fire(
+                                    response.title,
+                                    response.message,
+                                    response.status
+                                )
+                                $('html, body').css("cursor", "auto");
+                            }
+                        })
+                        .fail(function(xhr, textStatus, errorThrown) {
+                            Swal.fire(
+                                'Oops...',
+                                'Something went wrong with ajax!',
+                                'error'
+                            )
+                            $('html, body').css("cursor", "auto");
+                            console.log(xhr);
+                        })
                 }
             })
         });
-
-        // edit receipt form
-        $("#editResourceForm").submit(function(e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Confirm Edit?',
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, confirm!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // DO EDIT RECEIPT HERE THEN FIRE SWAL
-                    Swal.fire(
-                        'Done!',
-                        'Resource Edited.',
-                        'success'
-                    ).then(() => {
-                        window.location.href = "TResource.php";
-                    })
-                }
-            })
-        })
     </script>
 
 </body>
