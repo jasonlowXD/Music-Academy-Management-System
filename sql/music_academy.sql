@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.1.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2022 at 04:31 PM
+-- Generation Time: Jan 24, 2022 at 03:57 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -105,8 +105,19 @@ CREATE TABLE `learning_resource` (
   `RESOURCE_ID` int(10) NOT NULL,
   `TEACHER_ID` int(10) NOT NULL,
   `CHILD_ID` int(10) NOT NULL,
-  `RESOURCE_TITLE` int(255) NOT NULL
+  `RESOURCE_TITLE` varchar(255) NOT NULL,
+  `RESOURCE_URL` varchar(500) DEFAULT NULL,
+  `RESOURCE_FILEPATH` varchar(500) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `learning_resource`
+--
+
+INSERT INTO `learning_resource` (`RESOURCE_ID`, `TEACHER_ID`, `CHILD_ID`, `RESOURCE_TITLE`, `RESOURCE_URL`, `RESOURCE_FILEPATH`) VALUES
+(1, 2, 4, 'Piano C major scale', 'https://www.youtube.com/watch?v=QDWKzG5oaog', '../localFolder/resource/piano-scales-major.pdf'),
+(2, 2, 3, 'Piano fingering position', 'https://www.youtube.com/watch?v=v84wcuKn6sM', ''),
+(3, 2, 4, 'Piano G major scale', '', '');
 
 -- --------------------------------------------------------
 
@@ -297,7 +308,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `learning_resource`
 --
 ALTER TABLE `learning_resource`
-  MODIFY `RESOURCE_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `RESOURCE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `notification`
