@@ -16,7 +16,8 @@ if ($conn) {
             $title = $row["TITLE"];
             $content = $row["CONTENT"];
             $status = $row["VIEW_STATUS"];
-            $datetime = $row["DATETIME"];
+            $datetime = date_create($row["DATETIME"]);
+            $datetime_display = date_format($datetime, 'Y-m-d g:ia');
             $link = $row["LINK"];
 
             // if notification is unseen 
@@ -26,7 +27,7 @@ if ($conn) {
                                 <div class="">
                                     <h5 class=" font-weight-bold">' . $title . '</h5>
                                     <p class="text-dark"><strong>' . $content . '</strong></p>
-                                    <span class="text-info">' . $datetime . '</span>
+                                    <span class="text-info">' . $datetime_display . '</span>
                                 </div>
                             </a>';
             } else if ($status == "seen") {
@@ -34,7 +35,7 @@ if ($conn) {
                                 <div class="">
                                     <h5 class=" ">' . $title . '</h5>
                                     <p class=" text-muted">' . $content . '</p>
-                                    <span class="text-muted">' . $datetime . '</span>
+                                    <span class="text-muted">' . $datetime_display . '</span>
                                 </div>
                             </a>';
             }
