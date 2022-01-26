@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Edit Parent&Children</title>
+    <title>Edit Parent & Child</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
@@ -59,14 +59,14 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Edit Parent & Children</h4>
+                        <h4 class="text-themecolor">Edit Parent & Child</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="ACalendar.php">Home</a></li>
-                                <li class="breadcrumb-item"><a href="AParent.php">Parent&Children</a></li>
-                                <li class="breadcrumb-item active">Edit Parent&Children</li>
+                                <li class="breadcrumb-item"><a href="AParent.php">Parent & Child</a></li>
+                                <li class="breadcrumb-item active">Edit Parent & Child</li>
                             </ol>
                         </div>
                     </div>

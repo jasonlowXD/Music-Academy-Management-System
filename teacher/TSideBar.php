@@ -7,7 +7,7 @@
                 <li class="nav-small-cap">--- MANAGEMENT</li>
                 <li> <a class="waves-effect waves-dark" href="TCalendar.php"><i class="icon-calender"></i><span class="hide-menu">Class Calendar</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" href="TChildren.php"><i class="icon-people"></i><span class="hide-menu">Children List</span></a>
+                <li> <a class="waves-effect waves-dark" href="TChildren.php"><i class="icon-people"></i><span class="hide-menu">Child List</span></a>
                 </li>
                 <li> <a class="waves-effect waves-dark" href="TResource.php"><i class="icon-folder"></i><span class="hide-menu">Learning Resource</span></a>
                 </li>

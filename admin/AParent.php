@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Manage Parent&Children</title>
+    <title>Manage Parent & Child</title>
     <!-- Footable CSS -->
     <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
     <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
@@ -78,13 +78,13 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Parent & Children Management</h4>
+                        <h4 class="text-themecolor">Parent & Child Management</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="ACalendar.php">Home</a></li>
-                                <li class="breadcrumb-item active">Parent&Children</li>
+                                <li class="breadcrumb-item active">Parent & Child</li>
                             </ol>
                         </div>
                     </div>
@@ -144,7 +144,7 @@
                                                             <th>Phone</th>
                                                             <th>Status</th>
                                                             <th data-sort-ignore="true">Action</th>
-                                                            <th data-hide="all">Children</th>
+                                                            <th data-hide="all">Child</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>

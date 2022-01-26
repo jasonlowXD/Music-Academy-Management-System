@@ -10,7 +10,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
-    <title>Childern List</title>
+    <title>Child List</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
@@ -65,13 +65,13 @@
                 <!-- ============================================================== -->
                 <div class="row page-titles">
                     <div class="col-md-5 align-self-center">
-                        <h4 class="text-themecolor">Children List</h4>
+                        <h4 class="text-themecolor">Child List</h4>
                     </div>
                     <div class="col-md-7 align-self-center text-right">
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="PCalendar.php">Home</a></li>
-                                <li class="breadcrumb-item active">Children</li>
+                                <li class="breadcrumb-item active">Child</li>
                             </ol>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Children List</h4>
+                                <h4 class="card-title">Child List</h4>
                                 <hr>
                                 <div class="d-flex">
                                     <div class="mr-auto">

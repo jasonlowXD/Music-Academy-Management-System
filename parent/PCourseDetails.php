@@ -68,7 +68,7 @@
                         <div class="d-flex justify-content-end align-items-center">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="PCalendar.php">Home</a></li>
-                                <li class="breadcrumb-item"><a href="PChildren.php">Children</a></li>
+                                <li class="breadcrumb-item"><a href="PChildren.php">Child</a></li>
                                 <li class="breadcrumb-item active">Course Details</li>
                             </ol>
                         </div>
