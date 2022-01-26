@@ -7,9 +7,9 @@
                 <li class="nav-small-cap">--- MANAGEMENT</li>
                 <li> <a class="waves-effect waves-dark" href="PCalendar.php"><i class="icon-calender"></i><span class="hide-menu">Class Calendar</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" href="PChildren.php"><i class="icon-people"></i><span class="hide-menu">Children</span></a>
+                <li> <a class="waves-effect waves-dark" href="PChildren.php"><i class="icon-people"></i><span class="hide-menu">Child List</span></a>
                 </li>
-                <li> <a class="waves-effect waves-dark" href="PTeacher.php"><i class="icon-user"></i><span class="hide-menu">Teacher</span></a>
+                <li> <a class="waves-effect waves-dark" href="PTeacher.php"><i class="icon-user"></i><span class="hide-menu">Teacher Contact</span></a>
                 </li>
                 <li> <a class="waves-effect waves-dark" href="PInvoice.php"><i class="ti-credit-card"></i><span class="hide-menu">Invoice & Receipt</span></a>
                 </li>
