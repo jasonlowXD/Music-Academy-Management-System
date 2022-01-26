@@ -79,8 +79,8 @@ if ($conn) {
 
     // IF UPLOADED FILE NO ERROR OR NO FILE UPLOAD
     else {
-        $sql = "INSERT INTO LEARNING_RESOURCE (RESOURCE_ID,TEACHER_ID,CHILD_ID,RESOURCE_TITLE,RESOURCE_URL,RESOURCE_FILEPATH) 
-        VALUES ('','$userID','$child','$title','$url','$filePath')";
+        $sql = "INSERT INTO LEARNING_RESOURCE (RESOURCE_ID,TEACHER_ID,CHILD_ID,RESOURCE_TITLE,RESOURCE_URL,RESOURCE_FILEPATH,RESOURCE_DATETIME) 
+        VALUES ('','$userID','$child','$title','$url','$filePath',CURRENT_TIMESTAMP())";
         if ($filePath == NULL) {
             if (mysqli_query($conn, $sql)) {
                 $response['title']  = 'Done!';

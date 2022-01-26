@@ -92,7 +92,7 @@ if ($conn) {
         }
         // IF GOT CHANGE
         else {
-            $sql2 = "UPDATE LEARNING_RESOURCE SET CHILD_ID ='$childResource', RESOURCE_TITLE = '$resourceTitle', RESOURCE_URL = '$resourceUrl', RESOURCE_FILEPATH = '$filePath' WHERE RESOURCE_ID = '$resource_id' AND TEACHER_ID = '$userID'";
+            $sql2 = "UPDATE LEARNING_RESOURCE SET CHILD_ID ='$childResource', RESOURCE_TITLE = '$resourceTitle', RESOURCE_URL = '$resourceUrl', RESOURCE_FILEPATH = '$filePath', RESOURCE_DATETIME = CURRENT_TIMESTAMP() WHERE RESOURCE_ID = '$resource_id' AND TEACHER_ID = '$userID'";
             
             // IF FILEPATH IS NULL OR FILEPATH SAME AS DATABASE FILEPATH 
             if ($filePath == NULL || $filePath == $db_resource_filepath) {

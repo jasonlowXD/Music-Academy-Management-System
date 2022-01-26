@@ -129,6 +129,7 @@
                                                             <th>#</th>
                                                             <th>Child</th>
                                                             <th>Title</th>
+                                                            <th>Date</th>
                                                             <th>Url</th>
                                                             <th>File</th>
                                                             <th data-sort-ignore="true">Action</th>
@@ -140,13 +141,15 @@
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
-                                                            $sql = "SELECT * FROM LEARNING_RESOURCE LEFT JOIN CHILD ON LEARNING_RESOURCE.CHILD_ID = CHILD.CHILD_ID WHERE LEARNING_RESOURCE.TEACHER_ID = '$userID' ORDER BY LEARNING_RESOURCE.RESOURCE_ID DESC";
+                                                            $sql = "SELECT * FROM LEARNING_RESOURCE LEFT JOIN CHILD ON LEARNING_RESOURCE.CHILD_ID = CHILD.CHILD_ID WHERE LEARNING_RESOURCE.TEACHER_ID = '$userID' ORDER BY LEARNING_RESOURCE.RESOURCE_DATETIME DESC";
                                                             $result = $conn->query($sql);
                                                             while ($row = $result->fetch_assoc()) {
                                                                 $resource_num++;
                                                                 $resource_id = $row["RESOURCE_ID"];
                                                                 $child_name = $row["CHILD_NAME"];
                                                                 $resource_title = $row["RESOURCE_TITLE"];
+                                                                $resource_datetime = date_create($row["RESOURCE_DATETIME"]);
+                                                                $datetime_display = date_format($resource_datetime, 'Y-m-d g:ia');
                                                                 if ($row["RESOURCE_URL"] != null) {
                                                                     $url = $row["RESOURCE_URL"];
                                                                 } else {
@@ -162,7 +165,7 @@
                                                                     <td><?php echo $resource_num; ?></td>
                                                                     <td><?php echo $child_name; ?></td>
                                                                     <td><?php echo $resource_title; ?></td>
-
+                                                                    <td><?php echo $datetime_display; ?></td>
                                                                     <?php
                                                                     if ($url == '-') {
                                                                     ?>
