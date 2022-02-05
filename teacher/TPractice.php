@@ -89,12 +89,12 @@
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist" id="practiceLogTab">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="tab" href="#practiceLoglist" role="tab">
+                                        <a class="nav-link active" data-toggle="tab" href="#practiceProgresslist" role="tab">
                                             <span class="hidden-sm-up"><i class="ti-home"></i></span> <span class="hidden-xs-down">Child Practice Progress</span>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="tab" href="#addLog" role="tab">
+                                        <a class="nav-link" data-toggle="tab" href="#addProgress" role="tab">
                                             <span class="hidden-sm-up"><i class="ti-plus"></i></span> <span class="hidden-xs-down">Add New Progress</span>
                                         </a>
                                     </li>
@@ -102,7 +102,7 @@
                                 <!-- Tab panes -->
                                 <div class="tab-content tabcontent-border">
                                     <!-- course list panel -->
-                                    <div class="tab-pane active" id="practiceLoglist" role="tabpanel">
+                                    <div class="tab-pane active" id="practiceProgresslist" role="tabpanel">
                                         <div class="p-20">
                                             <div class="d-flex">
                                                 <div class="mr-auto">
@@ -127,44 +127,72 @@
                                                         <tr>
                                                             <th>#</th>
                                                             <th>Child</th>
-                                                            <th>Uploaded by</th>
-                                                            <th>Upload Date</th>
+                                                            <th>Course</th>
                                                             <th>Title</th>
-                                                            <th>File Media</th>
+                                                            <th>Date</th>
+                                                            <th>File</th>
                                                             <th data-sort-ignore="true">Action</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>Children A</td>
-                                                            <td>Sir ABC</td>
-                                                            <td>2021-12-01</td>
-                                                            <td>1st practice of Song A</td>
-                                                            <td><a href="../img/1080p.mp4" target="_blank" rel="noopener noreferrer">1080p.mp4</a></td>
-                                                            <td>
-                                                                <div class="button-group">
-                                                                    <a href="TPracticeDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>Children ABC</td>
-                                                            <td>Teacher ABC</td>
-                                                            <td>2021-12-16</td>
-                                                            <td>Song ABC practice</td>
-                                                            <td><a href="../img/Jounetsu Tairiku.mp4" target="_blank" rel="noopener noreferrer">Jounetsu Tairiku.mp4</a></td>
-                                                            <td>
-                                                                <div class="button-group">
-                                                                    <a href="TPracticeDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                                    <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                    <button type="button" class="btn btn-outline-danger" id="delete-row-btn"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
+                                                        <?php
+                                                        $progress_num = 0;
+                                                        $userID = $_SESSION["userID"];
+                                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                        if ($conn) {
+                                                            $sql = "SELECT * FROM PRACTICE_PROGRESS LEFT JOIN CHILD ON PRACTICE_PROGRESS.CHILD_ID = CHILD.CHILD_ID WHERE PRACTICE_PROGRESS.TEACHER_ID = '$userID' ORDER BY PRACTICE_PROGRESS.PROGRESS_DATETIME DESC";
+                                                            $result = $conn->query($sql);
+                                                            while ($row = $result->fetch_assoc()) {
+                                                                $progress_num++;
+                                                                $progress_id = $row["PROGRESS_ID"];
+                                                                $child_name = $row["CHILD_NAME"];
+                                                                $progress_course = $row["PROGRESS_COURSE"];
+                                                                $progress_title = $row["PROGRESS_TITLE"];
+                                                                $progress_datetime = date_create($row["PROGRESS_DATETIME"]);
+                                                                $datetime_display = date_format($progress_datetime, 'Y-m-d g:ia');
+
+                                                                if ($row["PROGRESS_FILEPATH"] != null) {
+                                                                    $filepath = $row["PROGRESS_FILEPATH"];
+                                                                } else {
+                                                                    $filepath = '-';
+                                                                }
+                                                        ?>
+                                                                <tr>
+                                                                    <td><?php echo $progress_num; ?></td>
+                                                                    <td><?php echo $child_name; ?></td>
+                                                                    <td><?php echo $progress_course; ?></td>
+                                                                    <td><?php echo $progress_title; ?></td>
+                                                                    <td><?php echo $datetime_display; ?></td>
+                                                                    <?php
+
+                                                                    if ($filepath == '-') {
+                                                                    ?>
+                                                                        <td><?php echo $filepath; ?></td>
+                                                                    <?php
+                                                                    } else {
+                                                                        $path_parts = pathinfo($filepath);
+                                                                        $file_name = $path_parts['basename']
+                                                                    ?>
+                                                                        <td><a href="<?php echo $filepath; ?>" target="_blank" rel="noopener noreferrer"><?php echo $file_name; ?></a></td>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                    <td>
+                                                                        <div class="button-group">
+                                                                            <a href="TPracticeDetail.php?progress_id=<?= $progress_id ?>" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                            <a href="TPracticeEdit.php?progress_id=<?= $progress_id ?>" class="btn btn-outline-info edit_modal" data-toggle="modal" data-target="#editModal"><i class="ti-pencil-alt" style="font-size:18px;"></i></a>
+                                                                            <a href="#" class="btn btn-outline-danger delete_btn" id="<?php echo $progress_id ?>"><i class="ti-trash" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+                                                        $conn->close();
+                                                        ?>
+
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
@@ -179,50 +207,76 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <!-- add progression panel -->
-                                    <div class="tab-pane" id="addLog" role="tabpanel">
+                                    <div class="tab-pane" id="addProgress" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material">
+                                            <form enctype="multipart/form-data" class="form-control-line" id="addProgressForm" method="post" action="addProgress.php">
                                                 <div class='form-group'>
                                                     <label class='control-label'>Select Child</label>
-                                                    <select class='form-control' name='children' required>
+                                                    <select class='form-control child_option' name='child' required>
                                                         <option hidden disabled selected value=""> -- select a child -- </option>
-                                                        <option value='Children A'>Children A</option>
-                                                        <option value='Children B'>Children B</option>
-                                                        <option value='Children C'>Children C</option>
+                                                        <?php
+                                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                        if ($conn) {
+                                                            $sql2 = "SELECT * FROM CHILD WHERE TEACHER_ID = '$userID' AND CHILD_STATUS ='active'";
+                                                            $result2 = $conn->query($sql2);
+                                                            while ($row2 = $result2->fetch_assoc()) {
+                                                                $child_id = $row2["CHILD_ID"];
+                                                                $child_name = $row2["CHILD_NAME"];
+                                                        ?>
+                                                                <option value="<?php echo $child_id ?>"><?php echo $child_name ?></option>
+                                                        <?php
+
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+                                                        $conn->close();
+                                                        ?>
                                                     </select>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <label class="col-md-12" for="example-text">Child's Course</span>
+                                                        </label>
+                                                        <div class="col-md-12 course_option">
+                                                        <input type="text" name="courseName" class="form-control" placeholder="Select a child first" value="" readonly>                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label class="col-md-12" for="example-text">Practice Progress Title</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control" placeholder="enter title" required>
+                                                            <input type="text" id="example-text" name="title" class="form-control" placeholder="enter title" required>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" id="progressFileDiv">
                                                     <div class="row">
-                                                        <label class="col-sm-12">Upload Practice Video File</label>
+                                                        <label class="col-sm-12">Practice Progress File</label>
                                                         <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
                                                             <div class="form-control" data-trigger="fileinput">
                                                                 <i class="glyphicon glyphicon-file fileinput-exists"></i>
                                                                 <span class="fileinput-filename"></span>
                                                             </div>
                                                             <span class="input-group-addon btn btn-default btn-file">
-                                                                <span class="fileinput-new">Select file</span>
+                                                                <span class="fileinput-new">Select file (only accept video file, max 500MB)</span>
                                                                 <span class="fileinput-exists">Change</span>
-                                                                <input type="hidden">
+                                                               
                                                                 <!-- get file data from this below input -->
-                                                                <input type="file" class="file" name="..." required>
+                                                                <input type="file" id="progressFileInput" name="progressFile" accept="video/*" required>
+
                                                             </span>
-                                                            <a href="javascript:void(0)" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                                            <a href="javascript:void(0)" id="btnFileRemove" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                                         </div>
+                                                        <span class="col-sm-12" id="progressFileFeedback"></span>
                                                     </div>
                                                 </div>
                                                 <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                                    <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
+                                                    <button type="reset" id="btnReset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -237,53 +291,7 @@
                 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="exampleModalLabel1">Edit Practice Progress</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            </div>
-                            <form class="form-material" id="editLogForm">
-                                <div class="modal-body">
-                                    <div class='form-group'>
-                                        <label class='control-label col-md-12'>Select Child</label>
-                                        <div class="col-md-12">
-                                            <select class='form-control text-muted' name='children' required>
-                                                <option selected value='Children A'>Children A</option>
-                                                <option value='Children B'>Children B</option>
-                                                <option value='Children C'>Children C</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-md-12" for="example-text">Practice Progress Title</span>
-                                        </label>
-                                        <div class="col-md-12">
-                                            <input type="text" id="example-text" name="example-text" class="form-control text-muted" placeholder="enter title" value="1st practice of Song A" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-12">Upload Practice Video File</label>
-                                        <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
-                                            <div class="form-control" data-trigger="fileinput">
-                                                <i class="glyphicon glyphicon-file fileinput-exists"></i>
-                                                <span class="fileinput-filename">Jounetsu Tairiku.mp4</span>
-                                            </div>
-                                            <span class="input-group-addon btn btn-default btn-file">
-                                                <span class="fileinput-new">Select file</span>
-                                                <span class="fileinput-exists">Change</span>
-                                                <input type="hidden">
-                                                <!-- get file data from this below input -->
-                                                <input type="file" name="...">
-                                            </span>
-                                            <a href="javascript:void(0)" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-info">Submit</button>
-                                </div>
-                            </form>
+                           
                         </div>
                     </div>
                 </div>
@@ -354,9 +362,94 @@
             });
         });
 
-        // delete progression
-        addrow.footable().on('click', '#delete-row-btn', function(e) {
+        $('.edit_modal').on('click', function(e) {
             e.preventDefault();
+            $('#editModal').modal('show').find('.modal-content').load($(this).attr('href'));
+        });
+
+        $('#btnFileRemove').click(function() {
+            progressFileRemoveClass();
+            $("#progressFileInput").val('');
+        });
+
+        $('#btnReset').click(function() {
+            progressFileRemoveClass();
+            $("#progressFileInput").val('');
+            $(".course_option").html(' <input type="text" name="courseName" class="form-control" placeholder="Select a child first" value="" readonly>');
+        });
+
+         // get course name after select child 
+         $(document).on('change', 'select.child_option', function() {
+            var progressFormid = $(this).closest("form[id]").attr("id");
+            var childSelected = $(this).val();
+            $.ajax({
+                    url: 'getCourseName.php',
+                    type: 'POST',
+                    data: {
+                        child_id: childSelected
+                    },
+                    dataType: 'json',
+                })
+                .done(function(response) {
+                    $('#' + progressFormid).find(".course_option").html(response.output);
+                }).fail(function(xhr, textStatus, errorThrown) {
+                    console.log(xhr.responseText);
+                })
+        });
+
+        $("#addProgressForm").submit(function(e) {
+            e.preventDefault();
+            $('html, body').css("cursor", "wait");
+            var formData = new FormData(this);
+            $.ajax({
+                    enctype: 'multipart/form-data',
+                    url: $("#addProgressForm").attr('action'),
+                    type: $("#addProgressForm").attr('method'),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.status == 'success') {
+                        progressFileRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            location.reload();
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error practice progress file') {
+                        progressFileAddClass(response.message);
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        progressFileRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
+                    Swal.fire(
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
+                    )
+                    $('html, body').css("cursor", "auto");
+                    console.log(xhr);
+                })
+        })
+
+        // delete progression
+        $('.delete_btn').click(function(e) {
+            e.preventDefault();
+
+            var progress_id = $(this).attr('id');
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -368,45 +461,47 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    //get the footable object
-                    var footable = addrow.data('footable');
-                    //get the row we are wanting to delete
-                    var row = $(this).parents('tr:first');
-                    //delete the progression AND FIRE SWAL
-                    footable.removeRow(row);
-                    Swal.fire(
-                        'Deleted!',
-                        'Your file has been deleted.',
-                        'success'
-                    )
+                    $('html, body').css("cursor", "wait");
+                    $.ajax({
+                            url: 'deleteProgress.php',
+                            type: 'POST',
+                            data: {
+                                progress_id: progress_id
+                            },
+                            dataType: 'json'
+                        }).done(function(response) {
+                            if (response.status == 'success') {
+                                Swal.fire(
+                                    response.title,
+                                    response.message,
+                                    response.status
+                                ).then(() => {
+                                    location.reload();
+                                })
+                                $('html, body').css("cursor", "auto");
+                            } else {
+                                Swal.fire(
+                                    response.title,
+                                    response.message,
+                                    response.status
+                                )
+                                $('html, body').css("cursor", "auto");
+                            }
+                        })
+                        .fail(function(xhr, textStatus, errorThrown) {
+                            Swal.fire(
+                                'Oops...',
+                                'Something went wrong with ajax!',
+                                'error'
+                            )
+                            $('html, body').css("cursor", "auto");
+                            console.log(xhr);
+                        })
                 }
             })
         });
 
-        // edit progression form
-        $("#editLogForm").submit(function(e) {
-            e.preventDefault();
-            Swal.fire({
-                title: 'Confirm Edit?',
-                icon: 'warning',
-                allowOutsideClick: false,
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, confirm!'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    // DO EDIT PROGRESSION HERE THEN FIRE SWAL
-                    Swal.fire(
-                        'Done!',
-                        'Practice Progress Edited.',
-                        'success'
-                    ).then(() => {
-                        window.location.href = "TPractice.php";
-                    })
-                }
-            })
-        })
+       
     </script>
 
 </body>
