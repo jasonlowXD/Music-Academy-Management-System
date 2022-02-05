@@ -219,3 +219,33 @@ function editResourceFileAddClass(message) {
     $("#editResourceFileFeedback").addClass("form-control-feedback");
     $("#editResourceFileFeedback").html(message);
 }
+
+// PROGRESS FILE 
+function progressFileRemoveClass() {
+    $("#progressFileDiv").removeClass("has-danger");
+    $("#progressFileInput").removeClass("form-control-danger");
+    $("#progressFileFeedback").removeClass("form-control-feedback");
+    $("#progressFileFeedback").html('');
+}
+
+function progressFileAddClass(message) {
+    $("#progressFileDiv").addClass("has-danger");
+    $("#progressFileInput").addClass("form-control-danger");
+    $("#progressFileFeedback").addClass("form-control-feedback");
+    $("#progressFileFeedback").html(message);
+}
+
+// EDIT PROGRESS FILE 
+function editProgressFileRemoveClass() {
+    $("#editProgressFileDiv").removeClass("has-danger");
+    $("#editProgressFileInput").removeClass("form-control-danger");
+    $("#editProgressFileFeedback").removeClass("form-control-feedback");
+    $("#editProgressFileFeedback").html('');
+}
+
+function editProgressFileAddClass(message) {
+    $("#editProgressFileDiv").addClass("has-danger");
+    $("#editProgressFileInput").addClass("form-control-danger");
+    $("#editProgressFileFeedback").addClass("form-control-feedback");
+    $("#editProgressFileFeedback").html(message);
+}
