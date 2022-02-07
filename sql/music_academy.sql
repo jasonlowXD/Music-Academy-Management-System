@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 24, 2022 at 03:57 PM
+-- Generation Time: Feb 07, 2022 at 05:28 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -67,7 +67,32 @@ INSERT INTO `child` (`CHILD_ID`, `PARENT_ID`, `TEACHER_ID`, `COURSE_ID`, `CHILD_
 (2, 1, 1, 1, 'superchild2', 15, 'active'),
 (3, 2, 2, 2, 'Wan Wen', 12, 'active'),
 (4, 2, 2, 3, 'Wan Thing', 14, 'active'),
-(5, 2, 3, 2, 'Jun Kit', 15, 'active');
+(5, 2, 3, 3, 'Jun Kit', 15, 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment`
+--
+
+CREATE TABLE `comment` (
+  `COMMENT_ID` int(10) NOT NULL,
+  `PROGRESS_ID` int(10) NOT NULL,
+  `TEACHER_ID` int(10) DEFAULT NULL,
+  `PARENT_ID` int(10) DEFAULT NULL,
+  `COMMENT_CONTENT` varchar(500) NOT NULL,
+  `COMMENT_DATETIME` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`COMMENT_ID`, `PROGRESS_ID`, `TEACHER_ID`, `PARENT_ID`, `COMMENT_CONTENT`, `COMMENT_DATETIME`) VALUES
+(1, 2, 2, NULL, 'good listening and focusing during class\r\nkeep it up', '2022-02-07 23:39:22'),
+(2, 2, NULL, 2, 'great to hear that', '2022-02-08 00:12:00'),
+(3, 4, 3, NULL, 'interesting', '2022-02-08 00:17:16'),
+(4, 4, NULL, 2, 'good performance', '2022-02-08 00:23:38');
 
 -- --------------------------------------------------------
 
@@ -107,17 +132,19 @@ CREATE TABLE `learning_resource` (
   `CHILD_ID` int(10) NOT NULL,
   `RESOURCE_TITLE` varchar(255) NOT NULL,
   `RESOURCE_URL` varchar(500) DEFAULT NULL,
-  `RESOURCE_FILEPATH` varchar(500) DEFAULT NULL
+  `RESOURCE_FILEPATH` varchar(500) DEFAULT NULL,
+  `RESOURCE_DATETIME` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `learning_resource`
 --
 
-INSERT INTO `learning_resource` (`RESOURCE_ID`, `TEACHER_ID`, `CHILD_ID`, `RESOURCE_TITLE`, `RESOURCE_URL`, `RESOURCE_FILEPATH`) VALUES
-(1, 2, 4, 'Piano C major scale', 'https://www.youtube.com/watch?v=QDWKzG5oaog', '../localFolder/resource/piano-scales-major.pdf'),
-(2, 2, 3, 'Piano fingering position', 'https://www.youtube.com/watch?v=v84wcuKn6sM', ''),
-(3, 2, 4, 'Piano G major scale', '', '');
+INSERT INTO `learning_resource` (`RESOURCE_ID`, `TEACHER_ID`, `CHILD_ID`, `RESOURCE_TITLE`, `RESOURCE_URL`, `RESOURCE_FILEPATH`, `RESOURCE_DATETIME`) VALUES
+(1, 2, 4, 'Piano C major scale', 'https://www.youtube.com/watch?v=QDWKzG5oaog', '../localFolder/resource/piano-scales-major.pdf', '2022-01-26 15:51:36'),
+(2, 2, 3, 'Piano fingering position', 'https://www.youtube.com/watch?v=v84wcuKn6sM', '', '2022-01-26 15:51:45'),
+(3, 2, 4, 'Piano G major scale', '', '', '2022-02-07 02:34:23'),
+(4, 3, 5, 'A minors scale', '', '../localFolder/resource/Am.png', '2022-01-26 15:46:21');
 
 -- --------------------------------------------------------
 
@@ -174,6 +201,33 @@ INSERT INTO `parent` (`PARENT_ID`, `ADMIN_ID`, `PARENT_NAME`, `PARENT_EMAIL`, `P
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `practice_progress`
+--
+
+CREATE TABLE `practice_progress` (
+  `PROGRESS_ID` int(10) NOT NULL,
+  `TEACHER_ID` int(10) NOT NULL,
+  `CHILD_ID` int(10) NOT NULL,
+  `PROGRESS_COURSE` varchar(255) NOT NULL,
+  `PROGRESS_TITLE` varchar(255) NOT NULL,
+  `PROGRESS_FILEPATH` varchar(500) NOT NULL,
+  `PROGRESS_DATETIME` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `practice_progress`
+--
+
+INSERT INTO `practice_progress` (`PROGRESS_ID`, `TEACHER_ID`, `CHILD_ID`, `PROGRESS_COURSE`, `PROGRESS_TITLE`, `PROGRESS_FILEPATH`, `PROGRESS_DATETIME`) VALUES
+(1, 2, 3, 'Piano grade 1', '4/2 class video', '../localFolder/progress/WanWenClass1.mp4', '2022-02-07 15:38:36'),
+(2, 2, 4, 'Piano grade 2', '3/2 class video', '../localFolder/progress/WanThingClass1.mp4', '2022-02-07 23:34:50'),
+(3, 2, 3, 'Piano grade 1', '2nd class', '../localFolder/progress/720p - Copy.webm', '2022-02-07 23:36:06'),
+(4, 3, 5, 'Piano grade 1', 'final class on 1/2', '../localFolder/progress/1080p.mp4', '2022-02-08 00:20:50'),
+(5, 3, 5, 'Piano grade 2', '1st class on 3/2', '../localFolder/progress/720p.mp4', '2022-02-08 00:21:31');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `teacher`
 --
 
@@ -213,9 +267,11 @@ CREATE TABLE `teacher_course` (
 --
 
 INSERT INTO `teacher_course` (`TEACHER_COURSE_ID`, `COURSE_ID`, `TEACHER_ID`) VALUES
-(1, 3, 2),
 (2, 2, 2),
-(3, 2, 3);
+(3, 2, 3),
+(4, 3, 2),
+(5, 3, 3),
+(6, 4, 3);
 
 --
 -- Indexes for dumped tables
@@ -235,6 +291,15 @@ ALTER TABLE `child`
   ADD KEY `CHILD.PARENT_ID` (`PARENT_ID`),
   ADD KEY `CHILD.TEACHER_ID` (`TEACHER_ID`),
   ADD KEY `CHILD.COURSE_ID` (`COURSE_ID`);
+
+--
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`COMMENT_ID`),
+  ADD KEY `COMMENT.PROGRESS_ID` (`PROGRESS_ID`),
+  ADD KEY `COMMENT.TEACHER_ID` (`TEACHER_ID`),
+  ADD KEY `COMMENT.PARENT_ID` (`PARENT_ID`);
 
 --
 -- Indexes for table `course`
@@ -268,6 +333,14 @@ ALTER TABLE `parent`
   ADD KEY `PARENT.ADMIN_ID` (`ADMIN_ID`) USING BTREE;
 
 --
+-- Indexes for table `practice_progress`
+--
+ALTER TABLE `practice_progress`
+  ADD PRIMARY KEY (`PROGRESS_ID`),
+  ADD KEY `PROGRESS.TEACHER_ID` (`TEACHER_ID`),
+  ADD KEY `PROGRESS.CHILD_ID` (`CHILD_ID`);
+
+--
 -- Indexes for table `teacher`
 --
 ALTER TABLE `teacher`
@@ -299,6 +372,12 @@ ALTER TABLE `child`
   MODIFY `CHILD_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `COMMENT_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
@@ -308,7 +387,7 @@ ALTER TABLE `course`
 -- AUTO_INCREMENT for table `learning_resource`
 --
 ALTER TABLE `learning_resource`
-  MODIFY `RESOURCE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `RESOURCE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `notification`
@@ -323,6 +402,12 @@ ALTER TABLE `parent`
   MODIFY `PARENT_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `practice_progress`
+--
+ALTER TABLE `practice_progress`
+  MODIFY `PROGRESS_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
@@ -332,7 +417,7 @@ ALTER TABLE `teacher`
 -- AUTO_INCREMENT for table `teacher_course`
 --
 ALTER TABLE `teacher_course`
-  MODIFY `TEACHER_COURSE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `TEACHER_COURSE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -345,6 +430,14 @@ ALTER TABLE `child`
   ADD CONSTRAINT `CHILD.COURSE_ID` FOREIGN KEY (`COURSE_ID`) REFERENCES `course` (`COURSE_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `CHILD.PARENT_ID` FOREIGN KEY (`PARENT_ID`) REFERENCES `parent` (`PARENT_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `CHILD.TEACHER_ID` FOREIGN KEY (`TEACHER_ID`) REFERENCES `teacher` (`TEACHER_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `comment`
+--
+ALTER TABLE `comment`
+  ADD CONSTRAINT `COMMENT.PARENT_ID` FOREIGN KEY (`PARENT_ID`) REFERENCES `parent` (`PARENT_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `COMMENT.PROGRESS_ID` FOREIGN KEY (`PROGRESS_ID`) REFERENCES `practice_progress` (`PROGRESS_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `COMMENT.TEACHER_ID` FOREIGN KEY (`TEACHER_ID`) REFERENCES `teacher` (`TEACHER_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `course`
@@ -372,6 +465,13 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `parent`
   ADD CONSTRAINT `PARENT.ADMIN_ID` FOREIGN KEY (`ADMIN_ID`) REFERENCES `admin` (`ADMIN_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `practice_progress`
+--
+ALTER TABLE `practice_progress`
+  ADD CONSTRAINT `PROGRESS.CHILD_ID` FOREIGN KEY (`CHILD_ID`) REFERENCES `child` (`CHILD_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `PROGRESS.TEACHER_ID` FOREIGN KEY (`TEACHER_ID`) REFERENCES `teacher` (`TEACHER_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teacher`
