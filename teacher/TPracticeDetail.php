@@ -86,21 +86,63 @@
                     <div class="col-md-12 col-sm-12 col-lg-8">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-flex no-block align-items-center justify-content-between">
-                                    <h4 class="card-title mr-auto">Children A, 1st practice of Song A</h4>
-                                    <a href="TPractice.php" type="button" class="btn btn-primary btn-xs waves-effect waves-light ml-auto"><i class="fa fa-arrow-left"></i></a>
-                                </div>
-                                <hr>
-                                <!-- if file type is img -->
-                                <!-- <img class="img-fluid" src="../img/neko.jpg"> -->
+                                <?php
+                                $progress_id = $_GET["progress_id"];
+                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                if ($conn) {
+                                    $sql = "SELECT * FROM PRACTICE_PROGRESS LEFT JOIN CHILD ON PRACTICE_PROGRESS.CHILD_ID = CHILD.CHILD_ID WHERE PROGRESS_ID = '$progress_id'";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $child_name = $row["CHILD_NAME"];
+                                        $progress_course = $row["PROGRESS_COURSE"];
+                                        $progress_title = $row["PROGRESS_TITLE"];
+                                        $progress_datetime = date_create($row["PROGRESS_DATETIME"]);
+                                        $datetime_display = date_format($progress_datetime, 'Y-m-d g:ia');
 
-                                <!-- if file type is video -->
-                                <video class="img-fluid" controls="controls" preload="true">
-                                    <source src="where the video is" type="video/mov" />
-                                    <source src="../img/1080p.mp4" type="video/mp4" />
-                                    <source src="where the video is" type="video/oog" />
-                                    Your browser does not support the video tag.
-                                </video>
+                                        if ($row["PROGRESS_FILEPATH"] != null) {
+                                            $filepath = $row["PROGRESS_FILEPATH"];
+                                        } else {
+                                            $filepath = '-';
+                                        }
+
+                                ?>
+                                        <div class="d-flex no-block align-items-center justify-content-between">
+                                            <h4 class="card-title mr-auto"><?php echo $child_name; ?></h4>
+                                            <a href="TPractice.php" type="button" class="btn btn-primary btn-xs waves-effect waves-light ml-auto"><i class="fa fa-arrow-left"></i></a>
+                                        </div>
+
+                                        <h3 class="card-title text-info"><?php echo $progress_course; ?>, <?php echo $progress_title; ?></h3>
+                                        <small class="card-title text-primary">Last modified: <?php echo $datetime_display; ?></small>
+
+                                        <hr>
+                                        <!-- if file type is img -->
+                                        <!-- <img class="img-fluid" src="../img/neko.jpg"> -->
+
+                                        <!-- if file type is video -->
+                                        <video class="img-fluid" controls="controls" preload="true">
+                                            <?php
+                                            $path_parts = pathinfo($filepath);
+                                            $file_type = $path_parts['extension'];
+                                            switch ($file_type) {
+                                                case "mp4": ?>
+                                                    <source src="<?php echo $filepath; ?>" type="video/mp4" />
+                                                <?php break;
+                                                case "webm": ?>
+                                                    <source src="<?php echo $filepath; ?>" type="video/webm" />
+                                                <?php break;
+                                                default: ?> Your browser does not support the video tag.
+                                            <?php
+                                            }
+                                            ?>
+                                        </video>
+
+                                <?php
+                                    }
+                                } else {
+                                    die("FATAL ERROR");
+                                }
+                                $conn->close();
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -112,43 +154,92 @@
                             <!-- ============================================================== -->
                             <!-- Comment widgets -->
                             <!-- ============================================================== -->
-                            <div class="comment-widgets m-b-20 commentDiv">
+                            <div class="comment-widgets m-b-10 commentDiv">
 
-                                <!-- Comment by own account (can delete) -->
-                                <div class="d-flex flex-row comment-row border-bottom deletableCommentDiv">
-                                    <div class="comment-text w-100">
-                                        <div class="d-flex no-block">
-                                            <h5 class="mr-auto"><strong>Teacher ABC</strong></h5>
-                                            <div class="ml-auto">
-                                                <button type="button" id="deleteCommentBtn" class="btn btn-danger btn-xs waves-effect waves-light">
-                                                    <i class="fa fa-times"></i>
-                                                </button>
+                                <?php
+                                $userID = $_SESSION["userID"];
+                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                if ($conn) {
+                                    $sql2 = "SELECT * FROM COMMENT LEFT JOIN TEACHER ON COMMENT.TEACHER_ID = TEACHER.TEACHER_ID LEFT JOIN PARENT ON COMMENT.PARENT_ID = PARENT.PARENT_ID WHERE COMMENT.PROGRESS_ID = '$progress_id' ORDER BY COMMENT.COMMENT_DATETIME ASC";
+                                    $result2 = $conn->query($sql2);
+
+                                    // IF NO COMMENT 
+                                    if ($result2->num_rows == 0) {
+                                ?>
+                                        <div id="no_comment_div" class="comment-row pb-1 border-bottom">
+                                            <div class="comment-text w-100">
+                                                <p>No comment here...</p>
                                             </div>
                                         </div>
-                                        <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry..</p>
-                                    </div>
-                                </div>
+                                        <?php
+                                    }
+                                    // IF GOT COMMENT 
+                                    else {
 
-                                <!-- Comment by other user (cannot delete) -->
-                                <div class="d-flex flex-row comment-row border-bottom">
-                                    <div class="comment-text w-100">
-                                        <div class="d-flex">
-                                            <h5><strong>Parent A</strong></h5>
-                                        </div>
-                                        <p class="m-b-5 m-t-10">Lorem Ipsum is simply dummy text of the printing and type setting industry. Lorem Ipsum has beenorem Ipsum is simply dummy text of the printing and type setting industry.</p>
-                                    </div>
-                                </div>
+                                        while ($row2 = $result2->fetch_assoc()) {
+                                            $comment_id = $row2["COMMENT_ID"];
+                                            $teacher_id = $row2["TEACHER_ID"];
+                                            $teacher_name = $row2["TEACHER_NAME"];
+                                            $parent_id = $row2["PARENT_ID"];
+                                            $parent_name = $row2["PARENT_NAME"];
+                                            $comment_content = $row2["COMMENT_CONTENT"];
+                                            $comment_content = str_replace("\n", "<br/>", $comment_content);
+                                            $comment_datetime = date_create($row2["COMMENT_DATETIME"]);
+                                            $datetime_display = date_format($comment_datetime, 'Y-m-d g:ia');
+
+
+                                            // IF THE COMMENT IS MAKE BY TEACHER (CURRENT USER)
+                                            if ($teacher_id != null && $teacher_id == $userID && $parent_id == null) {
+                                        ?>
+
+                                                <div id="<?php echo $comment_id ?>" class="comment-row pb-1 border-bottom deletableCommentDiv">
+                                                    <div class="comment-text w-100">
+                                                        <div class="d-flex no-block">
+                                                            <h5 class="mr-auto"><strong><?php echo $teacher_name; ?></strong></h5>
+                                                            <div class="ml-auto">
+                                                                <button type="button" id="" class=" deleteCommentBtn btn btn-danger btn-xs waves-effect waves-light">
+                                                                    <i class="fa fa-times"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <p class="m-b-10 m-t-10"><?php echo $comment_content; ?></p>
+                                                        <small class=" text-primary"><?php echo $datetime_display; ?></small>
+                                                    </div>
+                                                </div>
+                                            <?php
+                                            }
+                                            // IF THE COMMENT IS MAKE BY PARENT 
+                                            else if ($parent_id != null && $teacher_id == null) {
+                                            ?>
+
+                                                <div class="comment-row pb-1 border-bottom">
+                                                    <div class="comment-text w-100">
+                                                        <div class="d-flex">
+                                                            <h5><strong><?php echo $parent_name; ?></strong></h5>
+                                                        </div>
+                                                        <p class="m-b-10 m-t-10"><?php echo $comment_content; ?></p>
+                                                        <small class="text-primary"><?php echo $datetime_display; ?></small>
+                                                    </div>
+                                                </div>
+                                <?php
+                                            }
+                                        }
+                                    }
+                                }
+                                ?>
+
                             </div>
 
                             <!-- comment input -->
                             <div class="card-body border-top">
-                                <form action="" class="commentForm">
+                                <form action="addComment.php" method="post" id="addCommentForm">
                                     <div class="row">
-                                        <div class="col-8">
-                                            <textarea placeholder="Type your comment here" class="form-control border-0"></textarea>
+                                        <div class="col-9">
+                                            <input type="hidden" name="progressID" value="<?php echo $progress_id; ?>">
+                                            <textarea placeholder="Type your comment here" name="content" class="form-control border-0" rows="3"></textarea>
                                         </div>
-                                        <div class="col-4 text-right">
-                                            <button type="submit" class="btn btn-info btn-circle btn-lg"><i class="fa fa-paper-plane-o"></i> </button>
+                                        <div class="col-3 text-right">
+                                            <button type="submit" class="btn btn-info btn-circle waves-effect waves-light"><i class="fa fa-paper-plane-o"></i> </button>
                                         </div>
                                     </div>
                                 </form>
@@ -204,9 +295,44 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        // delete selected comment div
-        $(document).on('click', '#deleteCommentBtn', function(e) {
-            console.log($(this));
+        $("#addCommentForm").submit(function(e) {
+            e.preventDefault();
+            $('html, body').css("cursor", "wait");
+            $.ajax({
+                    url: $("#addCommentForm").attr('action'),
+                    type: $("#addCommentForm").attr('method'),
+                    data: $("#addCommentForm").serialize(),
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.status == 'success') {
+                        $('#addCommentForm textarea').val('');
+                        $("#no_comment_div").remove();
+                        $(".commentDiv").append(response.output);
+                    } else {
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                    }
+                    $('html, body').css("cursor", "auto");
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
+                    Swal.fire(
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
+                    )
+                    $('html, body').css("cursor", "auto");
+                    console.log(xhr);
+                })
+        });
+
+        // delete comment after user click
+        $(document).on('click', '.deleteCommentBtn', function() {
+            // console.log($(this).parents().eq(3).attr('id'));
+            var comment_id = $(this).parents().eq(3).attr('id');
             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
@@ -218,43 +344,36 @@
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // DO DELETE PROGRESSION HERE THEN FIRE SWAL
-                    $(this).parents('.deletableCommentDiv').remove();
-                    Swal.fire(
-                        'Deleted!',
-                        'Your comment has been deleted.',
-                        'success'
-                    )
+                    $.ajax({
+                            type: "GET",
+                            url: "deleteComment.php",
+                            data: {
+                                comment_id: comment_id,
+                            }
+                        }).done(function(response) {
+                            // console.log(response);
+                            $("#" + comment_id).remove();
+                            Swal.fire(
+                                'Deleted!',
+                                'Your comment has been deleted.',
+                                'success'
+                            );
+
+                            // IF THE DIV IS EMPTY, SET NO COMMENT DIV INSIDE 
+                            // console.log($.trim($('.commentDiv').html()).length);
+                            if (!$.trim($('.commentDiv').html()).length) {
+                                $(".commentDiv").html(' <div id="no_comment_div" class="comment-row pb-1 border-bottom">' +
+                                    '<div class="comment-text w-100">' +
+                                    '<p>No comment here...</p>' +
+                                    '</div>' +
+                                    '</div>');
+                            }
+                        })
+                        .fail(function(xhr, textStatus, errorThrown) {
+                            console.log(xhr.responseText);
+                        })
                 }
             })
-        })
-
-
-        // add new comment
-        $(".commentForm").on('submit', function(e) {
-            e.preventDefault();
-            var user = $("#userProfile").text();
-            // console.log(user);
-            var commentContent = $(".commentForm textarea").val();
-            $('.commentForm textarea').val('');
-            // console.log(commentContent);
-            var commentLayout = '<div class="d-flex flex-row comment-row border-bottom deletableCommentDiv">' +
-                '<div class="comment-text w-100">' +
-                '<div class="d-flex no-block">' +
-                '<h5 class="mr-auto"><strong>' + user + '</strong></h5>' +
-                '<div class="ml-auto">' +
-                '<button type="button" id="deleteCommentBtn" class="btn btn-danger btn-xs waves-effect waves-light">' +
-                '<i class="fa fa-times"></i>' +
-                '</button>' +
-                '</span>' +
-                '</div>' +
-                '</div>' +
-                '<p class="m-b-5 m-t-10">' + commentContent + '</p>' +
-                '</div>' +
-                '</div>';
-
-            // add new comment to database here then append
-            $(".commentDiv").append(commentLayout);
         })
     </script>
 

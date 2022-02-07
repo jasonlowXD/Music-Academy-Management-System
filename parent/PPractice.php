@@ -111,36 +111,71 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Child</th>
+                                                <th>Course</th>
                                                 <th>Uploaded by</th>
-                                                <th>Upload Date</th>
                                                 <th>Title</th>
-                                                <th>File Media</th>
+                                                <th>Date</th>
+                                                <th>File</th>
                                                 <th data-sort-ignore="true">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Children A</td>
-                                                <td>Sir ABC</td>
-                                                <td>2021-12-01</td>
-                                                <td>1st practice of Song A</td>
-                                                <td><a href="../img/1080p.mp4" target="_blank" rel="noopener noreferrer">1080p.mp4</a></td>
-                                                <td><a href="PPracticeDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Children ABC</td>
-                                                <td>Teacher ABC</td>
-                                                <td>2021-12-16</td>
-                                                <td>Song ABC practice</td>
-                                                <td><a href="../img/Jounetsu Tairiku.mp4" target="_blank" rel="noopener noreferrer">Jounetsu Tairiku.mp4</a></td>
-                                                <td><a href="PPracticeDetail.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
-                                            </tr>
+                                            <?php
+                                            $progress_num = 0;
+                                            $userID = $_SESSION["userID"];
+                                            $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                            if ($conn) {
+                                                $sql = "SELECT * FROM PRACTICE_PROGRESS LEFT JOIN TEACHER ON PRACTICE_PROGRESS.TEACHER_ID = TEACHER.TEACHER_ID LEFT JOIN CHILD ON PRACTICE_PROGRESS.CHILD_ID = CHILD.CHILD_ID WHERE CHILD.PARENT_ID = '$userID' ORDER BY PRACTICE_PROGRESS.PROGRESS_DATETIME DESC";
+                                                $result = $conn->query($sql);
+                                                while ($row = $result->fetch_assoc()) {
+                                                    $progress_num++;
+                                                    $progress_id = $row["PROGRESS_ID"];
+                                                    $child_name = $row["CHILD_NAME"];
+                                                    $teacher_name = $row["TEACHER_NAME"];
+                                                    $progress_course = $row["PROGRESS_COURSE"];
+                                                    $progress_title = $row["PROGRESS_TITLE"];
+                                                    $progress_datetime = date_create($row["PROGRESS_DATETIME"]);
+                                                    $datetime_display = date_format($progress_datetime, 'Y-m-d g:ia');
+
+                                                    if ($row["PROGRESS_FILEPATH"] != null) {
+                                                        $filepath = $row["PROGRESS_FILEPATH"];
+                                                    } else {
+                                                        $filepath = '-';
+                                                    }
+                                            ?>
+                                                    <tr>
+                                                        <td><?php echo $progress_num; ?></td>
+                                                        <td><?php echo $child_name; ?></td>
+                                                        <td><?php echo $progress_course; ?></td>
+                                                        <td><?php echo $teacher_name; ?></td>
+                                                        <td><?php echo $progress_title; ?></td>
+                                                        <td><?php echo $datetime_display; ?></td>
+                                                        <?php
+                                                        if ($filepath == '-') {
+                                                        ?>
+                                                            <td><?php echo $filepath; ?></td>
+                                                        <?php
+                                                        } else {
+                                                            $path_parts = pathinfo($filepath);
+                                                            $file_name = $path_parts['basename']
+                                                        ?>
+                                                            <td><a href="<?php echo $filepath; ?>" target="_blank" rel="noopener noreferrer"><?php echo $file_name; ?></a></td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <td><a href="PPracticeDetail.php?progress_id=<?= $progress_id ?>" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a></td>
+                                                    </tr>
+                                            <?php
+                                                }
+                                            } else {
+                                                die("FATAL ERROR");
+                                            }
+                                            $conn->close();
+                                            ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="7">
+                                                <td colspan="9">
                                                     <div class="text-right">
                                                         <ul class="pagination"> </ul>
                                                     </div>
