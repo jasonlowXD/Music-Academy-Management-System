@@ -35,12 +35,6 @@ if ($_SERVER["CONTENT_LENGTH"] > ((int)ini_get('post_max_size') * 1024 * 1024)) 
     $acceptable = array(
         'video/mp4',
         'video/webm',
-        'video/ogg',
-        'video/mov',
-        'video/wmv',
-        'video/avi',
-        'video/mpg',
-        'video/mpeg'
     );
 
     // IF FILE UPLOAD BUT GOT ERROR

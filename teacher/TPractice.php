@@ -164,7 +164,6 @@
                                                                     <td><?php echo $progress_title; ?></td>
                                                                     <td><?php echo $datetime_display; ?></td>
                                                                     <?php
-
                                                                     if ($filepath == '-') {
                                                                     ?>
                                                                         <td><?php echo $filepath; ?></td>
@@ -241,7 +240,8 @@
                                                         <label class="col-md-12" for="example-text">Child's Course</span>
                                                         </label>
                                                         <div class="col-md-12 course_option">
-                                                        <input type="text" name="courseName" class="form-control" placeholder="Select a child first" value="" readonly>                                                        </div>
+                                                            <input type="text" name="courseName" class="form-control" placeholder="Select a child first" value="" readonly>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
@@ -264,9 +264,9 @@
                                                             <span class="input-group-addon btn btn-default btn-file">
                                                                 <span class="fileinput-new">Select file (only accept video file, max 500MB)</span>
                                                                 <span class="fileinput-exists">Change</span>
-                                                               
+
                                                                 <!-- get file data from this below input -->
-                                                                <input type="file" id="progressFileInput" name="progressFile" accept="video/*" required>
+                                                                <input type="file" id="progressFileInput" name="progressFile" accept="video/mp4, video/webm" required>
 
                                                             </span>
                                                             <a href="javascript:void(0)" id="btnFileRemove" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
@@ -291,7 +291,7 @@
                 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -378,8 +378,8 @@
             $(".course_option").html(' <input type="text" name="courseName" class="form-control" placeholder="Select a child first" value="" readonly>');
         });
 
-         // get course name after select child 
-         $(document).on('change', 'select.child_option', function() {
+        // get course name after select child 
+        $(document).on('change', 'select.child_option', function() {
             var progressFormid = $(this).closest("form[id]").attr("id");
             var childSelected = $(this).val();
             $.ajax({
@@ -500,8 +500,6 @@
                 }
             })
         });
-
-       
     </script>
 
 </body>

@@ -103,11 +103,11 @@ if ($conn) {
                         <?php
                         if ($progress_filepath != null) {
                         ?>
-                            <input type="file" id="editProgressFileInput" name="progressFile" accept="video/*">
+                            <input type="file" id="editProgressFileInput" name="progressFile" accept="video/mp4, video/webm">
                         <?php
                         } else {
                         ?>
-                            <input type="file" id="editProgressFileInput" name="progressFile" accept="video/*" required>
+                            <input type="file" id="editProgressFileInput" name="progressFile" accept="video/mp4, video/webm" required>
                         <?php
                         }
                         ?>
