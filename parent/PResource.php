@@ -111,7 +111,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Child</th>
-                                                <th>Upload by</th>
+                                                <th>Uploaded by</th>
                                                 <th>Title</th>
                                                 <th>Date</th>
                                                 <th>Url</th>
