@@ -153,7 +153,7 @@
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
-                                                            $sql = "SELECT * FROM PARENT WHERE ADMIN_ID = '$userID'";
+                                                            $sql = "SELECT * FROM PARENT WHERE ADMIN_ID = '$userID' ORDER BY PARENT_ID DESC";
                                                             $result = $conn->query($sql);
                                                             while ($row = $result->fetch_assoc()) {
                                                                 $parent_num++;

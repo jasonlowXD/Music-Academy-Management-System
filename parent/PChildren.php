@@ -124,7 +124,7 @@
                                             $userID = $_SESSION["userID"];
                                             $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                             if ($conn) {
-                                                $sql = "SELECT * FROM CHILD LEFT JOIN TEACHER ON CHILD.TEACHER_ID = TEACHER.TEACHER_ID LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID WHERE PARENT_ID = '$userID'";
+                                                $sql = "SELECT * FROM CHILD LEFT JOIN TEACHER ON CHILD.TEACHER_ID = TEACHER.TEACHER_ID LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID WHERE PARENT_ID = '$userID' ORDER BY CHILD_ID DESC";
                                                 $result = $conn->query($sql);
                                                 while ($row = $result->fetch_assoc()) {
                                                     $children_num++;

@@ -120,7 +120,7 @@
                                         <h4><strong>Course Teaching</strong></h4>
                                         <?php
                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
-                                        $sql = "SELECT * FROM TEACHER LEFT JOIN TEACHER_COURSE ON TEACHER.TEACHER_ID = TEACHER_COURSE.TEACHER_ID LEFT JOIN COURSE ON TEACHER_COURSE.COURSE_ID = COURSE.COURSE_ID WHERE TEACHER.TEACHER_ID =  '$user_id' AND COURSE.COURSE_STATUS = 'active' ORDER BY COURSE.COURSE_NAME";
+                                        $sql = "SELECT * FROM TEACHER LEFT JOIN TEACHER_COURSE ON TEACHER.TEACHER_ID = TEACHER_COURSE.TEACHER_ID LEFT JOIN COURSE ON TEACHER_COURSE.COURSE_ID = COURSE.COURSE_ID WHERE TEACHER.TEACHER_ID =  '$user_id' ORDER BY COURSE.COURSE_NAME";
                                         $result = $conn->query($sql);
                                         while ($row = $result->fetch_assoc()) {
                                             $course_name = $row["COURSE_NAME"];

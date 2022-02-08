@@ -147,7 +147,7 @@
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
-                                                            $sql = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID' ORDER BY COURSE_NAME";
+                                                            $sql = "SELECT * FROM COURSE WHERE ADMIN_ID = '$userID' ORDER BY COURSE_NAME ASC";
                                                             $result = $conn->query($sql);
                                                             while ($row = $result->fetch_assoc()) {
                                                                 $course_num++;
