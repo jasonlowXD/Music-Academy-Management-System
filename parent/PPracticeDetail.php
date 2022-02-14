@@ -20,6 +20,8 @@
     <!-- Footable CSS -->
     <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
     <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+    <!-- Emoji CSS -->
+    <link href="../emojionearea/dist/emojionearea.css" rel="stylesheet">
 
 </head>
 
@@ -230,11 +232,11 @@
                             <div class="card-body border-top">
                                 <form action="addComment.php" method="post" id="addCommentForm">
                                     <div class="row">
-                                        <div class="col-9">
+                                        <div class="col-10 p-r-0">
                                             <input type="hidden" name="progressID" value="<?php echo $progress_id; ?>">
-                                            <textarea placeholder="Type your comment here" name="content" class="form-control border-0" rows="3"></textarea>
+                                            <textarea id="commentTextarea" placeholder="Type your comment here" name="content" class="form-control border-0" rows="3"></textarea>
                                         </div>
-                                        <div class="col-3 text-right">
+                                        <div class="col-2 p-l-0 text-right">
                                             <button type="submit" class="btn btn-info btn-circle"><i class="fa fa-paper-plane-o"></i> </button>
                                         </div>
                                     </div>
@@ -289,8 +291,15 @@
     <script src="../dist/js/pages/mask.js"></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Emoji-->
+    <script src="../emojionearea/dist/emojionearea.js"></script>
+
 
     <script>
+        $(document).ready(function() {
+            $("#commentTextarea").emojioneArea();
+        });
+
         $("#addCommentForm").submit(function(e) {
             e.preventDefault();
             $('html, body').css("cursor", "wait");
@@ -302,7 +311,8 @@
                 })
                 .done(function(response) {
                     if (response.status == 'success') {
-                        $('#addCommentForm textarea').val('');
+                        $('#addCommentForm #commentTextarea').val('');
+                        $(".emojionearea-editor").html('');
                         $("#no_comment_div").remove();
                         $(".commentDiv").append(response.output);
                     } else {
