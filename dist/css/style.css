@@ -11883,7 +11883,8 @@ html body .navbar-dark .mailbox .message-center {
   .comment-text.active .comment-footer .action-icons {
     visibility: visible; }
   .comment-text p {
-    max-height: 65px;
+    /* COMMENT FOR FYP PURPOSE  */
+    /* max-height: 65px; */
     width: 100%;
     overflow: hidden; }
 
