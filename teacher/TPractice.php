@@ -125,11 +125,10 @@
                                                 <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
                                                     <thead>
                                                         <tr>
-                                                            <th>#</th>
+                                                            <th>Date</th>
                                                             <th>Child</th>
                                                             <th>Course</th>
                                                             <th>Title</th>
-                                                            <th>Date</th>
                                                             <th>File</th>
                                                             <th data-sort-ignore="true">Action</th>
                                                         </tr>
@@ -158,11 +157,11 @@
                                                                 }
                                                         ?>
                                                                 <tr>
-                                                                    <td><?php echo $progress_num; ?></td>
+                                                                    <td><?php echo $datetime_display; ?></td>
                                                                     <td><?php echo $child_name; ?></td>
                                                                     <td><?php echo $progress_course; ?></td>
                                                                     <td><?php echo $progress_title; ?></td>
-                                                                    <td><?php echo $datetime_display; ?></td>
+
                                                                     <?php
                                                                     if ($filepath == '-') {
                                                                     ?>

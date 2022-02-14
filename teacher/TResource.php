@@ -126,10 +126,9 @@
                                                 <table id="mytable" class="table m-t-5 table-hover contact-list" data-page-size="5">
                                                     <thead>
                                                         <tr>
-                                                            <th>#</th>
+                                                            <th>Date</th>
                                                             <th>Child</th>
                                                             <th>Title</th>
-                                                            <th>Date</th>
                                                             <th>Url</th>
                                                             <th>File</th>
                                                             <th data-sort-ignore="true">Action</th>
@@ -162,10 +161,10 @@
                                                                 }
                                                         ?>
                                                                 <tr>
-                                                                    <td><?php echo $resource_num; ?></td>
+                                                                    <td><?php echo $datetime_display; ?></td>
                                                                     <td><?php echo $child_name; ?></td>
                                                                     <td><?php echo $resource_title; ?></td>
-                                                                    <td><?php echo $datetime_display; ?></td>
+
                                                                     <?php
                                                                     if ($url == '-') {
                                                                     ?>
