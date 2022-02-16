@@ -92,11 +92,24 @@
                 <!-- ============================================================== -->
                 <!-- Start Page Content -->
                 <!-- ============================================================== -->
+
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body calender-sidebar">
                                 <div id="calendar"></div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row text-left">
+                                    <div class="col-md-12">
+                                        <h4><strong>Class color code:</strong></h4>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <i class="fa fa-square text-primary"></i> Default
+                                        <i class="fa fa-square text-success m-l-10"></i> Child present
+                                        <i class="fa fa-square text-danger m-l-10"></i> Child absent
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -256,7 +269,8 @@
                                             <div class='row'>
                                                 <input class='editClass_classID' type='hidden' name='classID' readonly />
                                                 <input class='editClass_classGroupID' type='hidden' name='classGroupID' readonly />
-                                                <input class='editClass_selectedCalendarDate' type='hidden' name='selectedCalendarDate' readonly />
+                                                <input class='editClass_selectedCalendarDate' type='hidden' name='oldDate' readonly />
+                                                <input class='editClass_selectedCalendarTime' type='hidden' name='oldTime' readonly />
 
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
@@ -424,12 +438,12 @@
         $('.clockpicker').clockpicker();
 
         // Date Picker
-        $('.mydatepicker').datepicker({
-            format: 'yyyy-mm-dd',
-            autoclose: true,
-            todayHighlight: true,
-            clearBtn: true,
-        });
+        // $('.mydatepicker').datepicker({
+        //     format: 'yyyy-mm-dd',
+        //     autoclose: true,
+        //     todayHighlight: true,
+        //     clearBtn: true,
+        // });
 
         // add the responsive classes after page initialization
         window.onload = function() {
@@ -464,7 +478,7 @@
                     }
                 },
                 handleWindowResize: true,
-                longPressDelay: 1000,
+                longPressDelay: 100,
                 selectable: true,
                 editable: false,
                 droppable: false,
@@ -518,6 +532,14 @@
                     addform.find(".addClass_startDate").val(finalDateString);
                     addform.find(".addClass_startTime").val(finalTimeString);
                     addform.find(".addClass_day").val(dayName);
+
+                    addform.find('.addClass_endDate').datepicker({
+                        format: 'yyyy-mm-dd',
+                        autoclose: true,
+                        todayHighlight: true,
+                        clearBtn: true,
+                    });
+                    addform.find('.addClass_endDate').datepicker('setStartDate', finalDateString);
                 },
 
                 // CREATE NEW EVENT FUNCTION
@@ -529,6 +551,10 @@
                     $modal.modal({
                         backdrop: 'static'
                     });
+
+                    addform.find(".addClass_child_option").html('<option hidden disabled selected value=""> -- select a teacher first -- </option>');
+                    addform.find(".addClass_course_option").html('<input type = "text" name = "course" class="form-control" value="" placeholder="Select a child first" readonly>');
+                    addform.find(".addClass_duration_option").html('<input type = "text" name = "duration" class="form-control" value="" placeholder="Select a child first" readonly>');
 
                     // get child option after selected teacher 
                     $(document).on('change', 'select.addClass_teacher_option', function() {
@@ -634,6 +660,9 @@
                         })
                         calendar.refetchEvents();
                     });
+                    addform[0].reset();
+                    calendar.unselect();
+                    calendar.refetchEvents();
                 },
 
                 // EDIT/DELETE EVENT FUNCTION
@@ -704,6 +733,8 @@
                     editform.find(".editClass_classID").val(id);
                     editform.find(".editClass_classGroupID").val(classGroupID);
                     editform.find(".editClass_selectedCalendarDate").val(datestring);
+                    editform.find(".editClass_selectedCalendarTime").val(startTime);
+                    
                     editform.find(".editClass_teacher").val(teacher);
                     editform.find(".editClass_child").val(child);
                     editform.find(".editClass_course").val(course);
@@ -723,6 +754,13 @@
                     } else {
                         editAttendanceForm.find('input[name = "attendance"]').prop('checked', false);
                     }
+
+                    editform.find('.editClass_startDate').datepicker({
+                        format: 'yyyy-mm-dd',
+                        autoclose: true,
+                        todayHighlight: true,
+                        clearBtn: true,
+                    });
 
                     // SET NEW DAY WHEN DATEPICKER CHANGED IN STARTDATE 
                     $('.editClass_startDate').datepicker().change((e) => {
@@ -845,8 +883,8 @@
                                 })
                                 calendar.refetchEvents();
                             }
-                            calendar.refetchEvents();
                         })
+                        calendar.refetchEvents();
                     });
 
                     // EDIT ATTENDANCE EVENT
@@ -904,8 +942,8 @@
                                 })
                                 calendar.refetchEvents();
                             }
-                            calendar.refetchEvents();
                         });
+                        calendar.refetchEvents();
                     });
 
                     // DELETE EVENT
@@ -1008,33 +1046,11 @@
                                     console.log(xhr);
                                 })
                                 calendar.refetchEvents();
-
-                                // // get selected class groupid
-                                // var thisClassGroupId = eventObj.extendedProps.classGroup;
-                                // // get all classes with same groupid as selected class
-                                // var allclassGroupId = calendar.getEvents().filter(function(event) {
-                                //     return event.extendedProps.classGroup === thisClassGroupId;
-                                // });
-                                // // console.log(allclassGroupId);
-
-                                // // loop each class with same groupid
-                                // allclassGroupId.forEach(myFunction);
-
-                                // function myFunction(value) {
-                                //     // if current loop class date is same with selected class date, or
-                                //     // if current loop class date is after the selected class date
-                                //     if (moment(value.start).isSame(eventObj.start) || moment(value.start).isAfter(eventObj.start)) {
-                                //         value.remove();
-                                //     }
-                                // }
-
-                                // $modal.modal('hide');
-                                // Swal.fire('Deleted!', 'All classes are deleted', 'success')
                             }
-                            calendar.refetchEvents();
                         })
+                        calendar.refetchEvents();
                     });
-
+                    calendar.refetchEvents();
                 },
                 events: 'loadClass.php',
             });
