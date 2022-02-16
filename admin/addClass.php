@@ -57,6 +57,7 @@ if ($conn) {
 
             $sql2 = "INSERT INTO CLASS (CLASS_ID,CLASSGROUP_ID,START_DATETIME,END_DATETIME,CLASS_DAY,CLASS_LOCATION,CLASS_DESC,ATTENDANCE) 
             VALUES ('','$last_classgroup_id','$start_datetime','$end_datetime','$dayCode','$location','$desc',NULL)";
+
             if (mysqli_query($conn, $sql2)) {
                 $flag = true;
             } else {
@@ -72,9 +73,37 @@ if ($conn) {
     }
 
     if ($flag) {
-        $response['title']  = 'Done!';
-        $response['status']  = 'success';
-        $response['message'] = 'Classes are successful added!';
+
+        $sql3 = "SELECT * FROM CHILD LEFT JOIN PARENT ON CHILD.PARENT_ID = PARENT.PARENT_ID WHERE CHILD_ID = '$child_id'";
+        $result3 = $conn->query($sql3);
+        while ($row3 = $result3->fetch_assoc()) {
+            $db_child_name = $row3["CHILD_NAME"];
+            $db_parent_id = $row3["PARENT_ID"];
+        }
+
+        $time = date("g:iA", strtotime($startTime));
+
+        // NOTIFY TEACHER & PARENT
+        $title = 'New class added by Admin';
+        $content = $db_child_name . ' has new class start from ' . $startDate . ' ' . $time . ', please check';
+        $status = 'unseen';
+        $teacher_link = 'TCalendar.php';
+        $parent_link = 'PCalendar.php';
+
+        $sql4 = "INSERT INTO NOTIFICATION (NOTIFICATION_ID,ADMIN_ID,TEACHER_ID,PARENT_ID,TITLE,CONTENT,VIEW_STATUS,DATETIME,LINK) 
+        VALUES ('',NULL,'$teacher_id',NULL,'$title','$content','$status',CURRENT_TIMESTAMP(),'$teacher_link')";
+        $sql5 = "INSERT INTO NOTIFICATION (NOTIFICATION_ID,ADMIN_ID,TEACHER_ID,PARENT_ID,TITLE,CONTENT,VIEW_STATUS,DATETIME,LINK) 
+        VALUES ('',NULL,NULL,'$db_parent_id','$title','$content','$status',CURRENT_TIMESTAMP(),'$parent_link')";
+
+        if (mysqli_query($conn, $sql4) && mysqli_query($conn, $sql5)) {
+            $response['title']  = 'Done!';
+            $response['status']  = 'success';
+            $response['message'] = 'Classes are successful added!';
+        } else {
+            $response['title']  = 'Error!';
+            $response['status']  = 'error';
+            $response['message'] = 'notification error!';
+        }
     } else {
         $response['title']  = 'Error!';
         $response['status']  = 'error';
