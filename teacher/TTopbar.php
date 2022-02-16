@@ -71,10 +71,10 @@ $conn->close();
                     </a>
                     <div class="dropdown-menu dropdown-menu-right mailbox animated bounceInDown">
                         <ul>
+                            <li>
+                                <div class="drop-title font-weight-bold pl-3">Notifications</div>
+                            </li>
                             <div class="message-center">
-                                <li>
-                                    <div class="drop-title font-weight-bold pl-3">Notifications</div>
-                                </li>
                                 <li>
                                     <div class="dropdownNotification">
                                     </div>
