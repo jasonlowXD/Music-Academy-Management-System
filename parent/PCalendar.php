@@ -11,8 +11,6 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Parent index</title>
-    <!-- Custom CSS -->
-    <link href="../dist/css/style.css" rel="stylesheet">
     <!-- Calendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.css" rel="stylesheet" />
     <!-- <link href="../assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" /> -->
@@ -20,6 +18,9 @@
     <link href="../assets/node_modules/clockpicker/dist/jquery-clockpicker.css" rel="stylesheet">
     <!-- Date picker plugins css -->
     <link href="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="../dist/css/style.css" rel="stylesheet">
+
     <style>
         .datepicker {
             z-index: 1600 !important;
@@ -96,6 +97,18 @@
                             <div class="card-body calender-sidebar">
                                 <div id="calendar"></div>
                             </div>
+                            <div class="card-body">
+                                <div class="row text-left">
+                                    <div class="col-md-12">
+                                        <h4><strong>Class color code:</strong></h4>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <i class="fa fa-square text-primary"></i> Default
+                                        <i class="fa fa-square text-success m-l-10"></i> Child present
+                                        <i class="fa fa-square text-danger m-l-10"></i> Child absent
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -127,48 +140,48 @@
                             <div class="tab-content tabcontent-border">
                                 <!-- class detail tab -->
                                 <div class="tab-pane active" id="classdetail" role="tabpanel">
-                                    <div class="modal-body ">
+                                    <div class="modal-body">
                                         <div class="table-responsive">
-                                            <table class="table class-detail-table">
+                                            <table class="table" id="class_detail_table>">
                                                 <tbody>
                                                     <tr>
-                                                        <td width="200">Teacher :</td>
-                                                        <td class="teacherName"></td>
+                                                        <td width="35%"><strong>Teacher :</strong></td>
+                                                        <td class="teacher"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Children :</td>
-                                                        <td class="childrenName"></td>
+                                                        <td><strong>Child :</strong> </td>
+                                                        <td class="child"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Course :</td>
-                                                        <td class="courseName"></td>
+                                                        <td><strong>Course :</strong></td>
+                                                        <td class="course"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Duration (min) :</td>
+                                                        <td><strong>Duration (min) :</strong></td>
                                                         <td class="duration"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Date :</td>
+                                                        <td><strong>Date :</strong></td>
                                                         <td class="date"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Start Time :</td>
+                                                        <td><strong>Start Time :</strong></td>
                                                         <td class="startTime"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>End Time :</td>
+                                                        <td><strong>End Time :</strong></td>
                                                         <td class="endTime"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Location :</td>
+                                                        <td><strong>Location :</strong></td>
                                                         <td class="location"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Description :</td>
+                                                        <td><strong>Description :</strong></td>
                                                         <td class="desc"></td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Attendance :</td>
+                                                        <td><strong>Attendance :</strong></td>
                                                         <td class="attendance">
                                                         </td>
                                                     </tr>
@@ -185,31 +198,31 @@
                                 <!-- respond reschedule request tab -->
                                 <div class="tab-pane" id="makeRescheduleRequest" role="tabpanel">
                                     <div class="modal-body">
-                                        <form class="newRequest-modal-form">
+                                        <form class="newRequest-modal-form" id="requestForm">
                                             <div class='row'>
-                                                <div class='col-md-12'>
+                                                <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Selected Date</label>
-                                                        <input type="text" name="selectedDate" class="form-control mydatepicker" disabled />
+                                                        <label class='control-label'>Original Date</label>
+                                                        <input type="text" name="originalDate" class="form-control originalDate" readonly />
                                                     </div>
                                                 </div>
-                                                <div class='col-md-12'>
+                                                <div class='col-md-6'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Selected Time</label>
-                                                        <input class='form-control' type='text' name='selectedTime' disabled />
+                                                        <label class='control-label'>Original Time</label>
+                                                        <input type='text' name='originalTime' class="form-control originalTime" readonly />
                                                     </div>
                                                 </div>
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>New Date</label>
-                                                        <input type="text" id="bdate" name="newDate" class="form-control mydatepicker" placeholder="yyyy-mm-dd" required />
+                                                        <input type="text" name="newDate" class="form-control mydatepicker request_date" placeholder="yyyy-mm-dd" required />
                                                     </div>
                                                 </div>
-                                                <div class='col-md-12'>
+                                                <div class='col-md-6'>
                                                     <div class='form-group'>
                                                         <label class="control-label">New Time</label>
                                                         <div class="input-group clockpicker" data-placement="bottom" data-align="top" data-autoclose="true">
-                                                            <input type="text" class="form-control" name="newTime" placeholder="Select time" required />
+                                                            <input type="text" class="form-control request_time" name="newTime" placeholder="Select time" required />
                                                             <div class="input-group-append">
                                                                 <span class="input-group-text"><i class="fa fa-clock-o"></i></span>
                                                             </div>
@@ -219,51 +232,42 @@
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Description</label>
-                                                        <input class='form-control' placeholder='Description here' type='text' name='desc' required />
+                                                        <input class='form-control request_desc' placeholder='Description here' type='text' name='desc' required />
                                                     </div>
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                         </form>
 
-                                        <hr>
+
                                         <div class='d-none' id="requestRespondTable">
+                                            <hr>
                                             <h4><strong>Request Respond</strong></h4>
                                             <div class="table-responsive ">
-                                                <table id="rescheduleListTable" class="table m-t-5 table-hover contact-list" data-page-size="5">
+                                                <table id="rescheduleListTable" class="table table-hover contact-list" data-page-size="5">
                                                     <thead>
                                                         <tr>
-                                                            <th>#</th>
-                                                            <th width="130">New Date</th>
-                                                            <th width="130">New Time</th>
-                                                            <th>Description</th>
-                                                            <th>Status</th>
+                                                            <th style="width:5%;">#</th>
+                                                            <th style="width:45%;">New Date & Time</th>
+                                                            <th style="width:45%;">Description</th>
+                                                            <th style="width:5%;">Status</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
                                                         <tr>
                                                             <td>1</td>
-                                                            <td>2021-09-30</td>
-                                                            <td>11:00</td>
-                                                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur quis sollicitudin orci, vitae convallis est. Cras tempor, lectus feugiat placerat condimentum, sem nisi vehicula ex, fermentum tincidunt eros velit nec felis. </td>
+                                                            <td>2021-09-30 11:00</td>
+                                                            <td>child urgent sick yeet child urgent sick child urgent sick</td>
                                                             <td><span class="label label-danger">Rejected</span></td>
                                                         </tr>
                                                         <tr>
                                                             <td>2</td>
-                                                            <td>2021-10-05</td>
-                                                            <td>10:00</td>
+                                                            <td>2021-10-05 10:00</td>
                                                             <td>not free that day</td>
                                                             <td><span class="label label-warning">Pending</span></td>
                                                         </tr>
                                                     </tbody>
                                                     <tfoot>
-                                                        <tr>
-                                                            <td colspan="7">
-                                                                <div class="text-right">
-                                                                    <ul class="pagination"> </ul>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
                                                     </tfoot>
                                                 </table>
                                             </div>
@@ -350,10 +354,8 @@
 
         //FULLCALENDAR V5
         document.addEventListener('DOMContentLoaded', function() {
-            var day, dayName, fulldate, datestring;
-            var teacher, children, course, duration, startTime, location, desc;
-
-            var dataEvent = dummyData();
+            var day, dayName, fulldate, datestring, timeString;
+            var id, classGroupID, teacher, child, course, duration, startDate, endDate, startTime, endTime, loca, desc, attendance;
 
             var calendarEl = document.getElementById('calendar');
 
@@ -378,7 +380,7 @@
                     }
                 },
                 handleWindowResize: true,
-                longPressDelay: 1000,
+                longPressDelay: 100,
                 selectable: false,
                 editable: false,
                 droppable: false,
@@ -386,43 +388,10 @@
                 eventMaxStack: 3,
                 slotEventOverlap: false,
 
-                dateClick: function(info) {
-                    fulldate = info.date;
-                    // console.log(fulldate);
-                    day = fulldate.getDay(); //get the day (0=sunday, 1=monday...)
-                    switch (day) {
-                        case 0:
-                            dayName = 'Sunday';
-                            break;
-                        case 1:
-                            dayName = 'Monday';
-                            break;
-                        case 2:
-                            dayName = 'Tuesday';
-                            break;
-                        case 3:
-                            dayName = 'Wednesday';
-                            break;
-                        case 4:
-                            dayName = 'Thrusday';
-                            break;
-                        case 5:
-                            dayName = 'Friday';
-                            break;
-                        case 6:
-                            dayName = 'Saturday';
-                            break;
-                    }
-                    // console.log(dayName);
-
-                    datestring = info.dateStr;
-                    // console.log(datestring);
-                },
-
-                // EDIT/DELETE EVENT FUNCTION
+                // VIEW EVENT DETAILS & REQUEST RESCHEDULE
                 eventClick: function(info) {
                     var $modal = $('#event-detail-modal');
-                    var detailTable = $modal.find('.class-detail-table');
+                    var detailTable = $modal.find('#class_detail_table');
 
                     $modal.modal({
                         backdrop: 'static'
@@ -431,8 +400,7 @@
                     // GET VALUE from selected event
                     var eventObj = info.event;
                     // console.log(info.event.start.getDay()); 
-                    var day = eventObj.start.getDay(); //get the day (0=sunday, 1=monday...)
-                    var dayName;
+                    day = eventObj.start.getDay(); //get the day (0=sunday, 1=monday...)
                     switch (day) {
                         case 0:
                             dayName = 'Sunday';
@@ -456,73 +424,99 @@
                             dayName = 'Saturday';
                             break;
                     }
-                    var id = eventObj.id;
-                    // var id = eventObj.groupId;
-                    // var eventGroupId = calendar.getEvents().filter(function(event) {
-                    //     return event.groupId === id;
-                    // });
-                    // console.log(eventGroupId);
-                    var teacherChildren = eventObj.title.split(",");
-                    teacher = teacherChildren[0];
-                    children = teacherChildren[1];
+                    id = eventObj.id;
+
+                    // console.log(eventObj);
+
+                    var childCourse = eventObj.title.split(",");
+                    child = childCourse[0];
+                    course = childCourse[1];
 
                     var datestringInfo = eventObj.start;
                     var datestringMoment = moment(datestringInfo, "YYYY-MM-DD");
-                    var datestring = datestringMoment.format('YYYY-MM-DD')
+                    datestring = datestringMoment.format('YYYY-MM-DD')
 
-                    duration = 60;
                     var startTimeInfo = eventObj.start;
                     var startTimeMoment = moment(startTimeInfo, 'HH:mm'); //convert to moment object
                     startTime = startTimeMoment.format('HH:mm');
+                    var startTime12hourFormat = startTimeMoment.format('h:mm a');
 
-                    var endTime = startTimeMoment.add(duration, 'm').format('HH:mm');
-                    // console.log(startTime);
+                    var endTimeInfo = eventObj.end;
+                    var endTimeMoment = moment(endTimeInfo, 'HH:mm'); //convert to moment object
+                    endTime = endTimeMoment.format('HH:mm');
+                    var endTime12hourFormat = startTimeMoment.format('h:mm a');
 
-                    location = eventObj.extendedProps.location;
-                    var locationHTML = '<a href="https://apps.google.com/meet/" class="remove">' + location + '</a>'
-                    desc = eventObj.extendedProps.description;
+
+                    teacher = eventObj.extendedProps[0].teacher;
+                    duration = eventObj.extendedProps[0].duration;
+                    loca = eventObj.extendedProps[0].location;
+                    desc = eventObj.extendedProps[0].description;
 
                     // SET DATA VALUE INTO UI CLASS DETAILS
-                    detailTable.find(".teacherName").text(teacher);
-                    detailTable.find(".childrenName").text(children);
-                    detailTable.find(".courseName").text('Piano grade 1');
-                    detailTable.find(".duration").text(duration);
-                    detailTable.find(".date").text(datestring);
-                    detailTable.find(".startTime").text(startTime);
-                    detailTable.find(".endTime").text(endTime);
-                    detailTable.find(".remove").remove();
-                    detailTable.find(".location").append(locationHTML);
-                    detailTable.find(".desc").text(desc);
+                    $(".teacher").text(teacher);
+                    $(".child").text(child);
+                    $(".course").text(course);
+                    $(".duration").text(duration);
+                    $(".date").text(datestring);
+                    $(".startTime").text(startTime12hourFormat);
+                    $(".endTime").text(endTime12hourFormat);
 
-                    var attendance = eventObj.extendedProps.attendance;
-                    // console.log(attendance);
-                    var presentHTML = '<h4 class="remove"><span class="label label-success">Present</span></h4>';
-                    var absentHTML = '<h4 class="remove"><span class="label label-danger">Absent</span></h4>';
-                    var nullAttendHTML = '<span class="remove">-</span>';
-                    if (attendance == '1') {
-                        detailTable.find(".attendance").append(presentHTML);
-                    } else if (attendance == '0') {
-                        detailTable.find(".attendance").append(absentHTML);
-                    } else if (attendance == '') {
-                        detailTable.find(".attendance").append(nullAttendHTML);
+                    // CHECK THE LOCATION IS LINK OR NOT 
+                    // console.log(loca.includes("http"))
+                    if (loca.includes("http")) {
+                        var locationHTML = '<a href="' + loca + '" target="_blank" rel="noopener noreferrer"">' + loca + '</a>';
+                        $(".location").html(locationHTML);
+                    } else {
+                        $(".location").text(loca);
                     }
 
+                    $(".desc").text(desc);
+
+                    // SET ATTENDANCE STATUS 
+                    attendance = eventObj.extendedProps[0].attendance;
+                    // console.log(attendance);
+                    var presentHTML = '<h4><span class="label label-success">Present</span></h4>';
+                    var absentHTML = '<h4><span class="label label-danger">Absent</span></h4>';
+                    var nullAttendHTML = '<span>-</span>';
+                    if (attendance == 'present') {
+                        $(".attendance").html(presentHTML);
+                    } else if (attendance == 'absent') {
+                        $(".attendance").html(absentHTML);
+                    } else if (attendance == '' || attendance == null) {
+                        $(".attendance").html(nullAttendHTML);
+                    }
+
+                    // THIS MAYBE NEED TRY DIRECT CALL AJAX GET PHP DATA AND RENDER TABLE 
                     // CHECK THE EVENT GOT RESCHEDULE REQUEST OR NOT, IF GOT REQUEST THEN DISPLAY THE REQUEST TABLE
                     // console.log(eventObj.classNames[0])
-                    if (eventObj.classNames[0] == 'bg-warning') {
+                    if (eventObj.classNames[0] == 'bg-warning' || eventObj.classNames[0] == 'bg-success' || eventObj.classNames[0] == 'bg-danger') {
                         // console.log('warning here')
                         $("#requestRespondTable").removeClass('d-none');
-                    } else if (eventObj.classNames[0] == 'bg-success' || eventObj.classNames[0] == 'bg-danger' || eventObj.classNames[0] == 'bg-primary') {
-                        // console.log('others here')
+                    } else if (eventObj.classNames[0] == 'bg-primary') {
+                        // console.log('default color here')
                         $("#requestRespondTable").addClass('d-none');
                     }
+
                     // SET SELECTED DATE AND TIME IN RESCHEDULE REQUEST FORM UI
-                    var newRequestForm = $modal.find('.newRequest-modal-form');
-                    newRequestForm.find("input[name='selectedDate']").val(datestring);
-                    newRequestForm.find("input[name='selectedTime']").val(startTime);
+                    var newRequestForm = $modal.find('#requestForm');
+                    newRequestForm.find(".originalDate").val(datestring);
+                    newRequestForm.find(".originalTime").val(startTime);
+
+                    newRequestForm.find('.request_date').val('');
+                    newRequestForm.find('.request_time').val('');
+                    newRequestForm.find('.request_desc').val('');
+
+                    newRequestForm.find('.request_date').datepicker({
+                        format: 'yyyy-mm-dd',
+                        autoclose: true,
+                        todayHighlight: true,
+                        clearBtn: true,
+                    });
+                    newRequestForm.find('.request_date').datepicker('setStartDate', datestring);
+
 
                     // NEW RESCHEDULE REQUEST SUBMIT
-                    newRequestForm.on('submit', function() {
+                    newRequestForm.off("submit").on('submit', function() {
 
                         Swal.fire({
                             title: 'Submit Request?',
@@ -546,258 +540,14 @@
                         })
                         return false;
                     });
+
+                    calendar.refetchEvents();
                 },
-                events: dataEvent,
+                events: 'loadClass.php',
             });
 
             calendar.render();
         });
-
-        function dummyData() {
-            var dataEvent = [{
-                id: 1,
-                title: 'teacher A,children B',
-                start: '2021-11-01T10:00:00',
-                end: '2021-11-01T11:00:00',
-                className: 'bg-danger',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: '0'
-                }
-            }, {
-                id: 2,
-                title: 'teacher A,children B',
-                start: '2021-11-08T10:00:00',
-                end: '2021-11-08T11:00:00',
-                className: 'bg-success',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: '1'
-                }
-            }, {
-                id: 3,
-                title: 'teacher A,children B',
-                start: '2021-11-15T10:00:00',
-                end: '2021-11-15T11:00:00',
-                className: 'bg-warning',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 4,
-                title: 'teacher A,children B',
-                start: '2021-11-22T10:00:00',
-                end: '2021-11-22T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 5,
-                title: 'teacher A,children B',
-                start: '2021-11-29T10:00:00',
-                end: '2021-11-29T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 6,
-                title: 'teacher A,children B',
-                start: '2021-12-06T10:00:00',
-                end: '2021-12-06T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 7,
-                title: 'teacher A,children B',
-                start: '2021-12-13T10:00:00',
-                end: '2021-12-13T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 8,
-                title: 'teacher A,children B',
-                start: '2021-12-20T10:00:00',
-                end: '2021-12-20T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 9,
-                title: 'teacher A,children B',
-                start: '2021-12-27T10:00:00',
-                end: '2021-12-27T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 10,
-                title: 'teacher A,children B',
-                start: '2022-01-03T10:00:00',
-                end: '2022-01-03T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 11,
-                title: 'teacher A,children B',
-                start: '2022-01-10T10:00:00',
-                end: '2022-01-10T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 12,
-                title: 'teacher A,children B',
-                start: '2022-01-17T10:00:00',
-                end: '2022-01-17T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 13,
-                title: 'teacher A,children B',
-                start: '2022-01-24T10:00:00',
-                end: '2022-01-24T11:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 1,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 14,
-                title: 'teacher C,children A',
-                start: '2021-11-11T14:00:00',
-                end: '2021-11-11T15:00:00',
-                className: 'bg-warning',
-                extendedProps: {
-                    classGroup: 2,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 15,
-                title: 'teacher C,children A',
-                start: '2021-11-18T14:00:00',
-                end: '2021-11-18T15:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 2,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 16,
-                title: 'teacher C,children A',
-                start: '2021-11-25T14:00:00',
-                end: '2021-11-25T15:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 2,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 17,
-                title: 'teacher C,children A',
-                start: '2021-12-02T14:00:00',
-                end: '2021-12-02T15:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 2,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 18,
-                title: 'teacher B,children A',
-                start: '2021-11-22T13:00:00',
-                end: '2021-11-22T14:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 3,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 19,
-                title: 'teacher B,children A',
-                start: '2021-11-22T15:00:00',
-                end: '2021-11-22T16:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 4,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }, {
-                id: 20,
-                title: 'teacher B,children A',
-                start: '2021-11-22T17:00:00',
-                end: '2021-11-22T18:00:00',
-                className: 'bg-primary',
-                extendedProps: {
-                    classGroup: 5,
-                    location: 'www.google.com',
-                    description: 'learn beginner things',
-                    attendance: ''
-                }
-            }];
-
-            return dataEvent;
-        }
     </script>
 
 </body>
