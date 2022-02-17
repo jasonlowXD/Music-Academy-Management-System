@@ -30,10 +30,10 @@ if (isset($_POST["login"])) {
         $admin_sql = "SELECT * FROM ADMIN";
         $admin_result = $conn->query($admin_sql);
 
-        $teacher_sql = "SELECT TEACHER_ID,TEACHER_NAME,TEACHER_EMAIL,TEACHER_PASS,TEACHER_STATUS FROM TEACHER";
+        $teacher_sql = "SELECT * FROM TEACHER";
         $teacher_result = $conn->query($teacher_sql);
 
-        $parent_sql = "SELECT PARENT_ID,PARENT_NAME,PARENT_EMAIL,PARENT_PASS,PARENT_STATUS FROM PARENT";
+        $parent_sql = "SELECT * FROM PARENT";
         $parent_result = $conn->query($parent_sql);
 
         // CHECK ADMIN
@@ -75,6 +75,7 @@ if (isset($_POST["login"])) {
             if (mysqli_query($conn, $teacher_sql)) {
                 while ($row = $teacher_result->fetch_assoc()) {
                     $tempUserID = $row["TEACHER_ID"];
+                    $tempAdminID = $row["ADMIN_ID"];
                     $tempName = $row["TEACHER_NAME"];
                     $tempEmail = $row["TEACHER_EMAIL"];
                     $tempPass = $row["TEACHER_PASS"];
@@ -91,6 +92,7 @@ if (isset($_POST["login"])) {
                             $_SESSION["logged"] = TRUE;
                             $_SESSION["email"] = $email;
                             $_SESSION["userID"] = $tempUserID;
+                            $_SESSION["adminID"] = $tempAdminID;
                             $_SESSION["name"] = $tempName;
                             $_SESSION["accType"] = 1; //teacher
                             $passErr = '';
@@ -116,6 +118,7 @@ if (isset($_POST["login"])) {
                 if (mysqli_query($conn, $parent_sql)) {
                     while ($row = $parent_result->fetch_assoc()) {
                         $tempUserID = $row["PARENT_ID"];
+                        $tempAdminID = $row["ADMIN_ID"];
                         $tempName = $row["PARENT_NAME"];
                         $tempEmail = $row["PARENT_EMAIL"];
                         $tempPass = $row["PARENT_PASS"];
@@ -131,6 +134,7 @@ if (isset($_POST["login"])) {
                                 $_SESSION["logged"] = TRUE;
                                 $_SESSION["email"] = $email;
                                 $_SESSION["userID"] = $tempUserID;
+                                $_SESSION["adminID"] = $tempAdminID;
                                 $_SESSION["name"] = $tempName;
                                 $_SESSION["accType"] = 2; //parent
                                 $passErr = '';

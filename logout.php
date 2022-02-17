@@ -8,6 +8,7 @@
     $_SESSION["email"] = "";
     $_SESSION["userID"] = "";
     $_SESSION["accType"] = "";
+    $_SESSION["adminID"] = "";
     
     header("location: index.php");
     exit();
