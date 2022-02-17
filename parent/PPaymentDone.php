@@ -11,12 +11,11 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Payment Done</title>
+    <!-- page css -->
+    <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
-    <!-- page css -->
-    <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
-    <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
     <meta http-equiv='refresh' content='3; URL=http://localhost/fyp/parent/PInvoice.php'>
 
 </head>
@@ -137,7 +136,6 @@
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-
         // countdown time and display in html ui
         var timeleft = 3;
         var downloadTimer = setInterval(function() {
@@ -145,7 +143,7 @@
             document.getElementById("countdown").innerHTML = timeleft;
             if (timeleft <= 0) {
                 clearInterval(downloadTimer);
-            } 
+            }
         }, 1000);
     </script>
 

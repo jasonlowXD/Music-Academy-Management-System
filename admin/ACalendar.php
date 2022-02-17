@@ -11,8 +11,6 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Admin index</title>
-    <!-- Custom CSS -->
-    <link href="../dist/css/style.css" rel="stylesheet">
     <!-- Calendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.css" rel="stylesheet" />
     <!-- <link href="../assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" /> -->
@@ -20,8 +18,8 @@
     <link href="../assets/node_modules/clockpicker/dist/jquery-clockpicker.css" rel="stylesheet">
     <!-- Date picker plugins css -->
     <link href="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-    <!-- Date picker plugins css -->
-    <link href="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <!-- Custom CSS -->
+    <link href="../dist/css/style.css" rel="stylesheet">
     <style>
         .datepicker {
             z-index: 1600 !important;
@@ -116,7 +114,6 @@
                 </div>
                 <?php
                 $userID = $_SESSION["userID"];
-                $conn = mysqli_connect("localhost", "root", "", "music_academy");
                 ?>
                 <!-- CREATE CLASS EVENT MODAL-->
                 <div class="modal fade none-border" id="add-event-modal">
@@ -373,8 +370,6 @@
                                     </form>
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>
@@ -437,14 +432,6 @@
         // https://weareoutman.github.io/clockpicker/
         $('.clockpicker').clockpicker();
 
-        // Date Picker
-        // $('.mydatepicker').datepicker({
-        //     format: 'yyyy-mm-dd',
-        //     autoclose: true,
-        //     todayHighlight: true,
-        //     clearBtn: true,
-        // });
-
         // add the responsive classes after page initialization
         window.onload = function() {
             $('.fc-toolbar.fc-header-toolbar').addClass('row col-12');
@@ -453,7 +440,7 @@
         //FULLCALENDAR V5
         document.addEventListener('DOMContentLoaded', function() {
             var day, dayName, fulldate, datestring, timeString;
-            var id, classGroupID, teacher, children, course, duration, startDate, endDate, startTime, endTime, loca, desc, attendance;
+            var id, classGroupID, teacher, child, course, duration, startDate, endDate, startTime, endTime, loca, desc, attendance;
 
             var calendarEl = document.getElementById('calendar');
 
@@ -678,8 +665,7 @@
                     // GET EXISTING VALUE AND DISPLAY IN EDIT FORM VIEW
                     var eventObj = info.event;
                     // console.log(info.event.start.getDay()); 
-                    var day = eventObj.start.getDay(); //get the day (0=sunday, 1=monday...)
-                    var dayName;
+                    day = eventObj.start.getDay(); //get the day (0=sunday, 1=monday...)
                     switch (day) {
                         case 0:
                             dayName = 'Sunday';
@@ -705,7 +691,7 @@
                     }
                     id = eventObj.id;
 
-                    console.log(eventObj);
+                    // console.log(eventObj);
 
                     var childCourse = eventObj.title.split(",");
                     child = childCourse[0];
@@ -734,7 +720,7 @@
                     editform.find(".editClass_classGroupID").val(classGroupID);
                     editform.find(".editClass_selectedCalendarDate").val(datestring);
                     editform.find(".editClass_selectedCalendarTime").val(startTime);
-                    
+
                     editform.find(".editClass_teacher").val(teacher);
                     editform.find(".editClass_child").val(child);
                     editform.find(".editClass_course").val(course);
@@ -1050,6 +1036,7 @@
                         })
                         calendar.refetchEvents();
                     });
+
                     calendar.refetchEvents();
                 },
                 events: 'loadClass.php',

@@ -11,17 +11,16 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Manage course</title>
+    <!-- Footable CSS -->
+    <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
+    <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <!-- page css -->
     <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
     <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
     <link href="../assets/node_modules/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
-    <!-- Footable CSS -->
-    <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
-    <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <!-- Custom CSS -->
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
     <link href="../dist/css/style.css" rel="stylesheet">
-
     <style>
         .teacherTable td {
             padding: 0px !important;

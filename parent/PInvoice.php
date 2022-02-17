@@ -11,16 +11,15 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Invoice</title>
-    <!-- Custom CSS -->
-    <link href="../dist/css/style.css" rel="stylesheet">
-    <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
-    <!-- page css -->
-    <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
-    <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
     <!-- Footable CSS -->
     <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
     <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
-
+    <!-- page css -->
+    <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
+    <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="../dist/css/style.css" rel="stylesheet">
+    <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
 
 </head>
 
