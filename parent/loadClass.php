@@ -13,6 +13,7 @@ if ($conn) {
     $result = $conn->query($sql);
     while ($row = $result->fetch_assoc()) {
 
+        $classID = $row["CLASS_ID"];
         $courseName = $row["COURSE_NAME"];
         $childName = $row["CHILD_NAME"];
         $title = $childName . ',' . $courseName;
@@ -44,8 +45,16 @@ if ($conn) {
             $className = 'bg-success';
         }
 
+        $sql2 = "SELECT * FROM RESCHEDULE_REQUEST WHERE CLASS_ID = '$classID' ORDER BY REQUEST_ID DESC LIMIT 1";
+        $result2 = $conn->query($sql2);
+        while ($row2 = $result2->fetch_assoc()) {
+            if ($row2["REQUEST_STATUS"] == 'pending') {
+                $className = 'bg-warning';
+            }
+        }
+
         $response[] = array(
-            'id' => $row["CLASS_ID"],
+            'id' => $classID,
             'title' =>  $title,
             'start' =>  $startDatetime,
             'end' =>  $endDatetime,

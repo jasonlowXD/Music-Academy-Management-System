@@ -4,7 +4,10 @@ $userID = $_SESSION["userID"];
 $response = array();
 $conn = mysqli_connect("localhost", "root", "", "music_academy");
 if ($conn) {
-    $sql = "SELECT * FROM CLASS_GROUP 
+    $sql = "SELECT CLASS_GROUP.CLASSGROUP_ID, 
+    CLASS.CLASS_ID, CLASS.START_DATETIME,CLASS.END_DATETIME, CLASS.CLASS_LOCATION, CLASS.CLASS_DESC, CLASS.ATTENDANCE,
+    CHILD.CHILD_NAME, COURSE.COURSE_NAME, COURSE.DURATION_PER_CLASS
+                FROM CLASS_GROUP 
                 LEFT JOIN CLASS ON CLASS_GROUP.CLASSGROUP_ID = CLASS.CLASSGROUP_ID 
                 LEFT JOIN CHILD ON CLASS_GROUP.CHILD_ID = CHILD.CHILD_ID
                 LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID
@@ -12,6 +15,7 @@ if ($conn) {
     $result = $conn->query($sql);
     while ($row = $result->fetch_assoc()) {
 
+        $classID = $row["CLASS_ID"];
         $courseName = $row["COURSE_NAME"];
         $childName = $row["CHILD_NAME"];
         $title = $childName . ',' . $courseName;
@@ -41,8 +45,16 @@ if ($conn) {
             $className = 'bg-success';
         }
 
+        $sql2 = "SELECT * FROM RESCHEDULE_REQUEST WHERE CLASS_ID = '$classID' ORDER BY REQUEST_ID DESC LIMIT 1";
+        $result2 = $conn->query($sql2);
+        while ($row2 = $result2->fetch_assoc()) {
+            if ($row2["REQUEST_STATUS"] == 'pending') {
+                $className = 'bg-warning';
+            }
+        }
+
         $response[] = array(
-            'id' => $row["CLASS_ID"],
+            'id' => $classID,
             'title' =>  $title,
             'start' =>  $startDatetime,
             'end' =>  $endDatetime,
