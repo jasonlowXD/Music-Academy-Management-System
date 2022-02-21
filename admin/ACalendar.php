@@ -658,6 +658,9 @@
                     var $modal = $('#edit-event-modal');
                     var editform = $modal.find('#editClassForm');
                     var editAttendanceForm = $modal.find('#editAttendanceForm');
+                    editform[0].reset();
+                    editAttendanceForm[0].reset();
+                    
                     $modal.modal({
                         backdrop: 'static'
                     });
@@ -735,7 +738,7 @@
                     // EDIT ATTENDANCE FORM VALUE DISPLAY 
                     attendance = eventObj.extendedProps[0].attendance;
                     editAttendanceForm.find(".editAttendance_classID").val(id);
-                    if (attendance != null) {
+                    if (attendance != null || attendance != '') {
                         editAttendanceForm.find('input[name = "attendance"][value = "' + attendance + '"]').prop('checked', true);
                     } else {
                         editAttendanceForm.find('input[name = "attendance"]').prop('checked', false);
@@ -805,7 +808,6 @@
                                             response.status
                                         ).then(() => {
                                             $modal.modal('hide');
-                                            editform[0].reset();
                                             calendar.unselect();
                                         })
                                         $('html, body').css("cursor", "auto");
@@ -967,7 +969,6 @@
                                             response.status
                                         ).then(() => {
                                             $modal.modal('hide');
-                                            editform[0].reset();
                                             calendar.unselect();
                                         })
                                         $('html, body').css("cursor", "auto");
@@ -1010,7 +1011,6 @@
                                             response.status
                                         ).then(() => {
                                             $modal.modal('hide');
-                                            editform[0].reset();
                                             calendar.unselect();
                                         })
                                         $('html, body').css("cursor", "auto");
