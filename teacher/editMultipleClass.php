@@ -104,7 +104,7 @@ if ($conn) {
 
         // NOTIFY TEACHER & PARENT
         $title = 'Classes updated by ' . $userName;
-        $content = $db_child_name . ' ' . $oldDate . ' ' . $oldTime . ' and following classes changed to ' . $newDate . ' ' . $newTime . ', please check';
+        $content = $db_child_name . ' ' . $oldDate . ' ' . $oldTime . ' and following classes changed to ' . $newDate . ' ' . $newTime . ', please check!';
         $status = 'unseen';
         $admin_link = 'ACalendar.php';
         $parent_link = 'PCalendar.php';

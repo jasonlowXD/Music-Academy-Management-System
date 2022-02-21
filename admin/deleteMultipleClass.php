@@ -55,7 +55,7 @@ if ($conn) {
 
             // NOTIFY TEACHER & PARENT
             $title = 'Classes deleted by Admin';
-            $content = $db_child_name . ' ' . $datetime . ' and following classes has been deleted, please check';
+            $content = $db_child_name . ' ' . $datetime . ' and following classes has been deleted, please check!';
             $status = 'unseen';
             $teacher_link = 'TCalendar.php';
             $parent_link = 'PCalendar.php';

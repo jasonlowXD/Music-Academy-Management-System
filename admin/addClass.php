@@ -85,7 +85,7 @@ if ($conn) {
 
         // NOTIFY TEACHER & PARENT
         $title = 'New class added by Admin';
-        $content = $db_child_name . ' has new class start from ' . $startDate . ' ' . $time . ', please check';
+        $content = $db_child_name . ' has new class start from ' . $startDate . ' ' . $time . ', please check!';
         $status = 'unseen';
         $teacher_link = 'TCalendar.php';
         $parent_link = 'PCalendar.php';
