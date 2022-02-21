@@ -106,6 +106,7 @@
                                         <i class="fa fa-square text-primary"></i> Default
                                         <i class="fa fa-square text-success m-l-10"></i> Child present
                                         <i class="fa fa-square text-danger m-l-10"></i> Child absent
+                                        <i class="fa fa-square text-warning m-l-10"></i> Pending reschedule request
                                     </div>
                                 </div>
                             </div>
@@ -198,8 +199,9 @@
                                 <!-- respond reschedule request tab -->
                                 <div class="tab-pane" id="makeRescheduleRequest" role="tabpanel">
                                     <div class="modal-body">
-                                        <form class="newRequest-modal-form" id="requestForm">
+                                        <form class="newRequest-modal-form" id="requestForm" method="post" action="addRequest.php">
                                             <div class='row'>
+                                                <input class='request_classID' type='hidden' name='classID' readonly />
                                                 <div class='col-md-6'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Original Date</label>
@@ -231,8 +233,8 @@
                                                 </div>
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
-                                                        <label class='control-label'>Description</label>
-                                                        <input class='form-control request_desc' placeholder='Description here' type='text' name='desc' required />
+                                                        <label class='control-label'>Reason</label>
+                                                        <input class='form-control request_desc' placeholder='Reason here' type='text' name='desc' required />
                                                     </div>
                                                 </div>
                                             </div>
@@ -240,37 +242,7 @@
                                         </form>
 
 
-                                        <div class='d-none' id="requestRespondTable">
-                                            <hr>
-                                            <h4><strong>Request Respond</strong></h4>
-                                            <div class="table-responsive ">
-                                                <table id="rescheduleListTable" class="table table-hover contact-list" data-page-size="5">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width:5%;">#</th>
-                                                            <th style="width:45%;">New Date & Time</th>
-                                                            <th style="width:45%;">Description</th>
-                                                            <th style="width:5%;">Status</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>2021-09-30 11:00</td>
-                                                            <td>child urgent sick yeet child urgent sick child urgent sick</td>
-                                                            <td><span class="label label-danger">Rejected</span></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>2021-10-05 10:00</td>
-                                                            <td>not free that day</td>
-                                                            <td><span class="label label-warning">Pending</span></td>
-                                                        </tr>
-                                                    </tbody>
-                                                    <tfoot>
-                                                    </tfoot>
-                                                </table>
-                                            </div>
+                                        <div id="requestRespondTable">
                                         </div>
                                     </div>
                                 </div>
@@ -444,7 +416,7 @@
                     var endTimeInfo = eventObj.end;
                     var endTimeMoment = moment(endTimeInfo, 'HH:mm'); //convert to moment object
                     endTime = endTimeMoment.format('HH:mm');
-                    var endTime12hourFormat = startTimeMoment.format('h:mm a');
+                    var endTime12hourFormat = endTimeMoment.format('h:mm a');
 
 
                     teacher = eventObj.extendedProps[0].teacher;
@@ -478,6 +450,7 @@
                     var presentHTML = '<h4><span class="label label-success">Present</span></h4>';
                     var absentHTML = '<h4><span class="label label-danger">Absent</span></h4>';
                     var nullAttendHTML = '<span>-</span>';
+
                     if (attendance == 'present') {
                         $(".attendance").html(presentHTML);
                     } else if (attendance == 'absent') {
@@ -486,19 +459,10 @@
                         $(".attendance").html(nullAttendHTML);
                     }
 
-                    // THIS MAYBE NEED TRY DIRECT CALL AJAX GET PHP DATA AND RENDER TABLE 
-                    // CHECK THE EVENT GOT RESCHEDULE REQUEST OR NOT, IF GOT REQUEST THEN DISPLAY THE REQUEST TABLE
-                    // console.log(eventObj.classNames[0])
-                    if (eventObj.classNames[0] == 'bg-warning' || eventObj.classNames[0] == 'bg-success' || eventObj.classNames[0] == 'bg-danger') {
-                        // console.log('warning here')
-                        $("#requestRespondTable").removeClass('d-none');
-                    } else if (eventObj.classNames[0] == 'bg-primary') {
-                        // console.log('default color here')
-                        $("#requestRespondTable").addClass('d-none');
-                    }
-
                     // SET SELECTED DATE AND TIME IN RESCHEDULE REQUEST FORM UI
                     var newRequestForm = $modal.find('#requestForm');
+                    newRequestForm[0].reset();
+                    newRequestForm.find(".request_classID").val(id);
                     newRequestForm.find(".originalDate").val(datestring);
                     newRequestForm.find(".originalTime").val(startTime);
 
@@ -514,10 +478,26 @@
                     });
                     newRequestForm.find('.request_date').datepicker('setStartDate', datestring);
 
+                    var bg_color = eventObj.classNames[0];
+                    // console.log(bg_color);
+
+                    // IF CLASS ATTENDANCE IS PRESENT OR ALREADY GOT PENDING REQUEST, REQUEST FORM DISABLE 
+                    if (bg_color == 'bg-warning' || bg_color == 'bg-success') {
+                        newRequestForm.find("input").prop('disabled', true);
+                        newRequestForm.find("button").prop('disabled', true);
+                    }
+                    // IF ATTENDANCE IS ABSENT OR DEFAULT CLASS, REQUEST FORM ENABLE 
+                    else if (bg_color == 'bg-danger' || bg_color == 'bg-primary') {
+                        newRequestForm.find("input").prop('disabled', false);
+                        newRequestForm.find("button").prop('disabled', false);
+                    }
+
 
                     // NEW RESCHEDULE REQUEST SUBMIT
-                    newRequestForm.off("submit").on('submit', function() {
-
+                    newRequestForm.off("submit").on('submit', function(e) {
+                        // console.log('request submit')
+                        e.preventDefault();
+                        var formData = new FormData(this);
                         Swal.fire({
                             title: 'Submit Request?',
                             icon: 'warning',
@@ -528,18 +508,56 @@
                             confirmButtonText: 'Yes, confirm!'
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                console.log("submitted");
-                                newRequestForm[0].reset();
-                                $modal.modal('hide');
-                                Swal.fire(
-                                    'Done!',
-                                    'The request is sent to the ' + teacher,
-                                    'success'
-                                )
+                                $('html, body').css("cursor", "wait");
+                                $.ajax({
+                                    url: newRequestForm.attr('action'),
+                                    type: newRequestForm.attr('method'),
+                                    data: formData,
+                                    contentType: false,
+                                    processData: false,
+                                    dataType: 'json'
+                                }).done(function(response) {
+                                    if (response.status == 'success') {
+                                        Swal.fire(
+                                            response.title,
+                                            response.message,
+                                            response.status
+                                        ).then(() => {
+                                            $modal.modal('hide');
+                                        })
+                                        $('html, body').css("cursor", "auto");
+                                    } else {
+                                        Swal.fire(
+                                            response.title,
+                                            response.message,
+                                            response.status
+                                        )
+                                        $('html, body').css("cursor", "auto");
+                                    }
+                                }).fail(function(xhr, textStatus, errorThrown) {
+                                    Swal.fire(
+                                        'Oops...',
+                                        'Something went wrong with ajax!',
+                                        'error'
+                                    )
+                                    $('html, body').css("cursor", "auto");
+                                    console.log(xhr);
+                                })
+                                calendar.refetchEvents();
                             }
                         })
-                        return false;
+                        calendar.refetchEvents();
                     });
+
+                    // LOAD RESCHEDULE REQUEST ON THE CLASS SELECTED 
+                    $.ajax({
+                        url: 'loadRescheduleRequest.php?classID=' + id,
+                        dataType: "json"
+                    }).done(function(response) {
+                        $('#requestRespondTable').html(response.output);
+                    }).fail(function(xhr, textStatus, errorThrown) {
+                        console.log(xhr);
+                    })
 
                     calendar.refetchEvents();
                 },

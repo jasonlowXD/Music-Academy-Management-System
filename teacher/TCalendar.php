@@ -105,6 +105,7 @@
                                         <i class="fa fa-square text-primary"></i> Default
                                         <i class="fa fa-square text-success m-l-10"></i> Child present
                                         <i class="fa fa-square text-danger m-l-10"></i> Child absent
+                                        <i class="fa fa-square text-warning m-l-10"></i> Pending reschedule request from parent
                                     </div>
                                 </div>
                             </div>
@@ -364,56 +365,7 @@
                                 </div>
                                 <!-- respond reschedule request tab -->
                                 <div class="tab-pane" id="rescheduleRequest" role="tabpanel">
-                                    <div class="modal-body">
-                                        <div class='d-none' id="noRequestDiv">
-                                            <p>no request from parent</p>
-                                        </div>
-                                        <div class='d-none' id="requestRespondTable">
-                                            <div class="table-responsive">
-                                                <table id="rescheduleListTable" class="table table-hover" data-page-size="5">
-                                                    <thead>
-                                                        <tr>
-                                                            <th style="width:5%;">#</th>
-                                                            <th style="width:25%;">Parent</th>
-                                                            <th style="width:30%;">New Date & Time</th>
-                                                            <th style="width:30%;">Description</th>
-                                                            <th style="width:5%;">Status</th>
-                                                            <th style="width:5%;">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>leong jun kit</td>
-                                                            <td>2021-09-30 11:00</td>
-                                                            <td>child urgent sick child urgent sick child urgent sick</td>
-                                                            <td><span class="label label-danger">Rejected</span></td>
-                                                            <td>
-                                                                <div class="btn-group-vertical">
-                                                                    <button type="button" class="btn btn-sm btn-info mb-1" disabled> Accept</button>
-                                                                    <button type="button" class="btn btn-sm btn-danger mt-1" disabled>Reject</button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>jason low jia wei</td>
-                                                            <td>2021-10-05 10:00</td>
-                                                            <td>not free that day</td>
-                                                            <td><span class="label label-warning">Pending</span></td>
-                                                            <td>
-                                                                <div class="btn-group-vertical">
-                                                                    <button type="button" id="accept" class="btn btn-sm btn-info mb-1"> Accept</button>
-                                                                    <button type="button" id="reject" class="btn btn-sm btn-danger mt-1">Reject</button>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                    <tfoot>
-                                                    </tfoot>
-                                                </table>
-                                            </div>
-                                        </div>
+                                    <div class="modal-body request">
                                     </div>
                                 </div>
                             </div>
@@ -686,6 +638,8 @@
                     var $modal = $('#edit-event-modal');
                     var editform = $modal.find('#editClassForm');
                     var editAttendanceForm = $modal.find('#editAttendanceForm');
+                    editform[0].reset();
+                    editAttendanceForm[0].reset();
 
                     $modal.modal({
                         backdrop: 'static'
@@ -763,7 +717,7 @@
                     // EDIT ATTENDANCE FORM VALUE DISPLAY 
                     attendance = eventObj.extendedProps[0].attendance;
                     editAttendanceForm.find(".editAttendance_classID").val(id);
-                    if (attendance != null) {
+                    if (attendance != null || attendance != '') {
                         editAttendanceForm.find('input[name = "attendance"][value = "' + attendance + '"]').prop('checked', true);
                     } else {
                         editAttendanceForm.find('input[name = "attendance"]').prop('checked', false);
@@ -833,7 +787,6 @@
                                             response.status
                                         ).then(() => {
                                             $modal.modal('hide');
-                                            editform[0].reset();
                                             calendar.unselect();
                                         })
                                         $('html, body').css("cursor", "auto");
@@ -995,7 +948,6 @@
                                             response.status
                                         ).then(() => {
                                             $modal.modal('hide');
-                                            editform[0].reset();
                                             calendar.unselect();
                                         })
                                         $('html, body').css("cursor", "auto");
@@ -1038,7 +990,6 @@
                                             response.status
                                         ).then(() => {
                                             $modal.modal('hide');
-                                            editform[0].reset();
                                             calendar.unselect();
                                         })
                                         $('html, body').css("cursor", "auto");
@@ -1065,50 +1016,107 @@
                         calendar.refetchEvents();
                     });
 
+                    // console.log(id);
+                    // LOAD RESCHEDULE REQUEST ON THE CLASS SELECTED 
+                    $.ajax({
+                        url: 'loadRescheduleRequest.php?classID=' + id,
+                        dataType: "json"
+                    }).done(function(response) {
+                        $('.request').html(response.output);
 
-                    // CHECK THE EVENT GOT RESCHEDULE REQUEST OR NOT, IF GOT REQUEST THEN DISPLAY THE REQUEST TABLE
-                    // console.log(eventObj.classNames[0])
-                    if (eventObj.classNames[0] == 'bg-warning' || eventObj.classNames[0] == 'bg-success' || eventObj.classNames[0] == 'bg-danger') {
-                        // console.log('warning here')
-                        $("#requestRespondTable").removeClass('d-none');
-                        $("#noRequestDiv").addClass('d-none');
-                    } else if (eventObj.classNames[0] == 'bg-primary') {
-                        // console.log('others here')
-                        $("#noRequestDiv").removeClass('d-none');
-                        $("#requestRespondTable").addClass('d-none');
-                    }
+                        var rescheduleListTable = $modal.find('#rescheduleListTable');
 
-                    var rescheduleListTable = $modal.find('#rescheduleListTable');
+                        // ACCEPT RESCHEDULE EVENT
+                        rescheduleListTable.on('click', '.btn_accept', function() {
+                            // console.log($(this))
+                            var requestID = $(this).attr('id');
+                            // console.log(requestID);
+                            $('html, body').css("cursor", "wait");
+                            $.ajax({
+                                url: 'acceptRequest.php',
+                                type: 'POST',
+                                data: {
+                                    classID: id,
+                                    requestID: requestID
+                                },
+                                dataType: "json"
+                            }).done(function(response) {
+                                if (response.status == 'success') {
+                                    Swal.fire(
+                                        response.title,
+                                        response.message,
+                                        response.status
+                                    ).then(() => {
+                                        $modal.modal('hide');
+                                        calendar.unselect();
+                                    })
+                                    $('html, body').css("cursor", "auto");
+                                } else {
+                                    Swal.fire(
+                                        response.title,
+                                        response.message,
+                                        response.status
+                                    )
+                                    $('html, body').css("cursor", "auto");
+                                }
+                            }).fail(function(xhr, textStatus, errorThrown) {
+                                Swal.fire(
+                                    'Oops...',
+                                    'Something went wrong with ajax!',
+                                    'error'
+                                )
+                                $('html, body').css("cursor", "auto");
+                                console.log(xhr);
+                            })
+                            calendar.refetchEvents();
+                        });
 
-                    // ACCEPT RESCHEDULE EVENT
-                    rescheduleListTable.on('click', '#accept', function() {
-                        var $row = $(this).closest("tr"); // Finds the closest row <tr> 
-                        var $rowId = $row.find("td:nth-child(1)"); // Finds the 1st <td> element
-
-                        //row id
-                        console.log($rowId.text());
-                        Swal.fire(
-                            'Accepted!',
-                            'id ' + $rowId.text() + ' request has been accepted.',
-                            'success'
-                        )
-
-                    });
-
-                    // REJECT RESCHEDULE EVENT
-                    rescheduleListTable.on('click', '#reject', function() {
-                        var $row = $(this).closest("tr"); // Finds the closest row <tr> 
-                        var $rowId = $row.find("td:nth-child(1)"); // Finds the 2nd <td> element
-                        //row id
-                        console.log($rowId.text());
-                        Swal.fire(
-                            'Rejected!',
-                            'id ' + $rowId.text() + ' request has been rejected.',
-                            'success'
-                        )
-
-                    });
-
+                        // REJECT RESCHEDULE EVENT
+                        rescheduleListTable.on('click', '.btn_reject', function() {
+                            var requestID = $(this).attr('id');
+                            console.log(requestID);
+                            $('html, body').css("cursor", "wait");
+                            $.ajax({
+                                url: 'rejectRequest.php',
+                                type: 'POST',
+                                data: {
+                                    classID: id,
+                                    requestID: requestID
+                                },
+                                dataType: "json"
+                            }).done(function(response) {
+                                if (response.status == 'success') {
+                                    Swal.fire(
+                                        response.title,
+                                        response.message,
+                                        response.status
+                                    ).then(() => {
+                                        $modal.modal('hide');
+                                        calendar.unselect();
+                                    })
+                                    $('html, body').css("cursor", "auto");
+                                } else {
+                                    Swal.fire(
+                                        response.title,
+                                        response.message,
+                                        response.status
+                                    )
+                                    $('html, body').css("cursor", "auto");
+                                }
+                            }).fail(function(xhr, textStatus, errorThrown) {
+                                Swal.fire(
+                                    'Oops...',
+                                    'Something went wrong with ajax!',
+                                    'error'
+                                )
+                                $('html, body').css("cursor", "auto");
+                                console.log(xhr);
+                            })
+                            calendar.refetchEvents();
+                        });
+                    }).fail(function(xhr, textStatus, errorThrown) {
+                        console.log(xhr);
+                    })
                     calendar.refetchEvents();
                 },
                 events: 'loadClass.php',
