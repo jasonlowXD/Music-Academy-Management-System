@@ -56,7 +56,7 @@ if ($conn) {
             }
 
             // NOTIFY TEACHER & PARENT
-            $title = 'Classes deleted by ' . $userName;
+            $title = 'Multiple Classes deleted by ' . $userName;
             $content = $db_child_name . ' ' . $datetime . ' and following classes has been deleted, please check!';
             $status = 'unseen';
             $admin_link = 'ACalendar.php';

@@ -102,8 +102,8 @@ if ($conn) {
         $newTime = date("g:iA", strtotime($startTime));
 
         // NOTIFY TEACHER & PARENT
-        $title = 'Classes updated by Admin';
-        $content = $db_child_name . ' ' . $oldDate . ' ' . $oldTime . ' and following classes changed to ' . $newDate . ' ' . $newTime . ', please check!';
+        $title = 'Multiple Classes updated by Admin';
+        $content = $db_child_name . ' ' . $oldDate . ' ' . $oldTime . ' and following classes changed to start from ' . $newDate . ' ' . $newTime . ', please check!';
         $status = 'unseen';
         $teacher_link = 'TCalendar.php';
         $parent_link = 'PCalendar.php';
