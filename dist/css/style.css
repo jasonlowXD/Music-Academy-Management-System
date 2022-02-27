@@ -11758,7 +11758,9 @@ File: scss
 /*User mail widgets*/
 /*******************/
 .topbar .top-navbar .mailbox {
-  width: 300px; }
+  /* width: 300px;  */
+  width: 350px; /* changed for fyp purpose */
+}
   .topbar .top-navbar .mailbox ul {
     padding: 0px; }
     .topbar .top-navbar .mailbox ul li {
