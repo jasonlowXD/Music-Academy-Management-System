@@ -249,3 +249,33 @@ function editProgressFileAddClass(message) {
     $("#editProgressFileFeedback").addClass("form-control-feedback");
     $("#editProgressFileFeedback").html(message);
 }
+
+// RECEIPT FILE 
+function receiptFileRemoveClass() {
+    $("#receiptFileDiv").removeClass("has-danger");
+    $("#receiptFileInput").removeClass("form-control-danger");
+    $("#receiptFileFeedback").removeClass("form-control-feedback");
+    $("#receiptFileFeedback").html('');
+}
+
+function receiptFileAddClass(message) {
+    $("#receiptFileDiv").addClass("has-danger");
+    $("#receiptFileInput").addClass("form-control-danger");
+    $("#receiptFileFeedback").addClass("form-control-feedback");
+    $("#receiptFileFeedback").html(message);
+}
+
+// EDIT RECEIPT FILE 
+function editReceiptFileRemoveClass() {
+    $("#editReceiptFileDiv").removeClass("has-danger");
+    $("#editReceiptFileInput").removeClass("form-control-danger");
+    $("#editReceiptFileFeedback").removeClass("form-control-feedback");
+    $("#editReceiptFileFeedback").html('');
+}
+
+function editReceiptFileAddClass(message) {
+    $("#editReceiptFileDiv").addClass("has-danger");
+    $("#editReceiptFileInput").addClass("form-control-danger");
+    $("#editReceiptFileFeedback").addClass("form-control-feedback");
+    $("#editReceiptFileFeedback").html(message);
+}
