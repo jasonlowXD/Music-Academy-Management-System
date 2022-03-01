@@ -93,7 +93,10 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Invoices #1</h4>
+                                <?php
+                                $invoice_id = $_GET["invoice_id"];
+                                ?>
+                                <h4 class="card-title">Receipt of Invoice #<?php echo $invoice_id ?></h4>
                                 <hr>
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist" id="teacherTab">
@@ -127,23 +130,54 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>1</td>
-                                                            <td>10/1/2021</td>
-                                                            <td>540</td>
-                                                            <td>pay by cash</td>
-                                                            <td>Cash</td>
-                                                            <td>-</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>2</td>
-                                                            <td>20/1/2021</td>
-                                                            <td>540</td>
-                                                            <td>if pay by online and upload file</td>
-                                                            <td>Online</td>
-                                                            <td><a href="../img/receipttest.pdf" target="_blank" rel="noopener noreferrer">receipttest.pdf</a></td>
-                                                        </tr>
+                                                        <?php
+                                                        $receipt_num = 0;
+                                                        $userID = $_SESSION["userID"];
+                                                        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                                        if ($conn) {
+                                                            $sql = "SELECT * FROM PAYMENT_RECEIPT WHERE INVOICE_ID = '$invoice_id' ORDER BY RECEIPT_ID DESC";
+                                                            $result = $conn->query($sql);
+                                                            while ($row = $result->fetch_assoc()) {
+                                                                $receipt_num++;
+                                                                $receipt_id = $row["RECEIPT_ID"];
+                                                                $receipt_date = $row["RECEIPT_DATE"];
+                                                                $receipt_amount = $row["RECEIPT_AMOUNT"];
+                                                                $receipt_desc = $row["RECEIPT_DESC"];
+                                                                $receipt_type = $row["RECEIPT_TYPE"];
+                                                                if ($row["RECEIPT_FILEPATH"] != null) {
+                                                                    $receipt_filepath = $row["RECEIPT_FILEPATH"];
+                                                                } else {
+                                                                    $receipt_filepath = '-';
+                                                                }
+                                                        ?>
+                                                                <tr>
+                                                                    <td><?php echo $receipt_num; ?></td>
+                                                                    <td><?php echo $receipt_date; ?></td>
+                                                                    <td><?php echo $receipt_amount; ?></td>
+                                                                    <td><?php echo $receipt_desc; ?></td>
+                                                                    <td><?php echo $receipt_type; ?></td>
 
+                                                                    <?php
+                                                                    if ($receipt_filepath == '-') {
+                                                                    ?>
+                                                                        <td><?php echo $receipt_filepath; ?></td>
+                                                                    <?php
+                                                                    } else {
+                                                                        $path_parts = pathinfo($receipt_filepath);
+                                                                        $file_name = $path_parts['basename']
+                                                                    ?>
+                                                                        <td><a href="<?php echo $receipt_filepath; ?>" target="_blank" rel="noopener noreferrer"><?php echo $file_name; ?></a></td>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
+                                                                </tr>
+                                                        <?php
+                                                            }
+                                                        } else {
+                                                            die("FATAL ERROR");
+                                                        }
+                                                        $conn->close();
+                                                        ?>
                                                     </tbody>
                                                     <tfoot>
                                                         <tr>
@@ -165,22 +199,23 @@
                                     <!-- add receipt panel -->
                                     <div class="tab-pane" id="addReceiptTab" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material" id="addReceiptForm">
+                                            <form enctype="multipart/form-data" class="form-material" id="addReceiptForm" method="post" action="addReceipt.php">
+                                                <input type="hidden" name="invoiceID" class="form-control" value="<?php echo $invoice_id ?>" readonly>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="bdate">Receipt Date</span>
+                                                        <label class="col-md-12">Receipt Date</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="text" id="bdate" name="bdate" class="form-control mydatepicker" placeholder="dd/mm/yyyy" required>
+                                                            <input type="text" name="receiptDate" class="form-control mydatepicker" placeholder="yyyy-mm-dd" required>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12" for="example-text3">Amount (RM)</span>
+                                                        <label class="col-md-12">Amount (RM)</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="number" id="example-text3" name="example-text" class="form-control" placeholder="enter receipt amount" required>
+                                                            <input type="number" name="amount" class="form-control" placeholder="enter receipt amount" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -188,7 +223,7 @@
                                                     <div class="row">
                                                         <label class="col-md-12">Description</label>
                                                         <div class="col-md-12">
-                                                            <textarea class="form-control" rows="3" placeholder="enter receipt description" required></textarea>
+                                                            <input class="form-control" name="desc" placeholder="enter receipt description" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -196,11 +231,11 @@
                                                     <div class="row">
                                                         <label class="col-sm-12">Type</label>
                                                         <div class="col-sm-12">
-                                                            <input type="text" id="type" name="type" class="form-control" value="Online" disabled>
+                                                            <input type="text" name="receiptType" class="form-control" value="online" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-group">
+                                                <div class="form-group" id="receiptFileDiv">
                                                     <div class="row">
                                                         <label class="col-sm-12">Upload Receipt File</label>
                                                         <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
@@ -209,19 +244,19 @@
                                                                 <span class="fileinput-filename"></span>
                                                             </div>
                                                             <span class="input-group-addon btn btn-default btn-file">
-                                                                <span class="fileinput-new">Select file</span>
+                                                                <span class="fileinput-new">Select file (only accept pdf or image file, max 2MB)</span>
                                                                 <span class="fileinput-exists">Change</span>
-                                                                <input type="hidden">
                                                                 <!-- get file data from this below input -->
-                                                                <input type="file" name="..." required>
+                                                                <input type="file" id="receiptFileInput" name="receiptFile" accept="image/jpeg,image/png,application/pdf">
                                                             </span>
-                                                            <a href="javascript:void(0)" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+                                                            <a href="javascript:void(0)" id="btnFileRemove" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                                         </div>
+                                                        <span class="col-sm-12" id="receiptFileFeedback"></span>
                                                     </div>
                                                 </div>
                                                 <div class="button-group">
                                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                                    <button type="reset" class="btn btn-dark waves-effect waves-light">Reset</button>
+                                                    <button type="reset" id="btnReset" class="btn btn-dark waves-effect waves-light">Reset</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -284,13 +319,71 @@
     <script>
         // Date Picker
         $('.mydatepicker').datepicker({
-            format: 'dd/mm/yyyy',
+            format: 'yyyy-mm-dd',
             autoclose: true,
             todayHighlight: true
         });
 
         // footable
         $('#mytable').footable();
+
+        $('#btnFileRemove').click(function() {
+            receiptFileRemoveClass();
+            $("#receiptFileInput").val('');
+        });
+
+        $('#btnReset').click(function() {
+            receiptFileRemoveClass();
+            $("#receiptFileInput").val('');
+        });
+
+        $("#addReceiptForm").submit(function(e) {
+            e.preventDefault();
+            $('html, body').css("cursor", "wait");
+            var formData = new FormData(this);
+            $.ajax({
+                    enctype: 'multipart/form-data',
+                    url: $("#addReceiptForm").attr('action'),
+                    type: $("#addReceiptForm").attr('method'),
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    dataType: 'json'
+                })
+                .done(function(response) {
+                    if (response.status == 'success') {
+                        receiptFileRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        ).then(() => {
+                            location.reload();
+                        })
+                        $('html, body').css("cursor", "auto");
+                    } else if (response.status == 'error' && response.title == 'Error receipt file') {
+                        receiptFileAddClass(response.message);
+                        $('html, body').css("cursor", "auto");
+                    } else {
+                        receiptFileRemoveClass();
+                        Swal.fire(
+                            response.title,
+                            response.message,
+                            response.status
+                        )
+                        $('html, body').css("cursor", "auto");
+                    }
+                })
+                .fail(function(xhr, textStatus, errorThrown) {
+                    Swal.fire(
+                        'Oops...',
+                        'Something went wrong with ajax!',
+                        'error'
+                    )
+                    $('html, body').css("cursor", "auto");
+                    console.log(xhr);
+                })
+        })
     </script>
 
 </body>

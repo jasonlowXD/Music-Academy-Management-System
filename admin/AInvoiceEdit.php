@@ -12,7 +12,6 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Manage Invoice Details</title>
     <!-- page css -->
-    <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
     <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
@@ -83,6 +82,28 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <?php
+                                $invoice_id = $_GET["invoice_id"];
+                                $userID = $_SESSION["userID"];
+                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                if ($conn) {
+                                    $sql = "SELECT * FROM INVOICE LEFT JOIN PARENT ON INVOICE.PARENT_ID = PARENT.PARENT_ID WHERE INVOICE.INVOICE_ID = '$invoice_id'";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $parent_id = $row["PARENT_ID"];
+                                        $parent_name = $row["PARENT_NAME"];
+                                        $invoice_date = $row["INVOICE_DATE"];
+                                        $invoice_amount = $row["INVOICE_AMOUNT"];
+                                        $invoice_status = $row["INVOICE_STATUS"];
+                                        $invoice_desc = $row["INVOICE_DESC"];
+                                    }
+                                } else {
+                                    die("FATAL ERROR");
+                                }
+
+                                $conn->close();
+                                ?>
+
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist" id="teacherTab">
                                     <li class="nav-item">
@@ -103,30 +124,25 @@
                                     <div class="tab-pane active" id="invoiceDetails" role="tabpanel">
                                         <div class="p-20">
                                             <div id="invoicePrint">
-                                                <h3><b>INVOICE</b> <span class="pull-right">#1</span></h3>
+                                                <h3><b>INVOICE</b> <span class="pull-right">#<?php echo $invoice_id; ?></span></h3>
                                                 <hr>
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="pull-left">
                                                             <address>
-                                                                <h3> &nbsp;<b class="text-danger">Music Academy</b></h3>
-                                                                <p class="text-muted m-l-5">E 104, Dharti-2,
-                                                                    <br /> Nr' Viswakarma Temple,
-                                                                    <br /> Talaja Road,
-                                                                    <br /> Bhavnagar - 364002
+                                                                <h3><b class="text-danger">Music Academy</b></h3>
+                                                                <p class="text-muted m-l-5">No 1234, Jalan SK 1/1
+                                                                    <br /> Kampung Baru Seri Kembangan,
+                                                                    <br /> 43300 Seri Kembangan,
+                                                                    <br /> Selangor.
                                                                 </p>
                                                             </address>
                                                         </div>
                                                         <div class="pull-right text-right">
                                                             <address>
                                                                 <h3>To,</h3>
-                                                                <h4 class="font-bold">Parent ABC,</h4>
-                                                                <p class="text-muted m-l-30">E 104, Dharti-2,
-                                                                    <br /> Nr' Viswakarma Temple,
-                                                                    <br /> Talaja Road,
-                                                                    <br /> Bhavnagar - 364002
-                                                                </p>
-                                                                <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> 01-01-2021</p>
+                                                                <h4 class="font-bold"><?php echo $parent_name; ?></h4>
+                                                                <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar mr-1"></i><?php echo $invoice_date; ?></p>
                                                             </address>
                                                         </div>
                                                     </div>
@@ -135,27 +151,26 @@
                                                             <table class="table table-hover">
                                                                 <thead>
                                                                     <tr>
-                                                                        <th class="text-center">#</th>
+                                                                        <th>#</th>
                                                                         <th>Description</th>
                                                                         <th class="text-right">Total</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    <tr>
-                                                                        <td class="text-center">1</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td class="text-right"> RM 120 </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-center">2</td>
-                                                                        <td>Piano Grade 1</td>
-                                                                        <td class="text-right"> RM 120 </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-center">3</td>
-                                                                        <td>Guitar Grade 2</td>
-                                                                        <td class="text-right"> RM 300 </td>
-                                                                    </tr>
+                                                                    <?php
+                                                                    $split_newline_desc = explode("\n", $invoice_desc);
+                                                                    $num_of_desc = count($split_newline_desc) - 1; //remove the last \n due to it is blank
+                                                                    for ($i = 0; $i < $num_of_desc; $i++) {
+                                                                        $split_desc = explode(",", $split_newline_desc[$i]);
+                                                                    ?>
+                                                                        <tr>
+                                                                            <td><?php echo $i + 1 ?></td>
+                                                                            <td><?php echo $split_desc[0] ?></td>
+                                                                            <td class="text-right"> RM <?php echo $split_desc[1] ?> </td>
+                                                                        </tr>
+                                                                    <?php
+                                                                    }
+                                                                    ?>
                                                                 </tbody>
                                                             </table>
                                                         </div>
@@ -163,7 +178,7 @@
                                                     <div class="col-md-12">
                                                         <div class="pull-right m-t-30 text-right">
                                                             <hr>
-                                                            <h3><b>Total :</b> RM 540</h3>
+                                                            <h3><b>Total :</b> RM <?php echo $invoice_amount; ?></h3>
                                                         </div>
                                                         <div class="clearfix"></div>
                                                         <hr>
@@ -181,59 +196,98 @@
                                     <!-- edit invoice panel -->
                                     <div class="tab-pane" id="editInvoice" role="tabpanel">
                                         <div class="p-20">
-                                            <form class="form-material" id="editInvoiceForm">
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="example-text">Invoice Number</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" id="example-text" name="example-text" class="form-control text-muted" value="1" disabled>
+                                            <form class="" id="editInvoiceForm" method="post" action="editInvoice.php?invoice_id=<?= $invoice_id ?>">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Invoice Number</label>
+                                                            <input type="text" name="invoiceID" class="form-control text-muted" value="<?php echo $invoice_id; ?>" readonly>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="bdate">Invoice Date</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" id="bdate" name="bdate" class="form-control text-muted" value="01-01-2021" disabled>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Invoice Date</label>
+                                                            <input type="text" name="invoiceDate" class="form-control text-muted" value="<?php echo $invoice_date; ?>" readonly>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="example-text3">Parent Name</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" id="example-text3" name="example-text" class="form-control text-muted" value="Parent ABC" disabled>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group">
+                                                            <label>Parent Name</label>
+                                                            <input type="hidden" name="invoiceParentID" value="<?php echo $parent_id; ?>" readonly>
+                                                            <input type="text" name="invoiceParent" class="form-control text-muted" value="<?php echo $parent_name; ?>" readonly>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-sm-12">Status</label>
-                                                        <div class="col-sm-12">
-                                                            <select class="form-control text-muted">
-                                                                <option>Unpaid</option>
-                                                                <option>Paid</option>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Description</label>
+                                                            <div class="desc_div">
+                                                                <?php
+                                                                for ($i = 0; $i < $num_of_desc; $i++) {
+                                                                    $split_desc = explode(",", $split_newline_desc[$i]);
+                                                                ?>
+                                                                    <div class="row mb-2" id="desc-<?php echo $i ?>">
+                                                                        <div class="col-md-7 col-sm-7 col-12">
+                                                                            <input type="text" name="invoiceDescName[]" class="form-control" value="<?php echo $split_desc[0] ?>" required>
+                                                                        </div>
+                                                                        <div class="d-flex no-block align-items-end col-md-5 col-sm-5 col-12">
+                                                                            <label class="mr-3">RM</label>
+                                                                            <input type="number" name="invoiceDescPrice[]" class="form-control amount_change" value="<?php echo $split_desc[1] ?>" required>
+                                                                            <?php
+                                                                            if ($i > 0) {
+                                                                            ?>
+                                                                                <span id="buttonDiv">
+                                                                                    <button type="button" id="<?php echo $i ?>" class="ml-3 btn btn-danger btn-xs btn_remove"><i class="fa fa-times"></i></button>
+                                                                                </span>
+                                                                            <?php
+                                                                            }
+                                                                            ?>
+                                                                        </div>
+                                                                    </div>
+                                                                <?php
+                                                                }
+                                                                ?>
+
+                                                                <!-- for input new desc and clone -->
+                                                                <div class="row mb-2 d-none" id="clonedesc">
+                                                                    <div class="col-md-7 col-sm-7 col-12">
+                                                                        <input type="text" name="" class="form-control inputdescName" placeholder="Enter item">
+                                                                    </div>
+                                                                    <div class="d-flex no-block align-items-end col-md-5 col-sm-5 col-12">
+                                                                        <label class="mr-3">RM</label>
+                                                                        <input type="number" name="" class="form-control inputnumber">
+                                                                        <span id="buttonDiv"></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="m-1 mt-3">
+                                                                <button type="button" id="addDesc" class="btn btn-primary btn-xs"><i class="fa fa-plus"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Total Amount (RM)</label>
+                                                            <input type="text" name="totalAmount" class="form-control text-muted total_amount" value="<?php echo $invoice_amount; ?>" required>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>Status</label>
+                                                            <select class="form-control" name="invoiceStatus" required>
+                                                                <?php
+                                                                if ($invoice_status == "unpaid") {
+                                                                ?>
+                                                                    <option selected value='unpaid'>Unpaid</option>
+                                                                    <option value='paid'>Paid</option>
+                                                                <?php
+                                                                } else {
+                                                                ?>
+                                                                    <option value='unpaid'>Unpaid</option>
+                                                                    <option selected value='paid'>Paid</option>
+                                                                <?php
+                                                                }
+                                                                ?>
                                                             </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12" for="example-text4">Total Amount (RM)</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <input type="text" id="example-text4" name="example-text" class="form-control text-muted" value="540">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label class="col-md-12">Description</label>
-                                                        <div class="col-md-12">
-                                                            <textarea class="form-control text-muted" rows="3">Piano Grade 1&#13;&#10;Piano Grade 1&#13;&#10;Guitar Grade 2</textarea>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -246,26 +300,27 @@
                         </div>
                     </div>
                 </div>
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-
             </div>
+            <!-- End PAge Content -->
             <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
+
         </div>
         <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
+        <!-- End Container fluid  -->
         <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
-        <footer class="footer">
-            © 2021 Music Academy Management System
-        </footer>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page wrapper  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- footer -->
+    <!-- ============================================================== -->
+    <footer class="footer">
+        © 2021 Music Academy Management System
+    </footer>
+    <!-- ============================================================== -->
+    <!-- End footer -->
+    <!-- ============================================================== -->
     </div>
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -314,6 +369,59 @@
             return false;
         }
 
+        //remove existing desc UI
+        $(document).on('click', '.btn_remove', function() {
+            var btn_id = $(this).attr("id");
+            // console.log(btn_id);
+            $('#desc-' + btn_id).remove();
+            var sum = 0;
+            $(".amount_change").each(function() {
+                sum += Number($(this).val());
+            });
+            $(".total_amount").val(sum);
+        });
+
+        // clone desc input UI
+        var i = 1;
+        $('#addDesc').click(function() {
+            i++;
+            var clone = $('#clonedesc').clone().find('input').val('').end().find('select').val('').end();
+            clone.attr("id", "clonedesc-" + i);
+            clone.removeClass("d-none");
+            clone.find('input').prop('required', true);
+            clone.find('.inputdescName').attr('name', 'invoiceDescName[]');
+            clone.find('.inputnumber').attr('name', 'invoiceDescPrice[]');
+            clone.find('.inputnumber').addClass('amount_change');
+
+            var removebtn = '<button type="button" id="' + i + '" class="ml-3 btn btn-danger btn-xs btn_remove_clone"><i class="fa fa-times"></i></button>';
+
+            clone.find('#buttonDiv').append(removebtn);
+
+            $('.desc_div').append(clone);
+        });
+
+        //remove desc clone UI
+        $(document).on('click', '.btn_remove_clone', function() {
+            var btn_id = $(this).attr("id");
+            // console.log(btn_id);
+            $('#clonedesc-' + btn_id).remove();
+            var sum = 0;
+            $(".amount_change").each(function() {
+                sum += Number($(this).val());
+            });
+            $(".total_amount").val(sum);
+        });
+
+        // auto calculate total amount based the amount from desc 
+        $(document).on('change keyup mouseup click', '.amount_change', function() {
+            var sum = 0;
+            $(".amount_change").each(function() {
+                sum += Number($(this).val());
+            });
+            $(".total_amount").val(sum);
+        });
+
+
         // edit invoice form
         $("#editInvoiceForm").submit(function(e) {
             e.preventDefault();
@@ -327,13 +435,38 @@
                 confirmButtonText: 'Yes, confirm!'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // DO EDIT INVOICE HERE THEN FIRE SWAL
-                    Swal.fire(
-                        'Done!',
-                        'Invoice Edited.',
-                        'success'
-                    ).then(() => {
-                        window.location.href = "AInvoiceEdit.php";
+                    $('html, body').css("cursor", "wait");
+                    $.ajax({
+                        url: $("#editInvoiceForm").attr('action'),
+                        type: $("#editInvoiceForm").attr('method'),
+                        data: $("#editInvoiceForm").serialize(),
+                        dataType: 'json'
+                    }).done(function(response) {
+                        if (response.status == 'success') {
+                            Swal.fire(
+                                response.title,
+                                response.message,
+                                response.status
+                            ).then(() => {
+                                location.reload();
+                            })
+                            $('html, body').css("cursor", "auto");
+                        } else {
+                            Swal.fire(
+                                response.title,
+                                response.message,
+                                response.status
+                            )
+                            $('html, body').css("cursor", "auto");
+                        }
+                    }).fail(function(xhr, textStatus, errorThrown) {
+                        Swal.fire(
+                            'Oops...',
+                            'Something went wrong with ajax!',
+                            'error'
+                        )
+                        $('html, body').css("cursor", "auto");
+                        console.log(xhr);
                     })
                 }
             })

@@ -16,7 +16,13 @@
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
-
+    <style>
+        input[type=number].no-spinner::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body class="skin-megna-dark fixed-layout">
@@ -67,8 +73,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="PCalendar.php">Home</a></li>
                                 <li class="breadcrumb-item"><a href="PInvoice.php">Invoice</a></li>
-                                <li class="breadcrumb-item"><a href="PInvoiceDetail.php">Invoice Details</a></li>
-                                <li class="breadcrumb-item active">Payment</li>
+                                <li class="breadcrumb-item active">Invoice Details</li>
                             </ol>
                         </div>
                     </div>
@@ -83,8 +88,23 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">INVOICE #1 PAYMENT SUMMARY</h4>
+                                <?php
+                                $invoice_id = $_GET["invoice_id"];
+                                $userID = $_SESSION["userID"];
+                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                if ($conn) {
+                                    $sql = "SELECT * FROM INVOICE WHERE INVOICE_ID = '$invoice_id'";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $invoice_amount = $row["INVOICE_AMOUNT"];
+                                    }
+                                } else {
+                                    die("FATAL ERROR");
+                                }
 
+                                $conn->close();
+                                ?>
+                                <h4 class="card-title">INVOICE #<?php echo $invoice_id ?> PAYMENT SUMMARY</h4>
                                 <hr>
                                 <h5 class="card-title">Choose payment Option</h5>
                                 <ul class="nav nav-tabs" role="tablist">
@@ -109,7 +129,8 @@
                                         <p>For online banking, please fill in the name and account number as below:</p>
                                         <p><span class="font-weight-bold">Name: Music Academy Bank </span></p>
                                         <p><span class="font-weight-bold">Public Bank Account: 123456789</span></p>
-                                        <p>Remember to upload the payment proof through this link: <a href="PReceipt.php">click here</a></p>
+                                        <p>Once you have done your online banking, please send a screenshot of your payment proof to admin.</p>
+                                        <p>Or you can choose to manual upload yourself the payment proof through this link: <a href="PReceipt.php?invoice_id=<?= $invoice_id ?>">click here</a></p>
                                         <br>
                                     </div>
 
@@ -117,24 +138,24 @@
                                     <div role="tabpanel" class="tab-pane active" id="card">
                                         <div class="row">
                                             <div class="col-md-7">
-                                                <form>
+                                                <form id="paymentForm" method="post" action="makePayment.php?invoice_id=<?= $invoice_id ?>">
                                                     <div class="form-group input-group m-t-30">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
                                                         </div>
-                                                        <input type="text" class="form-control" placeholder="Card Number" aria-label="Amount (to the nearest dollar)">
+                                                        <input type="number" class="form-control no-spinner" name="card_num" placeholder="Card Number" required>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-xs-7 col-md-7">
                                                             <div class="form-group">
                                                                 <label>EXPIRATION DATE</label>
-                                                                <input type="text" class="form-control" name="Expiry" data-mask="99/99" placeholder="MM/YY" required="">
+                                                                <input type="text" class="form-control" name="expire_date" data-mask="99/99" placeholder="MM/YY" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-xs-5 col-md-5 pull-right">
                                                             <div class="form-group">
                                                                 <label>CV CODE</label>
-                                                                <input type="text" class="form-control" name="CVC" placeholder="CVC" required="">
+                                                                <input type="number" class="form-control no-spinner" name="cvc" placeholder="CVC" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -142,7 +163,7 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>NAME OF CARD</label>
-                                                                <input type="text" class="form-control" name="nameCard" placeholder="FULLNAME" required>
+                                                                <input type="text" class="form-control" name="name_of_card" placeholder="FULLNAME" required>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -150,18 +171,21 @@
                                                         <div class="col-md-12">
                                                             <div class="form-group">
                                                                 <label>Total Amount (RM)</label>
-                                                                <input type="text" class="form-control" name="amount" value="540" disabled>
+                                                                <input type="text" class="form-control" name="totalAmount" value="<?php echo $invoice_amount ?>" readonly>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <a href="PPaymentDone.php" class="btn btn-info"><span><i class="fa fa-money"></i> </span>Make Payment</a>
+                                                    <div class="button-group">
+                                                        <button type="submit" class="btn btn-info"><span><i class="fa fa-money"></i> </span>Make Payment</button>
+                                                        <a href="PInvoice.php" type="button" class="btn btn-danger">Cancel</a>
+                                                    </div>
                                                 </form>
                                             </div>
                                             <div class="col-md-4 ml-auto">
                                                 <h4 class="card-title m-t-30">General Info</h4>
                                                 <h1><i class="fa fa-cc-visa text-info"></i> <i class="fa fa-cc-mastercard text-danger"></i> </h1>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                                <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                                <p>Once you have done your payment, please send a screenshot of your payment proof to admin.</p>
+                                                <p>Or you can choose to manual upload yourself the online payment proof through this link: <a href="PReceipt.php?invoice_id=<?= $invoice_id ?>">click here</a></p>
                                             </div>
                                         </div>
                                     </div>
@@ -215,7 +239,37 @@
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-
+        // edit invoice form
+        $("#paymentForm").submit(function(e) {
+            e.preventDefault();
+            $('html, body').css("cursor", "wait");
+            $.ajax({
+                url: $("#paymentForm").attr('action'),
+                type: $("#paymentForm").attr('method'),
+                data: $("#paymentForm").serialize(),
+                dataType: 'json'
+            }).done(function(response) {
+                if (response.status == 'success') {
+                    window.location.href = "PPaymentDone.php";
+                    $('html, body').css("cursor", "auto");
+                } else {
+                    Swal.fire(
+                        response.title,
+                        response.message,
+                        response.status
+                    )
+                    $('html, body').css("cursor", "auto");
+                }
+            }).fail(function(xhr, textStatus, errorThrown) {
+                Swal.fire(
+                    'Oops...',
+                    'Something went wrong with ajax!',
+                    'error'
+                )
+                $('html, body').css("cursor", "auto");
+                console.log(xhr);
+            })
+        })
     </script>
 
 </body>

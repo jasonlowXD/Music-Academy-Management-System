@@ -42,6 +42,69 @@
         <!-- Topbar header - style you can find in pages.scss -->
         <!-- ============================================================== -->
         <?php require_once("ATopbar.php") ?>
+        <?php
+        $userID = $_SESSION["userID"];
+        $date = new DateTime();
+        $currentDate = $date->format('Y-m-d');
+        $currentYearMonth = $date->format('Y-m');
+        $monthName = date('F');
+
+        $conn = mysqli_connect("localhost", "root", "", "music_academy");
+        if ($conn) {
+            $sql = "SELECT INVOICE_DATE FROM INVOICE WHERE ADMIN_ID = '$userID' ORDER BY INVOICE_ID DESC LIMIT 1";
+            $result = $conn->query($sql);
+            while ($row = $result->fetch_assoc()) {
+                $db_latest_date = $row["INVOICE_DATE"];
+            }
+            $latest_YearMonth = date("Y-m", strtotime($db_latest_date));
+
+            // COMPARE YEAR AND MONTH ONLY 
+            if ($currentYearMonth > $latest_YearMonth) {
+                $sql2 = "SELECT * FROM PARENT WHERE ADMIN_ID = '$userID'";
+                $result2 = $conn->query($sql2);
+                while ($row2 = $result2->fetch_assoc()) {
+                    $parent_id = $row2["PARENT_ID"];
+                    $parent_name = $row2["PARENT_NAME"];
+                    $desc = '';
+                    $total_fee = 0;
+
+                    $sql3 = "SELECT * FROM CHILD LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID WHERE CHILD.PARENT_ID = '$parent_id' AND CHILD.CHILD_STATUS = 'active'";
+                    $result3 = $conn->query($sql3);
+                    while ($row3 = $result3->fetch_assoc()) {
+                        $child_name = $row3["CHILD_NAME"];
+                        $course_name = $row3["COURSE_NAME"];
+                        $course_fee = $row3["COURSE_FEE"];
+                        $desc .= $child_name . ' ' . $course_name . ',' . $course_fee . '\n';
+                        $total_fee += $course_fee;
+                    }
+
+                    $status = 'unpaid';
+
+                    // ADD NEW INVOICE FOR EACH PARENT & NOTIFY PARENT
+                    $sql4 = "INSERT INTO INVOICE (INVOICE_ID,ADMIN_ID,PARENT_ID,INVOICE_DATE,INVOICE_STATUS,INVOICE_AMOUNT,INVOICE_DESC)
+                    VALUES ('','$userID','$parent_id','$currentDate','$status','$total_fee','$desc')";
+
+                    // NOTIFY PARENT
+                    $title = 'New invoice alert';
+                    $content = 'Your ' . $monthName . ' invoice is here, please check!';
+                    $status = 'unseen';
+                    $parent_link = 'PInvoice.php';
+
+                    $sql5 = "INSERT INTO NOTIFICATION (NOTIFICATION_ID,ADMIN_ID,TEACHER_ID,PARENT_ID,TITLE,CONTENT,VIEW_STATUS,DATETIME,LINK) 
+                    VALUES ('',NULL,NULL,'$parent_id','$title','$content','$status',CURRENT_TIMESTAMP(),'$parent_link')";
+
+
+                    if (mysqli_query($conn, $sql4) && mysqli_query($conn, $sql5)) {
+                    } else {
+                        echo mysqli_error($conn);
+                    }
+                }
+            }
+        } else {
+            die("FATAL ERROR");
+        }
+        $conn->close();
+        ?>
         <!-- ============================================================== -->
         <!-- End Topbar header -->
         <!-- ============================================================== -->
@@ -118,84 +181,50 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Parent A</td>
-                                                <td>1/1/2021</td>
-                                                <td>540</td>
-                                                <td><span class="label label-success">Paid</span></td>
-                                                <td>
-                                                    <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Parent B</td>
-                                                <td>1/1/2021</td>
-                                                <td>150</td>
-                                                <td><span class="label label-success">Paid</span></td>
-                                                <td>
-                                                    <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>AABB</td>
-                                                <td>1/1/2021</td>
-                                                <td>320</td>
-                                                <td><span class="label label-danger">Unpaid</span></td>
-                                                <td>
-                                                    <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Parent A</td>
-                                                <td>1/2/2021</td>
-                                                <td>120</td>
-                                                <td><span class="label label-danger">Unpaid</span></td>
-                                                <td>
-                                                    <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Parent B</td>
-                                                <td>1/2/2021</td>
-                                                <td>150</td>
-                                                <td><span class="label label-success">Paid</span></td>
-                                                <td>
-                                                    <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>asdsad</td>
-                                                <td>1/2/2021</td>
-                                                <td>150</td>
-                                                <td><span class="label label-danger">Unpaid</span></td>
-                                                <td>
-                                                    <div class="button-group">
-                                                        <a href="AInvoiceEdit.php" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                        <a href="AReceipt.php" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            <?php
+                                            $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                            if ($conn) {
+                                                $sql5 = "SELECT * FROM INVOICE LEFT JOIN PARENT ON INVOICE.PARENT_ID = PARENT.PARENT_ID WHERE INVOICE.ADMIN_ID = '$userID' ORDER BY INVOICE.INVOICE_ID DESC";
+                                                $result5 = $conn->query($sql5);
+                                                while ($row5 = $result5->fetch_assoc()) {
+                                                    $invoice_id = $row5["INVOICE_ID"];
+                                                    $parent_name = $row5["PARENT_NAME"];
+                                                    $invoice_date = $row5["INVOICE_DATE"];
+                                                    $invoice_amount = $row5["INVOICE_AMOUNT"];
+                                                    $invoice_status = $row5["INVOICE_STATUS"];
+                                            ?>
+                                                    <tr>
+                                                        <td><?php echo $invoice_id; ?></td>
+                                                        <td><?php echo $parent_name; ?></td>
+                                                        <td><?php echo $invoice_date; ?></td>
+                                                        <td><?php echo $invoice_amount; ?></td>
+                                                        <?php
+                                                        if ($invoice_status == "paid") {
+                                                        ?>
+                                                            <td><span class="label label-success"><?php echo $invoice_status; ?></span></td>
+                                                        <?php
+                                                        } else {
+                                                        ?>
+                                                            <td><span class="label label-danger"><?php echo $invoice_status; ?></span></td>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                        <td>
+                                                            <div class="button-group">
+                                                                <a href="AInvoiceEdit.php?invoice_id=<?= $invoice_id ?>" type="button" class="btn btn-outline-success"><i class="ti-info-alt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                                <a href="AReceipt.php?invoice_id=<?= $invoice_id ?>" type="button" class="btn btn-outline-info"><i class="ti-receipt" style="font-size:18px;" aria-hidden="true"></i></a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+
+
+                                            <?php
+                                                }
+                                            } else {
+                                                die("FATAL ERROR");
+                                            }
+                                            $conn->close();
+                                            ?>
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -208,10 +237,6 @@
                                         </tfoot>
                                     </table>
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     </div>

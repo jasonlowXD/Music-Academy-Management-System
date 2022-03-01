@@ -82,31 +82,47 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+                                <?php
+                                $invoice_id = $_GET["invoice_id"];
+                                $userID = $_SESSION["userID"];
+                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                if ($conn) {
+                                    $sql = "SELECT * FROM INVOICE LEFT JOIN PARENT ON INVOICE.PARENT_ID = PARENT.PARENT_ID WHERE INVOICE.INVOICE_ID = '$invoice_id'";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $parent_id = $row["PARENT_ID"];
+                                        $parent_name = $row["PARENT_NAME"];
+                                        $invoice_date = $row["INVOICE_DATE"];
+                                        $invoice_amount = $row["INVOICE_AMOUNT"];
+                                        $invoice_status = $row["INVOICE_STATUS"];
+                                        $invoice_desc = $row["INVOICE_DESC"];
+                                    }
+                                } else {
+                                    die("FATAL ERROR");
+                                }
+
+                                $conn->close();
+                                ?>
                                 <div id="invoicePrint">
-                                    <h3><b>INVOICE</b> <span class="pull-right">#1</span></h3>
+                                    <h3><b>INVOICE</b> <span class="pull-right">#<?php echo $invoice_id; ?></span></h3>
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="pull-left">
                                                 <address>
-                                                    <h3> &nbsp;<b class="text-danger">Music Academy</b></h3>
-                                                    <p class="text-muted m-l-5">E 104, Dharti-2,
-                                                        <br /> Nr' Viswakarma Temple,
-                                                        <br /> Talaja Road,
-                                                        <br /> Bhavnagar - 364002
+                                                    <h3><b class="text-danger">Music Academy</b></h3>
+                                                    <p class="text-muted m-l-5">No 1234, Jalan SK 1/1
+                                                        <br /> Kampung Baru Seri Kembangan,
+                                                        <br /> 43300 Seri Kembangan,
+                                                        <br /> Selangor.
                                                     </p>
                                                 </address>
                                             </div>
                                             <div class="pull-right text-right">
                                                 <address>
                                                     <h3>To,</h3>
-                                                    <h4 class="font-bold">Parent ABC,</h4>
-                                                    <p class="text-muted m-l-30">E 104, Dharti-2,
-                                                        <br /> Nr' Viswakarma Temple,
-                                                        <br /> Talaja Road,
-                                                        <br /> Bhavnagar - 364002
-                                                    </p>
-                                                    <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> 01-01-2021</p>
+                                                    <h4 class="font-bold"><?php echo $parent_name; ?></h4>
+                                                    <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar mr-1"></i><?php echo $invoice_date; ?></p>
                                                 </address>
                                             </div>
                                         </div>
@@ -115,27 +131,26 @@
                                                 <table class="table table-hover">
                                                     <thead>
                                                         <tr>
-                                                            <th class="text-center">#</th>
+                                                            <th>#</th>
                                                             <th>Description</th>
                                                             <th class="text-right">Total</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td class="text-center">1</td>
-                                                            <td>Piano Grade 1</td>
-                                                            <td class="text-right"> RM 120 </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">2</td>
-                                                            <td>Piano Grade 1</td>
-                                                            <td class="text-right"> RM 120 </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="text-center">3</td>
-                                                            <td>Guitar Grade 2</td>
-                                                            <td class="text-right"> RM 300 </td>
-                                                        </tr>
+                                                        <?php
+                                                        $split_newline_desc = explode("\n", $invoice_desc);
+                                                        $num_of_desc = count($split_newline_desc) - 1; //remove the last \n due to it is blank
+                                                        for ($i = 0; $i < $num_of_desc; $i++) {
+                                                            $split_desc = explode(",", $split_newline_desc[$i]);
+                                                        ?>
+                                                            <tr>
+                                                                <td><?php echo $i + 1 ?></td>
+                                                                <td><?php echo $split_desc[0] ?></td>
+                                                                <td class="text-right"> RM <?php echo $split_desc[1] ?> </td>
+                                                            </tr>
+                                                        <?php
+                                                        }
+                                                        ?>
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -143,7 +158,7 @@
                                         <div class="col-md-12">
                                             <div class="pull-right m-t-30 text-right">
                                                 <hr>
-                                                <h3><b>Total :</b> RM 540</h3>
+                                                <h3><b>Total :</b> RM <?php echo $invoice_amount; ?></h3>
                                             </div>
                                             <div class="clearfix"></div>
                                             <hr>
@@ -152,7 +167,17 @@
                                 </div>
                                 <div class="text-right button-group">
                                     <a href="PInvoice.php" type="button" class="btn btn-primary">Return</a>
-                                    <a href="PPayment.php" type="button" class="btn btn-info">Proceed to Payment</a>
+                                    <?php
+                                    if ($invoice_status == "paid") {
+                                    ?>
+                                        <a href="PPayment.php?invoice_id=<?= $invoice_id ?>" type="button" class="btn btn-info disabled">Proceed to Payment</a>
+                                    <?php
+                                    } else {
+                                    ?>
+                                        <a href="PPayment.php?invoice_id=<?= $invoice_id ?>" type="button" class="btn btn-info">Proceed to Payment</a>
+                                    <?php
+                                    }
+                                    ?>
                                     <button onclick="printDiv('invoicePrint')" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
                                 </div>
                             </div>
