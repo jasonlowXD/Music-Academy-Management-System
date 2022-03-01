@@ -68,8 +68,7 @@
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="PCalendar.php">Home</a></li>
                                 <li class="breadcrumb-item"><a href="PInvoice.php">Invoice</a></li>
-                                <li class="breadcrumb-item"><a href="PInvoiceDetail.php">Invoice Details</a></li>
-                                <li class="breadcrumb-item active">Payment</li>
+                                <li class="breadcrumb-item active">Invoice Details</li>
                             </ol>
                         </div>
                     </div>
