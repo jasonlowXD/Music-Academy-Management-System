@@ -95,6 +95,17 @@
                             <div class="card-body">
                                 <?php
                                 $invoice_id = $_GET["invoice_id"];
+                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                if ($conn) {
+                                    $sql = "SELECT * FROM INVOICE WHERE INVOICE_ID = '$invoice_id'";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $invoice_amount = $row["INVOICE_AMOUNT"];
+                                    }
+                                } else {
+                                    die("FATAL ERROR");
+                                }
+                                $conn->close();
                                 ?>
                                 <h4 class="card-title">Receipt of Invoice #<?php echo $invoice_id ?></h4>
                                 <hr>
@@ -135,17 +146,19 @@
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
-                                                            $sql = "SELECT * FROM PAYMENT_RECEIPT WHERE INVOICE_ID = '$invoice_id' ORDER BY RECEIPT_ID DESC";
-                                                            $result = $conn->query($sql);
-                                                            while ($row = $result->fetch_assoc()) {
+                                                            $sql2 = "SELECT * FROM PAYMENT_RECEIPT WHERE INVOICE_ID = '$invoice_id' ORDER BY RECEIPT_ID DESC";
+                                                            $result2 = $conn->query($sql2);
+                                                            $receipt_total_amount = 0;
+                                                            while ($row2 = $result2->fetch_assoc()) {
                                                                 $receipt_num++;
-                                                                $receipt_id = $row["RECEIPT_ID"];
-                                                                $receipt_date = $row["RECEIPT_DATE"];
-                                                                $receipt_amount = $row["RECEIPT_AMOUNT"];
-                                                                $receipt_desc = $row["RECEIPT_DESC"];
-                                                                $receipt_type = $row["RECEIPT_TYPE"];
-                                                                if ($row["RECEIPT_FILEPATH"] != null) {
-                                                                    $receipt_filepath = $row["RECEIPT_FILEPATH"];
+                                                                $receipt_id = $row2["RECEIPT_ID"];
+                                                                $receipt_date = $row2["RECEIPT_DATE"];
+                                                                $receipt_amount = $row2["RECEIPT_AMOUNT"];
+                                                                $receipt_total_amount += $receipt_amount;
+                                                                $receipt_desc = $row2["RECEIPT_DESC"];
+                                                                $receipt_type = $row2["RECEIPT_TYPE"];
+                                                                if ($row2["RECEIPT_FILEPATH"] != null) {
+                                                                    $receipt_filepath = $row2["RECEIPT_FILEPATH"];
                                                                 } else {
                                                                     $receipt_filepath = '-';
                                                                 }
@@ -155,7 +168,19 @@
                                                                     <td><?php echo $receipt_date; ?></td>
                                                                     <td><?php echo $receipt_amount; ?></td>
                                                                     <td><?php echo $receipt_desc; ?></td>
-                                                                    <td><?php echo $receipt_type; ?></td>
+                                                                    <td>
+                                                                        <?php
+                                                                        if ($receipt_type == 'cash') {
+                                                                            echo 'Cash';
+                                                                        } else if ($receipt_type == 'card') {
+                                                                            echo 'Debit/Credit card';
+                                                                        } else if ($receipt_type == 'ewallet') {
+                                                                            echo 'E-wallet';
+                                                                        } else if ($receipt_type == 'bank') {
+                                                                            echo 'Bank transfer';
+                                                                        }
+                                                                        ?>
+                                                                    </td>
 
                                                                     <?php
                                                                     if ($receipt_filepath == '-') {
@@ -215,7 +240,10 @@
                                                         <label class="col-md-12">Amount (RM)</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="number" name="amount" class="form-control" placeholder="enter receipt amount" required>
+                                                            <?php
+                                                            $amount_left = $invoice_amount - $receipt_total_amount;
+                                                            ?>
+                                                            <input type="number" name="amount" class="form-control" placeholder="enter receipt amount" value="<?php echo $amount_left ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -231,13 +259,13 @@
                                                     <div class="row">
                                                         <label class="col-sm-12">Type</label>
                                                         <div class="col-sm-12">
-                                                            <input type="text" name="receiptType" class="form-control" value="online" readonly>
+                                                            <input type="text" name="receiptType" class="form-control" value="Bank transfer" readonly>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="form-group" id="receiptFileDiv">
                                                     <div class="row">
-                                                        <label class="col-sm-12">Upload Receipt File</label>
+                                                        <label class="col-sm-12">Upload supporting evidance of receipt file</label>
                                                         <div class="col-sm-12 fileinput fileinput-new input-group" data-provides="fileinput">
                                                             <div class="form-control" data-trigger="fileinput">
                                                                 <i class="glyphicon glyphicon-file fileinput-exists"></i>
@@ -247,7 +275,7 @@
                                                                 <span class="fileinput-new">Select file (only accept pdf or image file, max 2MB)</span>
                                                                 <span class="fileinput-exists">Change</span>
                                                                 <!-- get file data from this below input -->
-                                                                <input type="file" id="receiptFileInput" name="receiptFile" accept="image/jpeg,image/png,application/pdf">
+                                                                <input type="file" id="receiptFileInput" name="receiptFile" accept="image/jpeg,image/png,application/pdf" required>
                                                             </span>
                                                             <a href="javascript:void(0)" id="btnFileRemove" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
                                                         </div>

@@ -59,16 +59,33 @@ if ($conn) {
                     if ($receipt_type == "cash") {
                     ?>
                         <option selected value="cash">Cash</option>
-                        <option value="online">Online</option>
+                        <option value="card">Debit/Credit card</option>
+                        <option value="ewallet">E-wallet</option>
+                        <option value="bank">Bank transfer</option>
                     <?php
-                    } else {
+                    } else if ($receipt_type == "card") {
                     ?>
                         <option value="cash">Cash</option>
-                        <option selected value="online">Online</option>
+                        <option selected value="card">Debit/Credit card</option>
+                        <option value="ewallet">E-wallet</option>
+                        <option value="bank">Bank transfer</option>
+                    <?php
+                    } else if ($receipt_type == "ewallet") {
+                    ?>
+                        <option value="cash">Cash</option>
+                        <option value="card">Debit/Credit card</option>
+                        <option selected value="ewallet">E-wallet</option>
+                        <option value="bank">Bank transfer</option>
+                    <?php
+                    } else if ($receipt_type == "bank") {
+                    ?>
+                        <option value="cash">Cash</option>
+                        <option value="card">Debit/Credit card</option>
+                        <option value="ewallet">E-wallet</option>
+                        <option selected value="bank">Bank transfer</option>
                     <?php
                     }
                     ?>
-
                 </select>
             </div>
         </div>

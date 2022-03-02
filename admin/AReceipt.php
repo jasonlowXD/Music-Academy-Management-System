@@ -96,8 +96,20 @@
                             <div class="card-body">
                                 <?php
                                 $invoice_id = $_GET["invoice_id"];
+                                $conn = mysqli_connect("localhost", "root", "", "music_academy");
+                                if ($conn) {
+                                    $sql = "SELECT * FROM INVOICE LEFT JOIN PARENT ON INVOICE.PARENT_ID = PARENT.PARENT_ID WHERE INVOICE.INVOICE_ID = '$invoice_id'";
+                                    $result = $conn->query($sql);
+                                    while ($row = $result->fetch_assoc()) {
+                                        $parent_name = $row["PARENT_NAME"];
+                                        $invoice_amount = $row["INVOICE_AMOUNT"];
+                                    }
+                                } else {
+                                    die("FATAL ERROR");
+                                }
+                                $conn->close();
                                 ?>
-                                <h4 class="card-title">Receipt of Invoice #<?php echo $invoice_id ?></h4>
+                                <h4 class="card-title">Receipt of Invoice #<?php echo $invoice_id ?> , <?php echo $parent_name ?></h4>
                                 <hr>
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs" role="tablist" id="teacherTab">
@@ -137,17 +149,19 @@
                                                         $userID = $_SESSION["userID"];
                                                         $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                                         if ($conn) {
-                                                            $sql = "SELECT * FROM PAYMENT_RECEIPT WHERE INVOICE_ID = '$invoice_id' ORDER BY RECEIPT_ID DESC";
-                                                            $result = $conn->query($sql);
-                                                            while ($row = $result->fetch_assoc()) {
+                                                            $sql2 = "SELECT * FROM PAYMENT_RECEIPT WHERE INVOICE_ID = '$invoice_id' ORDER BY RECEIPT_ID DESC";
+                                                            $result2 = $conn->query($sql2);
+                                                            $receipt_total_amount = 0;
+                                                            while ($row2 = $result2->fetch_assoc()) {
                                                                 $receipt_num++;
-                                                                $receipt_id = $row["RECEIPT_ID"];
-                                                                $receipt_date = $row["RECEIPT_DATE"];
-                                                                $receipt_amount = $row["RECEIPT_AMOUNT"];
-                                                                $receipt_desc = $row["RECEIPT_DESC"];
-                                                                $receipt_type = $row["RECEIPT_TYPE"];
-                                                                if ($row["RECEIPT_FILEPATH"] != null) {
-                                                                    $receipt_filepath = $row["RECEIPT_FILEPATH"];
+                                                                $receipt_id = $row2["RECEIPT_ID"];
+                                                                $receipt_date = $row2["RECEIPT_DATE"];
+                                                                $receipt_amount = $row2["RECEIPT_AMOUNT"];
+                                                                $receipt_total_amount += $receipt_amount;
+                                                                $receipt_desc = $row2["RECEIPT_DESC"];
+                                                                $receipt_type = $row2["RECEIPT_TYPE"];
+                                                                if ($row2["RECEIPT_FILEPATH"] != null) {
+                                                                    $receipt_filepath = $row2["RECEIPT_FILEPATH"];
                                                                 } else {
                                                                     $receipt_filepath = '-';
                                                                 }
@@ -157,7 +171,19 @@
                                                                     <td><?php echo $receipt_date; ?></td>
                                                                     <td><?php echo $receipt_amount; ?></td>
                                                                     <td><?php echo $receipt_desc; ?></td>
-                                                                    <td><?php echo $receipt_type; ?></td>
+                                                                    <td>
+                                                                        <?php
+                                                                        if ($receipt_type == 'cash') {
+                                                                            echo 'Cash';
+                                                                        } else if ($receipt_type == 'card') {
+                                                                            echo 'Debit/Credit card';
+                                                                        } else if ($receipt_type == 'ewallet') {
+                                                                            echo 'E-wallet';
+                                                                        } else if ($receipt_type == 'bank') {
+                                                                            echo 'Bank transfer';
+                                                                        }
+                                                                        ?>
+                                                                    </td>
 
                                                                     <?php
                                                                     if ($receipt_filepath == '-') {
@@ -220,7 +246,10 @@
                                                         <label class="col-md-12">Amount (RM)</span>
                                                         </label>
                                                         <div class="col-md-12">
-                                                            <input type="number" name="amount" class="form-control" placeholder="enter receipt amount" required>
+                                                            <?php
+                                                            $amount_left = $invoice_amount - $receipt_total_amount;
+                                                            ?>
+                                                            <input type="number" name="amount" class="form-control" placeholder="enter receipt amount" value="<?php echo $amount_left ?>" required>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -239,7 +268,9 @@
                                                             <select class="form-control" name="receiptType" required>
                                                                 <option hidden disabled selected value=""> -- select receipt type -- </option>
                                                                 <option value="cash">Cash</option>
-                                                                <option value="online">Online</option>
+                                                                <option value="card">Debit/Credit card</option>
+                                                                <option value="ewallet">E-wallet</option>
+                                                                <option value="bank">Bank transfer</option>
                                                             </select>
                                                         </div>
                                                     </div>
