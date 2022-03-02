@@ -125,6 +125,20 @@
 
                                     <!-- online banking tab -->
                                     <div role="tabpanel" class="tab-pane" id="onlineBank">
+                                        <div class="mt-2">
+                                            <a href="https://www.pbebank.com/" target="_blank" rel="noopener noreferrer" class=" ml-2">
+                                                <img src="../dist/images/pbe.png" alt="pbe">
+                                            </a>
+                                            <a href="https://www.maybank2u.com.my/" target="_blank" rel="noopener noreferrer" class=" ml-2">
+                                                <img src="../dist/images/maybank.png" alt="maybank" style="width:150px;">
+                                            </a>
+                                            <a href="https://www.cimbclicks.com.my/" target="_blank" rel="noopener noreferrer" class=" ml-2">
+                                                <img src="../dist/images/cimb.png" alt="cimb" style="width:100px;">
+                                            </a>
+                                            <a href="https://www.rhbgroup.com/index.html" target="_blank" rel="noopener noreferrer" class=" ml-2">
+                                                <img src="../dist/images/rhb.png" alt="rhb">
+                                            </a>
+                                        </div>
                                         <br />
                                         <p>For online banking, please fill in the name and account number as below:</p>
                                         <p><span class="font-weight-bold">Name: Music Academy Bank </span></p>
