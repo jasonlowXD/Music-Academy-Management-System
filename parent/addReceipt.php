@@ -24,6 +24,9 @@ if ($_SERVER["CONTENT_LENGTH"] > ((int)ini_get('post_max_size') * 1024 * 1024)) 
     $amount = $_POST['amount'];
     $desc = $_POST['desc'];
     $receiptType = $_POST['receiptType'];
+    if ($receiptType == 'Bank transfer') {
+        $receiptType = 'bank';
+    }
 
     $maxsize    = 2097152; // 2MB
     $acceptable = array(
