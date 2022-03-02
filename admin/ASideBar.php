@@ -15,11 +15,6 @@
                 </li>
                 <li> <a class="waves-effect waves-dark" href="AInvoice.php"><i class="ti-credit-card"></i><span class="hide-menu">Invoice & Receipt</span></a>
                 </li>
-                <!-- <li> <a class="waves-effect waves-dark" href="javascript:void(0)"><i class="icon-folder"></i><span class="hide-menu">Learning Resource</span></a>
-                </li> -->
-                <!-- <li> <a class="waves-effect waves-dark" style="padding-right: 15px;" href="AProgression.php"><i class="icon-graduation"></i><span class="hide-menu">Children Progression</span></a>
-                </li> -->
-
                 <li class="nav-small-cap">--- SETTINGS</li>
                 <li> <a class="waves-effect waves-dark" href="Account.php" aria-expanded="false"><i class="icon-settings text-info"></i><span class="hide-menu">Account Settings</span></a></li>
                 <li> <a class="waves-effect waves-dark" href="../logout.php" aria-expanded="false"><i class="icon-logout text-danger"></i><span class="hide-menu">Log Out</span></a></li>
