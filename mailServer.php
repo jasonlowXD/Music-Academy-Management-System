@@ -6,13 +6,13 @@ use PHPMailer\PHPMailer\SMTP;
 
 /* Exception class. */
 
-require 'F:\Xampp\htdocs\fyp\PHPMailer\src\Exception.php';
+require 'F:\Xampp\htdocs\fyp\assets\PHPMailer\src\Exception.php';
 
 /* The main PHPMailer class. */
-require 'F:\Xampp\htdocs\fyp\PHPMailer\src\PHPMailer.php';
+require 'F:\Xampp\htdocs\fyp\assets\PHPMailer\src\PHPMailer.php';
 
 /* SMTP class, needed if you want to use SMTP. */
-require 'F:\Xampp\htdocs\fyp\PHPMailer\src\SMTP.php';
+require 'F:\Xampp\htdocs\fyp\assets\PHPMailer\src\SMTP.php';
 
 $mail = new PHPMailer(TRUE);
 // try {
