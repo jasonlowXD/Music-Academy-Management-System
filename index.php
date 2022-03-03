@@ -38,6 +38,7 @@ if (isset($_POST["login"])) {
 
         // CHECK ADMIN
         if (mysqli_query($conn, $admin_sql)) {
+            $adminCheck = false;
             while ($row = $admin_result->fetch_assoc()) {
                 $tempUserID = $row["ADMIN_ID"];
                 $tempName = $row["ADMIN_NAME"];
@@ -73,6 +74,7 @@ if (isset($_POST["login"])) {
         if (!$adminCheck) {
             // CHECK TEACHER
             if (mysqli_query($conn, $teacher_sql)) {
+                $teacherCheck = false;
                 while ($row = $teacher_result->fetch_assoc()) {
                     $tempUserID = $row["TEACHER_ID"];
                     $tempAdminID = $row["ADMIN_ID"];
@@ -190,7 +192,7 @@ if (isset($_POST["login"])) {
     <title>Login</title>
 
     <!-- page css -->
-    <link href="dist/css/pages/login-register-lock.css" rel="stylesheet">
+    <link href="dist/css/login-register-lock.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="dist/css/style.css" rel="stylesheet">
 
@@ -285,10 +287,10 @@ if (isset($_POST["login"])) {
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="assets/jquery/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="assets/node_modules/popper/popper.min.js"></script>
-    <script src="assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/popper/popper.min.js"></script>
+    <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!--Custom JavaScript -->

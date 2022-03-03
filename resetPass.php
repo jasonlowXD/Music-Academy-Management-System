@@ -35,6 +35,7 @@ if ($conn) {
 
     // ADMIN
     if (mysqli_query($conn, $admin_sql)) {
+        $adminCheck = false;
         while ($row = $admin_result->fetch_assoc()) {
             $user_mail = $row["ADMIN_EMAIL"];
 
@@ -60,6 +61,7 @@ if ($conn) {
     if (!$adminCheck) {
         // TEACHER
         if (mysqli_query($conn, $teacher_sql)) {
+            $teacherCheck = false;
             while ($row = $teacher_result->fetch_assoc()) {
                 $user_mail = $row["TEACHER_EMAIL"];
 
