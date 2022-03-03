@@ -64,8 +64,14 @@ if ($_SERVER["CONTENT_LENGTH"] > ((int)ini_get('post_max_size') * 1024 * 1024)) 
 
     // IF NO ERROR IN NEW FILE, SET NEW FILE PATH
     if (!$fileErrorSize && !$fileErrorType && !$fileError && !$noFileInput) {
-        $target_dir = "../localFolder/receipt/";
-        $filePath = $target_dir . $_FILES['receiptFile']['name'];
+        if (!file_exists('../localFolder/receipt/')) {
+            mkdir('../localFolder/receipt/', 0777, true);
+            $target_dir = "../localFolder/receipt/";
+            $filePath = $target_dir . $_FILES['receiptFile']['name'];
+        } else {
+            $target_dir = "../localFolder/receipt/";
+            $filePath = $target_dir . $_FILES['receiptFile']['name'];
+        }
     }
 
     $conn = mysqli_connect("localhost", "root", "", "music_academy");

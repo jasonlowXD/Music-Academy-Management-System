@@ -3,14 +3,13 @@ ob_get_contents();
 ob_end_clean();
 
 //IF THE POST FILE SIZE IS LARGER THAN POST_MAX_SIZE IN PHP.INI (CURRENTLY SET POST_MAX_SIZE AS 1000M ONLY)
-if ($_SERVER["CONTENT_LENGTH"] > ((int)ini_get('post_max_size')* 1024 * 1024)) {
+if ($_SERVER["CONTENT_LENGTH"] > ((int)ini_get('post_max_size') * 1024 * 1024)) {
     // $num1 = $_SERVER["CONTENT_LENGTH"] ;
     // $num = ((int)ini_get('post_max_size')* 1024 * 1024);
     $response['title']  = 'Error resource file';
     $response['status']  = 'error';
     // $response['message'] = 'Too large jor la oiii '. $num1 .' more than '. $num.' already!';
     $response['message'] = 'File must not more than 2 megabytes!';
-
 } else {
     $noFileInput = false;
     $fileError = false;
@@ -67,8 +66,14 @@ if ($_SERVER["CONTENT_LENGTH"] > ((int)ini_get('post_max_size')* 1024 * 1024)) {
 
     // IF NO ERROR IN NEW FILE, SET NEW FILE PATH
     if (!$fileErrorSize && !$fileErrorType && !$fileError && !$noFileInput) {
-        $target_dir = "../localFolder/resource/";
-        $filePath = $target_dir . $_FILES['resourceFile']['name'];
+        if (!file_exists('../localFolder/resource/')) {
+            mkdir('../localFolder/resource/', 0777, true);
+            $target_dir = "../localFolder/resource/";
+            $filePath = $target_dir . $_FILES['resourceFile']['name'];
+        } else {
+            $target_dir = "../localFolder/resource/";
+            $filePath = $target_dir . $_FILES['resourceFile']['name'];
+        }
     }
 
     $conn = mysqli_connect("localhost", "root", "", "music_academy");
