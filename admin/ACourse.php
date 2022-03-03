@@ -12,14 +12,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Manage course</title>
     <!-- Footable CSS -->
-    <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
-    <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="../assets/footable/css/footable.core.css" rel="stylesheet">
+    <link href="../assets/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <!-- page css -->
-    <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
-    <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
-    <link href="../assets/node_modules/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
+    <link href="../dist/css/footable-page.css" rel="stylesheet">
+    <link href="../dist/css/tab-page.css" rel="stylesheet">
+    <link href="../assets/select2/dist/css/select2.css" rel="stylesheet" type="text/css" />
     <!-- Custom CSS -->
-    <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
+    <link href="../dist/css/file-upload.css" rel="stylesheet">
     <link href="../dist/css/style.css" rel="stylesheet">
     <style>
         .teacherTable td {
@@ -342,10 +342,10 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../assets/jquery/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
-    <script src="../assets/node_modules/popper/popper.min.js"></script>
-    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
@@ -355,14 +355,14 @@
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.js"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/pages/jasny-bootstrap.js"></script>
-    <script src="../dist/js/pages/mask.js"></script>
+    <script src="../dist/js/jasny-bootstrap.js"></script>
+    <script src="../dist/js/mask.js"></script>
     <!-- Footable -->
-    <script src="../assets/node_modules/footable/js/footable.all.min.js"></script>
+    <script src="../assets/footable/js/footable.all.min.js"></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script src="../assets/node_modules/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
+    <script src="../assets/select2/dist/js/select2.full.min.js" type="text/javascript"></script>
 
     <script>
         // tab panel javascript

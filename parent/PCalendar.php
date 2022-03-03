@@ -13,11 +13,11 @@
     <title>Parent index</title>
     <!-- Calendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.css" rel="stylesheet" />
-    <!-- <link href="../assets/node_modules/calendar/dist/fullcalendar.css" rel="stylesheet" /> -->
+    <!-- <link href="../assets/calendar/dist/fullcalendar.css" rel="stylesheet" /> -->
     <!-- Page plugins css -->
-    <link href="../assets/node_modules/clockpicker/dist/jquery-clockpicker.css" rel="stylesheet">
+    <link href="../assets/clockpicker/dist/jquery-clockpicker.css" rel="stylesheet">
     <!-- Date picker plugins css -->
-    <link href="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
 
@@ -281,10 +281,10 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../assets/jquery/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
-    <script src="../assets/node_modules/popper/popper.min.js"></script>
-    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
@@ -294,17 +294,17 @@
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.js"></script>
     <!-- Calendar JavaScript -->
-    <script src="../assets/node_modules/calendar/jquery-ui.min.js"></script>
-    <script src="../assets/node_modules/moment/moment.js"></script>
-    <!-- <script src='../assets/node_modules/calendar/dist/fullcalendar.min.js'></script> -->
+    <script src="../assets/calendar/jquery-ui.min.js"></script>
+    <script src="../assets/moment/moment.js"></script>
+    <!-- <script src='../assets/calendar/dist/fullcalendar.min.js'></script> -->
     <!-- fullcalendar bundle -->
     <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.9.0/main.min.js'></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Clock Plugin JavaScript -->
-    <script src="../assets/node_modules/clockpicker/dist/jquery-clockpicker.min.js"></script>
+    <script src="../assets/clockpicker/dist/jquery-clockpicker.min.js"></script>
     <!-- Date Picker Plugin JavaScript -->
-    <script src="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="../assets/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 
     <script>
         // CLOCKPICKER

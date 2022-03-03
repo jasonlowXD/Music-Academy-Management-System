@@ -13,7 +13,7 @@
     <title>Edit teacher</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
-    <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
+    <link href="../dist/css/file-upload.css" rel="stylesheet">
 
 </head>
 
@@ -189,10 +189,10 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../assets/jquery/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
-    <script src="../assets/node_modules/popper/popper.min.js"></script>
-    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
@@ -202,7 +202,7 @@
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.js"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/pages/jasny-bootstrap.js"></script>
+    <script src="../dist/js/jasny-bootstrap.js"></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 

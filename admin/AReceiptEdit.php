@@ -119,7 +119,7 @@ if ($conn) {
 </form>
 
 <!-- Date Picker Plugin JavaScript -->
-<script src="../assets/node_modules/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+<script src="../assets/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
 <script>
     // Date Picker
     $('.mydatepicker').datepicker({

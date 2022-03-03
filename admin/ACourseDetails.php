@@ -13,7 +13,7 @@
     <title>Course Details</title>
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
-    <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
+    <link href="../dist/css/file-upload.css" rel="stylesheet">
     <style>
         .border-right {
             border-right: 2px solid #d1d1d1   !important;
@@ -101,7 +101,7 @@
                                         $duration_per_class = $row["DURATION_PER_CLASS"];
                                         $course_status = $row["COURSE_STATUS"];
                                         $course_desc = $row["COURSE_DESC"];
-                                        $course_desc = str_replace("\n", "<br/>", $course_desc);
+                                        $course_desc = str_replace("\r\n", "<br/>", $course_desc);
                                 ?>
                                         <div class="row">
                                             <div class="col-md-4 border-right">
@@ -205,10 +205,10 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../assets/jquery/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
-    <script src="../assets/node_modules/popper/popper.min.js"></script>
-    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
@@ -218,7 +218,7 @@
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.js"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/pages/jasny-bootstrap.js"></script>
+    <script src="../dist/js/jasny-bootstrap.js"></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
