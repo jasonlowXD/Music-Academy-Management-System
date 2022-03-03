@@ -64,9 +64,9 @@ if ($conn) {
         $db_date = $split_datetime[0];
         $db_date = new DateTime($db_date);
 
-        // IF CURRENT LOOP CLASS NO ATTENDANCE, THEN CAN EDIT 
+        // IF CURRENT LOOP CLASS NO ATTENDANCE OR ABSENT, THEN CAN EDIT 
         // IF CURRENT LOOP CLASS DATE IS EQUAL OR MORE THAN ORIGINAL DATE (USER SELECT 2022-02-02 AND AFTER DATE TO EDIT, WHICH MEAN DATE BEFORE 2022-02-02 CANNOT DO EDIT)
-        if ($db_attendance == null && $db_date >= $calendarDate) {
+        if ($db_attendance == null || $db_attendance == 'absent' && $db_date >= $calendarDate) {
 
             $date = $userInputdate->format('Y-m-d');
             $start_datetime = $date . ' ' . $startTime . ':00';
@@ -79,7 +79,7 @@ if ($conn) {
                 break;
             }
             $userInputdate->add($interval);
-        } else if ($db_attendance != 'present' || $db_attendance != 'absent') {
+        } else if ($db_attendance == 'present') {
             $flag = 'false attendance';
             break;
         }
