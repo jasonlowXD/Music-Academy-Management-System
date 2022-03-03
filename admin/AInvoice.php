@@ -12,14 +12,14 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
     <title>Manage invoice</title>
     <!-- Footable CSS -->
-    <link href="../assets/node_modules/footable/css/footable.core.css" rel="stylesheet">
-    <link href="../assets/node_modules/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="../assets/footable/css/footable.core.css" rel="stylesheet">
+    <link href="../assets/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" />
     <!-- page css -->
-    <link href="../dist/css/pages/footable-page.css" rel="stylesheet">
-    <link href="../dist/css/pages/tab-page.css" rel="stylesheet">
+    <link href="../dist/css/footable-page.css" rel="stylesheet">
+    <link href="../dist/css/tab-page.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
-    <link href="../dist/css/pages/file-upload.css" rel="stylesheet">
+    <link href="../dist/css/file-upload.css" rel="stylesheet">
 
 
 </head>
@@ -43,6 +43,7 @@
         <!-- ============================================================== -->
         <?php require_once("ATopbar.php") ?>
         <?php
+        date_default_timezone_set("Asia/Kuala_Lumpur");
         $userID = $_SESSION["userID"];
         $date = new DateTime();
         $currentDate = $date->format('Y-m-d');
@@ -60,7 +61,7 @@
 
             // COMPARE YEAR AND MONTH ONLY 
             if ($currentYearMonth > $latest_YearMonth) {
-                $sql2 = "SELECT * FROM PARENT WHERE ADMIN_ID = '$userID'";
+                $sql2 = "SELECT * FROM PARENT WHERE ADMIN_ID = '$userID' AND PARENT_STATUS = 'active'";
                 $result2 = $conn->query($sql2);
                 while ($row2 = $result2->fetch_assoc()) {
                     $parent_id = $row2["PARENT_ID"];
@@ -70,33 +71,35 @@
 
                     $sql3 = "SELECT * FROM CHILD LEFT JOIN COURSE ON CHILD.COURSE_ID = COURSE.COURSE_ID WHERE CHILD.PARENT_ID = '$parent_id' AND CHILD.CHILD_STATUS = 'active'";
                     $result3 = $conn->query($sql3);
-                    while ($row3 = $result3->fetch_assoc()) {
-                        $child_name = $row3["CHILD_NAME"];
-                        $course_name = $row3["COURSE_NAME"];
-                        $course_fee = $row3["COURSE_FEE"];
-                        $desc .= $child_name . ' ' . $course_name . ',' . $course_fee . '\n';
-                        $total_fee += $course_fee;
-                    }
+                    if ($result3->num_rows > 0) {
+                        while ($row3 = $result3->fetch_assoc()) {
+                            $child_name = $row3["CHILD_NAME"];
+                            $course_name = $row3["COURSE_NAME"];
+                            $course_fee = $row3["COURSE_FEE"];
+                            $desc .= $child_name . ' ' . $course_name . ',' . $course_fee . '\n';
+                            $total_fee += $course_fee;
+                        }
 
-                    $status = 'unpaid';
+                        $status = 'unpaid';
 
-                    // ADD NEW INVOICE FOR EACH PARENT & NOTIFY PARENT
-                    $sql4 = "INSERT INTO INVOICE (INVOICE_ID,ADMIN_ID,PARENT_ID,INVOICE_DATE,INVOICE_STATUS,INVOICE_AMOUNT,INVOICE_DESC)
-                    VALUES ('','$userID','$parent_id','$currentDate','$status','$total_fee','$desc')";
+                        // ADD NEW INVOICE FOR EACH PARENT & NOTIFY PARENT
+                        $sql4 = "INSERT INTO INVOICE (INVOICE_ID,ADMIN_ID,PARENT_ID,INVOICE_DATE,INVOICE_STATUS,INVOICE_AMOUNT,INVOICE_DESC)
+                        VALUES ('','$userID','$parent_id','$currentDate','$status','$total_fee','$desc')";
 
-                    // NOTIFY PARENT
-                    $title = 'New invoice alert';
-                    $content = 'Your ' . $monthName . ' invoice is here, please check!';
-                    $status = 'unseen';
-                    $parent_link = 'PInvoice.php';
+                        // NOTIFY PARENT
+                        $title = 'New invoice alert';
+                        $content = 'Your ' . $monthName . ' invoice is here, please check!';
+                        $status = 'unseen';
+                        $parent_link = 'PInvoice.php';
 
-                    $sql5 = "INSERT INTO NOTIFICATION (NOTIFICATION_ID,ADMIN_ID,TEACHER_ID,PARENT_ID,TITLE,CONTENT,VIEW_STATUS,DATETIME,LINK) 
-                    VALUES ('',NULL,NULL,'$parent_id','$title','$content','$status',CURRENT_TIMESTAMP(),'$parent_link')";
+                        $sql5 = "INSERT INTO NOTIFICATION (NOTIFICATION_ID,ADMIN_ID,TEACHER_ID,PARENT_ID,TITLE,CONTENT,VIEW_STATUS,DATETIME,LINK) 
+                        VALUES ('',NULL,NULL,'$parent_id','$title','$content','$status',CURRENT_TIMESTAMP(),'$parent_link')";
 
 
-                    if (mysqli_query($conn, $sql4) && mysqli_query($conn, $sql5)) {
-                    } else {
-                        echo mysqli_error($conn);
+                        if (mysqli_query($conn, $sql4) && mysqli_query($conn, $sql5)) {
+                        } else {
+                            echo mysqli_error($conn);
+                        }
                     }
                 }
             }
@@ -268,10 +271,10 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="../assets/node_modules/jquery/jquery-3.2.1.min.js"></script>
+    <script src="../assets/jquery/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap popper Core JavaScript -->
-    <script src="../assets/node_modules/popper/popper.min.js"></script>
-    <script src="../assets/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="../assets/popper/popper.min.js"></script>
+    <script src="../assets/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="../dist/js/perfect-scrollbar.jquery.min.js"></script>
     <!--Wave Effects -->
@@ -281,10 +284,10 @@
     <!--Custom JavaScript -->
     <script src="../dist/js/custom.js"></script>
     <!-- Custom Theme JavaScript -->
-    <script src="../dist/js/pages/jasny-bootstrap.js"></script>
-    <script src="../dist/js/pages/mask.js"></script>
+    <script src="../dist/js/jasny-bootstrap.js"></script>
+    <script src="../dist/js/mask.js"></script>
     <!-- Footable -->
-    <script src="../assets/node_modules/footable/js/footable.all.min.js"></script>
+    <script src="../assets/footable/js/footable.all.min.js"></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
