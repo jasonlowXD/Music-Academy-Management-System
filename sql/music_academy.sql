@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2022 at 06:58 PM
+-- Generation Time: Mar 03, 2022 at 05:26 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -63,12 +63,9 @@ CREATE TABLE `child` (
 --
 
 INSERT INTO `child` (`CHILD_ID`, `PARENT_ID`, `TEACHER_ID`, `COURSE_ID`, `CHILD_NAME`, `CHILD_AGE`, `CHILD_STATUS`) VALUES
-(1, 1, 1, 1, 'superchild', 14, 'active'),
-(2, 1, 1, 1, 'superchild2', 15, 'active'),
-(3, 2, 2, 2, 'Wan Wen', 12, 'active'),
-(4, 2, 2, 3, 'Wan Thing', 14, 'active'),
-(5, 2, 3, 3, 'Jun Kit', 15, 'active'),
-(6, 3, 3, 2, 'Kate', 5, 'active');
+(1, 1, 1, 1, 'super child 1', 6, 'active'),
+(2, 1, 1, 2, 'super child 2', 3, 'active'),
+(3, 1, 1, 1, 'super child 3', 12, 'inactive');
 
 -- --------------------------------------------------------
 
@@ -92,23 +89,11 @@ CREATE TABLE `class` (
 --
 
 INSERT INTO `class` (`CLASS_ID`, `CLASSGROUP_ID`, `START_DATETIME`, `END_DATETIME`, `CLASS_DAY`, `CLASS_LOCATION`, `CLASS_DESC`, `ATTENDANCE`) VALUES
-(1, 1, '2022-02-06 09:00:00', '2022-02-06 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', 'present'),
-(2, 1, '2022-02-13 09:00:00', '2022-02-13 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', 'absent'),
-(3, 1, '2022-02-20 09:00:00', '2022-02-20 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(4, 1, '2022-02-27 09:00:00', '2022-02-27 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(5, 1, '2022-03-06 09:00:00', '2022-03-06 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(6, 1, '2022-03-13 09:00:00', '2022-03-13 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(7, 1, '2022-03-20 09:00:00', '2022-03-20 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(8, 1, '2022-03-27 09:00:00', '2022-03-27 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(9, 1, '2022-04-03 09:00:00', '2022-04-03 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(10, 1, '2022-04-10 09:00:00', '2022-04-10 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(11, 1, '2022-04-17 09:00:00', '2022-04-17 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(12, 1, '2022-04-24 09:00:00', '2022-04-24 09:30:00', 0, 'piano room A', 'learn piano beginner lesson in 3 months', NULL),
-(13, 2, '2022-02-04 13:00:00', '2022-02-04 14:00:00', 5, 'piano room E', 'grade 2 lesson', 'absent'),
-(15, 2, '2022-02-12 13:00:00', '2022-02-12 14:00:00', 6, 'piano room E', 'grade 2 lesson', 'present'),
-(16, 2, '2022-02-18 13:00:00', '2022-02-18 14:00:00', 5, 'piano room E', 'grade 2 lesson', NULL),
-(17, 2, '2022-02-26 13:00:00', '2022-02-26 14:00:00', 6, 'piano room E', 'grade 2 lesson', NULL),
-(18, 2, '2022-03-05 13:00:00', '2022-03-05 14:00:00', 6, 'piano room E', 'grade 2 lesson', NULL);
+(2, 1, '2022-03-08 10:00:00', '2022-03-08 10:30:00', 2, 'super studio A', 'super desc', 'absent'),
+(6, 2, '2022-03-11 15:00:00', '2022-03-11 16:00:00', 5, 'https://apps.google.com/meet/', 'super online meet', NULL),
+(7, 2, '2022-03-12 14:00:00', '2022-03-12 15:00:00', 6, 'https://apps.google.com/meet/', 'super online meet', 'present'),
+(8, 2, '2022-03-19 14:00:00', '2022-03-19 15:00:00', 6, 'https://apps.google.com/meet/', 'super online meet', NULL),
+(9, 2, '2022-03-26 14:00:00', '2022-03-26 15:00:00', 6, 'https://apps.google.com/meet/', 'super online meet', NULL);
 
 -- --------------------------------------------------------
 
@@ -128,8 +113,8 @@ CREATE TABLE `class_group` (
 --
 
 INSERT INTO `class_group` (`CLASSGROUP_ID`, `ADMIN_ID`, `TEACHER_ID`, `CHILD_ID`) VALUES
-(1, 2, 2, 3),
-(2, 2, 3, 5);
+(1, 1, 1, 1),
+(2, 1, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -151,15 +136,8 @@ CREATE TABLE `comment` (
 --
 
 INSERT INTO `comment` (`COMMENT_ID`, `PROGRESS_ID`, `TEACHER_ID`, `PARENT_ID`, `COMMENT_CONTENT`, `COMMENT_DATETIME`) VALUES
-(1, 2, 2, NULL, 'good listening and focusing during class\r\nkeep it up', '2022-02-07 23:39:22'),
-(2, 2, NULL, 2, 'great to hear that', '2022-02-08 00:12:00'),
-(3, 4, 3, NULL, 'interesting', '2022-02-08 00:17:16'),
-(4, 4, NULL, 2, 'good performance', '2022-02-08 00:23:38'),
-(5, 1, 2, NULL, 'fast learning and understanding', '2022-02-09 14:32:02'),
-(6, 6, 2, NULL, 'good practice', '2022-02-09 14:44:06'),
-(8, 2, 2, NULL, 'good👍👍🏻👍🏼👍🏽👍🏾👍🏿', '2022-02-14 16:59:07'),
-(9, 1, NULL, 2, 'ok noted with thanks😊', '2022-02-14 17:16:27'),
-(10, 6, NULL, 2, 'okok👍', '2022-02-14 17:17:31');
+(1, 1, 1, NULL, 'super comment👍👍', '2022-03-03 17:26:09'),
+(2, 1, NULL, 1, '😂super walao nice🤣', '2022-03-03 17:26:31');
 
 -- --------------------------------------------------------
 
@@ -182,11 +160,32 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`COURSE_ID`, `ADMIN_ID`, `COURSE_NAME`, `COURSE_FEE`, `DURATION_PER_CLASS`, `COURSE_DESC`, `COURSE_STATUS`) VALUES
-(1, 1, 'Piano grade 1', 100, 45, 'superadmin de piano grade 1', 'active'),
-(2, 2, 'Piano grade 1', 110, 30, '-Learn scales and arpeggios in C, G, F majors and A, D minors\r\n-Sight reading in G, F majors and A minor\r\n-Aural tests\r\n-ABRSM Grade 1 Piano Exam', 'active'),
-(3, 2, 'Piano grade 2', 120, 60, '-Learn scales and arpeggios in C, G, F, D, A majors and A, D, E, G minors\r\n-Sight reading in D major and E, G minors\r\n-Aural tests\r\n-ABRSM Grade 2 Piano Exam', 'active'),
-(4, 2, 'Piano grade 3', 150, 30, '-Learn scales and arpeggios in D, A, E, Bb, Eb, majors and E, G, B, C minors\r\n-Sight reading in A, Bb, Eb majors and B minor\r\n-Aural tests\r\n-ABRSM Grade 3 Piano Exam', 'active'),
-(5, 2, 'Guitar grade 1', 110, 30, '-Learn scales and arpeggios in G, F majors and A, E minors\r\n-Sight reading in C, G, F majors and A, E minors\r\n        -Time signature 4/4, 3/4 and 2/4\r\n-Aural tests\r\n-ABRSM Grade 1 Guitar Exam', 'active');
+(1, 1, 'supercourse', 100, 30, 'superadmin de course test', 'active'),
+(2, 1, 'super extra course', 150, 60, 'superadmin de extra course', 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `invoice`
+--
+
+CREATE TABLE `invoice` (
+  `INVOICE_ID` int(10) NOT NULL,
+  `ADMIN_ID` int(10) NOT NULL,
+  `PARENT_ID` int(10) NOT NULL,
+  `INVOICE_DATE` date NOT NULL,
+  `INVOICE_STATUS` enum('paid','unpaid') NOT NULL,
+  `INVOICE_AMOUNT` int(10) NOT NULL,
+  `INVOICE_DESC` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `invoice`
+--
+
+INSERT INTO `invoice` (`INVOICE_ID`, `ADMIN_ID`, `PARENT_ID`, `INVOICE_DATE`, `INVOICE_STATUS`, `INVOICE_AMOUNT`, `INVOICE_DESC`) VALUES
+(999, 1, 1, '2022-02-01', 'paid', 350, 'super child 1 supercourse,100\nsuper child 2 super extra course,150\nsuper child 3 supercourse,100\n'),
+(1000, 1, 1, '2022-03-03', 'unpaid', 250, 'super child 1 supercourse,100\nsuper child 2 super extra course,150\n');
 
 -- --------------------------------------------------------
 
@@ -209,11 +208,7 @@ CREATE TABLE `learning_resource` (
 --
 
 INSERT INTO `learning_resource` (`RESOURCE_ID`, `TEACHER_ID`, `CHILD_ID`, `RESOURCE_TITLE`, `RESOURCE_URL`, `RESOURCE_FILEPATH`, `RESOURCE_DATETIME`) VALUES
-(1, 2, 4, 'Piano C major scale', 'https://www.youtube.com/watch?v=QDWKzG5oaog', '../localFolder/resource/piano-scales-major.pdf', '2022-01-26 15:51:36'),
-(2, 2, 3, 'Piano fingering position', 'https://www.youtube.com/watch?v=v84wcuKn6sM', '', '2022-01-26 15:51:45'),
-(3, 2, 4, 'Piano G major scale', 'https://app.diagrams.net/#G1Kys7lV-uJ1P_n63Ob4J6NLFZxdCbucrG', '', '2022-02-09 14:35:23'),
-(4, 3, 5, 'A minors scale', '', '../localFolder/resource/Am.png', '2022-01-26 15:46:21'),
-(5, 2, 4, 'Piano C major scale', '', '../localFolder/resource/complete_guitar_syllabus.pdf', '2022-02-09 14:34:38');
+(1, 1, 1, 'super resource', 'https://www.youtube.com/', '../localFolder/resource/resourceFile.pdf', '2022-03-03 17:19:21');
 
 -- --------------------------------------------------------
 
@@ -229,7 +224,7 @@ CREATE TABLE `notification` (
   `TITLE` varchar(50) NOT NULL,
   `CONTENT` varchar(255) NOT NULL,
   `VIEW_STATUS` enum('seen','unseen') NOT NULL DEFAULT 'unseen',
-  `DATETIME` datetime NOT NULL DEFAULT current_timestamp(),
+  `DATETIME` datetime NOT NULL DEFAULT current_timestamp() COMMENT 'auto delete after one month detected',
   `LINK` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -238,10 +233,41 @@ CREATE TABLE `notification` (
 --
 
 INSERT INTO `notification` (`NOTIFICATION_ID`, `ADMIN_ID`, `TEACHER_ID`, `PARENT_ID`, `TITLE`, `CONTENT`, `VIEW_STATUS`, `DATETIME`, `LINK`) VALUES
-(1, NULL, 2, NULL, 'You have a new child!', 'A new child (Wan Wen) has assigned to you!', 'unseen', '2022-01-21 23:20:44', 'TChildren.php'),
-(2, NULL, 2, NULL, 'You have a new child!', 'A new child (Wan Thing) has assigned to you!', 'seen', '2022-01-21 23:20:44', 'TChildren.php'),
-(3, NULL, 3, NULL, 'You have a new child!', 'A new child (Jun Kit) has assigned to you!', 'unseen', '2022-01-21 23:22:14', 'TChildren.php'),
-(4, NULL, 3, NULL, 'You have a new child!', 'A new child (Kate) has assigned to you!', 'unseen', '2022-02-09 01:35:30', 'TChildren.php');
+(1, NULL, 1, NULL, 'You have a new child!', 'A new child (super child 1) has assigned to you!', 'seen', '2022-03-03 16:27:50', 'TChildren.php'),
+(2, NULL, 1, NULL, 'You have a new child!', 'A new child (super child 2) has assigned to you!', 'seen', '2022-03-03 16:27:50', 'TChildren.php'),
+(3, NULL, 1, NULL, 'You have a new child!', 'A new child (super child 3) has assigned to you!', 'seen', '2022-03-03 16:31:59', 'TChildren.php'),
+(4, NULL, 1, NULL, 'New class added by Admin', 'super child 1 has new class start from 2022-03-01 10:00AM, please check!', 'seen', '2022-03-03 16:33:40', 'TCalendar.php'),
+(5, NULL, NULL, 1, 'New class added by Admin', 'super child 1 has new class start from 2022-03-01 10:00AM, please check!', 'seen', '2022-03-03 16:33:40', 'PCalendar.php'),
+(6, NULL, 1, NULL, 'New class added by Admin', 'super child 2 has new class start from 2022-03-05 2:00PM, please check!', 'seen', '2022-03-03 16:37:01', 'TCalendar.php'),
+(7, NULL, NULL, 1, 'New class added by Admin', 'super child 2 has new class start from 2022-03-05 2:00PM, please check!', 'seen', '2022-03-03 16:37:01', 'PCalendar.php'),
+(8, NULL, 1, NULL, 'Class updated by Admin', 'super child 1 2022-03-22 10:00AM class changed to 2022-03-23 10:00AM, please check!', 'seen', '2022-03-03 16:38:04', 'TCalendar.php'),
+(9, NULL, NULL, 1, 'Class updated by Admin', 'super child 1 2022-03-22 10:00AM class changed to 2022-03-23 10:00AM, please check!', 'seen', '2022-03-03 16:38:04', 'PCalendar.php'),
+(10, NULL, 1, NULL, 'Multiple Classes updated by Admin', 'super child 1 2022-03-23 10:00AM and following classes changed to start from 2022-03-21 10:00AM, please check!', 'seen', '2022-03-03 16:38:26', 'TCalendar.php'),
+(11, NULL, NULL, 1, 'Multiple Classes updated by Admin', 'super child 1 2022-03-23 10:00AM and following classes changed to start from 2022-03-21 10:00AM, please check!', 'seen', '2022-03-03 16:38:26', 'PCalendar.php'),
+(12, NULL, 1, NULL, 'Class deleted by Admin', 'super child 1 2022-03-21 10:00AM class has been deleted, please check!', 'seen', '2022-03-03 16:38:58', 'TCalendar.php'),
+(13, NULL, NULL, 1, 'Class deleted by Admin', 'super child 1 2022-03-21 10:00AM class has been deleted, please check!', 'seen', '2022-03-03 16:38:58', 'PCalendar.php'),
+(14, NULL, 1, NULL, 'Multiple Classes deleted by Admin', 'super child 1 2022-03-15 10:00AM and following classes has been deleted, please check!', 'seen', '2022-03-03 16:39:03', 'TCalendar.php'),
+(15, NULL, NULL, 1, 'Multiple Classes deleted by Admin', 'super child 1 2022-03-15 10:00AM and following classes has been deleted, please check!', 'seen', '2022-03-03 16:39:03', 'PCalendar.php'),
+(17, NULL, NULL, 1, 'New invoice alert', 'Your March invoice is here, please check!', 'seen', '2022-03-03 16:40:56', 'PInvoice.php'),
+(18, 1, NULL, NULL, 'New class added by superTeacher', 'super child 1 has new class start from 2022-03-13 11:00AM, please check!', 'seen', '2022-03-03 16:56:57', 'ACalendar.php'),
+(19, NULL, NULL, 1, 'New class added by superTeacher', 'super child 1 has new class start from 2022-03-13 11:00AM, please check!', 'seen', '2022-03-03 16:56:57', 'PCalendar.php'),
+(20, 1, NULL, NULL, 'Class updated by superTeacher', 'super child 1 2022-03-13 11:00AM class changed to 2022-03-14 11:00AM, please check!', 'seen', '2022-03-03 17:00:33', 'ACalendar.php'),
+(21, NULL, NULL, 1, 'Class updated by superTeacher', 'super child 1 2022-03-13 11:00AM class changed to 2022-03-14 11:00AM, please check!', 'seen', '2022-03-03 17:00:33', 'PCalendar.php'),
+(22, 1, NULL, NULL, 'Multiple Classes updated by superTeacher', 'super child 1 2022-03-20 11:00AM and following classes changed to start from 2022-03-21 11:00AM, please check!', 'seen', '2022-03-03 17:01:12', 'ACalendar.php'),
+(23, NULL, NULL, 1, 'Multiple Classes updated by superTeacher', 'super child 1 2022-03-20 11:00AM and following classes changed to start from 2022-03-21 11:00AM, please check!', 'seen', '2022-03-03 17:01:12', 'PCalendar.php'),
+(24, 1, NULL, NULL, 'Class deleted by superTeacher', 'super child 1 2022-03-21 11:00AM class has been deleted, please check!', 'seen', '2022-03-03 17:01:33', 'ACalendar.php'),
+(25, NULL, NULL, 1, 'Class deleted by superTeacher', 'super child 1 2022-03-21 11:00AM class has been deleted, please check!', 'seen', '2022-03-03 17:01:33', 'PCalendar.php'),
+(26, 1, NULL, NULL, 'Multiple Classes deleted by superTeacher', 'super child 1 2022-03-14 11:00AM and following classes has been deleted, please check!', 'seen', '2022-03-03 17:01:46', 'ACalendar.php'),
+(27, NULL, NULL, 1, 'Multiple Classes deleted by superTeacher', 'super child 1 2022-03-14 11:00AM and following classes has been deleted, please check!', 'seen', '2022-03-03 17:01:46', 'PCalendar.php'),
+(28, NULL, 1, NULL, 'New class reschedule request', 'super child 2 2022-03-05 2:00PM class has a new reschedule request, please check!', 'seen', '2022-03-03 17:03:57', 'TCalendar.php'),
+(29, NULL, NULL, 1, 'Reschedule request rejected', 'superTeacher has rejected your request on 2022-03-05 2:00PM class!', 'seen', '2022-03-03 17:05:18', 'PCalendar.php'),
+(30, NULL, 1, NULL, 'New class reschedule request', 'super child 2 2022-03-05 2:00PM class has a new reschedule request, please check!', 'seen', '2022-03-03 17:05:51', 'TCalendar.php'),
+(31, NULL, NULL, 1, 'Reschedule request accepted', 'superTeacher has accepted your request on 2022-03-05 2:00PM class and changed to 2022-03-11 3:00PM!', 'seen', '2022-03-03 17:06:47', 'PCalendar.php'),
+(32, 1, NULL, NULL, 'Class updated by superTeacher', 'super child 2 2022-03-05 2:00PM class changed to 2022-03-11 3:00PM, please check!', 'seen', '2022-03-03 17:06:48', 'ACalendar.php'),
+(33, 1, NULL, NULL, 'Class deleted by superTeacher', 'super child 1 2022-03-01 10:00AM class has been deleted, please check!', 'seen', '2022-03-03 17:10:05', 'ACalendar.php'),
+(34, NULL, NULL, 1, 'Class deleted by superTeacher', 'super child 1 2022-03-01 10:00AM class has been deleted, please check!', 'seen', '2022-03-03 17:10:05', 'PCalendar.php'),
+(35, 1, NULL, NULL, 'Class updated by superTeacher', 'super child 2 2022-03-11 3:00PM class changed to 2022-03-11 3:00PM, please check!', 'unseen', '2022-03-03 17:10:37', 'ACalendar.php'),
+(36, NULL, NULL, 1, 'Class updated by superTeacher', 'super child 2 2022-03-11 3:00PM class changed to 2022-03-11 3:00PM, please check!', 'seen', '2022-03-03 17:10:37', 'PCalendar.php');
 
 -- --------------------------------------------------------
 
@@ -265,9 +291,31 @@ CREATE TABLE `parent` (
 --
 
 INSERT INTO `parent` (`PARENT_ID`, `ADMIN_ID`, `PARENT_NAME`, `PARENT_EMAIL`, `PARENT_PASS`, `PARENT_PHONE_NUM`, `PARENT_STATUS`, `PARENT_RELATIONSHIP`) VALUES
-(1, 1, 'SuperParent', 'superparent@parent.test', '202cb962ac59075b964b07152d234b70', '011-12341234', 'active', 'guardian'),
-(2, 2, 'Leong CK', 'leong@leong.leong', '202cb962ac59075b964b07152d234b70', '011-44443333', 'active', 'father'),
-(3, 2, 'Angeline Chong', 'ange@mail.com', '202cb962ac59075b964b07152d234b70', '013-7776363', 'active', 'mother');
+(1, 1, 'superparent', 'superparent@parent.parent', '202cb962ac59075b964b07152d234b70', '011-99999999', 'active', 'guardian');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payment_receipt`
+--
+
+CREATE TABLE `payment_receipt` (
+  `RECEIPT_ID` int(10) NOT NULL,
+  `INVOICE_ID` int(10) NOT NULL,
+  `RECEIPT_DATE` date NOT NULL,
+  `RECEIPT_AMOUNT` int(10) NOT NULL,
+  `RECEIPT_DESC` varchar(500) NOT NULL,
+  `RECEIPT_TYPE` enum('cash','card','ewallet','bank') NOT NULL,
+  `RECEIPT_FILEPATH` varchar(500) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `payment_receipt`
+--
+
+INSERT INTO `payment_receipt` (`RECEIPT_ID`, `INVOICE_ID`, `RECEIPT_DATE`, `RECEIPT_AMOUNT`, `RECEIPT_DESC`, `RECEIPT_TYPE`, `RECEIPT_FILEPATH`) VALUES
+(1, 999, '2022-02-03', 100, 'ewallet payment', 'ewallet', ''),
+(2, 999, '2022-02-05', 250, 'online', 'bank', '../localFolder/receipt/receipttest.pdf');
 
 -- --------------------------------------------------------
 
@@ -290,12 +338,7 @@ CREATE TABLE `practice_progress` (
 --
 
 INSERT INTO `practice_progress` (`PROGRESS_ID`, `TEACHER_ID`, `CHILD_ID`, `PROGRESS_COURSE`, `PROGRESS_TITLE`, `PROGRESS_FILEPATH`, `PROGRESS_DATETIME`) VALUES
-(1, 2, 4, 'Piano grade 2', '4/2 class video', '../localFolder/progress/WanThing1.mp4', '2022-02-09 01:49:07'),
-(2, 2, 3, 'Piano grade 1', '3/2 class video', '../localFolder/progress/WanWen1.mp4', '2022-02-09 01:49:26'),
-(3, 2, 4, 'Piano grade 2', '2nd class video', '../localFolder/progress/720p - Copy.webm', '2022-02-09 12:46:49'),
-(4, 3, 5, 'Piano grade 1', 'final class on 1/2', '../localFolder/progress/junkit_grade1_Final.mp4', '2022-02-09 02:13:54'),
-(5, 3, 5, 'Piano grade 2', '1st class on 3/2', '../localFolder/progress/junkit_grade2_1.mp4', '2022-02-09 02:14:10'),
-(6, 2, 3, 'Piano grade 1', '3rd class video', '../localFolder/progress/class2.mp4', '2022-02-09 14:43:22');
+(1, 1, 1, 'supercourse', 'super progress', '../localFolder/progress/720p.mp4', '2022-03-03 17:24:07');
 
 -- --------------------------------------------------------
 
@@ -311,6 +354,14 @@ CREATE TABLE `reschedule_request` (
   `REQUEST_DESC` varchar(500) NOT NULL,
   `REQUEST_STATUS` enum('pending','accepted','rejected') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `reschedule_request`
+--
+
+INSERT INTO `reschedule_request` (`REQUEST_ID`, `CLASS_ID`, `PARENT_ID`, `REQUEST_DATETIME`, `REQUEST_DESC`, `REQUEST_STATUS`) VALUES
+(1, 6, 1, '2022-03-11 13:00:00', 'super sick', 'rejected'),
+(2, 6, 1, '2022-03-11 15:00:00', 'request 2nd time', 'accepted');
 
 -- --------------------------------------------------------
 
@@ -333,10 +384,7 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`TEACHER_ID`, `ADMIN_ID`, `TEACHER_NAME`, `TEACHER_EMAIL`, `TEACHER_PASS`, `TEACHER_PHONE_NUM`, `TEACHER_STATUS`) VALUES
-(1, 1, 'superTeacher', 'superTeacher@teacher.com', '202cb962ac59075b964b07152d234b70', '011-99999999', 'active'),
-(2, 2, 'Chloe', 'chloe@chloe.chloe', '202cb962ac59075b964b07152d234b70', '012-3456789', 'active'),
-(3, 2, 'Su Ling', 'su@su.su', '202cb962ac59075b964b07152d234b70', '013-4446666', 'active'),
-(4, 2, 'Christina', 'christina@chemail.com', '202cb962ac59075b964b07152d234b70', '011-78784545', 'active');
+(1, 1, 'superTeacher', 'superteacher@teacher.teacher', '202cb962ac59075b964b07152d234b70', '012-3456789', 'active');
 
 -- --------------------------------------------------------
 
@@ -355,12 +403,8 @@ CREATE TABLE `teacher_course` (
 --
 
 INSERT INTO `teacher_course` (`TEACHER_COURSE_ID`, `COURSE_ID`, `TEACHER_ID`) VALUES
-(4, 3, 2),
-(5, 3, 3),
-(6, 4, 3),
-(7, 2, 2),
-(8, 2, 3),
-(9, 2, 4);
+(1, 1, 1),
+(2, 2, 1);
 
 --
 -- Indexes for dumped tables
@@ -414,6 +458,14 @@ ALTER TABLE `course`
   ADD KEY `COURSE.ADMIN_ID` (`ADMIN_ID`);
 
 --
+-- Indexes for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD PRIMARY KEY (`INVOICE_ID`),
+  ADD KEY `INVOICE.ADMIN_ID` (`ADMIN_ID`),
+  ADD KEY `INVOICE.PARENT_ID` (`PARENT_ID`);
+
+--
 -- Indexes for table `learning_resource`
 --
 ALTER TABLE `learning_resource`
@@ -436,6 +488,13 @@ ALTER TABLE `notification`
 ALTER TABLE `parent`
   ADD PRIMARY KEY (`PARENT_ID`),
   ADD KEY `PARENT.ADMIN_ID` (`ADMIN_ID`) USING BTREE;
+
+--
+-- Indexes for table `payment_receipt`
+--
+ALTER TABLE `payment_receipt`
+  ADD PRIMARY KEY (`RECEIPT_ID`),
+  ADD KEY `RECEIPT.INVOICE_ID` (`INVOICE_ID`);
 
 --
 -- Indexes for table `practice_progress`
@@ -482,13 +541,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `child`
 --
 ALTER TABLE `child`
-  MODIFY `CHILD_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `CHILD_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `class`
 --
 ALTER TABLE `class`
-  MODIFY `CLASS_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `CLASS_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `class_group`
@@ -500,55 +559,67 @@ ALTER TABLE `class_group`
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `COMMENT_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `COMMENT_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `course`
 --
 ALTER TABLE `course`
-  MODIFY `COURSE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `COURSE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `invoice`
+--
+ALTER TABLE `invoice`
+  MODIFY `INVOICE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1001;
 
 --
 -- AUTO_INCREMENT for table `learning_resource`
 --
 ALTER TABLE `learning_resource`
-  MODIFY `RESOURCE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `RESOURCE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `NOTIFICATION_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `NOTIFICATION_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `parent`
 --
 ALTER TABLE `parent`
-  MODIFY `PARENT_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `PARENT_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `payment_receipt`
+--
+ALTER TABLE `payment_receipt`
+  MODIFY `RECEIPT_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `practice_progress`
 --
 ALTER TABLE `practice_progress`
-  MODIFY `PROGRESS_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `PROGRESS_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `reschedule_request`
 --
 ALTER TABLE `reschedule_request`
-  MODIFY `REQUEST_ID` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `REQUEST_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `TEACHER_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `TEACHER_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `teacher_course`
 --
 ALTER TABLE `teacher_course`
-  MODIFY `TEACHER_COURSE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `TEACHER_COURSE_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -591,6 +662,13 @@ ALTER TABLE `course`
   ADD CONSTRAINT `COURSE.ADMIN_ID` FOREIGN KEY (`ADMIN_ID`) REFERENCES `admin` (`ADMIN_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
+-- Constraints for table `invoice`
+--
+ALTER TABLE `invoice`
+  ADD CONSTRAINT `INVOICE.ADMIN_ID` FOREIGN KEY (`ADMIN_ID`) REFERENCES `admin` (`ADMIN_ID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `INVOICE.PARENT_ID	` FOREIGN KEY (`PARENT_ID`) REFERENCES `parent` (`PARENT_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
 -- Constraints for table `learning_resource`
 --
 ALTER TABLE `learning_resource`
@@ -610,6 +688,12 @@ ALTER TABLE `notification`
 --
 ALTER TABLE `parent`
   ADD CONSTRAINT `PARENT.ADMIN_ID` FOREIGN KEY (`ADMIN_ID`) REFERENCES `admin` (`ADMIN_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `payment_receipt`
+--
+ALTER TABLE `payment_receipt`
+  ADD CONSTRAINT `RECEIPT.INVOICE_ID` FOREIGN KEY (`INVOICE_ID`) REFERENCES `invoice` (`INVOICE_ID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `practice_progress`
