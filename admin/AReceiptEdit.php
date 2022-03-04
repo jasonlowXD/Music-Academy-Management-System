@@ -1,6 +1,9 @@
 <?php
 session_start();
 $userID = $_SESSION["userID"];
+$amount_left = $_SESSION["amount_left"];
+$receipt_total_amount = $_SESSION["receipt_total_amount"];
+$invoice_amount = $_SESSION["invoice_amount"];
 $receipt_id = $_GET["receipt_id"];
 $conn = mysqli_connect("localhost", "root", "", "music_academy");
 if ($conn) {
@@ -29,7 +32,7 @@ if ($conn) {
     <h4 class="modal-title" id="exampleModalLabel1">Edit Receipt</h4>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 </div>
-<form enctype="multipart/form-data" class="form-material" id="editReceiptForm" method="post" action="editReceipt.php?receipt_id=<?= $receipt_id ?>">
+<form enctype="multipart/form-data" class="form-control-line" id="editReceiptForm" method="post" action="editReceipt.php?receipt_id=<?= $receipt_id ?>">
     <div class="modal-body">
         <div class="form-group">
             <label class="col-md-12">Receipt Date</span>
@@ -39,10 +42,22 @@ if ($conn) {
             </div>
         </div>
         <div class="form-group">
-            <label class="col-md-12">Amount (RM)</span>
-            </label>
-            <div class="col-md-12">
-                <input type="number" name="amount" class="form-control text-muted" placeholder="enter receipt amount" value="<?php echo $receipt_amount ?>" required>
+            <div class="p-0 col-md-12 mb-2">
+                <label class="col-md-12">Amount (RM)</span>
+                </label>
+                <div class="col-md-12">
+                    <input type="number" name="amount" class="form-control text-muted editReceipt_amount_change" placeholder="enter receipt amount" value="<?php echo $receipt_amount ?>" required>
+                </div>
+            </div>
+            <div class="p-0 col-md-12">
+                <label class="col-md-12">Amount remaining in the invoice (RM)</span>
+                </label>
+                <div class="col-md-12">
+                    <input type="number" class="form-control pl-2 editReceipt_amount_left" value="<?php echo $amount_left ?>" disabled>
+                    <input type="hidden" class="form-control editReceipt_receipt_total_amount" value="<?php echo $receipt_total_amount ?>">
+                    <input type="hidden" class="form-control editReceipt_current_receipt_amount" value="<?php echo $receipt_amount ?>">
+                    <input type="hidden" class="form-control editReceipt_invoice_amount" value="<?php echo $invoice_amount ?>">
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -126,6 +141,19 @@ if ($conn) {
         format: 'yyyy-mm-dd',
         autoclose: true,
         todayHighlight: true
+    });
+
+    var invoice_amount = $(".editReceipt_invoice_amount").val();
+    var all_receipt_total_amount = $(".editReceipt_receipt_total_amount").val();
+    var current_receipt_amount = $(".editReceipt_current_receipt_amount").val();
+    var total_of_other_receipt_amount = all_receipt_total_amount - current_receipt_amount;
+    // auto calculate the left amount to display 
+    $(document).on('change keyup mouseup click', '.editReceipt_amount_change', function() {
+        var invoice_amount_left = invoice_amount - total_of_other_receipt_amount - $(this).val();
+        if (invoice_amount_left < 0) {
+            invoice_amount_left = 0;
+        }
+        $(".editReceipt_amount_left").val(invoice_amount_left);
     });
 
     $('#btnFileRemove2').click(function() {

@@ -224,7 +224,7 @@
                                     <!-- add receipt panel -->
                                     <div class="tab-pane" id="addReceiptTab" role="tabpanel">
                                         <div class="p-20">
-                                            <form enctype="multipart/form-data" class="form-material" id="addReceiptForm" method="post" action="addReceipt.php">
+                                            <form enctype="multipart/form-data" class="form-control-line" id="addReceiptForm" method="post" action="addReceipt.php">
                                                 <input type="hidden" name="invoiceID" class="form-control" value="<?php echo $invoice_id ?>" readonly>
                                                 <div class="form-group">
                                                     <div class="row">
@@ -237,13 +237,24 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label class="col-md-12">Amount (RM)</span>
-                                                        </label>
-                                                        <div class="col-md-12">
-                                                            <?php
-                                                            $amount_left = $invoice_amount - $receipt_total_amount;
-                                                            ?>
-                                                            <input type="number" name="amount" class="form-control" placeholder="enter receipt amount" value="<?php echo $amount_left ?>" required>
+                                                        <div class="p-0 col-md-6 mb-2">
+                                                            <label class="col-md-12">Amount (RM)</span>
+                                                            </label>
+                                                            <div class="col-md-12">
+                                                                <input type="number" name="amount" class="form-control addReceipt_amount_change" placeholder="enter receipt amount" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="p-0 col-md-6">
+                                                            <label class="col-md-12">Amount remaining in the invoice (RM)</span>
+                                                            </label>
+                                                            <div class="col-md-12">
+                                                                <?php
+                                                                $amount_left = $invoice_amount - $receipt_total_amount;
+                                                                ?>
+                                                                <input type="number" class="form-control pl-2 addReceipt_amount_left" value="<?php echo $amount_left ?>" disabled>
+                                                                <input type="hidden" class="form-control addReceipt_receipt_total_amount" value="<?php echo $receipt_total_amount ?>">
+                                                                <input type="hidden" class="form-control addReceipt_invoice_amount" value="<?php echo $invoice_amount ?>">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -354,6 +365,17 @@
 
         // footable
         $('#mytable').footable();
+
+        var invoice_amount = $(".addReceipt_invoice_amount").val();
+        var all_receipt_total_amount = $(".addReceipt_receipt_total_amount").val();
+        // auto calculate the left amount to display 
+        $(document).on('change keyup mouseup click', '.addReceipt_amount_change', function() {
+            var invoice_amount_left = invoice_amount - all_receipt_total_amount - $(this).val();
+            if (invoice_amount_left < 0) {
+                invoice_amount_left = 0;
+            }
+            $(".addReceipt_amount_left").val(invoice_amount_left);
+        });
 
         $('#btnFileRemove').click(function() {
             receiptFileRemoveClass();
