@@ -91,6 +91,7 @@
                                 <?php
                                 $invoice_id = $_GET["invoice_id"];
                                 $userID = $_SESSION["userID"];
+                                $userEmail = $_SESSION["email"];
                                 $conn = mysqli_connect("localhost", "root", "", "music_academy");
                                 if ($conn) {
                                     $sql = "SELECT * FROM INVOICE WHERE INVOICE_ID = '$invoice_id'";
@@ -111,7 +112,7 @@
                                     <li role="presentation" class="nav-item">
                                         <a href="#card" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">
                                             <span class="visible-xs"><i class="fa fa-credit-card"></i></span>
-                                            <span class="hidden-xs">Credit/Debit Card</span>
+                                            <span class="hidden-xs">Pay with Stripe</span>
                                         </a>
                                     </li>
                                     <li role="presentation" class="nav-item">
@@ -150,10 +151,24 @@
 
                                     <!-- card payment tab -->
                                     <div role="tabpanel" class="tab-pane active" id="card">
-                                        <div class="row">
-                                            <div class="col-md-7">
+                                        <div class="row ml-2">
+                                            <div class="col-md-12">
+                                                <h4 class="card-title mt-3">General Info</h4>
+                                                <h1><i class="fa fa-cc-visa text-info"></i> <i class="fa fa-cc-mastercard text-danger"></i> </h1>
+                                                <p>Once you have done your payment, please send a screenshot of your payment proof to admin.</p>
+                                                <p>Or you can choose to manual upload yourself the online payment proof through this link: <a href="PReceipt.php?invoice_id=<?= $invoice_id ?>">click here</a></p>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <?php
+                                                require("../stripe_config.php");
+                                                $invoice_amount_for_stripe = $invoice_amount * 100;
+                                                ?>
                                                 <form id="paymentForm" method="post" action="makePayment.php?invoice_id=<?= $invoice_id ?>">
-                                                    <div class="form-group input-group m-t-30">
+                                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<?php echo $publishableKey ?>" data-amount="<?php echo $invoice_amount_for_stripe ?>" data-name="Music Academy" data-description="Invoice #<?php echo $invoice_id ?> payment" data-currency="myr" data-email="<?php echo $userEmail ?>">
+                                                    </script>
+                                                    <input type="hidden" class="form-control" name="amount" value="<?php echo $invoice_amount ?>">
+
+                                                    <!-- <div class="form-group input-group m-t-30">
                                                         <div class="input-group-prepend">
                                                             <span class="input-group-text"><i class="fa fa-credit-card"></i></span>
                                                         </div>
@@ -190,17 +205,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="button-group">
-                                                        <button type="submit" class="btn btn-info"><span><i class="fa fa-money"></i> </span>Make Payment</button>
-                                                        <a href="PInvoice.php" type="button" class="btn btn-danger">Cancel</a>
-                                                    </div>
+                                                        <button type="submit" class="btn btn-info"><span><i class="fa fa-money"></i> </span>Make Payment</button> -->
+                                                    <a href="PInvoice.php" type="button" class="btn btn-danger">Cancel</a>
+                                                    <!-- </div> -->
                                                 </form>
                                             </div>
-                                            <div class="col-md-4 ml-auto">
-                                                <h4 class="card-title m-t-30">General Info</h4>
-                                                <h1><i class="fa fa-cc-visa text-info"></i> <i class="fa fa-cc-mastercard text-danger"></i> </h1>
-                                                <p>Once you have done your payment, please send a screenshot of your payment proof to admin.</p>
-                                                <p>Or you can choose to manual upload yourself the online payment proof through this link: <a href="PReceipt.php?invoice_id=<?= $invoice_id ?>">click here</a></p>
-                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -254,36 +264,37 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // edit invoice form
-        $("#paymentForm").submit(function(e) {
-            e.preventDefault();
-            $('html, body').css("cursor", "wait");
-            $.ajax({
-                url: $("#paymentForm").attr('action'),
-                type: $("#paymentForm").attr('method'),
-                data: $("#paymentForm").serialize(),
-                dataType: 'json'
-            }).done(function(response) {
-                if (response.status == 'success') {
-                    window.location.href = "PPaymentDone.php";
-                    $('html, body').css("cursor", "auto");
-                } else {
-                    Swal.fire(
-                        response.title,
-                        response.message,
-                        response.status
-                    )
-                    $('html, body').css("cursor", "auto");
-                }
-            }).fail(function(xhr, textStatus, errorThrown) {
-                Swal.fire(
-                    'Oops...',
-                    'Something went wrong with ajax!',
-                    'error'
-                )
-                $('html, body').css("cursor", "auto");
-                console.log(xhr);
-            })
-        })
+        // $("#paymentForm").submit(function(e) {
+        //     e.preventDefault();
+        //     $('html, body').css("cursor", "wait");
+        //     $.ajax({
+        //             url: $("#paymentForm").attr('action'),
+        //             type: $("#paymentForm").attr('method'),
+        //             data: $("#paymentForm").serialize(),
+        //             dataType: 'json'
+        //         })
+        //         .done(function(response) {
+        //             if (response.status == 'success') {
+        //                 window.location.href = "PPaymentDone.php";
+        //                 $('html, body').css("cursor", "auto");
+        //             } else {
+        //                 Swal.fire(
+        //                     response.title,
+        //                     response.message,
+        //                     response.status
+        //                 )
+        //                 $('html, body').css("cursor", "auto");
+        //             }
+        //         }).fail(function(xhr, textStatus, errorThrown) {
+        //             Swal.fire(
+        //                 'Oops...',
+        //                 'Something went wrong with ajax!',
+        //                 'error'
+        //             )
+        //             $('html, body').css("cursor", "auto");
+        //             console.log(xhr);
+        //         })
+        // })
     </script>
 
 </body>

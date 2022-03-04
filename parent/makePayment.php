@@ -1,15 +1,11 @@
 <?php
+require('../stripe_config.php');
 session_start();
 $response = array();
 $userID = $_SESSION["userID"];
 $adminID = $_SESSION["adminID"];
 $invoice_id = $_GET["invoice_id"];
-$card_num = $_POST['card_num'];
-$expire_date = $_POST['expire_date'];
-$cvc = $_POST['cvc'];
-$name_of_card = $_POST['name_of_card'];
-$totalAmount = $_POST['totalAmount'];
-
+$amount = $_POST['amount'];
 $conn = mysqli_connect("localhost", "root", "", "music_academy");
 
 if ($conn) {
@@ -20,7 +16,38 @@ if ($conn) {
         $db_invoice_date = $row["INVOICE_DATE"];
         $parent_name = $row["PARENT_NAME"];
     }
-    if ($totalAmount == $db_invoice_amount) {
+    if ($amount == $db_invoice_amount) {
+        if (isset($_POST['stripeToken'])) {
+            try {
+                \Stripe\Stripe::setVerifySslCerts(false);
+
+                $token = $_POST["stripeToken"];
+                $amount_for_stripe = $amount * 100;
+                $data = \Stripe\Charge::create(array(
+                    "amount" => $amount_for_stripe,
+                    "currency" => "myr",
+                    "description" => 'Invoice #' . $invoice_id,
+                    "source" => $token,
+
+                ));
+                $sql2 = "UPDATE INVOICE SET INVOICE_STATUS = 'paid' WHERE INVOICE_ID = '$invoice_id' AND PARENT_ID = '$userID' ";
+                
+                date_default_timezone_set("Asia/Kuala_Lumpur");
+                $date = new DateTime();
+                $currentDate = $date->format('Y-m-d');
+
+                $sql3 = "INSERT INTO PAYMENT_RECEIPT (RECEIPT_ID,INVOICE_ID,RECEIPT_DATE,RECEIPT_AMOUNT,RECEIPT_DESC,RECEIPT_TYPE,RECEIPT_FILEPATH) 
+                VALUES ('','$invoice_id','$currentDate','$amount','Card Payment','card',NULL)";
+                if (mysqli_query($conn, $sql2) && mysqli_query($conn, $sql3)) {
+                    header("Location: PPaymentDone.php");
+                } else {
+                    die('mysql error');
+                }
+            } catch (\Stripe\Exception\CardException $e) {
+                echo 'fail';
+                header("Location: PPaymentError.php");
+            }
+        }
         // $sql2 = "UPDATE INVOICE SET INVOICE_STATUS = 'paid' WHERE INVOICE_ID = '$invoice_id' AND PARENT_ID = '$userID' ";
 
         // $monthName = date('F', strtotime($db_invoice_date));
@@ -44,13 +71,8 @@ if ($conn) {
         //     $response['message'] = 'update invoice mysql error';
         // }
 
-        $response['title']  = 'Done!';
-        $response['status']  = 'success';
-        $response['message'] = 'Invoice edited!';
     } else {
-        $response['title']  = 'Error!';
-        $response['status']  = 'error';
-        $response['message'] = 'error total amount, please refresh';
+        die('amount and invoice amount not same, error!');
     }
 } else {
     die("FATAL ERROR");
