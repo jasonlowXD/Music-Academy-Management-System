@@ -1,18 +1,20 @@
 <?php
+require 'vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-/* Exception class. */
+// /* Exception class. */
+// require 'F:\Xampp\htdocs\fyp\assets\PHPMailer\src\Exception.php';
 
-require 'F:\Xampp\htdocs\fyp\assets\PHPMailer\src\Exception.php';
+// /* The main PHPMailer class. */
+// require 'F:\Xampp\htdocs\fyp\assets\PHPMailer\src\PHPMailer.php';
 
-/* The main PHPMailer class. */
-require 'F:\Xampp\htdocs\fyp\assets\PHPMailer\src\PHPMailer.php';
-
-/* SMTP class, needed if you want to use SMTP. */
-require 'F:\Xampp\htdocs\fyp\assets\PHPMailer\src\SMTP.php';
+// /* SMTP class, needed if you want to use SMTP. */
+// require 'F:\Xampp\htdocs\fyp\assets\PHPMailer\src\SMTP.php';
 
 $mail = new PHPMailer(TRUE);
 // try {
@@ -21,8 +23,8 @@ $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug 
 $mail->isSMTP();                                            //Send using SMTP
 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-$mail->Username   = 'musicacademyfypp@gmail.com';                     //SMTP username
-$mail->Password   = 'mapassword@123';                               //SMTP password
+$mail->Username   = $_ENV['PHPMAILER_USERNAME'];                     //SMTP username
+$mail->Password   = $_ENV['PHPMAILER_PASSWORD'];                               //SMTP password
 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;            //Enable implicit TLS encryption
 $mail->Port       = 587;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
@@ -58,4 +60,3 @@ $mail->Port       = 587;                                    //TCP port to connec
 // } catch (Exception $e) {
 //     echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 // }
-?>
