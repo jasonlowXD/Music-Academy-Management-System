@@ -16,7 +16,7 @@
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/file-upload.css" rel="stylesheet">
-    <meta http-equiv='refresh' content='3; URL=http://localhost/fyp/parent/PInvoice.php'>
+    <meta http-equiv='refresh' content='5; URL=http://localhost/fyp/parent/PInvoice.php'>
 
 </head>
 
@@ -83,8 +83,8 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h1>Payment Success !</h1>
-                                <p class="m-t-40">Redirecting back to Invoices in <span id="countdown">3</span> seconds...</p>
+                                <h1 class=" text-success font-weight-bold">Payment Success !</h1>
+                                <p class="m-t-40">Redirecting back to Invoices in <span id="countdown">5</span> seconds...</p>
                             </div>
 
                         </div>
@@ -136,7 +136,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         // countdown time and display in html ui
-        var timeleft = 3;
+        var timeleft = 5;
         var downloadTimer = setInterval(function() {
             timeleft--;
             document.getElementById("countdown").innerHTML = timeleft;
