@@ -353,7 +353,7 @@ if (isset($_POST["login"])) {
                     $('html, body').css("cursor", "auto");
                 })
                 .fail(function(xhr, textStatus, errorThrown) {
-                    // alert(errorThrown);
+                    // console.log(xhr);
                     Swal.fire(
                         'Oops...',
                         'Something went wrong with ajax !',
