@@ -36,19 +36,45 @@ if ($conn) {
                 $date = new DateTime();
                 $currentDate = $date->format('Y-m-d');
 
+                $filepath = null;
                 $sql3 = "INSERT INTO PAYMENT_RECEIPT (RECEIPT_ID,INVOICE_ID,RECEIPT_DATE,RECEIPT_AMOUNT,RECEIPT_DESC,RECEIPT_TYPE,RECEIPT_FILEPATH) 
-                VALUES ('','$invoice_id','$currentDate','$amount','Card Payment','card',NULL)";
+                VALUES ('','$invoice_id','$currentDate','$amount','Card Payment','card','$filepath')";
                 if (mysqli_query($conn, $sql2) && mysqli_query($conn, $sql3)) {
                     header("Location: PPaymentDone.php");
                 } else {
                     die('mysql error');
                 }
             } catch (\Stripe\Exception\CardException $e) {
-                echo 'fail';
+                header("Location: PPaymentError.php");
+                // Since it's a decline, \Stripe\Exception\CardException will be caught
+                // echo 'Status is:' . $e->getHttpStatus() . '\n';
+                // echo 'Type is:' . $e->getError()->type . '\n';
+                // echo 'Code is:' . $e->getError()->code . '\n';
+                // param is '' in this case
+                // echo 'Param is:' . $e->getError()->param . '\n';
+                // echo 'Message is:' . $e->getError()->message . '\n';
+            } catch (\Stripe\Exception\RateLimitException $e) {
+                // Too many requests made to the API too quickly
+                header("Location: PPaymentError.php");
+            } catch (\Stripe\Exception\InvalidRequestException $e) {
+                // Invalid parameters were supplied to Stripe's API
+                header("Location: PPaymentError.php");
+            } catch (\Stripe\Exception\AuthenticationException $e) {
+                // Authentication with Stripe's API failed
+                // (maybe you changed API keys recently)
+                header("Location: PPaymentError.php");
+            } catch (\Stripe\Exception\ApiConnectionException $e) {
+                // Network communication with Stripe failed
+                header("Location: PPaymentError.php");
+            } catch (\Stripe\Exception\ApiErrorException $e) {
+                // Display a very generic error to the user, and maybe send
+                // yourself an email
+                header("Location: PPaymentError.php");
+            } catch (Exception $e) {
+                // Something else happened, completely unrelated to Stripe
                 header("Location: PPaymentError.php");
             }
         }
-        // $sql2 = "UPDATE INVOICE SET INVOICE_STATUS = 'paid' WHERE INVOICE_ID = '$invoice_id' AND PARENT_ID = '$userID' ";
 
         // $monthName = date('F', strtotime($db_invoice_date));
 
