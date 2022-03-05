@@ -231,7 +231,7 @@
                                                                         </div>
                                                                         <div class="d-flex no-block align-items-end col-md-5 col-sm-5 col-12">
                                                                             <label class="mr-3">RM</label>
-                                                                            <input type="number" name="invoiceDescPrice[]" class="form-control amount_change" value="<?php echo $split_desc[1] ?>" required>
+                                                                            <input type="number" name="invoiceDescPrice[]" min=0 oninput="validity.valid||(value='');" class="form-control amount_change" value="<?php echo $split_desc[1] ?>" required>
                                                                             <?php
                                                                             if ($i > 0) {
                                                                             ?>
@@ -254,7 +254,7 @@
                                                                     </div>
                                                                     <div class="d-flex no-block align-items-end col-md-5 col-sm-5 col-12">
                                                                         <label class="mr-3">RM</label>
-                                                                        <input type="number" name="" class="form-control inputnumber">
+                                                                        <input type="number" name="" min=0 oninput="validity.valid||(value='');" class="form-control inputnumber">
                                                                         <span id="buttonDiv"></span>
                                                                     </div>
                                                                 </div>
@@ -267,7 +267,7 @@
                                                     <div class="col-md-12">
                                                         <div class="form-group">
                                                             <label>Total Amount (RM)</label>
-                                                            <input type="text" name="totalAmount" class="form-control text-muted total_amount" value="<?php echo $invoice_amount; ?>" required>
+                                                            <input type="number" name="totalAmount" min=0 oninput="validity.valid||(value='');" class="form-control text-muted total_amount" value="<?php echo $invoice_amount; ?>" required>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">

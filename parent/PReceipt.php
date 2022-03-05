@@ -241,7 +241,7 @@
                                                             <label class="col-md-12">Amount (RM)</span>
                                                             </label>
                                                             <div class="col-md-12">
-                                                                <input type="number" name="amount" class="form-control addReceipt_amount_change" placeholder="enter receipt amount" required>
+                                                                <input type="number" name="amount" min=0 oninput="validity.valid||(value='');" class="form-control addReceipt_amount_change" placeholder="enter receipt amount" required>
                                                             </div>
                                                         </div>
                                                         <div class="p-0 col-md-6">
