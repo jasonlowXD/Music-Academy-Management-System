@@ -220,7 +220,7 @@
                                             <div class='col-md-12'>
                                                 <div class='form-group'>
                                                     <label class='control-label'>Description</label>
-                                                    <input class='form-control addClass_desc' placeholder='Description here' type='text' name='desc' value="" required />
+                                                    <input class='form-control addClass_desc' placeholder='Description here' type='text' name='desc' value="" />
                                                 </div>
                                             </div>
                                         </div>
@@ -331,7 +331,7 @@
                                                 <div class='col-md-12'>
                                                     <div class='form-group'>
                                                         <label class='control-label'>Description</label>
-                                                        <input class='form-control editClass_desc' placeholder='Description here' type='text' name='desc' required />
+                                                        <input class='form-control editClass_desc' placeholder='Description here' type='text' name='desc' />
                                                     </div>
                                                 </div>
                                             </div>
@@ -660,7 +660,7 @@
                     var editAttendanceForm = $modal.find('#editAttendanceForm');
                     editform[0].reset();
                     editAttendanceForm[0].reset();
-                    
+
                     $modal.modal({
                         backdrop: 'static'
                     });
