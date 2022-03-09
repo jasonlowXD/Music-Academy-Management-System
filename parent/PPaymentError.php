@@ -16,7 +16,6 @@
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/file-upload.css" rel="stylesheet">
-    <!-- <meta http-equiv='refresh' content='5; URL=http://localhost/fyp/parent/PInvoice.php'> -->
 
 </head>
 
@@ -87,7 +86,6 @@
                                 <h4 class="mt-4">Please contact your bank to check your card status !</h4>
                                 <h4 class="mt-2">If card is valid, we apologize that there might something error happen in our server...</h4>
                                 <a href="PInvoice.php" type="button" class="btn btn-primary mt-4">Return</a>
-                                <!-- <p class="m-t-40">Redirecting back to Invoices in <span id="countdown">5</span> seconds...</p> -->
                             </div>
 
                         </div>
@@ -137,17 +135,6 @@
     <script src="../dist/js/mask.js"></script>
     <!-- Sweet-Alert  -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        // countdown time and display in html ui
-        // var timeleft = 5;
-        // var downloadTimer = setInterval(function() {
-        //     timeleft--;
-        //     document.getElementById("countdown").innerHTML = timeleft;
-        //     if (timeleft <= 0) {
-        //         clearInterval(downloadTimer);
-        //     }
-        // }, 1000);
-    </script>
 
 </body>
 

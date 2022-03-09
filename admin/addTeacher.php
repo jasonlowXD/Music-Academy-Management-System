@@ -97,7 +97,7 @@ if ($conn) {
 
         // SEND EMAIL 
         if (mysqli_query($conn, $sql4)) {
-            $link = "http://localhost/fyp";
+            $link = "http://localhost/MusicAMS";
             $mail->setFrom('musicacademyfypp@gmail.com', 'Music Academy');
             $mail->addAddress($teacherEmail);
             $mail->isHTML(true);

@@ -140,7 +140,7 @@ if ($conn) {
 
             // IF ALL INSERT OK, SEND EMAIL 
             if ($flag == TRUE) {
-                $link = "http://localhost/fyp";
+                $link = "http://localhost/MusicAMS";
                 $mail->setFrom('musicacademyfypp@gmail.com', 'Music Academy');
                 $mail->addAddress($parentEmail);
                 $mail->isHTML(true);
