@@ -154,7 +154,7 @@
                                         <div class="row ml-2">
                                             <div class="col-md-12">
                                                 <h4 class="card-title mt-3">General Info</h4>
-                                                <h1><i class="fa fa-cc-visa text-info"></i> <i class="fa fa-cc-mastercard text-danger"></i> </h1>
+                                                <h1><i class="fa fa-lg fa-cc-visa" style="color:blue;"></i> <i class="fa fa-lg fa-cc-mastercard" style="color:indianred;"></i> </h1>
                                                 <p>Once you have done your payment, please send a screenshot of your payment proof to admin.</p>
                                                 <p>Or you can choose to manual upload yourself the online payment proof through this link: <a href="PReceipt.php?invoice_id=<?= $invoice_id ?>">click here</a></p>
                                             </div>
