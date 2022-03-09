@@ -750,6 +750,7 @@
                         todayHighlight: true,
                         clearBtn: true,
                     });
+                    editform.find('.editClass_startDate').datepicker('setStartDate', datestring);
 
                     // SET NEW DAY WHEN DATEPICKER CHANGED IN STARTDATE 
                     $('.editClass_startDate').datepicker().change((e) => {
