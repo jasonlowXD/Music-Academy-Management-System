@@ -99,6 +99,14 @@
                                     while ($row = $result->fetch_assoc()) {
                                         $invoice_amount = $row["INVOICE_AMOUNT"];
                                     }
+                                    $sql2 = "SELECT * FROM PAYMENT_RECEIPT WHERE INVOICE_ID = '$invoice_id'";
+                                    $result2 = $conn->query($sql2);
+                                    $receipt_total_amount = 0;
+                                    while ($row2 = $result2->fetch_assoc()) {
+                                        $receipt_amount = $row2["RECEIPT_AMOUNT"];
+                                        $receipt_total_amount += $receipt_amount;
+                                    }
+                                    $amount_left = $invoice_amount - $receipt_total_amount;
                                 } else {
                                     die("FATAL ERROR");
                                 }
@@ -112,7 +120,7 @@
                                     <li role="presentation" class="nav-item">
                                         <a href="#card" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="true">
                                             <span class="visible-xs"><i class="fa fa-credit-card"></i></span>
-                                            <span class="hidden-xs">Pay with Stripe</span>
+                                            <span class="hidden-xs">Pay with Card</span>
                                         </a>
                                     </li>
                                     <li role="presentation" class="nav-item">
@@ -145,8 +153,15 @@
                                         <p><span class="font-weight-bold">Name: Music Academy Bank </span></p>
                                         <p><span class="font-weight-bold">Public Bank Account: 123456789</span></p>
                                         <p>Once you have done your online banking, please send a screenshot of your payment proof to admin.</p>
-                                        <p>Or you can choose to manual upload yourself the payment proof through this link: <a href="PReceipt.php?invoice_id=<?= $invoice_id ?>">click here</a></p>
-                                        <br>
+                                        <p>Or you can choose to manual upload yourself the payment proof through this link: <a href="PReceipt.php?invoice_id=<?= $invoice_id ?>" target="_blank" rel="noopener noreferrer">click here</a></p>
+                                        <div class="row">
+                                            <div class="col-12 col-md-6">
+                                                <div class="form-group">
+                                                    <label class=" font-weight-bold">Amount left to pay (RM)</label>
+                                                    <input type="text" class="form-control" value="<?php echo $amount_left ?>" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <!-- card payment tab -->
@@ -155,18 +170,36 @@
                                             <div class="col-md-12">
                                                 <h4 class="card-title mt-3">General Info</h4>
                                                 <h1><i class="fa fa-lg fa-cc-visa" style="color:blue;"></i> <i class="fa fa-lg fa-cc-mastercard" style="color:indianred;"></i> </h1>
-                                                <p>Once you have done your payment, please send a screenshot of your payment proof to admin.</p>
-                                                <p>Or you can choose to manual upload yourself the online payment proof through this link: <a href="PReceipt.php?invoice_id=<?= $invoice_id ?>">click here</a></p>
+                                                <p>Once you have done your online payment by credit/debit card, please send a screenshot of your payment proof to admin.</p>
                                             </div>
                                             <div class="col-md-12">
                                                 <?php
                                                 require("../stripe_config.php");
-                                                $invoice_amount_for_stripe = $invoice_amount * 100;
+                                                $invoice_amount_for_stripe = $amount_left * 100;
                                                 ?>
                                                 <form id="paymentForm" method="post" action="makePayment.php?invoice_id=<?= $invoice_id ?>">
-                                                    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<?php echo $publishableKey ?>" data-amount="<?php echo $invoice_amount_for_stripe ?>" data-name="Music Academy" data-description="Invoice #<?php echo $invoice_id ?> payment" data-currency="myr" data-email="<?php echo $userEmail ?>">
-                                                    </script>
-                                                    <input type="hidden" class="form-control" name="amount" value="<?php echo $invoice_amount ?>">
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-6">
+                                                            <div class="form-group">
+                                                                <label>Amount left to pay (RM)</label>
+                                                                <input type="text" class="form-control" name="amount" value="<?php echo $amount_left ?>" readonly>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                    if ($invoice_amount_for_stripe > 0) {
+                                                    ?>
+                                                        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<?php echo $publishableKey ?>" data-amount="<?php echo $invoice_amount_for_stripe ?>" data-name="Music Academy" data-description="Invoice #<?php echo $invoice_id ?> payment" data-currency="myr" data-email="<?php echo $userEmail ?>">
+                                                        </script>
+                                                        <a href="PInvoice.php" type="button" class="btn btn-danger">Cancel</a>
+                                                    <?php
+                                                    } else {
+                                                    ?>
+                                                        <a href="PInvoice.php" type="button" class="btn btn-primary">Return</a>
+                                                    <?php
+                                                    }
+                                                    ?>
+                                                    <!-- <input type="hidden" class="form-control" name="amount" value="<?php echo $invoice_amount ?>"> -->
 
                                                     <!-- <div class="form-group input-group m-t-30">
                                                         <div class="input-group-prepend">
@@ -206,7 +239,7 @@
                                                     </div>
                                                     <div class="button-group">
                                                         <button type="submit" class="btn btn-info"><span><i class="fa fa-money"></i> </span>Make Payment</button> -->
-                                                    <a href="PInvoice.php" type="button" class="btn btn-danger">Cancel</a>
+                                                    <!-- <a href="PInvoice.php" type="button" class="btn btn-danger">Cancel</a> -->
                                                     <!-- </div> -->
                                                 </form>
                                             </div>
