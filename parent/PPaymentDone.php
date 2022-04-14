@@ -16,7 +16,7 @@
     <!-- Custom CSS -->
     <link href="../dist/css/style.css" rel="stylesheet">
     <link href="../dist/css/file-upload.css" rel="stylesheet">
-    <meta http-equiv='refresh' content='5; URL=http://localhost/MusicAMS/parent/PInvoice.php'>
+    <meta http-equiv='refresh' content='5; URL=PInvoice.php'>
 
 </head>
 
